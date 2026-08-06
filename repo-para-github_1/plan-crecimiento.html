@@ -358,8 +358,12 @@
 </div>
 
 <section id="inicio" class="portada">
-  <img class="portada__foto" id="foto-portada" src="assets/portada-crecimiento.jpg"
-       alt="Banco de madera bajo una lámpara de fibra, contra un muro encalado">
+  <picture>
+    <!-- En vertical entra el encuadre alto; en apaisado, el ancho -->
+    <source media="(max-aspect-ratio: 1/1)" srcset="assets/portada-crecimiento-vertical.png">
+    <img class="portada__foto" id="foto-portada" src="assets/portada-crecimiento.png"
+         alt="Banco de madera bajo una lámpara de fibra, contra un muro encalado">
+  </picture>
 
   <div class="portada__hueco">
     <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -465,6 +469,11 @@
   <div class="blog-grid" id="gallery-grid">
     <div class="post"><img loading="lazy" src="https://differentissgood.com/assets/work-1.jpg" alt="Robata"><div class="post-body"><span>Producción</span><h3>Robata</h3><p>Fuego, precisión y apetito, capturados de cerca.</p></div></div>
     <div class="post"><img loading="lazy" src="https://differentissgood.com/assets/work-2.jpg" alt="DermÁnima"><div class="post-body"><span>Producto</span><h3>DermÁnima</h3><p>Luz suave y texturas naturales para una piel que respira.</p></div></div>
+    <div class="post"><img loading="lazy" src="assets/dermania1.png" alt="DermÁnima, fotografía de producto 1"><div class="post-body"><span>Producto</span><h3>DermÁnima</h3><p>Fotografía de producto para la línea de cosmética.</p></div></div>
+    <div class="post"><img loading="lazy" src="assets/dermania2.png" alt="DermÁnima, fotografía de producto 2"><div class="post-body"><span>Producto</span><h3>DermÁnima</h3><p>Fotografía de producto para la línea de cosmética.</p></div></div>
+    <div class="post"><img loading="lazy" src="assets/dermania3.png" alt="DermÁnima, fotografía de producto 3"><div class="post-body"><span>Producto</span><h3>DermÁnima</h3><p>Fotografía de producto para la línea de cosmética.</p></div></div>
+    <div class="post"><img loading="lazy" src="assets/dermania4.png" alt="DermÁnima, fotografía de producto 4"><div class="post-body"><span>Producto</span><h3>DermÁnima</h3><p>Fotografía de producto para la línea de cosmética.</p></div></div>
+    <div class="post"><img loading="lazy" src="assets/dermania5.png" alt="DermÁnima, fotografía de producto 5"><div class="post-body"><span>Producto</span><h3>DermÁnima</h3><p>Fotografía de producto para la línea de cosmética.</p></div></div>
     <div class="post"><img loading="lazy" src="https://differentissgood.com/assets/work-4.jpg" alt="Sivana"><div class="post-body"><span>Contenido</span><h3>Sivana Estética</h3><p>Calidez editorial que convierte visitas en clientas fieles.</p></div></div>
     <div class="post"><img loading="lazy" src="assets/produccion-video.png" alt="Rodaje de contenido de marca"><div class="post-body"><span>Backstage</span><h3>Detrás de cámaras</h3><p>Así se construye, plano a plano, el contenido que luego enamora en redes.</p></div></div>
     <div class="post"><img loading="lazy" src="assets/galeria-arte.png" alt="Moodboard de identidad visual"><div class="post-body"><span>Identidad</span><h3>Moodboard</h3><p>Color, forma y carácter definidos antes de escribir una sola línea de código.</p></div></div>
@@ -672,6 +681,11 @@
   let galleryData = [
     {src:'https://differentissgood.com/assets/work-1.jpg', cap:'Robata — Producción'},
     {src:'https://differentissgood.com/assets/work-2.jpg', cap:'DermÁnima — Producto'},
+    {src:'assets/dermania1.png', cap:'DermÁnima — Producto'},
+    {src:'assets/dermania2.png', cap:'DermÁnima — Producto'},
+    {src:'assets/dermania3.png', cap:'DermÁnima — Producto'},
+    {src:'assets/dermania4.png', cap:'DermÁnima — Producto'},
+    {src:'assets/dermania5.png', cap:'DermÁnima — Producto'},
     {src:'https://differentissgood.com/assets/work-4.jpg', cap:'Sivana Estética — Contenido'},
     {src:'assets/produccion-video.png', cap:'Detrás de cámaras'},
     {src:'assets/galeria-arte.png', cap:'Moodboard de identidad'},

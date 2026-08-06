@@ -488,6 +488,10 @@ section[id],footer[id]{scroll-margin-top:92px;}
   filter:grayscale(.45) contrast(1.02);
   transition:transform 1.3s var(--curva),filter .8s var(--curva);
 }
+/* Pieza con varias fotografías que se van pasando: se apilan y se funden */
+.trabajo--pase img{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--curva),transform 1.3s var(--curva),filter .8s var(--curva);}
+.trabajo--pase img.activa{opacity:1;}
+.trabajo--pase .trabajo__pie{z-index:1;}
 .trabajo:hover img{transform:scale(1.07);filter:grayscale(0) contrast(1);}
 
 .trabajo__pie{
@@ -1125,8 +1129,8 @@ section[id],footer[id]{scroll-margin-top:92px;}
         </figcaption>
       </figure>
 
-      <figure class="trabajo aparece" data-retardo="2">
-        <img loading="lazy" src="https://differentissgood.com/assets/work-2.jpg" alt="DermÁnima">
+      <figure class="trabajo trabajo--pase aparece" data-retardo="2" id="pase-dermanima">
+        <img loading="lazy" src="https://differentissgood.com/assets/work-2.jpg" alt="DermÁnima" class="activa">
         <figcaption class="trabajo__pie">
           <p class="trabajo__cat">Producto</p>
           <p class="trabajo__nombre">DermÁnima</p>
@@ -1559,6 +1563,67 @@ section[id],footer[id]{scroll-margin-top:92px;}
   document.getElementById('opinion-anterior').addEventListener('click', function(){ mostrar(actual - 1); reiniciar(); });
   document.getElementById('opinion-siguiente').addEventListener('click', function(){ mostrar(actual + 1); reiniciar(); });
   reiniciar();
+
+  /* ---------- Pase de fotografías de DermÁnima ----------
+     Para añadir o quitar fotos basta con editar esta lista. Las que no
+     existan se descartan solas, así que la pieza nunca se rompe. */
+  var DERMANIMA = [
+    'https://differentissgood.com/assets/work-2.jpg',
+    'assets/dermania1.png',
+    'assets/dermania2.png',
+    'assets/dermania3.png',
+    'assets/dermania4.png',
+    'assets/dermania5.png'
+  ];
+
+  (function(){
+    var marco = document.getElementById('pase-dermanima');
+    if(!marco || DERMANIMA.length < 2) return;
+
+    var primera = marco.querySelector('img');
+    // Si la primera no llega a cargar se descarta, para que el pase no deje
+    // un hueco en blanco al pasar por ella
+    var cargadas = [];
+    if(primera.complete && primera.naturalWidth === 0){
+      primera.remove();
+    } else {
+      cargadas.push(primera);
+      primera.addEventListener('error', function(){
+        var i = cargadas.indexOf(primera);
+        if(i > -1) cargadas.splice(i, 1);
+        primera.remove();
+      });
+    }
+    var pendientes = DERMANIMA.length - 1;
+
+    DERMANIMA.slice(1).forEach(function(ruta){
+      var img = new Image();
+      img.onload = function(){
+        img.className = '';
+        img.alt = '';
+        img.loading = 'lazy';
+        marco.insertBefore(img, marco.querySelector('.trabajo__pie'));
+        cargadas.push(img);
+        if(--pendientes === 0) arrancar();
+      };
+      img.onerror = function(){ if(--pendientes === 0) arrancar(); };
+      img.src = ruta;
+    });
+
+    function arrancar(){
+      if(!cargadas.length) return;
+      if(!cargadas.some(function(x){ return x.classList.contains('activa'); })){
+        cargadas[0].classList.add('activa');
+      }
+      if(cargadas.length < 2) return;
+      var i = 0;
+      setInterval(function(){
+        cargadas[i].classList.remove('activa');
+        i = (i + 1) % cargadas.length;
+        cargadas[i].classList.add('activa');
+      }, 3500);
+    }
+  })();
 
   /* ---------- QR hacia esta misma página ---------- */
   document.getElementById('qr').src =
