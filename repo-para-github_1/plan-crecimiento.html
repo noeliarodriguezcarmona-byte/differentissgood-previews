@@ -164,6 +164,7 @@
   footer{padding:40px 24px 30px;text-align:center;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);}
   footer .foot-contact{margin-bottom:14px;}
   .badge{position:fixed;bottom:88px;right:16px;background:var(--orange);color:#fff;font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;}
+  .plan-tag{position:fixed;top:16px;left:16px;background:var(--ink);color:var(--bg);font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;opacity:.9;z-index:41;}
 
   /* ===== Chat flotante minimalista ===== */
   .chat-float{position:fixed;bottom:16px;right:16px;background:var(--card);color:var(--ink);width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.35);z-index:50;transition:transform .25s ease,border-color .25s ease;border:1.5px solid var(--line);}
@@ -191,7 +192,7 @@
 </head>
 <body>
 
-<div class="plan-tag" style="position:fixed;top:16px;left:16px;background:var(--ink);color:var(--bg);font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;opacity:.9;z-index:41;">EJEMPLO · PLAN MEDIO</div>
+<div class="plan-tag">EJEMPLO · PLAN CRECIMIENTO</div>
 
 <header>
   <div class="headin">
@@ -282,8 +283,8 @@
     <h2>Gestiona tu contenido</h2>
     <p class="lead">Así de sencillo es cambiar fotos, pies de foto o entradas del blog — sin tocar una línea de código. (Demo visual; en tu web real los cambios se guardan de verdad.)</p>
     <div class="manage-tabs">
-      <button class="manage-tab active" onclick="showManageTab('fotos')">Fotografías</button>
-      <button class="manage-tab" onclick="showManageTab('blog')">Entradas del blog</button>
+      <button class="manage-tab active" onclick="showManageTab('fotos', this)">Fotografías</button>
+      <button class="manage-tab" onclick="showManageTab('blog', this)">Entradas del blog</button>
     </div>
     <div class="manage-panel active" id="manage-fotos">
       <div class="manage-grid" id="manage-grid"></div>
@@ -407,7 +408,7 @@
 </div>
 
 <section id="reserva">
-  <div class="sec-head reveal"><span class="eyebrow">Extra: calendario de reservas</span><h2>Reserva tu sesión</h2></div>
+  <div class="sec-head reveal"><span class="eyebrow">Agenda</span><h2>Reserva tu sesión</h2></div>
   <div class="booking reveal">
     <p style="color:var(--muted);">Elige día y hora para una llamada de 20 minutos y hablamos de tu proyecto.</p>
     <button class="cta" onclick="openBooking()">Ver disponibilidad →</button>
@@ -415,7 +416,7 @@
 </section>
 
 <section id="faq">
-  <div class="sec-head reveal"><span class="eyebrow">Extra: FAQ desplegable</span><h2>Preguntas frecuentes</h2></div>
+  <div class="sec-head reveal"><span class="eyebrow">Dudas frecuentes</span><h2>Preguntas frecuentes</h2></div>
   <div class="faq">
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda un proyecto? <span class="plus">+</span></button><div class="faq-a"><p>Entre 10 y 15 días laborables desde que confirmamos el brief.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Incluye cambios después de la entrega? <span class="plus">+</span></button><div class="faq-a"><p>Sí, incluye 3 rondas de ajustes antes de la versión final.</p></div></div>
@@ -440,7 +441,7 @@
 <button class="chat-float" onclick="window.open('https://wa.me/34662272128','_blank')" aria-label="Escríbenos" title="Escríbenos">
   <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.3 8.3 0 0 1-3.8-.9L3 20l1.9-5.7a8.3 8.3 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.6 2h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>
 </button>
-<div class="badge">Designed by Differentisgood</div>
+<div class="badge">Designed by Differentissgood</div>
 
 <script>
   const BASE_PRICE = 600; // Diseño & desarrollo web, siempre incluido
@@ -612,13 +613,14 @@
   function addBlogPost(){
     const t = prompt('Título de la nueva entrada:');
     if(!t) return;
-    blogData.push({title:t, tag:'Nuevo'});
+    const body = prompt('Texto de la entrada:') || 'Entrada pendiente de redactar.';
+    blogData.push({title:t, tag:'Nuevo', excerpt:body.slice(0,90), body});
     renderManagePosts();
   }
-  function showManageTab(tab){
+  function showManageTab(tab, btn){
     document.querySelectorAll('.manage-tab').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('.manage-panel').forEach(p=>p.classList.remove('active'));
-    event.target.classList.add('active');
+    btn.classList.add('active');
     document.getElementById('manage-'+tab).classList.add('active');
   }
   renderManageGrid();

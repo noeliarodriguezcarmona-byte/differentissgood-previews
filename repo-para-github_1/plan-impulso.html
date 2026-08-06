@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Differentissgood — Estudio Creativo</title>
-<meta name="description" content="Differentissgood. Branding, web y contenido que hacen que tu marca sea imposible de ignorar. Contáctanos por WhatsApp.">
+<title>Differentissgood — Plan Impulso</title>
+<meta name="description" content="Differentissgood. Plan Impulso: branding, web y contenido que hacen que tu marca sea imposible de ignorar. Contáctanos por WhatsApp.">
 <meta name="theme-color" content="#171410">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Differentissgood — Estudio Creativo">
+<meta property="og:title" content="Differentissgood — Plan Impulso">
 <meta property="og:description" content="Branding, web y contenido que hacen que tu marca sea imposible de ignorar.">
 <meta property="og:image" content="https://differentissgood.com/assets/og-cover.jpg">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Differentissgood — Estudio Creativo">
+<meta name="twitter:title" content="Differentissgood — Plan Impulso">
 <meta name="twitter:description" content="Branding, web y contenido que hacen que tu marca sea imposible de ignorar.">
 <meta name="twitter:image" content="https://differentissgood.com/assets/og-cover.jpg">
 <link rel="icon" href="https://differentissgood.com/assets/logo.png">
@@ -130,12 +130,12 @@
   .wa-form button{background:var(--orange);color:#fff;border:none;padding:14px;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;}
   footer{padding:34px 24px;text-align:center;font-size:12px;opacity:.55;}
   .badge{position:fixed;bottom:16px;right:16px;background:var(--orange);color:#fff;font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;letter-spacing:.02em;}
-  .plan-tag{position:fixed;top:16px;left:16px;background:var(--ink);color:var(--bg);font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;opacity:.85;}
+  .plan-tag{position:fixed;top:16px;left:16px;background:var(--ink);color:var(--bg);font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;opacity:.9;z-index:41;}
 </style>
 </head>
 <body>
 
-<div class="plan-tag">EJEMPLO · PLAN INICIO</div>
+<div class="plan-tag">EJEMPLO · PLAN IMPULSO</div>
 
 <header>
   <div class="brand"><img src="https://differentissgood.com/assets/logo.png" alt="logo"> Differentissgood</div>
@@ -225,7 +225,7 @@
 </section>
 
 <section id="deja-tu-valoracion">
-  <div class="sec-head reveal"><span class="eyebrow">Extra: formulario simple</span><h2>Deja tu valoración</h2></div>
+  <div class="sec-head reveal"><span class="eyebrow">Tu opinión</span><h2>Deja tu valoración</h2></div>
   <form class="valform reveal" onsubmit="alert('¡Gracias por tu valoración!'); return false;">
     <input type="text" placeholder="Tu nombre" required>
     <textarea placeholder="Cuéntanos tu experiencia" rows="3" required></textarea>
@@ -265,11 +265,11 @@
 </section>
 
 <footer>
-  <p>© 2026 Differentissgood. Todos los derechos reservados. <a href="#" style="text-decoration:underline;">Aviso Legal</a></p>
+  <p>© 2026 Differentissgood. Todos los derechos reservados. Aviso Legal · Política de Privacidad · Política de Cookies</p>
   <p style="margin-top:6px;">hello@differentissgood.com · +34 662 272 128</p>
 </footer>
 
-<div class="badge">Designed by Differentisgood</div>
+<div class="badge">Designed by Differentissgood</div>
 
 <script>
   // Modo oscuro real
@@ -306,15 +306,24 @@
   },{threshold:.15});
   revealEls.forEach(el=>io2.observe(el));
 
-  // Movimiento ligero (parallax) de las tarjetas al deslizar la página
+  // Movimiento ligero (parallax) de las tarjetas al deslizar la página.
+  // Se agrupa en un requestAnimationFrame: el scroll dispara decenas de eventos
+  // por segundo y recalcular la posición en cada uno provoca tirones en móvil.
+  let parallaxPendiente = false;
   window.addEventListener('scroll', ()=>{
-    cards.forEach((card,i)=>{
-      const rect = card.getBoundingClientRect();
-      const speed = (i%3===1) ? 0.03 : 0.015;
-      const offset = (window.innerHeight/2 - rect.top - rect.height/2) * speed;
-      card.style.transform = card.matches(':hover') ? '' : `translateY(${-offset}px)`;
+    if(parallaxPendiente) return;
+    parallaxPendiente = true;
+    requestAnimationFrame(()=>{
+      cards.forEach((card,i)=>{
+        if(card.matches(':hover')){ card.style.transform = ''; return; }
+        const rect = card.getBoundingClientRect();
+        const speed = (i%3===1) ? 0.03 : 0.015;
+        const offset = (window.innerHeight/2 - rect.top - rect.height/2) * speed;
+        card.style.transform = `translateY(${-offset}px)`;
+      });
+      parallaxPendiente = false;
     });
-  });
+  }, {passive:true});
 </script>
 
 </body>
