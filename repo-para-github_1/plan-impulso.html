@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es" style="scroll-behavior:smooth;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Differentissgood — Estudio Creativo</title>
+<meta name="description" content="Differentissgood. Branding, web y contenido que hacen que tu marca sea imposible de ignorar. Contáctanos por WhatsApp.">
+<meta name="theme-color" content="#171410">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Differentissgood — Estudio Creativo">
+<meta property="og:description" content="Branding, web y contenido que hacen que tu marca sea imposible de ignorar.">
+<meta property="og:image" content="https://differentissgood.com/assets/og-cover.jpg">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Differentissgood — Estudio Creativo">
+<meta name="twitter:description" content="Branding, web y contenido que hacen que tu marca sea imposible de ignorar.">
+<meta name="twitter:image" content="https://differentissgood.com/assets/og-cover.jpg">
+<link rel="icon" href="https://differentissgood.com/assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F2E9; --ink:#1c1a17; --orange:#E0611C; --line:#e6ddcc;
+    --card:#ffffff;
+  }
+  [data-theme="dark"]{
+    --bg:#151310; --ink:#F5F0E6; --line:#332e26; --card:#1e1b17;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;transition:background .3s,color .3s;}
+  h1,h2,h3{font-family:'Fraunces',serif;margin:0;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;position:sticky;top:0;background:var(--bg);z-index:40;border-bottom:1px solid var(--line);}
+  header .brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:.02em;margin-left:-6px;}
+  header .brand img{height:30px;width:30px;object-fit:contain;image-rendering:-webkit-optimize-contrast;}
+  header nav a{margin-left:22px;font-size:14px;text-decoration:none;opacity:.8;}
+  .toggle-btn{border:1px solid var(--line);background:none;color:var(--ink);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;}
+  .head-right{display:flex;align-items:center;gap:10px;}
+  .burger{display:flex;flex-direction:column;justify-content:center;gap:4px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:none;cursor:pointer;padding:0;}
+  .burger span{display:block;width:14px;height:1.5px;background:var(--ink);margin:0 auto;transition:.25s ease;}
+  .burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+
+  /* menú hamburguesa — overlay a pantalla completa */
+  .menu-overlay{position:fixed;inset:0;background:var(--bg);z-index:35;display:flex;flex-direction:column;justify-content:center;padding:40px;opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .3s ease,transform .3s ease;}
+  .menu-overlay.open{opacity:1;pointer-events:auto;transform:none;}
+  .menu-links{display:flex;flex-direction:column;gap:2px;max-width:480px;margin:0 auto;width:100%;}
+  .menu-links a{font-family:'Fraunces',serif;font-size:clamp(28px,6vw,44px);padding:14px 6px;border-bottom:1px solid var(--line);text-decoration:none;display:block;transition:color .2s,padding-left .2s;}
+  .menu-links a:hover{color:var(--orange);padding-left:12px;}
+  .menu-foot{max-width:480px;margin:30px auto 0;width:100%;text-align:center;font-size:13px;opacity:.6;}
+
+  /* plan-name destacado en el hero */
+  .plan-name{display:inline-block;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(15px,2vw,18px);color:var(--orange);letter-spacing:.03em;margin-bottom:6px;}
+  .hero{padding:90px 24px 70px;text-align:center;position:relative;overflow:hidden;}
+  .hero .glow{position:absolute;top:-200px;left:50%;width:760px;height:500px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(224,97,28,.20),transparent 65%);filter:blur(10px);animation:driftGlow 9s ease-in-out infinite;pointer-events:none;}
+  @keyframes driftGlow{0%,100%{transform:translateX(-52%) translateY(0);}50%{transform:translateX(-48%) translateY(24px);}}
+  .hero > *{position:relative;z-index:1;}
+  .hero h1{opacity:0;transform:translateY(20px);animation:heroIn .7s ease forwards .05s;}
+  .hero p{opacity:0;transform:translateY(20px);animation:heroIn .7s ease forwards .2s;}
+  .hero .cta{opacity:0;transform:translateY(20px);animation:heroIn .7s ease forwards .35s;}
+  @keyframes heroIn{to{opacity:1;transform:none;}}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  .eyebrow{color:var(--orange);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;}
+  .hero h1{font-size:clamp(38px,6vw,64px);line-height:1.05;margin-top:16px;font-style:italic;}
+  .hero h1 em{color:var(--orange);font-style:normal;position:relative;}
+  .hero p{max-width:520px;margin:22px auto 0;font-size:17px;opacity:.75;line-height:1.6;}
+  .cta{display:inline-flex;align-items:center;gap:8px;margin-top:32px;background:var(--orange);color:#fff;padding:14px 26px;border-radius:30px;text-decoration:none;font-weight:600;font-size:15px;}
+  section{padding:70px 24px;border-top:1px solid var(--line);}
+  .sec-head{text-align:center;margin-bottom:44px;}
+  .sec-head .eyebrow{display:block;margin-bottom:10px;}
+  .sec-head h2{font-size:32px;}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1040px;margin:0 auto;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;opacity:0;transform:translateY(30px);transition:opacity .6s ease, transform .3s ease, border-color .3s ease, box-shadow .3s ease;}
+  .card.in{opacity:1;}
+  .card:hover{transform:translateY(-6px) scale(1.02) !important;border-color:var(--orange);box-shadow:0 14px 30px rgba(0,0,0,.08);}
+  .process{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;max-width:1040px;margin:0 auto;position:relative;}
+  .process::before{content:"";position:absolute;top:20px;left:8%;right:8%;height:1px;background:var(--line);z-index:0;}
+  .step{position:relative;z-index:1;text-align:center;transition:transform .3s ease;}
+  .step:hover{transform:translateY(-6px);}
+  .step-n{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--orange);color:#fff;font-size:13px;font-weight:600;margin-bottom:14px;box-shadow:0 0 0 6px var(--bg);}
+  .step h3{font-size:17px;margin-bottom:8px;}
+  .step p{font-size:14px;opacity:.7;line-height:1.5;}
+  .card .n{color:var(--orange);font-size:12px;font-weight:600;letter-spacing:.1em;display:block;margin-bottom:8px;}
+  .card h3{font-size:18px;font-family:'Inter',sans-serif;font-weight:600;margin-bottom:8px;}
+  .card p{font-size:14px;opacity:.7;line-height:1.6;margin:0;}
+  .card .ico{width:38px;height:38px;border-radius:10px;background:rgba(224,97,28,.1);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px;}
+
+  /* Hero: chips visuales con lo esencial */
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:620px;margin:28px auto 0;opacity:0;transform:translateY(20px);animation:heroIn .7s ease forwards .5s;}
+  .hero-chip{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);padding:8px 14px;border-radius:30px;font-size:12.5px;font-weight:600;}
+  .hero-chip .e{font-size:14px;}
+
+  /* QR final */
+  .qr-box{display:flex;align-items:center;gap:24px;justify-content:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px;max-width:520px;margin:0 auto;}
+  .qr-box img{width:110px;height:110px;border-radius:10px;background:#fff;padding:8px;}
+  .qr-box p{font-size:13.5px;opacity:.7;max-width:220px;}
+
+  /* Mapa compacto */
+  .map-compact{display:flex;gap:20px;max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;align-items:center;flex-wrap:wrap;}
+  .map-compact iframe{width:220px;height:150px;border:0;border-radius:12px;flex-shrink:0;filter:grayscale(.25);}
+  .map-compact .map-text{flex:1;min-width:180px;}
+  .map-compact h3{font-size:16px;margin-bottom:6px;font-family:'Inter',sans-serif;font-weight:600;}
+  .map-compact p{font-size:13px;opacity:.7;line-height:1.5;}
+  .reviews-track-wrap{overflow:hidden;max-width:1040px;margin:0 auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .reviews-track{display:flex;gap:18px;width:max-content;animation:slideLeft 26s linear infinite;}
+  .reviews-track:hover{animation-play-state:paused;}
+  @keyframes slideLeft{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;flex:0 0 300px;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;}
+  .review:hover{transform:translateY(-5px);border-color:var(--orange);box-shadow:0 12px 26px rgba(0,0,0,.08);}
+  .stars{color:var(--orange);letter-spacing:2px;margin-bottom:10px;}
+  .review p{font-size:14px;opacity:.8;line-height:1.6;}
+  .review b{display:block;margin-top:10px;font-size:13px;}
+  .valform{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:10px;}
+  .valform input,.valform textarea{padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:'Inter',sans-serif;font-size:14px;}
+  .valform button{background:var(--orange);color:#fff;border:none;padding:13px;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;}
+  .about{display:flex;gap:40px;align-items:center;flex-wrap:wrap;max-width:1040px;margin:0 auto;}
+  .about img{width:260px;border-radius:16px;flex:1;min-width:220px;}
+  .about div{flex:2;min-width:260px;}
+  .about p{opacity:.75;line-height:1.7;font-size:15px;}
+  .map iframe{width:100%;height:280px;border:0;border-radius:16px;}
+  .contact{background:var(--ink);color:var(--bg);border-radius:24px;padding:60px 30px;text-align:center;max-width:1040px;margin:0 auto;}
+  .contact h2{font-size:30px;color:var(--bg);}
+  .contact p{opacity:.75;margin-top:10px;}
+  .wa-form{max-width:420px;margin:30px auto 0;display:flex;flex-direction:column;gap:10px;}
+  .wa-form input,.wa-form textarea{padding:12px 14px;border-radius:10px;border:none;font-family:'Inter',sans-serif;font-size:14px;}
+  .wa-form button{background:var(--orange);color:#fff;border:none;padding:14px;border-radius:10px;font-weight:600;cursor:pointer;font-size:14px;}
+  footer{padding:34px 24px;text-align:center;font-size:12px;opacity:.55;}
+  .badge{position:fixed;bottom:16px;right:16px;background:var(--orange);color:#fff;font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;letter-spacing:.02em;}
+  .plan-tag{position:fixed;top:16px;left:16px;background:var(--ink);color:var(--bg);font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;opacity:.85;}
+</style>
+</head>
+<body>
+
+<div class="plan-tag">EJEMPLO · PLAN INICIO</div>
+
+<header>
+  <div class="brand"><img src="https://differentissgood.com/assets/logo.png" alt="logo"> Differentissgood</div>
+  <div class="head-right">
+    <button class="toggle-btn" id="theme-btn" onclick="toggleDarkMode()">🌙</button>
+    <button class="burger" id="burger-btn" onclick="toggleMenu()" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menu-overlay">
+  <nav class="menu-links">
+    <a href="#servicios" onclick="closeMenu()">Servicios</a>
+    <a href="#proceso" onclick="closeMenu()">Proceso</a>
+    <a href="#sobre" onclick="closeMenu()">Quiénes somos</a>
+    <a href="#contacto" onclick="closeMenu()">Contacto</a>
+  </nav>
+  <div class="menu-foot">hello@differentissgood.com · +34 662 272 128</div>
+</div>
+
+<section class="hero" style="border-top:none;">
+  <div class="glow"></div>
+  <div class="plan-name">Plan Impulso</div>
+  <div class="eyebrow">Estudio creativo</div>
+  <h1>Different iss always <em>good.</em></h1>
+  <p>Branding, web y contenido con una idea clara: hacer que tu marca sea imposible de ignorar.</p>
+  <a class="cta" href="#contacto">Hablemos de tu marca →</a>
+  <div class="hero-chips">
+    <div class="hero-chip"><span class="e">🎨</span> Diseño web profesional</div>
+    <div class="hero-chip"><span class="e">✨</span> Web personalizada</div>
+    <div class="hero-chip"><span class="e">📱</span> Adaptado a móviles</div>
+    <div class="hero-chip"><span class="e">💬</span> Contacto por WhatsApp</div>
+    <div class="hero-chip"><span class="e">🔎</span> SEO básico</div>
+    <div class="hero-chip"><span class="e">⚡</span> Entrega rápida</div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="sec-head"><span class="eyebrow">Qué hacemos</span><h2>Servicios</h2><p style="max-width:520px;margin:14px auto 0;opacity:.65;font-size:15px;">Seis disciplinas, una sola obsesión: un trabajo que hace que te recuerden, que hablen de ti y que te elijan.</p></div>
+  <div class="grid3">
+    <div class="card"><div class="ico">🎨</div><span class="n">01</span><h3>Identidad de marca</h3><p>Nombres, logos y mundos visuales que nadie puede copiar. Construimos el ADN visual completo de tu negocio, desde cero o partiendo de lo que ya tienes.</p></div>
+    <div class="card"><div class="ico">🖥️</div><span class="n">02</span><h3>Diseño & desarrollo web</h3><p>Webs editoriales, rápidas y construidas para convertir. Cada página está pensada para que el visitante entienda tu marca en segundos.</p></div>
+    <div class="card"><div class="ico">📱</div><span class="n">03</span><h3>Contenido & redes</h3><p>Feeds que hacen crecer tu marca mes a mes, con una línea visual coherente y contenido que realmente conecta.</p></div>
+    <div class="card"><div class="ico">📸</div><span class="n">04</span><h3>Producción foto & vídeo</h3><p>Fotografía editorial y cine de marca: imágenes que se detienen a mirar, no que se pasan de largo.</p></div>
+    <div class="card"><div class="ico">📈</div><span class="n">05</span><h3>Campañas de pago</h3><p>Creatividad pensada para vender, no solo para impresionar — cada campaña con un objetivo medible detrás.</p></div>
+    <div class="card"><div class="ico">🎯</div><span class="n">06</span><h3>Estrategia & posicionamiento</h3><p>Un posicionamiento más afilado y decisiones más valientes, para que tu marca ocupe un lugar propio en la mente del cliente.</p></div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="sec-head reveal"><span class="eyebrow">Nuestro método</span><h2>Cómo trabajamos</h2><p style="max-width:520px;margin:14px auto 0;opacity:.65;font-size:15px;">Cuatro pasos, cero sorpresas. Sabes exactamente qué esperar desde el primer día.</p></div>
+  <div class="process">
+    <div class="step reveal"><span class="step-n">01</span><h3>Descubrimiento</h3><p>Hablamos de tu marca, tu público y tus objetivos reales.</p></div>
+    <div class="step reveal"><span class="step-n">02</span><h3>Diseño</h3><p>Creamos una propuesta a medida, sin plantillas genéricas.</p></div>
+    <div class="step reveal"><span class="step-n">03</span><h3>Ajustes</h3><p>Dos rondas de cambios para que quede exactamente como quieres.</p></div>
+    <div class="step reveal"><span class="step-n">04</span><h3>Lanzamiento</h3><p>Tu web sale al mundo, lista para convertir desde el primer clic.</p></div>
+  </div>
+</section>
+
+<section id="valoraciones">
+  <div class="sec-head reveal"><span class="eyebrow">Lo que dicen</span><h2>Valoraciones</h2></div>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track">
+      <div class="review"><div class="stars">★★★★★</div><p>"Se han convertido en el equipo audiovisual oficial de nuestra marca."</p><b>Tío Papelón — Marca de bebidas</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Súper profesionales y atentos a cada detalle. Encantados con el resultado."</p><b>FitBar Catering</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Los recomiendo totalmente, el trabajo fue impecable."</p><b>Sarahi Acevedo</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Muy contentos, cuidando cada detalle y siempre disponibles."</p><b>Whoop! The Agency</b></div>
+      <!-- duplicado para bucle infinito -->
+      <div class="review"><div class="stars">★★★★★</div><p>"Se han convertido en el equipo audiovisual oficial de nuestra marca."</p><b>Tío Papelón — Marca de bebidas</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Súper profesionales y atentos a cada detalle. Encantados con el resultado."</p><b>FitBar Catering</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Los recomiendo totalmente, el trabajo fue impecable."</p><b>Sarahi Acevedo</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Muy contentos, cuidando cada detalle y siempre disponibles."</p><b>Whoop! The Agency</b></div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:26px;font-size:13px;"><a href="#deja-tu-valoracion" style="color:var(--orange);text-decoration:none;">Deja tu valoración ↓</a></p>
+</section>
+
+<section id="sobre">
+  <div class="about reveal">
+    <img loading="lazy" src="https://differentissgood.com/assets/founder-2.jpg" alt="Fundador">
+    <div>
+      <span class="eyebrow">Sobre nosotros</span>
+      <h2 style="margin-top:10px;font-size:28px;">El hogar de las marcas valientes</h2>
+      <p>Nacimos de la idea de que ser diferente siempre es bueno. Mezclamos estrategia, oficio y tecnología para construir marcas en las que la gente quiere quedarse.</p>
+      <p>Cada proyecto lo lleva un equipo senior, de principio a fin — sin intermediarios ni resultados a medias.</p>
+    </div>
+  </div>
+</section>
+
+<section id="deja-tu-valoracion">
+  <div class="sec-head reveal"><span class="eyebrow">Extra: formulario simple</span><h2>Deja tu valoración</h2></div>
+  <form class="valform reveal" onsubmit="alert('¡Gracias por tu valoración!'); return false;">
+    <input type="text" placeholder="Tu nombre" required>
+    <textarea placeholder="Cuéntanos tu experiencia" rows="3" required></textarea>
+    <button type="submit">Enviar valoración</button>
+  </form>
+</section>
+
+<section id="contacto">
+  <div class="contact reveal">
+    <h2>Hablemos de tu marca</h2>
+    <p>Respondemos en menos de 1 día laborable.</p>
+    <form class="wa-form" onsubmit="event.preventDefault(); const n=this[0].value, m=this[1].value; window.open('https://wa.me/34662272128?text='+encodeURIComponent('Hola, soy '+n+'. '+m),'_blank');">
+      <input type="text" placeholder="Tu nombre" required>
+      <textarea placeholder="Cuéntanos tu proyecto" rows="3" required></textarea>
+      <button type="submit">Enviar por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<section id="ubicacion">
+  <div class="sec-head reveal"><span class="eyebrow">Dónde estamos</span><h2 style="font-size:26px;">Ubicación</h2></div>
+  <div class="map-compact reveal">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d187003.5!2d2.1734!3d41.3851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBarcelona!5e0!3m2!1ses!2ses" loading="lazy"></iframe>
+    <div class="map-text">
+      <h3>Barcelona, España</h3>
+      <p>Y en remoto con clientes de todo el mundo. Escríbenos y hablamos.</p>
+    </div>
+  </div>
+</section>
+
+<section id="qr">
+  <div class="sec-head reveal"><span class="eyebrow">Compártenos</span><h2 style="font-size:26px;">Escanea y visita</h2></div>
+  <div class="qr-box reveal">
+    <img id="qr-img" alt="Código QR de la web">
+    <p>Escanea el código y visita nuestra web.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Differentissgood. Todos los derechos reservados. <a href="#" style="text-decoration:underline;">Aviso Legal</a></p>
+  <p style="margin-top:6px;">hello@differentissgood.com · +34 662 272 128</p>
+</footer>
+
+<div class="badge">Designed by Differentisgood</div>
+
+<script>
+  // Modo oscuro real
+  function toggleDarkMode(){
+    const isDark = document.body.getAttribute('data-theme') === 'dark';
+    document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
+  }
+
+  // Menú hamburguesa
+  function toggleMenu(){
+    document.getElementById('menu-overlay').classList.toggle('open');
+    document.getElementById('burger-btn').classList.toggle('open');
+  }
+  function closeMenu(){
+    document.getElementById('menu-overlay').classList.remove('open');
+    document.getElementById('burger-btn').classList.remove('open');
+  }
+
+  // QR hacia la web
+  document.getElementById('qr-img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&bgcolor=ffffff&color=1c1a17&data=' + encodeURIComponent('https://differentissgood.com');
+
+  // Aparición de las tarjetas de servicios al hacer scroll
+  const cards = document.querySelectorAll('#servicios .card');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:.2});
+  cards.forEach(c=>io.observe(c));
+
+  // Aparición del resto de bloques (proceso, valoraciones, sobre, formularios, mapa, contacto)
+  const revealEls = document.querySelectorAll('.reveal');
+  const io2 = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:.15});
+  revealEls.forEach(el=>io2.observe(el));
+
+  // Movimiento ligero (parallax) de las tarjetas al deslizar la página
+  window.addEventListener('scroll', ()=>{
+    cards.forEach((card,i)=>{
+      const rect = card.getBoundingClientRect();
+      const speed = (i%3===1) ? 0.03 : 0.015;
+      const offset = (window.innerHeight/2 - rect.top - rect.height/2) * speed;
+      card.style.transform = card.matches(':hover') ? '' : `translateY(${-offset}px)`;
+    });
+  });
+</script>
+
+</body>
+</html>
