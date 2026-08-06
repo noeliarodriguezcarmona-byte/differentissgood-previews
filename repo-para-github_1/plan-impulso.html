@@ -74,6 +74,9 @@ body{
 }
 h1,h2,h3,h4{font-family:var(--serif);font-weight:400;margin:0;line-height:1.08;letter-spacing:-.02em;}
 p{margin:0;}
+/* El navegador da margen propio a figure, blockquote y dl: sin esto las
+   piezas de la galería y los retratos quedan encogidos en su hueco */
+figure,figcaption,blockquote,dl,dd{margin:0;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 button,input,textarea,select{font:inherit;color:inherit;}
@@ -440,6 +443,72 @@ section[id],footer[id]{scroll-margin-top:92px;}
 .paso p{margin-top:9px;color:var(--ink-soft);font-size:14.5px;line-height:1.6;}
 
 /* ==========================================================================
+   6 bis. TRABAJOS — cinta de marcas y galería
+   ========================================================================== */
+/* Cinta de logotipos: la pista lleva la lista dos veces exactas, para que al
+   desplazarse la mitad el bucle empalme sin salto */
+.marcas{
+  margin-top:clamp(40px,5vw,68px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.marcas__pista{
+  display:flex;align-items:center;gap:clamp(34px,5vw,64px);
+  width:max-content;animation:cinta 32s linear infinite;
+}
+.marcas:hover .marcas__pista{animation-play-state:paused;}
+@keyframes cinta{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marcas__pista img{
+  height:clamp(20px,2.2vw,26px);width:auto;object-fit:contain;
+  filter:grayscale(1);opacity:.45;
+  transition:opacity .4s var(--curva),filter .4s var(--curva);
+}
+.marcas__pista img:hover{opacity:1;filter:grayscale(0);}
+[data-theme="dark"] .marcas__pista img{filter:grayscale(1) brightness(2.2);}
+[data-theme="dark"] .marcas__pista img:hover{filter:brightness(1.6);}
+
+/* Galería */
+.trabajos{
+  margin-top:clamp(40px,5vw,64px);
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(13px,1.7vw,20px);
+  grid-auto-rows:clamp(175px,20vw,255px);
+}
+.trabajo{
+  position:relative;overflow:hidden;border-radius:var(--radio);
+  border:1px solid var(--line);background:var(--bg-soft);
+  transition:box-shadow .55s var(--curva),border-color .45s var(--curva);
+}
+.trabajo--grande{grid-column:span 2;grid-row:span 2;}
+.trabajo--ancho{grid-column:span 2;}
+.trabajo:hover{box-shadow:var(--shadow);border-color:var(--accent);}
+
+.trabajo img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(.45) contrast(1.02);
+  transition:transform 1.3s var(--curva),filter .8s var(--curva);
+}
+.trabajo:hover img{transform:scale(1.07);filter:grayscale(0) contrast(1);}
+
+.trabajo__pie{
+  position:absolute;inset:auto 0 0 0;padding:clamp(16px,1.8vw,22px);
+  background:linear-gradient(0deg,rgba(18,15,12,.92),rgba(18,15,12,.6) 55%,rgba(18,15,12,.18) 82%,transparent);
+  color:#fff;transform:translateY(10px);
+  transition:transform .55s var(--curva);
+}
+.trabajo:hover .trabajo__pie{transform:none;}
+.trabajo__cat{font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+.trabajo__nombre{font-family:var(--serif);font-size:clamp(17px,1.9vw,25px);margin-top:5px;line-height:1.14;}
+/* La descripción solo aparece al pasar el cursor, para no cargar la rejilla */
+.trabajo__desc{
+  font-size:13px;line-height:1.5;color:rgba(255,255,255,.74);
+  display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .55s var(--curva),opacity .45s var(--curva),margin-top .55s var(--curva);
+}
+.trabajo__desc > span{overflow:hidden;}
+.trabajo:hover .trabajo__desc{grid-template-rows:1fr;opacity:1;margin-top:7px;}
+
+/* ==========================================================================
    7. HABLEMOS DE TU MARCA — contenedor oscuro, compacto
    ========================================================================== */
 .contacto__caja{
@@ -661,6 +730,10 @@ section[id],footer[id]{scroll-margin-top:92px;}
   .perfil__marco{aspect-ratio:4/3;}
   .perfil__media::after{display:none;}
   .lugar{grid-template-columns:1fr;}
+  /* Dos columnas: la pieza grande pasa a ocupar el ancho entero */
+  .trabajos{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(165px,25vw,235px);}
+  .trabajo--grande{grid-column:span 2;grid-row:span 1;}
+  .trabajo--ancho{grid-column:span 2;}
   .pie__arriba{grid-template-columns:1fr;}
   .inicio__pie{grid-template-columns:1fr;align-items:start;}
   .metodo::before{display:none;}
@@ -678,6 +751,14 @@ section[id],footer[id]{scroll-margin-top:92px;}
   /* En vertical los sellos ocupan más sitio relativo */
   .pie{padding-bottom:120px;}
   .opiniones__marco{min-height:300px;}
+  /* Una sola columna: sin hover, la descripción se muestra siempre */
+  .trabajos{grid-template-columns:1fr;grid-auto-rows:clamp(200px,52vw,260px);}
+  .trabajo--grande,.trabajo--ancho{grid-column:span 1;grid-row:span 1;}
+  .trabajo__pie{transform:none;
+    /* Con la descripción siempre visible el rótulo sube, así que el velo
+       tiene que cubrir más alto para que se lea sobre fotos claras */
+    background:linear-gradient(0deg,rgba(18,15,12,.94),rgba(18,15,12,.82) 60%,rgba(18,15,12,.4) 88%,transparent);}
+  .trabajo__desc{grid-template-rows:1fr;opacity:1;margin-top:7px;}
 }
 @media(max-width:600px){
   /* Los dos sellos fijos comparten la franja inferior: se encogen para que
@@ -751,11 +832,12 @@ section[id],footer[id]{scroll-margin-top:92px;}
     <a href="#quienes-somos"><i>02</i> Quiénes somos</a>
     <a href="#que-hacemos"><i>03</i> Qué hacemos</a>
     <a href="#como-trabajamos"><i>04</i> Cómo trabajamos</a>
-    <a href="#hablemos"><i>05</i> Hablemos de tu marca</a>
-    <a href="#anade-valoracion"><i>06</i> Añade tu valoración</a>
-    <a href="#donde-estamos"><i>07</i> Dónde estamos</a>
-    <a href="#valoraciones"><i>08</i> Valoraciones</a>
-    <a href="#conocenos"><i>09</i> Conócenos un poco más</a>
+    <a href="#trabajos"><i>05</i> Trabajos</a>
+    <a href="#hablemos"><i>06</i> Hablemos de tu marca</a>
+    <a href="#anade-valoracion"><i>07</i> Añade tu valoración</a>
+    <a href="#donde-estamos"><i>08</i> Dónde estamos</a>
+    <a href="#valoraciones"><i>09</i> Valoraciones</a>
+    <a href="#conocenos"><i>10</i> Conócenos un poco más</a>
   </div>
   <div class="menu__pie">
     <a href="mailto:hello@differentissgood.com">hello@differentissgood.com</a>
@@ -998,7 +1080,91 @@ section[id],footer[id]{scroll-margin-top:92px;}
   </div>
 </section>
 
-<!-- ====================== 5. HABLEMOS DE TU MARCA ====================== -->
+<!-- ====================== 5. TRABAJOS ====================== -->
+<section id="trabajos">
+  <div class="contenedor">
+    <p class="rotulo aparece">Trabajo reciente</p>
+    <h2 class="titulo-seccion aparece" data-retardo="1">Trabajos</h2>
+    <p class="entradilla aparece" data-retardo="2">
+      Marcas que ya se atrevieron, y algunas de las piezas que hemos hecho con ellas.
+    </p>
+
+    <div class="marcas aparece" data-retardo="3" aria-label="Marcas con las que trabajamos">
+      <div class="marcas__pista">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/adidas.png" alt="Adidas">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/amazon.png" alt="Amazon">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/loreal.png" alt="L'Oréal Professionnel">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/garnier.png" alt="Garnier">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/patron.png" alt="Patrón">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/pulitzer.png" alt="Pulitzer Hotels">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/sivana.png" alt="Sivana Estética">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/robata.png" alt="Robata Sushi &amp; Grill">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/monster-sushi.png" alt="Monster Sushi">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/tio-papelon.png" alt="Tío Papelón">
+        <!-- La lista se repite entera: así el bucle empalma sin salto -->
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/adidas.png" alt="Adidas" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/amazon.png" alt="Amazon" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/loreal.png" alt="L'Oréal Professionnel" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/garnier.png" alt="Garnier" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/patron.png" alt="Patrón" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/pulitzer.png" alt="Pulitzer Hotels" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/sivana.png" alt="Sivana Estética" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/robata.png" alt="Robata Sushi &amp; Grill" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/monster-sushi.png" alt="Monster Sushi" aria-hidden="true">
+        <img loading="lazy" src="https://differentissgood.com/assets/clients/tio-papelon.png" alt="Tío Papelón" aria-hidden="true">
+      </div>
+    </div>
+
+    <div class="trabajos">
+      <figure class="trabajo aparece trabajo--grande" data-retardo="1">
+        <img loading="lazy" src="https://differentissgood.com/assets/work-1.jpg" alt="Robata">
+        <figcaption class="trabajo__pie">
+          <p class="trabajo__cat">Producción</p>
+          <p class="trabajo__nombre">Robata</p>
+          <div class="trabajo__desc"><span>Fuego, precisión y apetito, capturados de cerca.</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="trabajo aparece" data-retardo="2">
+        <img loading="lazy" src="https://differentissgood.com/assets/work-2.jpg" alt="DermÁnima">
+        <figcaption class="trabajo__pie">
+          <p class="trabajo__cat">Producto</p>
+          <p class="trabajo__nombre">DermÁnima</p>
+          <div class="trabajo__desc"><span>Luz suave y texturas naturales para una piel que respira.</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="trabajo aparece" data-retardo="3">
+        <img loading="lazy" src="https://differentissgood.com/assets/work-4.jpg" alt="Sivana Estética">
+        <figcaption class="trabajo__pie">
+          <p class="trabajo__cat">Contenido</p>
+          <p class="trabajo__nombre">Sivana Estética</p>
+          <div class="trabajo__desc"><span>Calidez editorial que convierte visitas en clientas fieles.</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="trabajo aparece" data-retardo="4">
+        <img loading="lazy" src="assets/produccion-video.png" alt="Rodaje de contenido de marca">
+        <figcaption class="trabajo__pie">
+          <p class="trabajo__cat">Backstage</p>
+          <p class="trabajo__nombre">Detrás de cámaras</p>
+          <div class="trabajo__desc"><span>Así se construye, plano a plano, el contenido que enamora en redes.</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="trabajo aparece trabajo--ancho" data-retardo="5">
+        <img loading="lazy" src="assets/galeria-arte.png" alt="Moodboard de identidad visual">
+        <figcaption class="trabajo__pie">
+          <p class="trabajo__cat">Identidad</p>
+          <p class="trabajo__nombre">Moodboard</p>
+          <div class="trabajo__desc"><span>Color, forma y carácter definidos antes de escribir una línea de código.</span></div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 6. HABLEMOS DE TU MARCA ====================== -->
 <section id="hablemos">
   <div class="contenedor">
     <div class="contacto__caja aparece">
@@ -1019,7 +1185,7 @@ section[id],footer[id]{scroll-margin-top:92px;}
   </div>
 </section>
 
-<!-- ====================== 6. AÑADE TU VALORACIÓN ====================== -->
+<!-- ====================== 7. AÑADE TU VALORACIÓN ====================== -->
 <section id="anade-valoracion">
   <div class="contenedor">
     <p class="rotulo aparece">Tu opinión</p>
@@ -1062,7 +1228,7 @@ section[id],footer[id]{scroll-margin-top:92px;}
   </div>
 </section>
 
-<!-- ====================== 7. DÓNDE ESTAMOS ====================== -->
+<!-- ====================== 8. DÓNDE ESTAMOS ====================== -->
 <section id="donde-estamos">
   <div class="contenedor">
     <div class="lugar">
@@ -1102,7 +1268,7 @@ section[id],footer[id]{scroll-margin-top:92px;}
   </div>
 </section>
 
-<!-- ====================== 8. VALORACIONES ====================== -->
+<!-- ====================== 9. VALORACIONES ====================== -->
 <section id="valoraciones">
   <div class="contenedor">
     <p class="rotulo aparece">Lo que dicen</p>
