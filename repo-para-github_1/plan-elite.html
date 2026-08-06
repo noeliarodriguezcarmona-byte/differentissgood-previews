@@ -785,32 +785,44 @@
   // las rutas que no existan se descartan solas y la pieza no se rompe.
   var DERMANIMA = [
     'https://differentissgood.com/assets/work-2.jpg',
-    'assets/dermania1.png',
-    'assets/dermania2.png',
-    'assets/dermania3.png',
-    'assets/dermania4.png',
-    'assets/dermania5.png'
+    'assets/dermania1.jpg',
+    'assets/dermania2.jpg',
+    'assets/dermania3.jpg',
+    'assets/dermania4.jpg',
+    'assets/dermania5.jpg'
   ];
 
   (function(){
     var marco = document.getElementById('pase-dermanima');
-    if(!marco || DERMANIMA.length < 2) return;
+    if(!marco) return;
+
+    var cargadas = [];
+    var actual = 0;
+
+    function mostrar(n){
+      if(!cargadas.length) return;
+      actual = (n + cargadas.length) % cargadas.length;
+      cargadas.forEach(function(img, k){ img.classList.toggle('activa', k === actual); });
+    }
+    // Si una foto falla se quita de la lista y otra ocupa su sitio al momento,
+    // para que nunca quede la pieza sin ninguna visible
+    function descartar(img){
+      var k = cargadas.indexOf(img);
+      if(k > -1) cargadas.splice(k, 1);
+      img.remove();
+      mostrar(0);
+    }
 
     var primera = marco.querySelector('img');
-    // Si la primera no llega a cargar se descarta, para que el pase no deje
-    // un hueco en blanco al pasar por ella
-    var cargadas = [];
     if(primera.complete && primera.naturalWidth === 0){
       primera.remove();
     } else {
       cargadas.push(primera);
-      primera.addEventListener('error', function(){
-        var i = cargadas.indexOf(primera);
-        if(i > -1) cargadas.splice(i, 1);
-        primera.remove();
-      });
+      primera.addEventListener('error', function(){ descartar(primera); });
     }
+
     var pendientes = DERMANIMA.length - 1;
+    if(pendientes < 1){ mostrar(0); return; }
 
     DERMANIMA.slice(1).forEach(function(ruta){
       var img = new Image();
@@ -819,6 +831,7 @@
         img.loading = 'lazy';
         marco.insertBefore(img, marco.querySelector('span'));
         cargadas.push(img);
+        img.addEventListener('error', function(){ descartar(img); });
         if(--pendientes === 0) arrancar();
       };
       img.onerror = function(){ if(--pendientes === 0) arrancar(); };
@@ -826,17 +839,9 @@
     });
 
     function arrancar(){
-      if(!cargadas.length) return;
-      if(!cargadas.some(function(x){ return x.classList.contains('activa'); })){
-        cargadas[0].classList.add('activa');
-      }
+      mostrar(0);
       if(cargadas.length < 2) return;
-      var i = 0;
-      setInterval(function(){
-        cargadas[i].classList.remove('activa');
-        i = (i + 1) % cargadas.length;
-        cargadas[i].classList.add('activa');
-      }, 3500);
+      setInterval(function(){ mostrar(actual + 1); }, 3500);
     }
   })();
 
