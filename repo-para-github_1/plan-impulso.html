@@ -717,6 +717,19 @@ section[id],footer[id]{scroll-margin-top:92px;}
 .pie__legal{font-size:12.5px;color:var(--ink-faint);text-align:right;}
 .pie__legal p + p{margin-top:5px;}
 
+/* Volver arriba: aparece al bajar, con el color de esta página */
+.arriba{
+  position:fixed;bottom:62px;right:16px;z-index:45;
+  width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--accent);color:#fff;display:grid;place-items:center;
+  box-shadow:0 10px 26px rgba(0,0,0,.28);
+  opacity:0;visibility:hidden;transform:translateY(12px) scale(.9);
+  transition:opacity .4s ease,transform .4s cubic-bezier(.22,.61,.36,1),visibility .4s;
+}
+.arriba.visible{opacity:1;visibility:visible;transform:none;}
+.arriba:hover{transform:translateY(-3px);}
+.arriba svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+@media(max-width:600px){.arriba{width:42px;height:42px;right:12px;}}
 .sello{
   position:fixed;bottom:16px;right:16px;z-index:40;
   background:var(--accent);color:#fff;
@@ -1379,6 +1392,8 @@ section[id],footer[id]{scroll-margin-top:92px;}
   </div>
 </footer>
 
+<button class="arriba" id="arriba" aria-label="Volver arriba"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
 <div class="sello">Designed by Differentissgood</div>
 
 <script>
@@ -1636,5 +1651,22 @@ section[id],footer[id]{scroll-margin-top:92px;}
 })();
 </script>
 
+<script>
+(function(){
+  var boton = document.getElementById('arriba');
+  var pendiente = false;
+  function revisar(){
+    if(pendiente) return;
+    pendiente = true;
+    requestAnimationFrame(function(){
+      boton.classList.toggle('visible', window.scrollY > 420);
+      pendiente = false;
+    });
+  }
+  window.addEventListener('scroll', revisar, {passive:true});
+  revisar();
+  boton.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
 </body>
 </html>
