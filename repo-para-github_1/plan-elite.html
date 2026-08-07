@@ -71,6 +71,16 @@
   .sec-head{text-align:center;margin-bottom:64px;}
   .sec-head h2{font-size:clamp(30px,4vw,46px);margin-top:14px;}
 
+  /* ============ Fondos fotográficos de sección ============ */
+  /* Van en la propia sección, no en un pseudoelemento: asi conviven con
+     .aurora y .con-fondo, que ya usan ::before y ::after */
+  .foto-fondo{
+    background-image:var(--velo),var(--foto);
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+  }
+  @media(min-width:900px){.foto-fondo{background-attachment:fixed,fixed;}}
+  /* Si el archivo aún no existe, queda el velo y la sección se lee igual */
+
   /* ============ Color: degradados, auroras y marca de IA ============ */
   /* Texto con el degradado de la paleta */
   .degradado{
@@ -229,20 +239,19 @@
     position:relative;min-height:100svh;max-width:none;padding:0;overflow:hidden;
     display:flex;flex-direction:column;justify-content:flex-end;margin:0;
   }
-  .portada__foto{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    transform:scale(1.07);animation:acercaPortada 1.9s cubic-bezier(.22,.61,.36,1) forwards;
-  }
-  @keyframes acercaPortada{to{transform:scale(1);}}
   /* Grano fino sobre la fotografía: disimula el ampliado y da textura */
   .portada__grano{
     position:absolute;inset:0;z-index:1;pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
     background-size:160px 160px;opacity:.13;mix-blend-mode:overlay;
   }
+  .portada{
+    background-image:linear-gradient(180deg,rgba(32,35,26,.72),rgba(32,35,26,.88)),url(assets/paisaje-lago-esmeralda.jpg);
+    background-size:cover;background-position:center;
+  }
   .portada__velo{
     position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(180deg,rgba(14,12,8,.55),rgba(14,12,8,.12) 30%,rgba(14,12,8,.24) 58%,rgba(14,12,8,.74));
+    background:linear-gradient(180deg,rgba(14,12,8,.30),transparent 34%,rgba(14,12,8,.42));
   }
   .portada__texto{
     position:relative;z-index:2;width:100%;max-width:1180px;
@@ -826,8 +835,6 @@
 </div>
 
 <section id="inicio" class="portada">
-  <img class="portada__foto" src="assets/plan-elite4.jpg"
-       alt="Cielo de nubes doradas atravesado por la luz">
   <div class="portada__grano" aria-hidden="true"></div>
   <div class="portada__velo" aria-hidden="true"></div>
 
@@ -856,7 +863,7 @@
   </div>
 </section>
 
-<section id="servicios" class="con-fondo" style="--fondo:url(assets/planelite1.jpg)">
+<section id="servicios" class="foto-fondo" style="--velo:linear-gradient(180deg,rgba(32,35,26,.88),rgba(32,35,26,.94));--foto:url(assets/paisaje-atardecer-montana.jpg);">
   <div class="sec-head reveal"><span class="eyebrow degradado">Todo en un solo plan</span><h2>Lo que incluye tu Plan Élite</h2><p style="max-width:560px;margin:14px auto 0;color:var(--muted);font-size:15px;">Una web no es solo diseño. Es una máquina de vender, impulsada por IA, funcionando para ti 24/7.</p></div>
   <div class="serv-list" id="serv-list">
     <div class="serv-row reveal" style="transition-delay:.02s;"><span class="num">01</span><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><circle cx="6.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg></span><div class="txt"><h3>Desarrollo web profesional</h3><p>diseño y código a medida, pensado para convertir.</p></div></div>
@@ -889,7 +896,7 @@
   </button>
 </section>
 
-<section id="social-proof" class="aurora" style="padding-top:90px;padding-bottom:90px;">
+<section id="social-proof" class="aurora foto-fondo" style="--velo:linear-gradient(180deg,rgba(32,35,26,.88),rgba(32,35,26,.94));--foto:url(assets/paisaje-cabana-lago.jpg);padding-top:90px;padding-bottom:90px;">
   <div class="sec-head reveal">
     <span class="eyebrow degradado">Resultados que hablan solos</span>
     <h2>Marcas que ya se atrevieron</h2>
@@ -1056,7 +1063,7 @@
   </div>
 </section>
 
-<section id="contacto" class="aurora">
+<section id="contacto" class="aurora foto-fondo" style="--velo:linear-gradient(180deg,rgba(32,35,26,.88),rgba(32,35,26,.94));--foto:url(assets/paisaje-atardecer-lila.jpg);">
   <div class="sec-head reveal"><span class="eyebrow degradado">Dudas frecuentes</span><h2>Preguntas y respuestas</h2></div>
   <div class="faq">
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda un proyecto Élite? <span class="plus">+</span></button><div class="faq-a"><p>Entre 20 y 30 días laborables, según los servicios seleccionados.</p></div></div>
