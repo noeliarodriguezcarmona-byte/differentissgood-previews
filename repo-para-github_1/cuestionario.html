@@ -191,13 +191,14 @@ select:invalid,select option[value=""]{color:var(--tenue);}
 .radio-row b{display:block;font-size:14px;margin-bottom:2px;}
 .radio-row span.d{color:var(--muted);font-size:12.5px;}
 
-.file-field{
-  border:1.5px dashed var(--line);border-radius:13px;padding:16px;
-  text-align:center;transition:border-color .3s ease,background .3s ease;
+/* Recordatorio de que ese archivo se sube al final, en un solo sitio */
+.luego{
+  display:flex;align-items:flex-start;gap:9px;
+  border:1px dashed var(--line);border-radius:13px;padding:12px 14px;
+  font-size:12px;color:var(--tenue);line-height:1.55;
 }
-.file-field:hover{border-color:var(--orange);background:rgba(221,107,58,.05);}
-.file-field p{font-size:12px;color:var(--tenue);margin:0 0 9px;}
-.file-field input[type="file"]{font-size:11.5px;color:var(--muted);width:100%;cursor:pointer;}
+.luego b{color:var(--muted);font-weight:600;}
+.luego::before{content:"↓";color:var(--orange);font-weight:700;line-height:1.4;}
 
 /* --- Bloques repetibles --- */
 .repe{
@@ -294,11 +295,36 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   border-radius:100px;padding:5px 13px;font-size:11.5px;cursor:pointer;font-family:'Inter',sans-serif;
 }
 .borrador button:hover{border-color:var(--orange);color:var(--orange);}
-.aviso-peso{
-  margin-top:10px;font-size:12px;line-height:1.55;color:var(--ink);
-  background:rgba(221,107,58,.12);border:1px solid rgba(221,107,58,.4);
-  border-radius:10px;padding:10px 12px;
+/* --- Último paso: la carpeta donde deja los archivos --- */
+.velo__caja{max-height:88vh;overflow-y:auto;}
+.subir-btn{
+  display:block;width:100%;margin:20px 0 10px;padding:16px;
+  border-radius:100px;text-decoration:none;font-weight:700;font-size:15px;
+  background:var(--degradado);background-size:180% 180%;color:#231c14;
+  transition:background-position .6s ease,transform .3s ease,box-shadow .3s ease;
 }
+.subir-btn:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 14px 32px rgba(221,107,58,.28);}
+.lista-archivos{
+  text-align:left;margin-top:18px;border:1px solid var(--line);
+  border-radius:13px;background:var(--card2);
+}
+.lista-archivos summary{
+  cursor:pointer;padding:13px 15px;font-size:13px;font-weight:600;list-style:none;
+}
+.lista-archivos summary::-webkit-details-marker{display:none;}
+.lista-archivos summary::after{content:" ▾";color:var(--orange);}
+.lista-archivos[open] summary::after{content:" ▴";}
+.lista-archivos ul{margin:0;padding:0 15px 14px;list-style:none;}
+.lista-archivos li{
+  font-size:12.5px;color:var(--muted);line-height:1.5;
+  padding:8px 0;border-top:1px solid var(--line);
+}
+.lista-archivos li code{
+  display:inline-block;margin-top:3px;font-size:11.5px;color:var(--oro);
+  background:rgba(201,162,74,.1);border-radius:5px;padding:1px 6px;
+  word-break:break-all;
+}
+.lista-archivos p{padding:0 15px 14px;font-size:12.5px;color:var(--muted);}
 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
@@ -327,16 +353,20 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   </div>
 
   <div class="aviso">
-    <h3>Antes de empezar, dos cosas</h3>
+    <h3>Antes de empezar, tres cosas</h3>
     <p><b>1. Solo verás lo que te corresponde.</b> En cuanto elijas plan, se ocultan las preguntas de los demás. Cada bloque lleva escrito a qué plan pertenece
       <span class="marca-ej">Incluido en todos los planes</span>.</p>
     <p><b>2. Si un apartado no lo quieres en tu web</b>, marca abajo del bloque la casilla <b>«No lo quiero en mi web»</b>. Ese bloque se cierra y sus respuestas <b>no se envían</b>: no nos llega nada de ahí.</p>
+    <p><b>3. Las fotos y los archivos van al final</b>, todos juntos. Cuando envíes esto se abre una carpeta donde los arrastras — sin registrarte en nada y sin límite de tamaño. Te decimos ahí mismo qué subir y con qué nombre.</p>
   </div>
 
-      <!-- Pega aquí la dirección del Worker. Es lo único que hay que tocar
-         en todo el archivo. -->
+    <!-- Lo único que hay que tocar en todo el archivo:
+         data-correo   → a dónde llegan las respuestas
+         data-archivos → la carpeta donde el cliente deja fotos y vídeos
+                         (si se deja vacío, se le pide que los mande por correo) -->
     <form id="cuestionario" novalidate
-          data-api="https://cuestionario.noeliarodriguezcarmona-a7e.workers.dev">
+          data-correo="projectmanager@differentissgood.com"
+          data-archivos="">
 
     <!-- ================= 1 · PLAN ================= -->
     <div class="step" data-planes="impulso crecimiento elite">
@@ -645,14 +675,15 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         <label class="field-label">Opiniones sueltas que quieras destacar</label>
         <textarea name="Testimonios escritos" rows="3" placeholder="Pega aquí las que más te gusten, con el nombre de quien las dijo."></textarea>
         <label class="field-label">Vídeos de clientes hablando de vosotros</label>
-        <div class="hint">Si ya están colgados en Instagram, Drive o YouTube, pega los enlaces —
-          es lo más cómodo y no hay límite de tamaño.</div>
+        <div class="hint">Si ya están colgados en Instagram, Drive o YouTube, pega los enlaces.</div>
         <textarea name="Enlaces a vídeos de testimonios" rows="2" placeholder="https://..."></textarea>
-        <div class="hint" style="margin-top:12px;">O adjúntalos aquí, si los tienes en el dispositivo.</div>
-        <div class="file-field">
-          <p>MP4 o MOV, hasta 20 MB cada uno</p>
-          <input type="file" name="Vídeos de testimonios" accept="video/*" multiple>
-        </div>
+        <label class="field-label">¿Tenéis vídeos guardados en el móvil o el ordenador?</label>
+        <select name="Tiene vídeos de testimonios">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+        <div class="luego" style="margin-top:12px;"><span>Si has dicho que sí, los subes <b>al final</b>, en la carpeta que te abrimos al enviar. Pesen lo que pesen.</span></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -863,21 +894,23 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         <div><h2>Archivos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">Las fotos del equipo y de cada servicio ya las has subido arriba, en su ficha. Aquí va lo demás.</p>
+        <p class="step-sub">Marca lo que tengas. Al enviar el cuestionario te abrimos una carpeta y te decimos exactamente qué subir y con qué nombre — incluidas las fotos del equipo y de cada servicio.</p>
 
-        <label class="field-label">Logotipo en buena calidad</label>
-        <div class="hint">Si puede ser en AI, SVG o PDF, mejor que un PNG.</div>
-        <div class="file-field"><p>Logotipo</p><input type="file" name="Logotipo" accept="image/*,.ai,.pdf,.svg"></div>
+        <div class="chip-grid">
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Logotipo"><span>Logotipo</span></label>
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Fotos del local"><span>Fotos del local</span></label>
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Fotos de trabajos"><span>Fotos de trabajos</span></label>
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Manual de marca"><span>Manual de marca</span></label>
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Textos ya escritos"><span>Textos ya escritos</span></label>
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Tipografías o iconos"><span>Tipografías o iconos</span></label>
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Catálogo de productos"><span>Catálogo de productos</span></label>
+          <label class="chip"><input type="checkbox" name="Material que tiene" value="Textos legales"><span>Textos legales</span></label>
+        </div>
 
-        <label class="field-label">Fotos del local o de las instalaciones</label>
-        <div class="file-field"><p>Puedes seleccionar varias</p><input type="file" name="Fotos del local" accept="image/*" multiple></div>
+        <div class="luego" style="margin-top:16px;"><span>Del logotipo, si puedes, sube el <b>AI, SVG o PDF</b> antes que un PNG: se ve nítido a cualquier tamaño.</span></div>
 
-        <label class="field-label">Fotos de trabajos realizados</label>
-        <div class="file-field"><p>Puedes seleccionar varias</p><input type="file" name="Fotos de trabajos" accept="image/*" multiple></div>
-
-        <label class="field-label">Otros documentos</label>
-        <div class="hint">Manual de marca, textos ya escritos, tipografías, iconos…</div>
-        <div class="file-field"><p>Puedes seleccionar varios</p><input type="file" name="Otros documentos" multiple></div>
+        <label class="field-label">¿Hay algo más que nos quieras pasar?</label>
+        <textarea name="Otros archivos" rows="2" placeholder="Cuéntanos qué es y lo verás en la lista de la carpeta."></textarea>
 
         <label class="field-label">¿No tienes fotografía profesional?</label>
         <select name="Necesita sesión de fotos">
@@ -916,7 +949,7 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     </div>
 
     <button type="submit" class="enviar">Enviar mi proyecto</button>
-    <p class="footnote">Te llega una copia a tu correo y te respondemos en menos de 48 horas.<br>Los bloques que hayas marcado como «no lo quiero» no se envían.</p>
+    <p class="footnote">Al enviar te abrimos la carpeta donde dejas las fotos y los vídeos.<br>Los bloques que hayas marcado como «no lo quiero» no se envían.</p>
   </form>
 </div>
 
@@ -958,8 +991,11 @@ select:invalid,select option[value=""]{color:var(--tenue);}
       '<label class="field-label">Titulaciones y certificados</label>' +
       '<textarea name="Persona ' + n + ' · Certificados" rows="2"></textarea>' +
       '<label class="field-label">Fotografía de retrato <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>' +
-      '<div class="file-field"><p>Solo si queréis que aparezca en la web</p>' +
-        '<input type="file" name="Persona ' + n + ' · Foto" accept="image/*"></div>');
+      '<select name="Persona ' + n + ' · Retrato">' +
+        '<option value="" selected></option>' +
+        '<option>Sí, la subo al final</option>' +
+        '<option>No queremos que aparezca</option>' +
+      '</select>');
   };
 
   window.añadirServicio = function(){
@@ -975,9 +1011,12 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         '<div><label class="field-label">Qué gana quien lo contrata</label><input type="text" name="Servicio ' + n + ' · Beneficio"></div>' +
       '</div>' +
       '<label class="field-label">Fotografía de este servicio o producto</label>' +
-      '<div class="hint">Adjúntala aquí y así sabemos qué imagen corresponde a cuál.</div>' +
-      '<div class="file-field"><p>Puedes seleccionar varias</p>' +
-        '<input type="file" name="Servicio ' + n + ' · Fotos" accept="image/*" multiple></div>');
+      '<select name="Servicio ' + n + ' · Fotos">' +
+        '<option value="" selected></option>' +
+        '<option>Sí, la subo al final</option>' +
+        '<option>No tenemos foto todavía</option>' +
+      '</select>' +
+      '<div class="luego" style="margin-top:10px;"><span>Al enviar te damos el <b>nombre exacto</b> que tiene que llevar el archivo, así sabemos qué imagen es de qué.</span></div>');
   };
 
   window.añadirFaq = function(){
@@ -1116,13 +1155,13 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   /* ==================================================================
      ENVÍO
      Regla de oro: nada se pierde. Lo escrito se guarda en el propio
-     navegador según se teclea, los archivos suben de uno en uno con
-     reintentos, y si algo falla el formulario se queda como estaba para
-     poder reintentar sin volver a rellenarlo.
+     navegador según se teclea. Las respuestas van por correo (solo
+     texto, así nunca falla por tamaño) y, al terminar, se le enseña al
+     cliente dónde dejar sus fotos y vídeos — sin subir nada desde aquí.
      ================================================================== */
   var formulario = document.getElementById('cuestionario');
-  var API = (formulario.dataset.api || '').replace(/\/+$/, '');
-  var MAX_MB = 20;
+  var CORREO = formulario.dataset.correo || 'projectmanager@differentissgood.com';
+  var CARPETA_ARCHIVOS = formulario.dataset.archivos || '';
   var velo = document.getElementById('velo');
   var veloCaja = document.getElementById('velo-caja');
   var LLAVE = 'cuestionario-differentissgood';
@@ -1171,25 +1210,6 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     });
   }
 
-  /* ---------- Avisar del tamaño en el momento de elegir ---------- */
-  formulario.addEventListener('change', function(e){
-    var c = e.target;
-    if(c.type !== 'file' || !c.files) return;
-    var grandes = [];
-    for(var i = 0; i < c.files.length; i++){
-      if(c.files[i].size > MAX_MB * 1024 * 1024) grandes.push(c.files[i].name);
-    }
-    var previo = c.parentNode.querySelector('.aviso-peso');
-    if(previo) previo.remove();
-    if(grandes.length){
-      var p = document.createElement('p');
-      p.className = 'aviso-peso';
-      p.innerHTML = '<b>' + grandes.join(', ') + '</b> pasa de ' + MAX_MB + ' MB y no se podrá enviar. ' +
-        'Quita ese archivo, o mándanoslo aparte y dínoslo en el último bloque.';
-      c.parentNode.appendChild(p);
-    }
-  });
-
   /* ---------- Recoger lo escrito, agrupado por bloques ---------- */
   function tituloBloque(campo){
     var bloque = campo.closest('.step');
@@ -1218,14 +1238,43 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     fuera.sort(function(a, b){ return orden.indexOf(a.bloque) - orden.indexOf(b.bloque); });
     return fuera;
   }
-  function recogerArchivos(){
+  /** Con lo marcado en el formulario, arma la lista de qué archivos hacen
+   *  falta y con qué nombre — así el cliente sabe exactamente qué subir. */
+  function listaDeArchivos(envio){
     var lista = [];
-    formulario.querySelectorAll('input[type=file]').forEach(function(c){
-      if(c.disabled || !c.files || !c.files.length) return;
-      if(c.closest('.step[hidden]') || c.closest('.step.apagado')) return;
-      for(var i = 0; i < c.files.length; i++) lista.push({campo:c.name, fichero:c.files[i]});
+    function val(nombre){
+      var c = formulario.querySelector('[name="' + CSS.escape(nombre) + '"]');
+      return (c && !c.disabled) ? c.value : '';
+    }
+    // Logotipo, local, trabajos, manual de marca, catálogo, legales
+    formulario.querySelectorAll('[name="Material que tiene"]:checked').forEach(function(c){
+      if(c.disabled || c.closest('.step[hidden]') || c.closest('.step.apagado')) return;
+      lista.push({etiqueta:c.value, nombre:envio + '-' + ruta(c.value)});
     });
+    // Equipo: una por persona que haya dicho que sí
+    formulario.querySelectorAll('[name$="· Retrato"]').forEach(function(sel){
+      if(sel.disabled || sel.value !== 'Sí, la subo al final') return;
+      var n = sel.name.replace(' · Retrato', '');
+      var nombrePersona = val(n + ' · Nombre') || n;
+      lista.push({etiqueta:'Retrato de ' + nombrePersona, nombre:envio + '-equipo-' + ruta(nombrePersona)});
+    });
+    // Servicios: una por servicio que haya dicho que sí
+    formulario.querySelectorAll('[name$="· Fotos"]').forEach(function(sel){
+      if(sel.tagName !== 'SELECT' || sel.disabled || sel.value !== 'Sí, la subo al final') return;
+      var n = sel.name.replace(' · Fotos', '');
+      var nombreServicio = val(n + ' · Nombre') || n;
+      lista.push({etiqueta:'Fotos de ' + nombreServicio, nombre:envio + '-servicio-' + ruta(nombreServicio)});
+    });
+    // Vídeos de testimonios
+    var vt = formulario.querySelector('[name="Tiene vídeos de testimonios"]');
+    if(vt && !vt.disabled && vt.value === 'Sí'){
+      lista.push({etiqueta:'Vídeos de testimonios', nombre:envio + '-testimonios'});
+    }
     return lista;
+  }
+  function ruta(t){
+    return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40) || 'archivo';
   }
 
   /* ---------- Comprobaciones antes de enviar ---------- */
@@ -1240,12 +1289,6 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     });
     return fallo;
   }
-  function archivoDemasiadoGrande(archivos){
-    for(var i = 0; i < archivos.length; i++){
-      if(archivos[i].fichero.size > MAX_MB * 1024 * 1024) return archivos[i].fichero.name;
-    }
-    return null;
-  }
 
   /* ---------- Reintentos ---------- */
   function conReintentos(hacer, intentos){
@@ -1256,22 +1299,10 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         .then(function(){ return conReintentos(hacer, intentos - 1); });
     });
   }
-  function pedir(url, opciones){
-    return conReintentos(function(){
-      return fetch(url, opciones).then(function(r){
-        return r.json().catch(function(){ return {}; }).then(function(j){
-          if(r.ok) return j;
-          var fallo = new Error(j.error || ('Error ' + r.status));
-          if(r.status >= 400 && r.status < 500 && r.status !== 429) fallo.definitivo = true;
-          throw fallo;
-        });
-      });
-    });
-  }
 
-  /* ---------- Texto de respaldo, por si hiciera falta ---------- */
+  /* ---------- Texto de respaldo / cuerpo del correo ---------- */
   function comoTexto(envio, respuestas, archivos){
-    var t = 'CUESTIONARIO DIFFERENTISSGOOD\nCarpeta: ' + envio +
+    var t = 'CUESTIONARIO DIFFERENTISSGOOD\nReferencia: ' + envio +
             '\nFecha: ' + new Date().toLocaleString('es-ES') + '\n\n';
     var bloque = null;
     respuestas.forEach(function(r){
@@ -1279,8 +1310,10 @@ select:invalid,select option[value=""]{color:var(--tenue);}
       t += r.campo + ':\n' + r.valor + '\n\n';
     });
     if(archivos.length){
-      t += '\nARCHIVOS\n';
-      archivos.forEach(function(a){ t += '· ' + a.campo + ' — ' + a.camino + '\n'; });
+      t += '\nARCHIVOS QUE FALTA SUBIR\n';
+      archivos.forEach(function(a){ t += '· ' + a.etiqueta + ' — ' + a.nombre + '\n'; });
+    } else {
+      t += '\nNo se ha marcado ningún archivo pendiente.\n';
     }
     return t;
   }
@@ -1300,12 +1333,27 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     if(b) b.style.width = Math.round(pct) + '%';
     if(d) d.textContent = texto;
   }
-  function pantallaHecho(referencia){
+  function pantallaHecho(referencia, archivos){
     localStorage.removeItem(LLAVE);
+    var listaHtml = '';
+    if(archivos.length){
+      listaHtml = '<details class="lista-archivos" open><summary>Lo que subir (' + archivos.length + ')</summary><ul>' +
+        archivos.map(function(a){
+          return '<li>' + a.etiqueta + '<br><code>' + a.nombre + '</code></li>';
+        }).join('') + '</ul></details>';
+    } else {
+      listaHtml = '<p style="font-size:12.5px;color:var(--tenue);margin-top:14px;">No has marcado ningún archivo pendiente — con esto ya está todo.</p>';
+    }
+    var botonArchivos = (archivos.length)
+      ? (CARPETA_ARCHIVOS
+          ? '<a class="subir-btn" href="' + CARPETA_ARCHIVOS + '" target="_blank" rel="noopener">Subir mis fotos y vídeos</a>'
+          : '<div class="velo__error">Aún no hay una carpeta configurada para subir archivos. Mándalos por correo a <b>' + CORREO + '</b> con la referencia <b>' + referencia + '</b> y esta misma lista.</div>')
+      : '';
     veloCaja.innerHTML =
       '<div class="tic">✓</div>' +
-      '<h3>Recibido</h3>' +
-      '<p>Ya lo tenemos todo, respuestas y archivos. Te respondemos en menos de 48 horas.</p>' +
+      '<h3>Respuestas recibidas</h3>' +
+      '<p>Ya nos ha llegado tu cuestionario. Te respondemos en menos de 48 horas.</p>' +
+      botonArchivos + listaHtml +
       '<p class="velo__detalle" style="margin-top:14px;">Referencia: ' + referencia + '</p>';
   }
   function pantallaError(mensaje, referencia, texto){
@@ -1344,69 +1392,40 @@ select:invalid,select option[value=""]{color:var(--tenue);}
       return;
     }
 
-    var respuestas = recogerRespuestas();
-    var pendientes = recogerArchivos();
-
-    var pesado = archivoDemasiadoGrande(pendientes);
-    if(pesado){
-      pantallaProgreso();
-      pantallaError('El archivo <b>' + pesado + '</b> pasa de ' + MAX_MB + ' MB. ' +
-        'Quítalo y vuelve a intentarlo — si es un vídeo, pega mejor el enlace de donde esté colgado.');
-      return;
-    }
-    if(!API || API.indexOf('TU-WORKER') > -1){
-      pantallaProgreso();
-      pantallaError('Falta poner la dirección del Worker en el atributo <b>data-api</b> del formulario.');
-      return;
-    }
-
     enviando = true;
     pantallaProgreso();
 
-    // La carpeta lleva la fecha delante y el nombre del negocio detrás
+    // La referencia lleva la fecha delante y el nombre del negocio detrás
     var negocio = (formulario.querySelector('[name="Nombre del negocio"]') || {}).value || 'cliente';
-    var envio = new Date().toISOString().slice(0,10) + '-' +
-      negocio.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()
-             .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    var envio = new Date().toISOString().slice(0,10) + '-' + ruta(negocio);
 
-    var subidos = [];
-    var pasos = pendientes.length + 1;
-    var hechos = 0;
-    var texto = '';
+    var respuestas = recogerRespuestas();
+    var archivos = listaDeArchivos(envio);
+    var texto = comoTexto(envio, respuestas, archivos);
 
-    function siguiente(i){
-      if(i >= pendientes.length){
-        progreso(hechos / pasos * 100, 'Guardando las respuestas…');
-        return pedir(API + '/api/enviar', {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({envio:envio, respuestas:respuestas, archivos:subidos}),
-        }).then(function(r){
-          progreso(100, 'Listo');
-          pantallaHecho(r.envio || envio);
-          enviando = false;
-        });
-      }
-      var a = pendientes[i];
-      progreso(hechos / pasos * 100,
-        'Subiendo ' + (i + 1) + ' de ' + pendientes.length + ': ' + a.fichero.name);
-      var url = API + '/api/archivo?envio=' + encodeURIComponent(envio) +
-                '&campo=' + encodeURIComponent(a.campo) +
-                '&archivo=' + encodeURIComponent(a.fichero.name);
-      return pedir(url, {
+    progreso(40, 'Enviando tus respuestas…');
+
+    conReintentos(function(){
+      return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CORREO), {
         method:'POST',
-        headers:{'Content-Type': a.fichero.type || 'application/octet-stream'},
-        body: a.fichero,
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({
+          _subject: 'Cuestionario · ' + negocio,
+          Referencia: envio,
+          'Respuestas completas': texto,
+        }),
       }).then(function(r){
-        subidos.push({campo:a.campo, nombre:a.fichero.name, camino:r.camino});
-        hechos++;
-        return siguiente(i + 1);
+        if(r.ok) return r.json().catch(function(){ return {}; });
+        var fallo = new Error('El correo no se ha podido enviar (código ' + r.status + ').');
+        if(r.status >= 400 && r.status < 500) fallo.definitivo = true;
+        throw fallo;
       });
-    }
-
-    siguiente(0).catch(function(e){
+    }).then(function(){
+      progreso(100, 'Listo');
+      pantallaHecho(envio, archivos);
       enviando = false;
-      texto = comoTexto(envio, respuestas, subidos);
+    }).catch(function(e){
+      enviando = false;
       pantallaError(String(e && e.message ? e.message : e), envio, texto);
     });
   }

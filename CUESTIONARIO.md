@@ -1,130 +1,96 @@
 # Puesta en marcha del cuestionario
 
-**Gratis, sin tarjeta y sin terminal.** Todo se hace desde el navegador.
+**Gratis, sin tarjeta y sin terminal.** Dos pasos y ya está en marcha.
 
-Cuando un cliente envía el cuestionario, aparece solo en tu repositorio de GitHub:
+## Cómo funciona
 
-```
-clientes/
-  2026-08-11-panaderia-la-espiga/
-    respuestas.md                      ← todo ordenado por bloques
-    equipo/
-      persona-1-foto-ana-ruiz.jpg
-    servicios/
-      servicio-1-fotos-pan-masa-madre.jpg
-      servicio-2-fotos-bolleria.jpg
-    local/
-    trabajos/
-    testimonios/
-    logotipo-logo.svg
-```
-
-Y para hacer la web, abres Claude Code en ese repositorio y dices:
-*«hazme la web de la panadería con lo que hay en su carpeta»*. Se leen las
-respuestas y se ven las fotos directamente. **Tú no descargas ni ordenas nada.**
+1. El cliente rellena el cuestionario. Al enviarlo, **las respuestas te
+   llegan por correo** a `projectmanager@differentissgood.com` — sin fallos,
+   porque es solo texto y el texto nunca pesa demasiado.
+2. Si el cliente tiene fotos, logotipo o vídeos, en la misma pantalla de
+   confirmación le sale un botón — **«Subir mis fotos y vídeos»** — que lo
+   lleva a una carpeta compartida donde los arrastra, sin registrarse en
+   nada y sin límite de tamaño.
+3. Debajo del botón ve la **lista exacta de lo que tiene que subir**, con el
+   nombre que le hemos puesto a cada archivo (por ejemplo
+   `2026-08-11-panaderia-la-espiga-equipo-ana-ruiz`). Esa misma lista te
+   llega también a ti por correo, así sabes qué buscar en la carpeta.
+4. Tú entras en la carpeta, te descargas lo que haya y lo arrastras a tu
+   repositorio de GitHub. Abres Claude Code ahí y dices *«hazme la web con
+   lo que hay en esta carpeta»*.
 
 ---
 
-## Los cuatro pasos
+## Los dos pasos
 
-### 1. Crear el repositorio
+### 1. Crear la carpeta para subir archivos
 
-En GitHub → **New repository**
+Recomendamos **Dropbox** — es gratis, no pide tarjeta y el cliente no
+necesita cuenta para dejar archivos ahí.
 
-- Nombre: **`clientes`**
-- Marca **Private**
-- Marca **Add a README file** (hace falta que no esté vacío)
-- **Create repository**
+1. Entra en [dropbox.com](https://www.dropbox.com) y crea una cuenta
+   gratuita (con tu correo, sin tarjeta).
+2. En el panel, busca **«Solicitudes de archivos»** (*File requests*) →
+   **Crear una solicitud de archivos**.
+3. Ponle un nombre, por ejemplo `Cuestionario Differentissgood`, y **crea la
+   solicitud**.
+4. Te da un enlace del tipo `https://www.dropbox.com/request/XXXXXXXXXX`.
+   **Cópialo.**
 
-### 2. Crear el token
+Con el plan gratuito te avisa por correo cada vez que alguien sube algo, y
+puedes ver y descargar los archivos en cualquier momento desde Dropbox.
 
-GitHub → tu foto arriba a la derecha → **Settings** → abajo del todo
-**Developer settings** → **Personal access tokens** → **Fine-grained tokens**
-→ **Generate new token**
+> Si prefieres otra cosa (Google Drive con «cualquiera con el enlace puede
+> subir», WeTransfer...), vale igual: solo hace falta un enlace donde se
+> pueda dejar un archivo sin cuenta.
 
-- Nombre: `cuestionario`
-- Expiration: **No expiration** (o un año, y lo renuevas)
-- **Repository access** → *Only select repositories* → elige **`clientes`**
-- **Permissions** → *Repository permissions* → busca **Contents** y ponlo en
-  **Read and write**
-- **Generate token** y **copia el token**. Solo se ve una vez.
+### 2. Pegar el enlace en el cuestionario
 
-> Ese token solo puede escribir en `clientes`. No da acceso a nada más tuyo.
+Abre **`repo-para-github_1/cuestionario.html`**, busca el `<form>` (al
+principio del archivo, justo después del aviso de las «tres cosas») y
+rellena `data-archivos` con el enlace del paso 1:
 
-### 3. Crear el Worker
-
-En [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** →
-**Create application** → **Start with Hello World!**
-
-- Nombre: `cuestionario`
-- **Deploy** (crea uno de ejemplo)
-- Después **Edit code**: borra todo lo que haya y pega el contenido de
-  **`recogida/worker.js`** de este repositorio
-- **Deploy** otra vez
-
-Te queda una dirección así, **cópiala**:
-
-```
-https://cuestionario.TU-SUBDOMINIO.workers.dev
+```html
+<form id="cuestionario" novalidate
+      data-correo="projectmanager@differentissgood.com"
+      data-archivos="https://www.dropbox.com/request/XXXXXXXXXX">
 ```
 
-Ahora, en el mismo Worker → **Settings** → **Variables and Secrets** → **Add**:
+Guarda, sube el cambio a GitHub y ya está — no hace falta tocar nada más.
 
-| Tipo | Nombre | Valor |
-|---|---|---|
-| Secret | `GITHUB_TOKEN` | el token del paso 2 |
-| Text | `GITHUB_REPO` | `noeliarodriguezcarmona-byte/clientes` |
-| Text | `ORIGENES` | `https://differentissgood-previews.noeliarodriguezcarmona-a7e.workers.dev` |
-
-En `ORIGENES` van, separadas por comas, las direcciones desde las que se acepta
-el cuestionario. Añade tu dominio propio cuando lo tengas.
-
-**Deploy** para que los cambios entren.
-
-### 4. Apuntar el cuestionario al Worker
-
-**Ya está hecho.** El cuestionario apunta a:
-
-```
-https://cuestionario.noeliarodriguezcarmona-a7e.workers.dev
-```
-
-Si al desplegarlo le pusiste otro nombre y la dirección te quedó distinta, dímelo
-y la cambio. Está en `repo-para-github_1/cuestionario.html`, en el atributo
-`data-api` del formulario.
+Mientras `data-archivos` esté vacío, si el cliente tiene algo que subir, la
+pantalla final le pide que te lo mande por correo en vez de darle el botón.
+El cuestionario funciona igual de bien sin este paso; solo que sin la
+carpeta el cliente tiene que mandarte las fotos aparte.
 
 ---
 
 ## Comprobar que va
 
-1. Abre `https://TU-WORKER.workers.dev/api/estado` — debe responder
-   `{"ok":true,"repo":"noeliarodriguezcarmona-byte/clientes","maxMB":20}`
-2. Rellena el cuestionario tú misma con una foto pequeña
-3. Mira el repositorio `clientes`: tiene que estar la carpeta con todo dentro
+1. Rellena el cuestionario tú misma con un par de respuestas.
+2. Al enviarlo debe aparecer la pantalla «Respuestas recibidas» con el
+   botón de subir archivos (si marcaste alguno) y su lista.
+3. Revisa que te llegue el correo a `projectmanager@differentissgood.com`.
 
----
+## Por qué es así de simple
 
-## Cómo está pensado para que no se pierda nada
+- **Nada que instalar ni configurar en un servidor.** El correo lo manda un
+  servicio externo (formsubmit.co) que ya está conectado; la carpeta de
+  archivos es Dropbox, con cuenta gratuita.
+- **No hay límite de tamaño que pueda fallar.** El correo solo lleva texto;
+  los archivos, sean del tamaño que sean, van a la carpeta.
+- **Borrador en su navegador.** Lo que el cliente va escribiendo se guarda
+  solo. Si cierra la pestaña sin querer, al volver lo encuentra igual.
+- **Si el envío del correo falla**, se le dice, sus respuestas siguen
+  escritas, puede reintentar sin rellenar nada y además puede **descargar
+  sus respuestas** para mandártelas por otra vía.
 
-- **Los archivos suben de uno en uno**, no en un envío gigante. Uno pesado no
-  tumba el resto.
-- **Tres reintentos** por archivo desde el navegador y **dos más** dentro del
-  Worker. Un corte de red pasajero no cuesta un envío.
-- **El aviso de tamaño salta al elegir el archivo**, no al enviar. El cliente se
-  entera al momento, no después de rellenarlo todo.
-- **Borrador en su navegador.** Lo que va escribiendo se guarda solo. Si cierra
-  la pestaña sin querer, al volver lo encuentra igual.
-- **Si algo falla**, se le dice, sus respuestas siguen escritas, puede reintentar
-  sin rellenar nada y además puede **descargar sus respuestas** para mandártelas
-  por otra vía.
+## La ruta automática, para más adelante
 
-## Límites
-
-- **20 MB por archivo.** Es lo que admite bien la API de GitHub. Fotos,
-  logotipos y documentos entran de sobra.
-- **Los vídeos largos no caben.** Por eso en la pregunta de testimonios se pide
-  primero el **enlace** (Instagram, Drive, YouTube), que es de donde salen casi
-  siempre, y adjuntar es la segunda opción.
-- GitHub gratuito no pone límite de repositorios privados ni de espacio
-  razonable para esto. Si algún repositorio creciera mucho, se archivan las
-  carpetas de proyectos ya cerrados.
+En la carpeta `recogida/` queda montado un sistema más avanzado: un Worker
+de Cloudflare que, en vez de mandar un correo, deja las respuestas **y los
+archivos** ya ordenados dentro de un repositorio de GitHub, listos para que
+Claude Code los lea directamente. Es gratis y sin tarjeta, pero tiene más
+pasos de configuración (crear un token, crear el Worker, apuntarlo). Si más
+adelante quieres automatizarlo del todo, esa pieza ya está lista — dímelo y
+retomamos esos pasos.
