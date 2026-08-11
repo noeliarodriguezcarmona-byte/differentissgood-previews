@@ -248,6 +248,53 @@ select:invalid,select option[value=""]{color:var(--tenue);}
 .enviar:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 14px 32px rgba(221,107,58,.28);}
 .footnote{text-align:center;color:var(--tenue);font-size:12px;margin-top:16px;line-height:1.6;}
 
+/* ==========================================================================
+   5. ENVÍO EN CURSO Y CONFIRMACIÓN
+   ========================================================================== */
+.velo{
+  position:fixed;inset:0;z-index:60;display:none;
+  align-items:center;justify-content:center;padding:24px;
+  background:rgba(20,16,12,.86);backdrop-filter:blur(8px);
+}
+.velo.abierto{display:flex;}
+.velo__caja{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:34px 30px;max-width:420px;width:100%;text-align:center;
+}
+.velo__caja h3{font-size:21px;margin-bottom:10px;}
+.velo__caja p{font-size:13.5px;color:var(--muted);line-height:1.6;}
+.velo__barra{height:5px;border-radius:5px;background:var(--card2);overflow:hidden;margin:20px 0 12px;}
+.velo__barra i{display:block;height:100%;width:0;background:var(--degradado);transition:width .35s var(--curva);}
+.velo__detalle{font-size:12px;color:var(--tenue);min-height:18px;}
+.velo__error{
+  border:1px solid rgba(221,107,58,.45);background:rgba(221,107,58,.1);
+  border-radius:12px;padding:13px 15px;margin-top:16px;
+  font-size:13px;color:var(--ink);text-align:left;line-height:1.6;
+}
+.velo__acciones{display:flex;gap:10px;margin-top:18px;}
+.velo__acciones button{
+  flex:1;padding:12px;border-radius:100px;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;
+  border:1px solid var(--line);background:none;color:var(--ink);
+}
+.velo__acciones button.principal{border-color:transparent;background:var(--degradado);color:#231c14;}
+.tic{
+  width:62px;height:62px;border-radius:50%;background:var(--degradado);color:#231c14;
+  display:grid;place-items:center;font-size:27px;margin:0 auto 18px;
+  animation:aparecerTic .5s var(--curva);
+}
+@keyframes aparecerTic{0%{transform:scale(0);}70%{transform:scale(1.14);}100%{transform:scale(1);}}
+/* Aviso de que lo escrito queda guardado en el propio navegador */
+.borrador{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:12px;color:var(--tenue);margin-top:14px;
+}
+.borrador button{
+  background:none;border:1px solid var(--line);color:var(--tenue);
+  border-radius:100px;padding:5px 13px;font-size:11.5px;cursor:pointer;font-family:'Inter',sans-serif;
+}
+.borrador button:hover{border-color:var(--orange);color:var(--orange);}
+
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
@@ -281,10 +328,10 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     <p><b>2. Si un apartado no lo quieres en tu web</b>, marca abajo del bloque la casilla <b>«No lo quiero en mi web»</b>. Ese bloque se cierra y sus respuestas <b>no se envían</b>: no nos llega nada de ahí.</p>
   </div>
 
-  <form id="cuestionario" action="https://formsubmit.co/projectmanager@differentissgood.com" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="_subject" value="Nuevo cuestionario de proyecto — Differentissgood">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
+      <!-- Pega aquí la dirección de tu Worker, la que te da Cloudflare al desplegarlo.
+         Es lo único que hay que tocar. -->
+    <form id="cuestionario" novalidate
+          data-api="https://cuestionario-differentissgood.TU-SUBDOMINIO.workers.dev">
 
     <!-- ================= 1 · PLAN ================= -->
     <div class="step" data-planes="impulso crecimiento elite">
@@ -865,6 +912,10 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   </form>
 </div>
 
+<div class="velo" id="velo" role="dialog" aria-modal="true" aria-live="polite">
+  <div class="velo__caja" id="velo-caja"></div>
+</div>
+
 <script>
 (function(){
   'use strict';
@@ -1053,6 +1104,225 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   document.querySelectorAll('.step').forEach(function(s){ mirador.observe(s); });
 
   aplicarPlan();
+
+  /* ==================================================================
+     ENVÍO
+     Regla de oro: nada se pierde. Lo escrito se guarda en el propio
+     navegador según se teclea, los archivos suben de uno en uno con
+     reintentos, y si algo falla el formulario se queda como estaba para
+     poder reintentar sin volver a rellenarlo.
+     ================================================================== */
+  var formulario = document.getElementById('cuestionario');
+  var API = (formulario.dataset.api || '').replace(/\/+$/, '');
+  var velo = document.getElementById('velo');
+  var veloCaja = document.getElementById('velo-caja');
+  var LLAVE = 'cuestionario-differentissgood';
+
+  /* ---------- Borrador en el navegador ---------- */
+  function guardarBorrador(){
+    try{
+      var d = {};
+      formulario.querySelectorAll('input,select,textarea').forEach(function(c){
+        if(!c.name || c.type === 'file') return;
+        if(c.type === 'checkbox' || c.type === 'radio'){ if(c.checked) (d[c.name] = d[c.name] || []).push(c.value); }
+        else if(c.value) d[c.name] = c.value;
+      });
+      localStorage.setItem(LLAVE, JSON.stringify({guardado:Date.now(), datos:d}));
+    }catch(e){ /* modo privado o sin espacio: no es motivo para romper nada */ }
+  }
+  function recuperarBorrador(){
+    try{
+      var crudo = localStorage.getItem(LLAVE);
+      if(!crudo) return false;
+      var d = JSON.parse(crudo).datos || {};
+      var repuestos = 0;
+      Object.keys(d).forEach(function(nombre){
+        var campos = formulario.querySelectorAll('[name="' + CSS.escape(nombre) + '"]');
+        campos.forEach(function(c){
+          if(c.type === 'checkbox' || c.type === 'radio'){
+            if([].concat(d[nombre]).indexOf(c.value) > -1){ c.checked = true; repuestos++; }
+          } else if(campos.length === 1){ c.value = d[nombre]; repuestos++; }
+        });
+      });
+      return repuestos > 0;
+    }catch(e){ return false; }
+  }
+  formulario.addEventListener('input', guardarBorrador);
+  formulario.addEventListener('change', guardarBorrador);
+
+  if(recuperarBorrador()){
+    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); avance();
+    var nota = document.createElement('p');
+    nota.className = 'borrador';
+    nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
+      '<button type="button" id="tirar-borrador">Empezar de cero</button>';
+    formulario.parentNode.insertBefore(nota, formulario);
+    document.getElementById('tirar-borrador').addEventListener('click', function(){
+      localStorage.removeItem(LLAVE); location.reload();
+    });
+  }
+
+  /* ---------- Recoger lo escrito ---------- */
+  function recogerRespuestas(){
+    var fuera = [], grupos = {};
+    formulario.querySelectorAll('input,select,textarea').forEach(function(c){
+      if(!c.name || c.disabled || c.type === 'file') return;
+      if(c.closest('.step[hidden]') || c.closest('.step.apagado')) return;
+      if(c.type === 'checkbox' || c.type === 'radio'){
+        if(c.checked) (grupos[c.name] = grupos[c.name] || []).push(c.value);
+      } else if(c.value.trim()){
+        fuera.push({campo:c.name, valor:c.value.trim()});
+      }
+    });
+    Object.keys(grupos).forEach(function(n){ fuera.push({campo:n, valor:grupos[n].join(', ')}); });
+    return fuera;
+  }
+  function recogerArchivos(){
+    var lista = [];
+    formulario.querySelectorAll('input[type=file]').forEach(function(c){
+      if(c.disabled || !c.files || !c.files.length) return;
+      if(c.closest('.step[hidden]') || c.closest('.step.apagado')) return;
+      for(var i = 0; i < c.files.length; i++) lista.push({campo:c.name, fichero:c.files[i]});
+    });
+    return lista;
+  }
+
+  /* ---------- Comprobar lo imprescindible ---------- */
+  function faltaAlgo(){
+    var fallo = null;
+    formulario.querySelectorAll('[required]').forEach(function(c){
+      if(fallo || c.disabled || c.closest('.step[hidden]') || c.closest('.step.apagado')) return;
+      var vacio = (c.type === 'radio')
+        ? !formulario.querySelector('[name="' + CSS.escape(c.name) + '"]:checked')
+        : !c.value.trim();
+      if(vacio) fallo = c;
+    });
+    return fallo;
+  }
+
+  /* ---------- Subir con reintentos ---------- */
+  function subir(url, opciones, intentos){
+    intentos = intentos || 3;
+    return fetch(url, opciones).then(function(r){
+      if(r.ok) return r.json();
+      // Un error nuestro no se arregla repitiendo; uno del servidor, quizá sí
+      if(r.status >= 400 && r.status < 500 && r.status !== 429){
+        return r.json().catch(function(){ return {}; }).then(function(j){
+          throw new Error(j.error || ('Error ' + r.status));
+        });
+      }
+      throw new Error('Error ' + r.status);
+    }).catch(function(e){
+      if(intentos <= 1) throw e;
+      return new Promise(function(ok){ setTimeout(ok, (4 - intentos) * 900); })
+        .then(function(){ return subir(url, opciones, intentos - 1); });
+    });
+  }
+
+  /* ---------- Pantallas del envío ---------- */
+  function pantallaProgreso(){
+    velo.classList.add('abierto');
+    veloCaja.innerHTML =
+      '<h3>Enviando tu cuestionario</h3>' +
+      '<p>No cierres esta ventana. Si algo falla te lo decimos y no perderás nada.</p>' +
+      '<div class="velo__barra"><i id="velo-barra"></i></div>' +
+      '<p class="velo__detalle" id="velo-detalle">Preparando…</p>';
+  }
+  function progreso(pct, texto){
+    var b = document.getElementById('velo-barra');
+    var d = document.getElementById('velo-detalle');
+    if(b) b.style.width = Math.round(pct) + '%';
+    if(d) d.textContent = texto;
+  }
+  function pantallaHecho(referencia, avisoOk){
+    localStorage.removeItem(LLAVE);
+    veloCaja.innerHTML =
+      '<div class="tic">✓</div>' +
+      '<h3>Recibido</h3>' +
+      '<p>Ya lo tenemos guardado. Te respondemos en menos de 48 horas.</p>' +
+      (avisoOk ? '' : '<div class="velo__error">Tu cuestionario está a salvo, pero el aviso por correo no ha salido. ' +
+        'Guarda esta referencia por si acaso.</div>') +
+      '<p class="velo__detalle" style="margin-top:14px;">Referencia: ' + referencia + '</p>';
+  }
+  function pantallaError(mensaje){
+    veloCaja.innerHTML =
+      '<h3>No se ha podido enviar</h3>' +
+      '<p>Tus respuestas siguen escritas y guardadas en este navegador. No has perdido nada.</p>' +
+      '<div class="velo__error">' + mensaje + '</div>' +
+      '<div class="velo__acciones">' +
+        '<button type="button" id="velo-cerrar">Volver</button>' +
+        '<button type="button" class="principal" id="velo-reintentar">Reintentar</button>' +
+      '</div>';
+    document.getElementById('velo-cerrar').addEventListener('click', function(){ velo.classList.remove('abierto'); });
+    document.getElementById('velo-reintentar').addEventListener('click', enviar);
+  }
+
+  /* ---------- El envío ---------- */
+  var enviando = false;
+  function enviar(){
+    if(enviando) return;
+
+    var falla = faltaAlgo();
+    if(falla){
+      velo.classList.remove('abierto');
+      var bloque = falla.closest('.step');
+      if(bloque) bloque.scrollIntoView({behavior:'smooth', block:'center'});
+      setTimeout(function(){ falla.focus(); }, 400);
+      return;
+    }
+    if(!API || API.indexOf('TU-SUBDOMINIO') > -1){
+      pantallaProgreso();
+      pantallaError('Falta configurar la dirección del Worker en el atributo <b>data-api</b> del formulario.');
+      return;
+    }
+
+    enviando = true;
+    pantallaProgreso();
+
+    var envio = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-') + '-' +
+                Math.random().toString(36).slice(2,10);
+    var respuestas = recogerRespuestas();
+    var archivos = recogerArchivos();
+    var subidos = [];
+    var total = archivos.length + 1;
+    var hechos = 0;
+
+    function siguiente(i){
+      if(i >= archivos.length){
+        progreso(hechos / total * 100, 'Guardando las respuestas…');
+        return subir(API + '/api/enviar', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({envio:envio, respuestas:respuestas, archivos:subidos}),
+        }).then(function(r){
+          progreso(100, 'Listo');
+          pantallaHecho(r.envio || envio, r.aviso !== false);
+          enviando = false;
+        });
+      }
+      var a = archivos[i];
+      progreso(hechos / total * 100, 'Subiendo ' + (i + 1) + ' de ' + archivos.length + ': ' + a.fichero.name);
+      var url = API + '/api/subir?envio=' + encodeURIComponent(envio) +
+                '&campo=' + encodeURIComponent(a.campo) +
+                '&archivo=' + encodeURIComponent(a.fichero.name);
+      return subir(url, {
+        method:'POST',
+        headers:{'Content-Type': a.fichero.type || 'application/octet-stream'},
+        body: a.fichero,
+      }).then(function(r){
+        subidos.push({campo:a.campo, nombre:a.fichero.name, clave:r.clave});
+        hechos++;
+        return siguiente(i + 1);
+      });
+    }
+
+    siguiente(0).catch(function(e){
+      enviando = false;
+      pantallaError(String(e && e.message ? e.message : e));
+    });
+  }
+
+  formulario.addEventListener('submit', function(e){ e.preventDefault(); enviar(); });
 })();
 </script>
 </body>

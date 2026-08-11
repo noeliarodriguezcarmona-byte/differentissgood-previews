@@ -1,0 +1,32 @@
+# Worker que recoge el cuestionario: guarda los archivos en R2 y avisa por correo.
+#
+# Antes de desplegar, en el panel de Cloudflare:
+#   1. R2 → Create bucket → nombre: cuestionarios
+#   2. Workers & Pages → este Worker → Settings → Variables and Secrets:
+#        RESEND_API_KEY   (clave de Resend, para el correo de aviso)
+#        FIRMA            (una frase larga inventada; firma los enlaces de descarga)
+#
+# Desplegar:  npx wrangler deploy
+
+name = "cuestionario-differentissgood"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Almacén donde se guarda todo lo que envían los clientes
+[[r2_buckets]]
+binding = "ARCHIVOS"
+bucket_name = "cuestionarios"
+
+[vars]
+# A dónde llega el aviso de cada cuestionario recibido
+CORREO_DESTINO = "projectmanager@differentissgood.com"
+
+# Remitente. Tiene que ser de un dominio verificado en Resend.
+CORREO_ORIGEN = "Cuestionarios <cuestionario@differentissgood.com>"
+
+# Solo se aceptan envíos desde estas direcciones, separadas por comas.
+# Añade aquí tu dominio propio cuando lo tengas.
+ORIGENES = "https://differentissgood-previews.noeliarodriguezcarmona-a7e.workers.dev,https://differentissgood.com,https://www.differentissgood.com"
+
+# Tamaño máximo por archivo, en megabytes
+MAX_MB = "95"
