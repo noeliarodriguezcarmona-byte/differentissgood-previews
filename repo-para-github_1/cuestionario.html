@@ -328,10 +328,12 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     <p><b>2. Si un apartado no lo quieres en tu web</b>, marca abajo del bloque la casilla <b>«No lo quiero en mi web»</b>. Ese bloque se cierra y sus respuestas <b>no se envían</b>: no nos llega nada de ahí.</p>
   </div>
 
-      <!-- Pega aquí la dirección de tu Worker, la que te da Cloudflare al desplegarlo.
-         Es lo único que hay que tocar. -->
+      <!-- Los dos datos de tu cuenta de Cloudinary (gratuita, sin tarjeta).
+         Es lo único que hay que tocar en todo el archivo. -->
     <form id="cuestionario" novalidate
-          data-api="https://cuestionario-differentissgood.TU-SUBDOMINIO.workers.dev">
+          data-cloud="TU-CLOUD-NAME"
+          data-preset="TU-UPLOAD-PRESET"
+          data-correo="projectmanager@differentissgood.com">
 
     <!-- ================= 1 · PLAN ================= -->
     <div class="step" data-planes="impulso crecimiento elite">
@@ -1113,7 +1115,9 @@ select:invalid,select option[value=""]{color:var(--tenue);}
      poder reintentar sin volver a rellenarlo.
      ================================================================== */
   var formulario = document.getElementById('cuestionario');
-  var API = (formulario.dataset.api || '').replace(/\/+$/, '');
+  var CLOUD   = (formulario.dataset.cloud  || '').trim();
+  var PRESET  = (formulario.dataset.preset || '').trim();
+  var CORREO  = (formulario.dataset.correo || '').trim();
   var velo = document.getElementById('velo');
   var veloCaja = document.getElementById('velo-caja');
   var LLAVE = 'cuestionario-differentissgood';
@@ -1200,26 +1204,51 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     return fallo;
   }
 
-  /* ---------- Subir con reintentos ---------- */
-  function subir(url, opciones, intentos){
+  /* ---------- Reintentos ---------- */
+  function conReintentos(hacer, intentos){
     intentos = intentos || 3;
-    return fetch(url, opciones).then(function(r){
-      if(r.ok) return r.json();
-      // Un error nuestro no se arregla repitiendo; uno del servidor, quizá sí
-      if(r.status >= 400 && r.status < 500 && r.status !== 429){
-        return r.json().catch(function(){ return {}; }).then(function(j){
-          throw new Error(j.error || ('Error ' + r.status));
-        });
-      }
-      throw new Error('Error ' + r.status);
-    }).catch(function(e){
-      if(intentos <= 1) throw e;
+    return hacer().catch(function(e){
+      if(intentos <= 1 || e.definitivo) throw e;
       return new Promise(function(ok){ setTimeout(ok, (4 - intentos) * 900); })
-        .then(function(){ return subir(url, opciones, intentos - 1); });
+        .then(function(){ return conReintentos(hacer, intentos - 1); });
     });
   }
 
-  /* ---------- Pantallas del envío ---------- */
+  /* ---------- Subir un archivo a Cloudinary ---------- */
+  function subirArchivo(envio, campo, fichero){
+    var datos = new FormData();
+    datos.append('file', fichero);
+    datos.append('upload_preset', PRESET);
+    datos.append('folder', 'cuestionarios/' + envio + '/' + campo.replace(/[^\w -]/g, ''));
+    return conReintentos(function(){
+      return fetch('https://api.cloudinary.com/v1_1/' + CLOUD + '/auto/upload', {
+        method:'POST', body:datos,
+      }).then(function(r){
+        return r.json().catch(function(){ return {}; }).then(function(j){
+          if(r.ok && j.secure_url) return j.secure_url;
+          var msg = (j.error && j.error.message) || ('Error ' + r.status);
+          var fallo = new Error(msg);
+          // Una clave mal puesta no se arregla repitiendo
+          if(r.status === 400 || r.status === 401) fallo.definitivo = true;
+          throw fallo;
+        });
+      });
+    });
+  }
+
+  /* ---------- Texto plano del cuestionario ---------- */
+  function comoTexto(envio, respuestas, archivos){
+    var t = 'CUESTIONARIO DIFFERENTISSGOOD\nReferencia: ' + envio +
+            '\nFecha: ' + new Date().toLocaleString('es-ES') + '\n\n';
+    respuestas.forEach(function(r){ t += r.campo + ':\n' + r.valor + '\n\n'; });
+    if(archivos.length){
+      t += '\nARCHIVOS\n';
+      archivos.forEach(function(a){ t += '· ' + a.campo + ' — ' + a.nombre + '\n  ' + a.url + '\n'; });
+    }
+    return t;
+  }
+
+  /* ---------- Pantallas ---------- */
   function pantallaProgreso(){
     velo.classList.add('abierto');
     veloCaja.innerHTML =
@@ -1234,17 +1263,21 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     if(b) b.style.width = Math.round(pct) + '%';
     if(d) d.textContent = texto;
   }
-  function pantallaHecho(referencia, avisoOk){
+  function pantallaHecho(referencia, avisoOk, texto){
     localStorage.removeItem(LLAVE);
     veloCaja.innerHTML =
       '<div class="tic">✓</div>' +
       '<h3>Recibido</h3>' +
-      '<p>Ya lo tenemos guardado. Te respondemos en menos de 48 horas.</p>' +
-      (avisoOk ? '' : '<div class="velo__error">Tu cuestionario está a salvo, pero el aviso por correo no ha salido. ' +
-        'Guarda esta referencia por si acaso.</div>') +
+      '<p>Ya lo tenemos. Te respondemos en menos de 48 horas.</p>' +
+      (avisoOk ? '' :
+        '<div class="velo__error">Tus archivos están guardados, pero el aviso por correo no ha salido. ' +
+        'Descarga tus respuestas y mándanoslas a ' + CORREO + '.</div>' +
+        '<div class="velo__acciones"><button type="button" class="principal" id="velo-bajar">Descargar mis respuestas</button></div>') +
       '<p class="velo__detalle" style="margin-top:14px;">Referencia: ' + referencia + '</p>';
+    var bajar = document.getElementById('velo-bajar');
+    if(bajar) bajar.addEventListener('click', function(){ descargarTexto(referencia, texto); });
   }
-  function pantallaError(mensaje){
+  function pantallaError(mensaje, referencia, texto){
     veloCaja.innerHTML =
       '<h3>No se ha podido enviar</h3>' +
       '<p>Tus respuestas siguen escritas y guardadas en este navegador. No has perdido nada.</p>' +
@@ -1252,9 +1285,19 @@ select:invalid,select option[value=""]{color:var(--tenue);}
       '<div class="velo__acciones">' +
         '<button type="button" id="velo-cerrar">Volver</button>' +
         '<button type="button" class="principal" id="velo-reintentar">Reintentar</button>' +
-      '</div>';
+      '</div>' +
+      (texto ? '<div class="velo__acciones"><button type="button" id="velo-bajar">Descargar mis respuestas</button></div>' : '');
     document.getElementById('velo-cerrar').addEventListener('click', function(){ velo.classList.remove('abierto'); });
     document.getElementById('velo-reintentar').addEventListener('click', enviar);
+    var bajar = document.getElementById('velo-bajar');
+    if(bajar) bajar.addEventListener('click', function(){ descargarTexto(referencia, texto); });
+  }
+  function descargarTexto(referencia, texto){
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([texto], {type:'text/plain;charset=utf-8'}));
+    a.download = 'cuestionario-' + referencia + '.txt';
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
   }
 
   /* ---------- El envío ---------- */
@@ -1270,9 +1313,9 @@ select:invalid,select option[value=""]{color:var(--tenue);}
       setTimeout(function(){ falla.focus(); }, 400);
       return;
     }
-    if(!API || API.indexOf('TU-SUBDOMINIO') > -1){
+    if(!CLOUD || !PRESET || CLOUD.indexOf('TU-') === 0 || PRESET.indexOf('TU-') === 0){
       pantallaProgreso();
-      pantallaError('Falta configurar la dirección del Worker en el atributo <b>data-api</b> del formulario.');
+      pantallaError('Faltan los datos de Cloudinary en los atributos <b>data-cloud</b> y <b>data-preset</b> del formulario.');
       return;
     }
 
@@ -1280,46 +1323,61 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     pantallaProgreso();
 
     var envio = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-') + '-' +
-                Math.random().toString(36).slice(2,10);
+                Math.random().toString(36).slice(2,8);
     var respuestas = recogerRespuestas();
-    var archivos = recogerArchivos();
+    var pendientes = recogerArchivos();
     var subidos = [];
-    var total = archivos.length + 1;
+    var pasos = pendientes.length + 2;   // archivos + copia de seguridad + correo
     var hechos = 0;
+    var texto = '';
 
-    function siguiente(i){
-      if(i >= archivos.length){
-        progreso(hechos / total * 100, 'Guardando las respuestas…');
-        return subir(API + '/api/enviar', {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({envio:envio, respuestas:respuestas, archivos:subidos}),
-        }).then(function(r){
-          progreso(100, 'Listo');
-          pantallaHecho(r.envio || envio, r.aviso !== false);
-          enviando = false;
-        });
-      }
-      var a = archivos[i];
-      progreso(hechos / total * 100, 'Subiendo ' + (i + 1) + ' de ' + archivos.length + ': ' + a.fichero.name);
-      var url = API + '/api/subir?envio=' + encodeURIComponent(envio) +
-                '&campo=' + encodeURIComponent(a.campo) +
-                '&archivo=' + encodeURIComponent(a.fichero.name);
-      return subir(url, {
-        method:'POST',
-        headers:{'Content-Type': a.fichero.type || 'application/octet-stream'},
-        body: a.fichero,
-      }).then(function(r){
-        subidos.push({campo:a.campo, nombre:a.fichero.name, clave:r.clave});
+    function siguienteArchivo(i){
+      if(i >= pendientes.length) return Promise.resolve();
+      var a = pendientes[i];
+      progreso(hechos / pasos * 100,
+        'Subiendo ' + (i + 1) + ' de ' + pendientes.length + ': ' + a.fichero.name);
+      return subirArchivo(envio, a.campo, a.fichero).then(function(url){
+        subidos.push({campo:a.campo, nombre:a.fichero.name, url:url});
         hechos++;
-        return siguiente(i + 1);
+        return siguienteArchivo(i + 1);
       });
     }
 
-    siguiente(0).catch(function(e){
-      enviando = false;
-      pantallaError(String(e && e.message ? e.message : e));
-    });
+    siguienteArchivo(0)
+      .then(function(){
+        // Copia de seguridad: el cuestionario entero queda también guardado,
+        // así que aunque el correo falle la información no se pierde.
+        texto = comoTexto(envio, respuestas, subidos);
+        progreso(hechos / pasos * 100, 'Guardando una copia…');
+        var copia = new File([texto], 'respuestas-' + envio + '.txt', {type:'text/plain'});
+        return subirArchivo(envio, 'respuestas', copia)
+          .then(function(url){ hechos++; return url; })
+          .catch(function(){ hechos++; return null; });   // la copia no bloquea el envío
+      })
+      .then(function(){
+        progreso(hechos / pasos * 100, 'Avisando por correo…');
+        var carga = {_subject:'Cuestionario nuevo — Differentissgood', Referencia:envio};
+        respuestas.forEach(function(r){ carga[r.campo] = r.valor; });
+        subidos.forEach(function(a){ carga['ARCHIVO · ' + a.campo + ' · ' + a.nombre] = a.url; });
+
+        return conReintentos(function(){
+          return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CORREO), {
+            method:'POST',
+            headers:{'Content-Type':'application/json', Accept:'application/json'},
+            body: JSON.stringify(carga),
+          }).then(function(r){ if(!r.ok) throw new Error('Error ' + r.status); return r.json(); });
+        }).then(function(){ return true; }).catch(function(){ return false; });
+      })
+      .then(function(avisoOk){
+        progreso(100, 'Listo');
+        pantallaHecho(envio, avisoOk, texto);
+        enviando = false;
+      })
+      .catch(function(e){
+        enviando = false;
+        pantallaError(String(e && e.message ? e.message : e), envio,
+          texto || comoTexto(envio, respuestas, subidos));
+      });
   }
 
   formulario.addEventListener('submit', function(e){ e.preventDefault(); enviar(); });
