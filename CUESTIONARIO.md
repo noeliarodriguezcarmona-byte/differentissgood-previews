@@ -1,96 +1,105 @@
 # Puesta en marcha del cuestionario
 
-**Gratis, sin tarjeta y sin que en ningún momento tengas que pagar.**
+**Gratis, sin tarjeta y sin terminal.** Todo se hace desde el navegador.
 
-Los archivos que suben los clientes van a **Cloudinary** y a ti te llega un correo
-a `projectmanager@differentissgood.com` con todas las respuestas y un enlace por
-cada archivo.
+Cuando un cliente envía el cuestionario, aparece solo en tu repositorio de GitHub:
+
+```
+clientes/
+  2026-08-11-panaderia-la-espiga/
+    respuestas.md                      ← todo ordenado por bloques
+    equipo/
+      persona-1-foto-ana-ruiz.jpg
+    servicios/
+      servicio-1-fotos-pan-masa-madre.jpg
+      servicio-2-fotos-bolleria.jpg
+    local/
+    trabajos/
+    testimonios/
+    logotipo-logo.svg
+```
+
+Y para hacer la web, abres Claude Code en ese repositorio y dices:
+*«hazme la web de la panadería con lo que hay en su carpeta»*. Se leen las
+respuestas y se ven las fotos directamente. **Tú no descargas ni ordenas nada.**
 
 ---
 
-## Por qué así y no con adjuntos
+## Los cuatro pasos
 
-El correo tiene un tope duro de 25 MB por mensaje. Un cuestionario con fotos del
-equipo, fotos de cada servicio y vídeos de testimonios se va fácilmente a 200 MB:
-por correo **nunca** iba a llegar, se pagara lo que se pagara.
+### 1. Crear el repositorio
 
-Por eso los archivos van a un almacén y el correo lleva solo los enlaces. Así el
-correo pesa unos kilobytes y llega siempre.
+En GitHub → **New repository**
 
----
+- Nombre: **`clientes`**
+- Marca **Private**
+- Marca **Add a README file** (hace falta que no esté vacío)
+- **Create repository**
 
-## Lo que hay que hacer, una sola vez (5 minutos)
+### 2. Crear el token
 
-### 1. Crear la cuenta
+GitHub → tu foto arriba a la derecha → **Settings** → abajo del todo
+**Developer settings** → **Personal access tokens** → **Fine-grained tokens**
+→ **Generate new token**
 
-Entra en **[cloudinary.com](https://cloudinary.com)** → *Sign up for free*.
+- Nombre: `cuestionario`
+- Expiration: **No expiration** (o un año, y lo renuevas)
+- **Repository access** → *Only select repositories* → elige **`clientes`**
+- **Permissions** → *Repository permissions* → busca **Contents** y ponlo en
+  **Read and write**
+- **Generate token** y **copia el token**. Solo se ve una vez.
 
-No pide tarjeta. El plan gratuito da **25 GB de almacenamiento** y 25 GB de
-tráfico al mes, que para esto sobra de largo.
+> Ese token solo puede escribir en `clientes`. No da acceso a nada más tuyo.
 
-### 2. Copiar tu «cloud name»
+### 3. Crear el Worker
 
-Nada más entrar, en el panel verás **Cloud Name**. Es una palabra corta, algo como
-`dq8x2vabc`. Cópiala.
+En [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** →
+**Create** → **Create Worker**
 
-### 3. Crear el preset de subida
+- Nombre: `cuestionario`
+- **Deploy** (crea uno de ejemplo)
+- Después **Edit code**: borra todo lo que haya y pega el contenido de
+  **`recogida/worker.js`** de este repositorio
+- **Deploy** otra vez
 
-Este es el paso que permite que los clientes suban archivos **sin tener cuenta**.
+Te queda una dirección así, **cópiala**:
 
-1. Arriba a la derecha, el engranaje → **Settings**
-2. Pestaña **Upload**
-3. Baja hasta **Upload presets** → **Add upload preset**
-4. Ponle de nombre `cuestionario`
-5. En **Signing Mode** elige **Unsigned** ← importante
-6. En **Folder** escribe `cuestionarios`
-7. **Save**
+```
+https://cuestionario.TU-SUBDOMINIO.workers.dev
+```
 
-### 4. Pegar los dos datos en el cuestionario
+Ahora, en el mismo Worker → **Settings** → **Variables and Secrets** → **Add**:
+
+| Tipo | Nombre | Valor |
+|---|---|---|
+| Secret | `GITHUB_TOKEN` | el token del paso 2 |
+| Text | `GITHUB_REPO` | `noeliarodriguezcarmona-byte/clientes` |
+| Text | `ORIGENES` | `https://differentissgood-previews.noeliarodriguezcarmona-a7e.workers.dev` |
+
+En `ORIGENES` van, separadas por comas, las direcciones desde las que se acepta
+el cuestionario. Añade tu dominio propio cuando lo tengas.
+
+**Deploy** para que los cambios entren.
+
+### 4. Apuntar el cuestionario al Worker
 
 En `repo-para-github_1/cuestionario.html`, al principio del formulario:
 
 ```html
 <form id="cuestionario" novalidate
-      data-cloud="TU-CLOUD-NAME"
-      data-preset="TU-UPLOAD-PRESET"
-      data-correo="projectmanager@differentissgood.com">
+      data-api="https://TU-WORKER.workers.dev">
 ```
 
-Sustituye `TU-CLOUD-NAME` por lo del paso 2 y `TU-UPLOAD-PRESET` por `cuestionario`.
-**Es lo único que hay que tocar en todo el archivo.**
-
-### 5. Activar el correo
-
-La primera vez que se envíe el cuestionario, formsubmit te manda un correo de
-confirmación a `projectmanager@differentissgood.com`. Ábrelo y pulsa el enlace.
-A partir de ahí ya llegan todos, sin cuenta ni configuración.
+Pon ahí la dirección del paso 3. **Es lo único que se toca en el HTML.**
 
 ---
 
-## Cómo comprobar que va
+## Comprobar que va
 
-Rellena el cuestionario tú misma con una foto pequeña y mira que:
-
-1. Sale la pantalla de «Recibido»
-2. Te llega el correo con las respuestas y los enlaces
-3. En Cloudinary → **Media Library** → carpeta `cuestionarios` está todo
-
----
-
-## Dónde queda cada cosa
-
-En Cloudinary, dentro de `cuestionarios`:
-
-```
-cuestionarios/
-  2026-08-11-09-14-22-a1b2c3/
-    Persona 1  Foto/       ← el retrato de cada persona
-    Servicio 1  Fotos/     ← las fotos de cada servicio
-    Vídeos de testimonios/
-    respuestas/            ← copia del cuestionario en texto
-```
-
-Cada envío en su carpeta, con la fecha delante para que salgan ordenados.
+1. Abre `https://TU-WORKER.workers.dev/api/estado` — debe responder
+   `{"ok":true,"repo":"noeliarodriguezcarmona-byte/clientes","maxMB":20}`
+2. Rellena el cuestionario tú misma con una foto pequeña
+3. Mira el repositorio `clientes`: tiene que estar la carpeta con todo dentro
 
 ---
 
@@ -98,29 +107,23 @@ Cada envío en su carpeta, con la fecha delante para que salgan ordenados.
 
 - **Los archivos suben de uno en uno**, no en un envío gigante. Uno pesado no
   tumba el resto.
-- **Tres reintentos** por archivo, con pausas crecientes. Un corte de red
-  pasajero no cuesta un envío.
-- **Copia de seguridad automática.** Además de los archivos, se sube el
-  cuestionario entero en texto. Aunque el correo fallara, la información sigue
-  estando en tu Cloudinary.
-- **Si el correo falla**, al cliente se le dice, se le da el envío por recibido
-  (sus archivos ya están) y se le ofrece **descargar sus respuestas** para
-  mandártelas por otra vía.
+- **Tres reintentos** por archivo desde el navegador y **dos más** dentro del
+  Worker. Un corte de red pasajero no cuesta un envío.
+- **El aviso de tamaño salta al elegir el archivo**, no al enviar. El cliente se
+  entera al momento, no después de rellenarlo todo.
 - **Borrador en su navegador.** Lo que va escribiendo se guarda solo. Si cierra
-  la pestaña sin querer, al volver lo encuentra tal como lo dejó.
-- **Si algo falla del todo**, sus respuestas siguen escritas y puede reintentar
-  sin rellenar nada de nuevo.
+  la pestaña sin querer, al volver lo encuentra igual.
+- **Si algo falla**, se le dice, sus respuestas siguen escritas, puede reintentar
+  sin rellenar nada y además puede **descargar sus respuestas** para mandártelas
+  por otra vía.
 
----
+## Límites
 
-## Lo que conviene saber
-
-**El preset sin firma es público.** Va escrito en la página, así que alguien que
-lo mirase podría subir archivos a tu Cloudinary. En la práctica el riesgo es bajo
-—la dirección del cuestionario no está indexada—, pero si quieres cerrarlo más:
-en el preset puedes limitar los formatos permitidos y el tamaño máximo por
-archivo, dentro de *Settings → Upload → tu preset*.
-
-**Si algún día se llenan los 25 GB**, entra en Media Library y borra las carpetas
-de proyectos ya cerrados. Nunca te va a cobrar sin que tú lo autorices: el plan
-gratuito no se convierte solo en uno de pago.
+- **20 MB por archivo.** Es lo que admite bien la API de GitHub. Fotos,
+  logotipos y documentos entran de sobra.
+- **Los vídeos largos no caben.** Por eso en la pregunta de testimonios se pide
+  primero el **enlace** (Instagram, Drive, YouTube), que es de donde salen casi
+  siempre, y adjuntar es la segunda opción.
+- GitHub gratuito no pone límite de repositorios privados ni de espacio
+  razonable para esto. Si algún repositorio creciera mucho, se archivan las
+  carpetas de proyectos ya cerrados.
