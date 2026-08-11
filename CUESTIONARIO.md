@@ -54,7 +54,7 @@ GitHub → tu foto arriba a la derecha → **Settings** → abajo del todo
 ### 3. Crear el Worker
 
 En [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** →
-**Create** → **Create Worker**
+**Create application** → **Start with Hello World!**
 
 - Nombre: `cuestionario`
 - **Deploy** (crea uno de ejemplo)
@@ -83,14 +83,15 @@ el cuestionario. Añade tu dominio propio cuando lo tengas.
 
 ### 4. Apuntar el cuestionario al Worker
 
-En `repo-para-github_1/cuestionario.html`, al principio del formulario:
+**Ya está hecho.** El cuestionario apunta a:
 
-```html
-<form id="cuestionario" novalidate
-      data-api="https://TU-WORKER.workers.dev">
+```
+https://cuestionario.noeliarodriguezcarmona-a7e.workers.dev
 ```
 
-Pon ahí la dirección del paso 3. **Es lo único que se toca en el HTML.**
+Si al desplegarlo le pusiste otro nombre y la dirección te quedó distinta, dímelo
+y la cambio. Está en `repo-para-github_1/cuestionario.html`, en el atributo
+`data-api` del formulario.
 
 ---
 
