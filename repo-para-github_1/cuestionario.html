@@ -179,6 +179,9 @@ select:invalid,select option[value=""]{color:var(--tenue);}
 }
 .chip input:checked + span{background:rgba(221,107,58,.16);border-color:var(--orange);color:var(--orange);font-weight:600;}
 .chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(221,107,58,.2);}
+.chip input:disabled + span{opacity:.4;cursor:not-allowed;}
+.chip-grid__contador{font-weight:600;color:var(--ink);}
+.chip-grid__contador[data-corto]{color:var(--rosa);}
 
 .radio-row{display:flex;flex-direction:column;gap:9px;}
 .radio-row label{
@@ -796,23 +799,64 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     </div>
 
     <!-- ================= 17 · EXTRAS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-planes="impulso">
       <div class="step-head">
         <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Extras</h2><span class="plan-badge">Elige de 2 a 4</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">Marca lo que te interese. Algunos van con el plan y otros se presupuestan aparte: te lo decimos al responder.</p>
-        <div class="chip-grid">
-          <label class="chip"><input type="checkbox" name="Extras" value="Botón de WhatsApp"><span>Botón de WhatsApp</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Preguntas frecuentes desplegables"><span>Preguntas frecuentes desplegables</span></label>
+        <p class="step-sub">El Plan Impulso incluye entre 2 y 4 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" data-min="2" data-max="4">
+          <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Certificado SSL gestionado"><span>Certificado SSL gestionado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones simple"><span>Formulario de valoraciones simple</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Favicon e identidad visual mínima"><span>Favicon e identidad visual mínima</span></label>
+        </div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step" data-planes="crecimiento">
+      <div class="step-head">
+        <span class="step-num">17</span>
+        <div><h2>Extras</h2><span class="plan-badge" data-nivel="medio">Elige de 4 a 6</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">El Plan Crecimiento incluye entre 4 y 6 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" data-min="4" data-max="6">
+          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business"><span>Integración con Google Business</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Calendario de reservas"><span>Calendario de reservas</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter automática"><span>Newsletter automática</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Blog con IA"><span>Blog con IA</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Sesión de fotografía"><span>Sesión de fotografía</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Vídeo de marca"><span>Vídeo de marca</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Calendario de reservas básico"><span>Calendario de reservas básico</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Botón de WhatsApp flotante inteligente"><span>Botón de WhatsApp flotante inteligente</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
+        </div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step" data-planes="elite">
+      <div class="step-head">
+        <span class="step-num">17</span>
+        <div><h2>Extras</h2><span class="plan-badge" data-nivel="elite">Elige hasta 6 de 8</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">El Plan Élite permite elegir hasta 6 de estos 8 extras. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" data-min="0" data-max="6">
+          <label class="chip"><input type="checkbox" name="Extras" value="Chat con IA / chatbot"><span>Chat con IA / chatbot</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Carrito de compra avanzado / pasarela de pago"><span>Carrito de compra avanzado / pasarela de pago</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Dashboard de analítica personalizado"><span>Dashboard de analítica personalizado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Multi-idioma"><span>Multi-idioma</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Animaciones 3D / parallax"><span>Animaciones 3D / parallax</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Panel de administración para el cliente"><span>Panel de administración para el cliente</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con automatizaciones avanzadas"><span>Newsletter con automatizaciones avanzadas</span></label>
         </div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -1103,6 +1147,9 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         }
       });
     });
+    if(typeof gruposExtras !== 'undefined'){
+      gruposExtras.forEach(function(grid){ actualizarGrupoExtras(grid); });
+    }
     renumerar();
     avance();
   }
@@ -1151,6 +1198,29 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   document.querySelectorAll('.step').forEach(function(s){ mirador.observe(s); });
 
   aplicarPlan();
+
+  /* ---------- Extras: mínimo y máximo por plan ---------- */
+  var gruposExtras = Array.prototype.slice.call(document.querySelectorAll('.chip-grid[data-min]'));
+  function actualizarGrupoExtras(grid){
+    var min = parseInt(grid.dataset.min, 10) || 0;
+    var max = parseInt(grid.dataset.max, 10) || Infinity;
+    var casillas = Array.prototype.slice.call(grid.querySelectorAll('input[type=checkbox]'));
+    var marcadas = casillas.filter(function(c){ return c.checked; }).length;
+    casillas.forEach(function(c){ c.disabled = !c.checked && marcadas >= max; });
+    var contador = grid.closest('.step-cuerpo').querySelector('[data-contador]');
+    if(!contador) return;
+    if(marcadas < min){
+      contador.textContent = 'Llevas ' + marcadas + ' — te faltan ' + (min - marcadas) + ' para el mínimo.';
+      contador.setAttribute('data-corto', '');
+    } else {
+      contador.textContent = 'Llevas ' + marcadas + ' de ' + max + ' como máximo.';
+      contador.removeAttribute('data-corto');
+    }
+  }
+  gruposExtras.forEach(function(grid){
+    grid.addEventListener('change', function(){ actualizarGrupoExtras(grid); });
+    actualizarGrupoExtras(grid);
+  });
 
   /* ==================================================================
      ENVÍO
@@ -1287,6 +1357,15 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         : !c.value.trim();
       if(vacio) fallo = c;
     });
+    if(!fallo){
+      gruposExtras.forEach(function(grid){
+        if(fallo || grid.closest('.step[hidden]') || grid.closest('.step.apagado')) return;
+        var min = parseInt(grid.dataset.min, 10) || 0;
+        var casillas = Array.prototype.slice.call(grid.querySelectorAll('input[type=checkbox]'));
+        var marcadas = casillas.filter(function(c){ return c.checked; }).length;
+        if(marcadas < min) fallo = casillas[0];
+      });
+    }
     return fallo;
   }
 
