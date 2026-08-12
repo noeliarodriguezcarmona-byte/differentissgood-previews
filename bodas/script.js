@@ -199,37 +199,6 @@ function pintarServicios() {
     </label>`).join('');
 }
 
-function formularioPresupuesto() {
-  const form = $('#formulario-presupuesto');
-  const aviso = $('#aviso-presupuesto');
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const elegidos = $$('input[name="servicio"]:checked', form).map((el) => el.value);
-
-    if (!elegidos.length) {
-      aviso.textContent = 'Marca al menos un servicio para pedir presupuesto';
-      aviso.dataset.estado = 'error';
-      return;
-    }
-
-    const mensaje = [
-      '¡Hola Differentissgood! Nos gustaría pedir presupuesto para nuestra boda 💍',
-      '',
-      'Nos interesa:',
-      ...elegidos.map((s) => `• ${s}`),
-    ].join('\n');
-
-    const url = `https://wa.me/${WHATSAPP_POR_DEFECTO}?text=${encodeURIComponent(mensaje)}`;
-    const ventana = window.open(url, '_blank', 'noopener');
-    if (!ventana || ventana.closed) { location.href = url; return; }
-
-    aviso.textContent = 'Se ha abierto WhatsApp con vuestra selección. Pulsa enviar para que nos llegue.';
-    aviso.dataset.estado = 'ok';
-  });
-}
-
 /* ---------------------------------------------------------
    Otros servicios: tarjetas que rotan sus fotos cada 2 s
    --------------------------------------------------------- */
@@ -238,10 +207,10 @@ function otrosServicios() {
   const fila = $('#otros-servicios-fila');
   if (!fila || typeof OTROS_SERVICIOS === 'undefined') return;
 
-  fila.innerHTML = OTROS_SERVICIOS.map(({ id, nombre, fotos }) => `
+  fila.innerHTML = OTROS_SERVICIOS.map(({ id, nombre, carpeta, fotos }) => `
     <div class="servicio-visual sube" data-servicio="${id}">
       ${fotos.length
-        ? fotos.map((archivo, i) => `<img src="media/fotos/${archivo}" alt="${nombre}" loading="lazy" class="${i === 0 ? 'activa' : ''}">`).join('')
+        ? fotos.map((archivo, i) => `<img src="media/${carpeta}/${archivo}" alt="${nombre}" loading="lazy" class="${i === 0 ? 'activa' : ''}">`).join('')
         : `<div class="hueco"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg><p>Próximamente</p><small>Añade fotos en <code>OTROS_SERVICIOS</code></small></div>`}
       <span class="servicio-visual__etiqueta">${nombre}</span>
     </div>`).join('');
@@ -269,26 +238,6 @@ function pintarVideo() {
   marco.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}" title="Highlight de boda"
     loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>`;
-}
-
-/* ---------------------------------------------------------
-   Blog: últimas 3 entradas en portada
-   --------------------------------------------------------- */
-
-function pintarBlog() {
-  const fila = $('#blog-fila');
-  if (!fila || typeof POSTS === 'undefined') return;
-
-  const ultimas = [...POSTS].sort((a, b) => b.fecha.localeCompare(a.fecha)).slice(0, 3);
-  fila.innerHTML = ultimas.map(({ slug, titulo, fecha, resumen, foto }) => `
-    <a class="tarjeta-post sube" href="blog/post.html?post=${slug}">
-      <figure class="tarjeta-post__foto">
-        <img src="${foto}" alt="${titulo}" loading="lazy">
-      </figure>
-      <p class="tarjeta-post__fecha">${new Date(fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-      <h3>${titulo}</h3>
-      <p class="tarjeta-post__resumen">${resumen}</p>
-    </a>`).join('');
 }
 
 /* ---------------------------------------------------------
@@ -354,16 +303,21 @@ function formularioWhatsApp() {
 
   const decir = (texto, estado) => { aviso.textContent = texto; aviso.dataset.estado = estado; };
 
-  const mensaje = () => [
-    '¡Hola Differentissgood! Nos gustaría pedir presupuesto para nuestra boda 💍',
-    '',
-    `• Nombres: ${$('#f-nombre').value.trim()}`,
-    `• Teléfono: ${$('#f-telefono').value.trim()}`,
-    `• Fecha de la boda: ${$('#f-fecha').value || 'por confirmar'}`,
-    `• Nos interesa: ${$('#f-servicio').value}`,
-    '',
-    $('#f-mensaje').value.trim(),
-  ].join('\n');
+  const mensaje = () => {
+    const elegidos = $$('input[name="servicio"]:checked', form).map((el) => el.value);
+    return [
+      '¡Hola Differentissgood! Nos gustaría pedir presupuesto para nuestra boda 💍',
+      '',
+      `• Nombres: ${$('#f-nombre').value.trim()}`,
+      `• Teléfono: ${$('#f-telefono').value.trim()}`,
+      `• Fecha de la boda: ${$('#f-fecha').value || 'por confirmar'}`,
+      '',
+      $('#f-mensaje').value.trim(),
+      '',
+      elegidos.length ? 'Nos interesa:' : '',
+      ...elegidos.map((s) => `• ${s}`),
+    ].join('\n');
+  };
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -410,7 +364,6 @@ pintarPortfolioDestacado();
 pintarServicios();
 pintarVideo();
 otrosServicios();
-pintarBlog();
 opinionesCarrusel();
 avisoProvisional();
 cabecera();
@@ -418,5 +371,4 @@ menuMovil();
 menuActivo();
 volverArriba();
 formularioWhatsApp();
-formularioPresupuesto();
 animarEntradas();

@@ -97,11 +97,22 @@ p { margin: 0 0 1em; }
   color: var(--texto);
 }
 .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.marca__ico {
-  width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid currentColor;
-  display: grid; place-items: center; font-family: var(--serif); font-size: 1.05rem;
+
+/* ---------- Logotipo Differentissgood (texto + ola) ---------- */
+.logo-dg { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: .82; }
+.logo-dg__texto {
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-weight: 900; font-style: italic;
+  text-transform: uppercase; letter-spacing: -.01em; font-size: 1.02rem; color: currentColor; white-space: nowrap;
 }
-.marca__txt { font-family: var(--serif); font-size: 1.08rem; letter-spacing: .03em; }
+.logo-dg__ola { width: 100%; height: 7px; display: block; margin-top: 1px; }
+.logo-dg__ola path { fill: none; stroke: #e8622f; stroke-width: 5.5; stroke-linecap: round; }
+.logo-dg__lema {
+  font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; font-size: .68rem;
+  color: var(--texto-suave); margin-top: 3px; letter-spacing: .01em;
+}
+.logo-dg--pie { align-items: center; }
+.logo-dg--pie .logo-dg__texto { font-size: 1.3rem; }
+.logo-dg--pie .logo-dg__ola { width: 110px; }
 
 .menu { display: flex; gap: 30px; font-size: .88rem; letter-spacing: .01em; }
 .menu a { text-decoration: none; padding-bottom: 4px; border-bottom: 1px solid transparent; opacity: .92; }
@@ -363,6 +374,11 @@ p { margin: 0 0 1em; }
 .redes svg { width: 18px; height: 18px; fill: currentColor; }
 
 .formulario { text-align: left; }
+.formulario__subtitulo { font-weight: 700; font-size: .92rem; margin: 30px 0 14px; }
+.servicios__fila--form { grid-template-columns: 1fr; gap: 10px; margin: 0 0 20px; max-width: none; }
+.servicios__fila--form .servicio-carta { padding: 14px 16px; }
+.servicios__fila--form .servicio-carta h3 { font-size: .92rem; margin: 0 0 6px; }
+.servicios__fila--form .servicio-carta ul { font-size: .8rem; }
 .campos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .campo { display: flex; flex-direction: column; gap: 6px; font-size: .88rem; }
 .campo--ancho { grid-column: 1 / -1; }

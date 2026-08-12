@@ -147,12 +147,13 @@ const SERVICIOS = [
 
 /* ---------------------------------------------------------
    Otros servicios (aparte de bodas): tarjetas que rotan sus
-   fotos cada 2 s. "fotos" vacío = tarjeta "próximamente".
+   fotos cada 2 s. "carpeta" indica dónde están (por defecto
+   media/fotos/). "fotos" vacío = tarjeta "próximamente".
    --------------------------------------------------------- */
 const OTROS_SERVICIOS = [
-  { id: 'retrato', nombre: 'Retrato', fotos: ['boda-01.jpg', 'boda-18.jpg', 'boda-36.jpg'] },
-  { id: 'eventos', nombre: 'Eventos', fotos: ['boda-38.jpg', 'boda-45.jpg', 'boda-51.jpg'] },
-  { id: 'gastronomia', nombre: 'Gastronomía', fotos: [] },
-  { id: 'beauty', nombre: 'Beauty', fotos: [] },
-  { id: 'producto', nombre: 'Producto / Ecommerce', fotos: [] },
+  { id: 'retrato', nombre: 'Retrato', carpeta: 'fotos', fotos: ['boda-01.jpg', 'boda-18.jpg', 'boda-36.jpg'] },
+  { id: 'eventos', nombre: 'Eventos', carpeta: 'fotos', fotos: ['boda-38.jpg', 'boda-45.jpg', 'boda-51.jpg'] },
+  { id: 'producto', nombre: 'Producto / Ecommerce', carpeta: 'otros', fotos: ['producto-01.jpg', 'producto-02.jpg', 'producto-03.jpg', 'producto-04.jpg', 'producto-05.jpg'] },
+  { id: 'gastronomia', nombre: 'Gastronomía', carpeta: 'fotos', fotos: [] },
+  { id: 'beauty', nombre: 'Beauty', carpeta: 'fotos', fotos: [] },
 ];
