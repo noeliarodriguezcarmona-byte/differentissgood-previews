@@ -1,0 +1,42 @@
+# Publica el repositorio en GitHub Pages en cada push a main.
+#
+# Requiere activar Pages una vez a mano:
+#   Settings → Pages → Source: GitHub Actions
+#
+# No se puede automatizar: crear el sitio exige permisos de administración del
+# repositorio, que el token de Actions no tiene. Una vez activado, este flujo
+# se encarga de todos los despliegues siguientes sin tocar nada.
+name: Publicar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      # El sitio es estático: se sube la carpeta tal cual, sin compilar nada
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: despliegue
+        uses: actions/deploy-pages@v4
