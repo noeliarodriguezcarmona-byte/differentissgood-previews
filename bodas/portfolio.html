@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio completo · Differentissgood Weddings</title>
+  <meta name="description" content="Todas las fotografías de boda de Differentissgood, organizadas por categoría.">
+  <meta name="theme-color" content="#faf6f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#17130f" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="grano" aria-hidden="true"></div>
+
+  <header class="cabecera" data-fija="true" id="cabecera">
+    <a class="marca" href="index.html">
+      <span class="logo-dg">
+        <span class="logo-dg__texto">Differentissgood</span>
+        <svg class="logo-dg__ola" viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 C15 2,30 12,45 7 C60 2,75 12,90 7 C100 4,110 9,120 6"/></svg>
+      </span>
+    </a>
+    <nav class="menu" aria-label="Secciones">
+      <a href="index.html#quienes-somos">Quiénes somos</a>
+      <a href="portfolio.html" aria-current="true">Portfolio</a>
+      <a href="index.html#video">Vídeo</a>
+      <a href="index.html#blog">Otros servicios</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <a href="index.html#contacto" class="btn btn--solido btn--peque">Pide presupuesto</a>
+    <button class="menu__abrir" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <div class="menu-movil" id="menu-movil" hidden>
+    <button class="menu-movil__x" id="menu-movil-cerrar" aria-label="Cerrar menú">×</button>
+    <a href="index.html#quienes-somos">Quiénes somos</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="index.html#video">Vídeo</a>
+    <a href="index.html#blog">Otros servicios</a>
+    <a href="index.html#contacto" class="destacado">Contacto</a>
+  </div>
+
+  <main class="blog-pagina">
+    <div class="envoltura">
+      <a class="volver-portfolio" href="index.html#portfolio">← Volver al inicio</a>
+      <div class="seccion__cab sube">
+        <p class="etiqueta">Portfolio completo</p>
+        <h2>Todas las bodas</h2>
+      </div>
+    </div>
+
+    <div class="cuadricula-completa" id="cuadricula-completa"></div>
+  </main>
+
+  <footer class="pie">
+    <div class="envoltura">
+      <div class="pie__marca">
+        <span class="logo-dg logo-dg--pie">
+          <span class="logo-dg__texto">Differentissgood</span>
+          <svg class="logo-dg__ola" viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 C15 2,30 12,45 7 C60 2,75 12,90 7 C100 4,110 9,120 6"/></svg>
+          <span class="logo-dg__lema">una perspectiva differente</span>
+        </span>
+      </div>
+      <p class="pie__firma">Barcelona · Diseñado por Differentissgood</p>
+    </div>
+  </footer>
+
+  <button class="volver-arriba" id="volver-arriba" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="data.js"></script>
+  <script>
+    const cuadricula = document.getElementById('cuadricula-completa');
+
+    // Orden fijo: parejas, detalles, grupo y luego el resto de categorías.
+    const ordenadas = [...PORTFOLIO].sort((a, b) =>
+      ORDEN_CATEGORIAS_COMPLETO.indexOf(a.categoria) - ORDEN_CATEGORIAS_COMPLETO.indexOf(b.categoria));
+
+    cuadricula.innerHTML = ordenadas.map(({ archivo, categoria }) => `
+      <figure>
+        <img src="media/fotos/${archivo}" alt="Foto de boda — ${CATEGORIAS[categoria]}" loading="lazy" data-archivo="${archivo}">
+        <div class="hueco" hidden>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg>
+          <p>Foto pendiente</p>
+          <small>Sube <code>${archivo}</code> a <code>media/fotos/</code></small>
+        </div>
+      </figure>`).join('');
+
+    document.querySelectorAll('.cuadricula-completa img').forEach((img) => {
+      const hueco = img.nextElementSibling;
+      hueco.hidden = true;
+      img.addEventListener('error', () => { img.style.display = 'none'; hueco.hidden = false; });
+    });
+
+    document.querySelector('.menu__abrir').addEventListener('click', () => { document.getElementById('menu-movil').hidden = false; });
+    document.getElementById('menu-movil-cerrar').addEventListener('click', () => { document.getElementById('menu-movil').hidden = true; });
+
+    const botonArriba = document.getElementById('volver-arriba');
+    addEventListener('scroll', () => botonArriba.classList.toggle('visible', window.scrollY > 500), { passive: true });
+    botonArriba.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    document.querySelectorAll('.sube').forEach((el) => el.classList.add('visible'));
+  </script>
+</body>
+</html>
