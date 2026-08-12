@@ -163,6 +163,7 @@ p { margin: 0 0 1em; }
   justify-content: center; gap: 8px; background: var(--fondo-2); color: var(--texto-suave);
   text-align: center; padding: 24px; border-radius: inherit;
 }
+.hueco-foto[hidden], .hueco[hidden] { display: none; }
 .hueco-foto svg, .hueco svg { width: 40px; height: 40px; stroke: var(--acento); stroke-width: 2; fill: none; }
 .hueco-foto p, .hueco p { margin: 0; font-weight: 600; color: var(--texto); }
 .hueco-foto small, .hueco small { font-size: .8rem; }
