@@ -21,11 +21,12 @@
     <nav class="menu" aria-label="Secciones">
       <a href="index.html#quienes-somos">Quiénes somos</a>
       <a href="portfolio.html" aria-current="true">Portfolio</a>
+      <a href="index.html#presupuesto">Presupuesto</a>
       <a href="index.html#video">Vídeo</a>
       <a href="blog.html">Blog</a>
       <a href="index.html#contacto">Contacto</a>
     </nav>
-    <a href="index.html#contacto" class="btn btn--solido btn--peque">Pide presupuesto</a>
+    <a href="index.html#presupuesto" class="btn btn--solido btn--peque">Pide presupuesto</a>
     <button class="menu__abrir" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú">
       <span></span><span></span>
     </button>
@@ -35,6 +36,7 @@
     <button class="menu-movil__x" id="menu-movil-cerrar" aria-label="Cerrar menú">×</button>
     <a href="index.html#quienes-somos">Quiénes somos</a>
     <a href="portfolio.html">Portfolio</a>
+    <a href="index.html#presupuesto">Presupuesto</a>
     <a href="index.html#video">Vídeo</a>
     <a href="blog.html">Blog</a>
     <a href="index.html#contacto" class="destacado">Contacto</a>
@@ -45,11 +47,10 @@
       <a class="volver-portfolio" href="index.html#portfolio">← Volver al inicio</a>
       <div class="seccion__cab sube">
         <p class="etiqueta">Portfolio completo</p>
-        <h2>Todas las bodas, por categoría</h2>
+        <h2>Todas las bodas</h2>
       </div>
     </div>
 
-    <div class="filtro-categorias" id="filtro-categorias"></div>
     <div class="cuadricula-completa" id="cuadricula-completa"></div>
   </main>
 
@@ -66,16 +67,14 @@
 
   <script src="data.js"></script>
   <script>
-    const filtro = document.getElementById('filtro-categorias');
     const cuadricula = document.getElementById('cuadricula-completa');
 
-    const todas = [{ slug: 'todas', nombre: 'Todas' }, ...Object.entries(CATEGORIAS).map(([slug, nombre]) => ({ slug, nombre }))];
+    // Orden fijo: parejas, detalles, grupo y luego el resto de categorías.
+    const ordenadas = [...PORTFOLIO].sort((a, b) =>
+      ORDEN_CATEGORIAS_COMPLETO.indexOf(a.categoria) - ORDEN_CATEGORIAS_COMPLETO.indexOf(b.categoria));
 
-    filtro.innerHTML = todas.map(({ slug, nombre }, i) => `
-      <button type="button" data-cat="${slug}" aria-pressed="${i === 0}">${nombre}</button>`).join('');
-
-    cuadricula.innerHTML = PORTFOLIO.map(({ archivo, categoria }) => `
-      <figure data-cat="${categoria}">
+    cuadricula.innerHTML = ordenadas.map(({ archivo, categoria }) => `
+      <figure>
         <img src="media/fotos/${archivo}" alt="Foto de boda — ${CATEGORIAS[categoria]}" loading="lazy" data-archivo="${archivo}">
         <div class="hueco" hidden>
           <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg>
@@ -88,16 +87,6 @@
       const hueco = img.nextElementSibling;
       hueco.hidden = true;
       img.addEventListener('error', () => { img.style.display = 'none'; hueco.hidden = false; });
-    });
-
-    filtro.addEventListener('click', (e) => {
-      const boton = e.target.closest('button');
-      if (!boton) return;
-      filtro.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === boton)));
-      const cat = boton.dataset.cat;
-      cuadricula.querySelectorAll('figure').forEach((f) => {
-        f.classList.toggle('oculta', cat !== 'todas' && f.dataset.cat !== cat);
-      });
     });
 
     document.querySelector('.menu__abrir').addEventListener('click', () => { document.getElementById('menu-movil').hidden = false; });

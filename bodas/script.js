@@ -155,19 +155,108 @@ function heroSlideshow() {
 }
 
 /* ---------------------------------------------------------
-   Portfolio: selección destacada en la portada (masonry)
+   Portfolio: selección destacada en la portada (bento)
    --------------------------------------------------------- */
 
 function pintarPortfolioDestacado() {
   const cont = $('#portfolio-destacado');
   if (!cont || typeof PORTFOLIO_DESTACADO === 'undefined') return;
 
-  cont.innerHTML = PORTFOLIO_DESTACADO.map((archivo, i) => `
+  const piezas = PORTFOLIO_DESTACADO.map((archivo) => `
     <figure class="portfolio__pieza sube">
       <img src="media/fotos/${archivo}" alt="Foto de boda" loading="lazy">
       ${huecoSvg(archivo)}
     </figure>`).join('');
+
+  const cta = `
+    <a class="portfolio__cta sube" href="portfolio.html">
+      <img src="media/fotos/${PORTFOLIO_DESTACADO[PORTFOLIO_DESTACADO.length - 1]}" alt="" loading="lazy">
+      <span class="portfolio__cta__texto">
+        <p>Todas las bodas</p>
+        <span>Ver portfolio completo →</span>
+      </span>
+    </a>`;
+
+  cont.innerHTML = piezas + cta;
   protegerImagenes(cont);
+}
+
+/* ---------------------------------------------------------
+   Presupuesto: servicios seleccionables + envío por WhatsApp
+   --------------------------------------------------------- */
+
+function pintarServicios() {
+  const fila = $('#servicios-fila');
+  if (!fila || typeof SERVICIOS === 'undefined') return;
+
+  fila.innerHTML = SERVICIOS.map(({ id, nombre, detalles }) => `
+    <label class="servicio-carta sube">
+      <input type="checkbox" name="servicio" value="${nombre}" id="servicio-${id}">
+      <span>
+        <h3>${nombre}</h3>
+        <ul>${detalles.map((d) => `<li>${d}</li>`).join('')}</ul>
+      </span>
+    </label>`).join('');
+}
+
+function formularioPresupuesto() {
+  const form = $('#formulario-presupuesto');
+  const aviso = $('#aviso-presupuesto');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const elegidos = $$('input[name="servicio"]:checked', form).map((el) => el.value);
+
+    if (!elegidos.length) {
+      aviso.textContent = 'Marca al menos un servicio para pedir presupuesto';
+      aviso.dataset.estado = 'error';
+      return;
+    }
+
+    const mensaje = [
+      '¡Hola Differentissgood! Nos gustaría pedir presupuesto para nuestra boda 💍',
+      '',
+      'Nos interesa:',
+      ...elegidos.map((s) => `• ${s}`),
+    ].join('\n');
+
+    const url = `https://wa.me/${WHATSAPP_POR_DEFECTO}?text=${encodeURIComponent(mensaje)}`;
+    const ventana = window.open(url, '_blank', 'noopener');
+    if (!ventana || ventana.closed) { location.href = url; return; }
+
+    aviso.textContent = 'Se ha abierto WhatsApp con vuestra selección. Pulsa enviar para que nos llegue.';
+    aviso.dataset.estado = 'ok';
+  });
+}
+
+/* ---------------------------------------------------------
+   Otros servicios: tarjetas que rotan sus fotos cada 2 s
+   --------------------------------------------------------- */
+
+function otrosServicios() {
+  const fila = $('#otros-servicios-fila');
+  if (!fila || typeof OTROS_SERVICIOS === 'undefined') return;
+
+  fila.innerHTML = OTROS_SERVICIOS.map(({ id, nombre, fotos }) => `
+    <div class="servicio-visual sube" data-servicio="${id}">
+      ${fotos.length
+        ? fotos.map((archivo, i) => `<img src="media/fotos/${archivo}" alt="${nombre}" loading="lazy" class="${i === 0 ? 'activa' : ''}">`).join('')
+        : `<div class="hueco"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg><p>Próximamente</p><small>Añade fotos en <code>OTROS_SERVICIOS</code></small></div>`}
+      <span class="servicio-visual__etiqueta">${nombre}</span>
+    </div>`).join('');
+
+  $$('.servicio-visual', fila).forEach((tarjeta) => {
+    const imgs = $$('img', tarjeta);
+    if (imgs.length < 2) return;
+    let actual = 0;
+    setInterval(() => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      imgs[actual].classList.remove('activa');
+      actual = (actual + 1) % imgs.length;
+      imgs[actual].classList.add('activa');
+    }, 2000);
+  });
 }
 
 /* ---------------------------------------------------------
@@ -318,7 +407,9 @@ function formularioWhatsApp() {
 
 heroSlideshow();
 pintarPortfolioDestacado();
+pintarServicios();
 pintarVideo();
+otrosServicios();
 pintarBlog();
 opinionesCarrusel();
 avisoProvisional();
@@ -327,4 +418,5 @@ menuMovil();
 menuActivo();
 volverArriba();
 formularioWhatsApp();
+formularioPresupuesto();
 animarEntradas();

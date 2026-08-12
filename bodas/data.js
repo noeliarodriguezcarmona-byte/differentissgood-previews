@@ -79,12 +79,80 @@ const PORTFOLIO = [
   { archivo: 'boda-59.jpg', categoria: 'anillos' },
 ];
 
-// Selección curada para la portada del portfolio (vista previa, no todas).
+// Selección curada para la portada del portfolio (composición tipo bento:
+// una foto grande, varias medianas y una tarjeta de "ver todo" al final).
 const PORTFOLIO_DESTACADO = [
   'boda-13.jpg', 'boda-32.jpg', 'boda-08.jpg', 'boda-37.jpg',
   'boda-47.jpg', 'boda-02.jpg', 'boda-58.jpg', 'boda-33.jpg',
-  'boda-09.jpg', 'boda-45.jpg', 'boda-06.jpg', 'boda-40.jpg',
 ];
 
-// Las 4 imágenes de la portada, en este orden exacto.
-const FOTOS_HERO = ['boda-06.jpg', 'boda-32.jpg', 'boda-58.jpg', 'boda-13.jpg'];
+// Las imágenes de la portada, en este orden exacto: primero las 4 elegidas,
+// luego las 3 añadidas después.
+const FOTOS_HERO = [
+  'boda-06.jpg', 'boda-32.jpg', 'boda-58.jpg', 'boda-13.jpg',
+  'boda-40.jpg', 'boda-21.jpg', 'boda-42.jpg',
+];
+
+// Orden en el portfolio completo: primero parejas, luego detalles, luego
+// grupo, y el resto de categorías después, en este orden.
+const ORDEN_CATEGORIAS_COMPLETO = [
+  'parejas', 'detalles', 'grupo', 'familia', 'flores', 'anillos',
+  'paisajes', 'mascotas', 'momentos', 'celebracion',
+];
+
+/* ---------------------------------------------------------
+   Presupuesto: servicios que el cliente puede marcar.
+   ---------------------------------------------------------
+   Añadir/editar un servicio: modifica este array. "detalles" es
+   la lista corta que aparece bajo cada uno.
+   --------------------------------------------------------- */
+const SERVICIOS = [
+  {
+    id: 'foto',
+    nombre: 'Reportaje de fotografía',
+    detalles: [
+      'Fotografías editadas en alta resolución',
+      'Entrega en una galería/web personalizada y exclusiva para vosotros',
+    ],
+  },
+  {
+    id: 'foto-video',
+    nombre: 'Reportaje de fotografía + vídeo',
+    detalles: [
+      'Fotografías editadas en alta resolución',
+      'Vídeo largo (20-25 min aprox.) + videoclip (2-3 min)',
+      'Entre 800 y 1000 fotografías en una boda completa',
+      'Entrega en una galería/web personalizada y exclusiva para vosotros',
+      'Álbum personalizado con vuestros nombres',
+    ],
+  },
+  {
+    id: 'pre-post',
+    nombre: 'Reportaje antes o después de la boda',
+    detalles: [
+      'Sesión adicional fuera del día de la boda',
+      'Fotos incluidas en pendrive',
+    ],
+  },
+  {
+    id: 'dron',
+    nombre: 'Reportaje completo desde el aire',
+    detalles: [
+      'Grabación desde 45 min antes de la ceremonia hasta el final del aperitivo',
+      'Solicitamos el permiso de vuelo el día de la boda',
+      'Licencia de piloto y seguro de Responsabilidad Civil incluidos',
+    ],
+  },
+];
+
+/* ---------------------------------------------------------
+   Otros servicios (aparte de bodas): tarjetas que rotan sus
+   fotos cada 2 s. "fotos" vacío = tarjeta "próximamente".
+   --------------------------------------------------------- */
+const OTROS_SERVICIOS = [
+  { id: 'retrato', nombre: 'Retrato', fotos: ['boda-01.jpg', 'boda-18.jpg', 'boda-36.jpg'] },
+  { id: 'eventos', nombre: 'Eventos', fotos: ['boda-38.jpg', 'boda-45.jpg', 'boda-51.jpg'] },
+  { id: 'gastronomia', nombre: 'Gastronomía', fotos: [] },
+  { id: 'beauty', nombre: 'Beauty', fotos: [] },
+  { id: 'producto', nombre: 'Producto / Ecommerce', fotos: [] },
+];
