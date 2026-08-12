@@ -106,7 +106,7 @@
   <div class="escenario">
     <div class="historia" id="historia">
       <figure class="historia__foto" style="margin:0;">
-        <img id="historia-img" src="media/portada.jpg" alt="">
+        <img id="historia-img" src="media/fotos/boda-13.jpg" alt="">
         <div class="hueco" id="historia-hueco" hidden>
           <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg>
           <p>Falta esta foto</p>
@@ -144,19 +144,21 @@
       cualquiera de las fotos que hayas subido a <code>bodas/media/fotos/</code>.</p>
   </div>
 
+  <script src="data.js"></script>
+  <script src="blog/posts.js"></script>
   <script src="script.js"></script>
   <script>
-    // Lista de fotos disponibles para la plantilla: se toma de la misma lista
-    // que usa la galería (definida en script.js).
+    // Lista de fotos disponibles para la plantilla: se toma del portfolio
+    // completo (definido en data.js).
     (function () {
       const selector = document.getElementById('selector-foto');
       const img = document.getElementById('historia-img');
       const hueco = document.getElementById('historia-hueco');
 
-      const opciones = ['portada.jpg', ...FOTOS_GALERIA];
+      const opciones = PORTFOLIO.map((p) => p.archivo);
       opciones.forEach((nombre) => {
         const op = document.createElement('option');
-        op.value = `media/${nombre === 'portada.jpg' ? '' : 'fotos/'}${nombre}`;
+        op.value = `media/fotos/${nombre}`;
         op.textContent = nombre;
         selector.appendChild(op);
       });

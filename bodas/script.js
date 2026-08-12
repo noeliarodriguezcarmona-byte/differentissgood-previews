@@ -1,29 +1,15 @@
 /* =========================================================
-   Differentissgood · Bodas
-   Movimiento al hacer scroll · menú · galería y vídeos ·
-   formulario a WhatsApp · compartir enlace
+   Differentissgood · Bodas — index.html
+   Slideshow de portada · scroll reveal · portfolio · vídeo ·
+   blog · opiniones · volver arriba · formulario a WhatsApp
    ========================================================= */
 
-const WHATSAPP_POR_DEFECTO = '34620004434';   // cambia esto por el número real
+const WHATSAPP_POR_DEFECTO = '34620004434';
 const CLAVE_AVISO = 'differentissgood-bodas:aviso-oculto';
+const YOUTUBE_ID = 'QNSZ45aThLs';
 
 const $  = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
-
-/* ---------------------------------------------------------
-   Fotos y vídeos del reportaje: añade o quita nombres de
-   archivo aquí según lo que subas a bodas/media/.
-   La galería y la plantilla de Historias leen esta misma lista.
-   --------------------------------------------------------- */
-
-const FOTOS_GALERIA = Array.from({ length: 59 }, (_, i) => `boda-${String(i + 1).padStart(2, '0')}.jpg`);
-
-// Índices (empezando en 0) de las fotos que ocupan doble ancho en la cuadrícula.
-const FOTOS_ANCHAS = [2, 11, 20, 29, 38, 47, 56];
-
-const VIDEOS_GALERIA = [
-  { youtube: 'QNSZ45aThLs', titulo: 'Highlight de boda' },
-];
 
 /* ---------------------------------------------------------
    Entrada al hacer scroll: cada bloque sube al asomar
@@ -46,7 +32,7 @@ function animarEntradas() {
       setTimeout(() => entrada.target.classList.add('visible'), retraso);
       observador.unobserve(entrada.target);
     });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: .12 });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: .12 });
 
   bloques.forEach((b) => observador.observe(b));
 }
@@ -65,29 +51,27 @@ function cabecera() {
 
 function menuMovil() {
   const boton = $('.menu__abrir');
+  const cerrar = $('#menu-movil-cerrar');
   const menu  = $('#menu-movil');
   if (!boton || !menu) return;
 
-  const alternar = (abrir) => {
-    boton.setAttribute('aria-expanded', String(abrir));
-    menu.hidden = !abrir;
-  };
+  const alternar = (abrir) => { boton.setAttribute('aria-expanded', String(abrir)); menu.hidden = !abrir; };
 
-  boton.addEventListener('click', () => alternar(menu.hidden));
+  boton.addEventListener('click', () => alternar(true));
+  cerrar?.addEventListener('click', () => alternar(false));
   menu.addEventListener('click', (e) => { if (e.target.tagName === 'A') alternar(false); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape') alternar(false); });
 }
 
 function menuActivo() {
-  const enlaces = $$('.menu a');
+  const enlaces = $$('.menu a[href^="#"]');
   const secciones = enlaces.map((a) => $(a.getAttribute('href'))).filter(Boolean);
   if (!secciones.length || !('IntersectionObserver' in window)) return;
 
   const observador = new IntersectionObserver((entradas) => {
     entradas.forEach((entrada) => {
       if (!entrada.isIntersecting) return;
-      enlaces.forEach((a) => a.setAttribute('aria-current',
-        String(a.getAttribute('href') === `#${entrada.target.id}`)));
+      enlaces.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === `#${entrada.target.id}`)));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
 
@@ -108,99 +92,159 @@ function avisoProvisional() {
   });
 }
 
-/** Si la foto de portada no está todavía, se enseña su marco de cortesía en
-    vez del icono de imagen rota del navegador. */
-function fotoPortada() {
-  const foto = $('#foto-portada');
-  const hueco = $('#hueco-portada');
-  if (!foto || !hueco) return;
-  const faltar = () => { foto.style.display = 'none'; hueco.hidden = false; };
-  if (foto.complete && foto.naturalWidth === 0) faltar();
-  foto.addEventListener('error', faltar);
-}
-
-/* ---------------------------------------------------------
-   Galería: genera la cuadrícula a partir de FOTOS_GALERIA,
-   con marco de cortesía para las fotos que aún no se han subido.
-   --------------------------------------------------------- */
-
-function huecoSvg(nombreArchivo) {
+function huecoSvg(nombreArchivo, carpeta = 'media/fotos/') {
   return `
-    <div class="hueco">
+    <div class="hueco" hidden>
       <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg>
       <p>Foto pendiente</p>
-      <small>Sube <code>${nombreArchivo}</code> a <code>bodas/media/fotos/</code></small>
+      <small>Sube <code>${nombreArchivo}</code> a <code>bodas/${carpeta}</code></small>
     </div>`;
 }
 
-function pintarGaleria() {
-  const cuadricula = $('#cuadricula-galeria');
-  if (!cuadricula) return;
+function protegerImagenes(raiz) {
+  $$('img', raiz).forEach((img) => {
+    const hueco = img.nextElementSibling;
+    if (!hueco || !hueco.classList.contains('hueco')) return;
+    hueco.hidden = true;
+    img.addEventListener('error', () => { img.style.display = 'none'; hueco.hidden = false; });
+  });
+}
 
-  cuadricula.innerHTML = FOTOS_GALERIA.map((archivo, i) => `
-    <figure class="galeria__pieza sube${FOTOS_ANCHAS.includes(i) ? ' galeria__pieza--ancha' : ''}">
-      <img src="media/fotos/${archivo}" alt="Foto de boda ${i + 1}" loading="lazy" data-archivo="${archivo}">
+/* ---------------------------------------------------------
+   Portada: slideshow automático de FOTOS_HERO
+   --------------------------------------------------------- */
+
+function heroSlideshow() {
+  const contenedor = $('#hero-diapositivas');
+  const puntos = $('#hero-puntos');
+  if (!contenedor || typeof FOTOS_HERO === 'undefined') return;
+
+  contenedor.innerHTML = FOTOS_HERO.map((archivo, i) => `
+    <figure class="hero__diapositiva${i === 0 ? ' activa' : ''}" style="margin:0;">
+      <img src="media/fotos/${archivo}" alt="Boda ${i + 1}" loading="${i === 0 ? 'eager' : 'lazy'}">
       ${huecoSvg(archivo)}
     </figure>`).join('');
+  protegerImagenes(contenedor);
 
-  $$('.galeria__pieza img', cuadricula).forEach((img) => {
-    const hueco = img.nextElementSibling;
-    const faltar = () => { img.style.display = 'none'; hueco.hidden = false; };
-    hueco.hidden = true;
-    img.addEventListener('error', faltar);
-  });
-}
+  puntos.innerHTML = FOTOS_HERO.map((_, i) => `<button type="button" aria-current="${i === 0}" aria-label="Foto ${i + 1}"></button>`).join('');
 
-/* ---------------------------------------------------------
-   Vídeos: genera la fila a partir de VIDEOS_GALERIA
-   --------------------------------------------------------- */
+  const diapositivas = $$('.hero__diapositiva', contenedor);
+  const botones = $$('button', puntos);
+  let actual = 0;
+  let temporizador;
 
-function pintarVideos() {
-  const fila = $('#fila-videos');
-  if (!fila) return;
+  function mostrar(i) {
+    diapositivas[actual].classList.remove('activa');
+    botones[actual].setAttribute('aria-current', 'false');
+    actual = i;
+    diapositivas[actual].classList.add('activa');
+    botones[actual].setAttribute('aria-current', 'true');
+  }
 
-  fila.innerHTML = VIDEOS_GALERIA.map(({ archivo, youtube, titulo }) => youtube ? `
-    <figure class="video sube">
-      <iframe src="https://www.youtube-nocookie.com/embed/${youtube}" title="${titulo}"
-              loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen style="width:100%;height:100%;border:0;"></iframe>
-      <figcaption>${titulo}</figcaption>
-    </figure>` : `
-    <figure class="video sube">
-      <video src="media/videos/${archivo}" controls preload="metadata" playsinline data-archivo="${archivo}"></video>
-      <figcaption>${titulo}</figcaption>
-      <div class="hueco" hidden>
-        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 12h32v24H8z"/><path d="m20 20 10 6-10 6Z"/></svg>
-        <p>Vídeo pendiente</p>
-        <small>Sube <code>${archivo}</code> a <code>bodas/media/videos/</code></small>
-      </div>
-    </figure>`).join('');
+  function siguiente() { mostrar((actual + 1) % diapositivas.length); }
 
-  $$('.video video', fila).forEach((video) => {
-    const hueco = video.parentElement.querySelector('.hueco');
-    video.addEventListener('error', () => { video.style.display = 'none'; hueco.hidden = false; });
-  });
-}
-
-/* ---------------------------------------------------------
-   Compartir: copiar el enlace del portfolio
-   --------------------------------------------------------- */
-
-function compartir() {
-  const boton = $('#btn-copiar');
-  const enlace = $('#enlace-portfolio');
-  const aviso = $('#copiado-aviso');
-  if (!boton || !enlace) return;
-
-  boton.addEventListener('click', async () => {
-    const texto = enlace.textContent.trim();
-    try {
-      await navigator.clipboard.writeText(texto);
-      aviso.textContent = 'Enlace copiado. Ya puedes pegarlo en tu historia de Instagram.';
-    } catch {
-      aviso.textContent = 'No se ha podido copiar automáticamente: copia el enlace de arriba a mano.';
+  function reiniciar() {
+    clearInterval(temporizador);
+    if (diapositivas.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      temporizador = setInterval(siguiente, 3000);
     }
-  });
+  }
+
+  botones.forEach((b, i) => b.addEventListener('click', () => { mostrar(i); reiniciar(); }));
+  reiniciar();
+}
+
+/* ---------------------------------------------------------
+   Portfolio: selección destacada en la portada (masonry)
+   --------------------------------------------------------- */
+
+function pintarPortfolioDestacado() {
+  const cont = $('#portfolio-destacado');
+  if (!cont || typeof PORTFOLIO_DESTACADO === 'undefined') return;
+
+  cont.innerHTML = PORTFOLIO_DESTACADO.map((archivo, i) => `
+    <figure class="portfolio__pieza sube">
+      <img src="media/fotos/${archivo}" alt="Foto de boda" loading="lazy">
+      ${huecoSvg(archivo)}
+    </figure>`).join('');
+  protegerImagenes(cont);
+}
+
+/* ---------------------------------------------------------
+   Vídeo: incrusta el vídeo de YouTube
+   --------------------------------------------------------- */
+
+function pintarVideo() {
+  const marco = $('#video-marco');
+  if (!marco) return;
+  marco.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${YOUTUBE_ID}" title="Highlight de boda"
+    loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>`;
+}
+
+/* ---------------------------------------------------------
+   Blog: últimas 3 entradas en portada
+   --------------------------------------------------------- */
+
+function pintarBlog() {
+  const fila = $('#blog-fila');
+  if (!fila || typeof POSTS === 'undefined') return;
+
+  const ultimas = [...POSTS].sort((a, b) => b.fecha.localeCompare(a.fecha)).slice(0, 3);
+  fila.innerHTML = ultimas.map(({ slug, titulo, fecha, resumen, foto }) => `
+    <a class="tarjeta-post sube" href="blog/post.html?post=${slug}">
+      <figure class="tarjeta-post__foto">
+        <img src="${foto}" alt="${titulo}" loading="lazy">
+      </figure>
+      <p class="tarjeta-post__fecha">${new Date(fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+      <h3>${titulo}</h3>
+      <p class="tarjeta-post__resumen">${resumen}</p>
+    </a>`).join('');
+}
+
+/* ---------------------------------------------------------
+   Opiniones: carrusel que muestra una detrás de otra
+   --------------------------------------------------------- */
+
+function opinionesCarrusel() {
+  const carrusel = $('#opiniones-carrusel');
+  const puntosCont = $('#opiniones-puntos');
+  if (!carrusel || !puntosCont) return;
+
+  const slides = $$('.opinion-slide', carrusel);
+  puntosCont.innerHTML = slides.map((_, i) => `<button type="button" aria-current="${i === 0}" aria-label="Opinión ${i + 1}"></button>`).join('');
+  const puntos = $$('button', puntosCont);
+  let actual = 0;
+  let temporizador;
+
+  function mostrar(i) {
+    slides[actual].classList.remove('activa');
+    puntos[actual].setAttribute('aria-current', 'false');
+    actual = i;
+    slides[actual].classList.add('activa');
+    puntos[actual].setAttribute('aria-current', 'true');
+  }
+
+  function reiniciar() {
+    clearInterval(temporizador);
+    if (slides.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      temporizador = setInterval(() => mostrar((actual + 1) % slides.length), 5000);
+    }
+  }
+
+  puntos.forEach((b, i) => b.addEventListener('click', () => { mostrar(i); reiniciar(); }));
+  reiniciar();
+}
+
+/* ---------------------------------------------------------
+   Botón volver arriba
+   --------------------------------------------------------- */
+
+function volverArriba() {
+  const boton = $('#volver-arriba');
+  if (!boton) return;
+  addEventListener('scroll', () => boton.classList.toggle('visible', window.scrollY > 600), { passive: true });
+  boton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
 }
 
 /* ---------------------------------------------------------
@@ -219,10 +263,7 @@ function formularioWhatsApp() {
   ];
   const consiento = $('#f-consiento');
 
-  const decir = (texto, estado) => {
-    aviso.textContent = texto;
-    aviso.dataset.estado = estado;
-  };
+  const decir = (texto, estado) => { aviso.textContent = texto; aviso.dataset.estado = estado; };
 
   const mensaje = () => [
     '¡Hola Differentissgood! Nos gustaría pedir presupuesto para nuestra boda 💍',
@@ -275,13 +316,15 @@ function formularioWhatsApp() {
    Arranque
    --------------------------------------------------------- */
 
-pintarGaleria();
-pintarVideos();
-fotoPortada();
+heroSlideshow();
+pintarPortfolioDestacado();
+pintarVideo();
+pintarBlog();
+opinionesCarrusel();
 avisoProvisional();
 cabecera();
 menuMovil();
 menuActivo();
-compartir();
+volverArriba();
 formularioWhatsApp();
 animarEntradas();
