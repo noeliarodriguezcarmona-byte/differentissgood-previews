@@ -351,6 +351,25 @@ input[type="file"]::file-selector-button{
 <div class="fondo" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="grano" aria-hidden="true"></div>
 
+<div class="velo abierto" id="puerta">
+  <div class="velo__caja">
+    <div id="puerta-formulario">
+      <h3>Antes de empezar</h3>
+      <p>Introduce el código de cliente que te hemos dado por email o WhatsApp al firmar tu contrato.</p>
+      <input type="text" id="puerta-input" placeholder="Ej: DIG-2026-001" style="width:100%;margin-top:14px;text-align:center;text-transform:uppercase;" autocomplete="off">
+      <p class="velo__error" id="puerta-error" style="display:none;">Escribe tu código de cliente para continuar.</p>
+      <div class="velo__acciones">
+        <button type="button" class="principal" id="puerta-continuar">Continuar</button>
+      </div>
+    </div>
+    <div id="puerta-repetido" style="display:none;">
+      <div class="tic">✓</div>
+      <h3>Ya hemos recibido tu cuestionario</h3>
+      <p>Con este código ya nos llegaron tus respuestas. Si necesitas cambiar algo, escríbenos directamente y lo vemos juntos.</p>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
 
   <header>
@@ -1025,6 +1044,44 @@ input[type="file"]::file-selector-button{
 (function(){
   'use strict';
 
+  /* ==================================================================
+     PUERTA DE ENTRADA — código de cliente
+     Nada se muestra hasta que se introduce el código de referencia
+     que Differentissgood le ha dado al cliente al firmar el contrato.
+     Si ese código ya envió un cuestionario antes (en este navegador),
+     no se le vuelve a mostrar el formulario.
+     ================================================================== */
+  var LLAVE_COMPLETADOS = 'cuestionario-differentissgood-completados';
+  var codigoCliente = '';
+  var puerta = document.getElementById('puerta');
+  var puertaInput = document.getElementById('puerta-input');
+  var puertaError = document.getElementById('puerta-error');
+
+  function codigosCompletados(){
+    try{ return JSON.parse(localStorage.getItem(LLAVE_COMPLETADOS) || '[]'); }
+    catch(e){ return []; }
+  }
+  function marcarCompletado(codigo){
+    try{
+      var lista = codigosCompletados();
+      if(lista.indexOf(codigo) === -1){ lista.push(codigo); localStorage.setItem(LLAVE_COMPLETADOS, JSON.stringify(lista)); }
+    }catch(e){ /* modo privado: no pasa nada, solo no recordará este código */ }
+  }
+  document.getElementById('puerta-continuar').addEventListener('click', function(){
+    var valor = puertaInput.value.trim().toUpperCase();
+    if(!valor){ puertaError.textContent = 'Escribe tu código de cliente para continuar.'; puertaError.style.display = 'block'; return; }
+    if(codigosCompletados().indexOf(valor) > -1){
+      document.getElementById('puerta-formulario').style.display = 'none';
+      document.getElementById('puerta-repetido').style.display = 'block';
+      return;
+    }
+    codigoCliente = valor;
+    puerta.classList.remove('abierto');
+  });
+  puertaInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('puerta-continuar').click(); }
+  });
+
   var barra = document.getElementById('barra');
   var pct = document.getElementById('porcentaje');
 
@@ -1425,7 +1482,8 @@ input[type="file"]::file-selector-button{
 
   /* ---------- Texto de respaldo / cuerpo del correo ---------- */
   function comoTexto(envio, respuestas, archivos){
-    var t = 'CUESTIONARIO DIFFERENTISSGOOD\nReferencia: ' + envio +
+    var t = 'CUESTIONARIO DIFFERENTISSGOOD\nCódigo de cliente: ' + codigoCliente +
+            '\nReferencia: ' + envio +
             '\nFecha: ' + new Date().toLocaleString('es-ES') + '\n\n';
     var bloque = null;
     respuestas.forEach(function(r){
@@ -1511,9 +1569,9 @@ input[type="file"]::file-selector-button{
     enviando = true;
     pantallaProgreso();
 
-    // La referencia lleva la fecha delante y el nombre del negocio detrás
+    // La referencia lleva el código de cliente delante, luego la fecha y el nombre del negocio
     var negocio = (formulario.querySelector('[name="Nombre del negocio"]') || {}).value || 'cliente';
-    var envio = new Date().toISOString().slice(0,10) + '-' + ruta(negocio);
+    var envio = (codigoCliente ? codigoCliente + '_' : '') + new Date().toISOString().slice(0,10) + '-' + ruta(negocio);
 
     var respuestas = recogerRespuestas();
     var archivos = recogerArchivos();
@@ -1523,7 +1581,8 @@ input[type="file"]::file-selector-button{
 
     conReintentos(function(){
       var datos = new FormData();
-      datos.append('_subject', 'Cuestionario · ' + negocio);
+      datos.append('_subject', 'Cuestionario · ' + (codigoCliente ? codigoCliente + ' · ' : '') + negocio);
+      datos.append('Código de cliente', codigoCliente);
       datos.append('Referencia', envio);
       datos.append('Respuestas completas', texto);
       archivos.forEach(function(a){
@@ -1549,6 +1608,7 @@ input[type="file"]::file-selector-button{
     }).then(function(){
       progreso(100, 'Listo');
       pantallaHecho(envio, archivos);
+      marcarCompletado(codigoCliente);
       enviando = false;
     }).catch(function(e){
       enviando = false;
