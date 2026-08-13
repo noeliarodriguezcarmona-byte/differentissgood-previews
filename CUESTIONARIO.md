@@ -5,7 +5,7 @@
 ## Cómo funciona
 
 1. El cliente rellena el cuestionario. Al enviarlo, **las respuestas te
-   llegan por correo** a `projectmanager@differentissgood.com` — sin fallos,
+   llegan por correo** a `info.differentissgood@gmail.com` — sin fallos,
    porque es solo texto y el texto nunca pesa demasiado.
 2. Si el cliente tiene fotos, logotipo o vídeos, en la misma pantalla de
    confirmación le sale un botón — **«Subir mis fotos y vídeos»** — que lo
@@ -52,7 +52,7 @@ rellena `data-archivos` con el enlace del paso 1:
 
 ```html
 <form id="cuestionario" novalidate
-      data-correo="projectmanager@differentissgood.com"
+      data-correo="info.differentissgood@gmail.com"
       data-archivos="https://www.dropbox.com/request/XXXXXXXXXX">
 ```
 
@@ -70,7 +70,7 @@ carpeta el cliente tiene que mandarte las fotos aparte.
 1. Rellena el cuestionario tú misma con un par de respuestas.
 2. Al enviarlo debe aparecer la pantalla «Respuestas recibidas» con el
    botón de subir archivos (si marcaste alguno) y su lista.
-3. Revisa que te llegue el correo a `projectmanager@differentissgood.com`.
+3. Revisa que te llegue el correo a `info.differentissgood@gmail.com`.
 
 ## Por qué es así de simple
 
