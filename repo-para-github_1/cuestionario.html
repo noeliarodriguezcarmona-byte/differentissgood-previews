@@ -94,6 +94,13 @@ header p{color:var(--muted);font-size:15px;max-width:520px;margin:18px auto 0;li
   border:1px solid var(--line);border-radius:20px;padding:2px 10px;
   font-size:11px;color:var(--tenue);
 }
+/* Los puntos del aviso van saliendo uno a uno al cargar la página */
+.aviso h3,.aviso p{opacity:0;transform:translateY(8px);animation:entra-punto .55s var(--curva) forwards;}
+.aviso h3{animation-delay:.05s;}
+.aviso p:nth-of-type(1){animation-delay:.25s;}
+.aviso p:nth-of-type(2){animation-delay:.45s;}
+.aviso p:nth-of-type(3){animation-delay:.65s;}
+@keyframes entra-punto{to{opacity:1;transform:none;}}
 
 /* ==========================================================================
    2. BLOQUES
@@ -360,10 +367,9 @@ input[type="file"]::file-selector-button{
 
   <div class="aviso">
     <h3>Antes de empezar, tres cosas</h3>
-    <p><b>1. Solo verás lo que te corresponde.</b> En cuanto elijas plan, se ocultan las preguntas de los demás. Cada bloque lleva escrito a qué plan pertenece
-      <span class="marca-ej">Incluido en todos los planes</span>.</p>
-    <p><b>2. Si un apartado no lo quieres en tu web</b>, marca abajo del bloque la casilla <b>«No lo quiero en mi web»</b>. Ese bloque se cierra y sus respuestas <b>no se envían</b>: no nos llega nada de ahí.</p>
-    <p><b>3. Cada foto va pegada a su pregunta</b> — el logotipo en «Logotipo», la foto de cada persona en su propia ficha, etc. Así sabemos exactamente qué es cada imagen, sin tener que renombrar nada. Se envían junto con tus respuestas, en el mismo correo.</p>
+    <p><b>Solo ves lo tuyo.</b> Al elegir plan, se ocultan las preguntas de los demás <span class="marca-ej">Incluido en todos los planes</span>.</p>
+    <p><b>Puedes descartar bloques.</b> Marca «No lo quiero en mi web» y ese bloque no se envía.</p>
+    <p><b>Cada foto va con su pregunta.</b> Se adjunta ahí mismo y llega junto con tus respuestas, en un solo correo.</p>
   </div>
 
     <!-- Lo único que hay que tocar en todo el archivo:
@@ -502,9 +508,10 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="impulso crecimiento elite">
       <div class="step-head">
         <span class="step-num">7</span>
-        <div><h2>Los textos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Textos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
+        <p class="step-sub">Nos referimos al contenido escrito que se lee en tu web: el titular de la portada, la descripción de cada servicio, la presentación del equipo, los textos de cada sección... Los textos legales (aviso legal, política de privacidad) van aparte, en el paso de Archivos.</p>
         <label class="field-label">¿Los tienes escritos?</label>
         <select name="Textos">
           <option value="" selected></option>
