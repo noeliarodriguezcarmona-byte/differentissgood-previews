@@ -166,6 +166,17 @@ select{
 select:invalid,select option[value=""]{color:var(--tenue);}
 ::placeholder{color:var(--tenue);}
 
+input[type="file"]{
+  width:100%;padding:11px 12px;border-radius:11px;border:1px dashed var(--line);
+  background:var(--card2);color:var(--tenue);font-family:'Inter',sans-serif;font-size:12.5px;
+  transition:border-color .3s ease;
+}
+input[type="file"]:hover{border-color:var(--orange);}
+input[type="file"]::file-selector-button{
+  margin-right:12px;padding:8px 14px;border-radius:100px;border:none;cursor:pointer;
+  background:var(--degradado);color:#231c14;font-weight:700;font-size:12.5px;font-family:'Inter',sans-serif;
+}
+
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(max-width:560px){.row2{grid-template-columns:1fr;}}
 
@@ -298,15 +309,7 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   border-radius:100px;padding:5px 13px;font-size:11.5px;cursor:pointer;font-family:'Inter',sans-serif;
 }
 .borrador button:hover{border-color:var(--orange);color:var(--orange);}
-/* --- Último paso: la carpeta donde deja los archivos --- */
 .velo__caja{max-height:88vh;overflow-y:auto;}
-.subir-btn{
-  display:block;width:100%;margin:20px 0 10px;padding:16px;
-  border-radius:100px;text-decoration:none;font-weight:700;font-size:15px;
-  background:var(--degradado);background-size:180% 180%;color:#231c14;
-  transition:background-position .6s ease,transform .3s ease,box-shadow .3s ease;
-}
-.subir-btn:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 14px 32px rgba(221,107,58,.28);}
 .lista-archivos{
   text-align:left;margin-top:18px;border:1px solid var(--line);
   border-radius:13px;background:var(--card2);
@@ -360,16 +363,13 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     <p><b>1. Solo verás lo que te corresponde.</b> En cuanto elijas plan, se ocultan las preguntas de los demás. Cada bloque lleva escrito a qué plan pertenece
       <span class="marca-ej">Incluido en todos los planes</span>.</p>
     <p><b>2. Si un apartado no lo quieres en tu web</b>, marca abajo del bloque la casilla <b>«No lo quiero en mi web»</b>. Ese bloque se cierra y sus respuestas <b>no se envían</b>: no nos llega nada de ahí.</p>
-    <p><b>3. Las fotos y los archivos van al final</b>, todos juntos. Cuando envíes esto se abre una carpeta donde los arrastras — sin registrarte en nada y sin límite de tamaño. Te decimos ahí mismo qué subir y con qué nombre.</p>
+    <p><b>3. Cada foto va pegada a su pregunta</b> — el logotipo en «Logotipo», la foto de cada persona en su propia ficha, etc. Así sabemos exactamente qué es cada imagen, sin tener que renombrar nada. Se envían junto con tus respuestas, en el mismo correo.</p>
   </div>
 
     <!-- Lo único que hay que tocar en todo el archivo:
-         data-correo   → a dónde llegan las respuestas
-         data-archivos → la carpeta donde el cliente deja fotos y vídeos
-                         (si se deja vacío, se le pide que los mande por correo) -->
+         data-correo → a dónde llegan las respuestas y los archivos adjuntos -->
     <form id="cuestionario" novalidate
-          data-correo="info.differentissgood@gmail.com"
-          data-archivos="https://www.dropbox.com/request/lasw8mtou979szxncmwp">
+          data-correo="info.differentissgood@gmail.com">
 
     <!-- ================= 1 · PLAN ================= -->
     <div class="step" data-planes="impulso crecimiento elite">
@@ -680,13 +680,9 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         <label class="field-label">Vídeos de clientes hablando de vosotros</label>
         <div class="hint">Si ya están colgados en Instagram, Drive o YouTube, pega los enlaces.</div>
         <textarea name="Enlaces a vídeos de testimonios" rows="2" placeholder="https://..."></textarea>
-        <label class="field-label">¿Tenéis vídeos guardados en el móvil o el ordenador?</label>
-        <select name="Tiene vídeos de testimonios">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
-        <div class="luego" style="margin-top:12px;"><span>Si has dicho que sí, los subes <b>al final</b>, en la carpeta que te abrimos al enviar. Pesen lo que pesen.</span></div>
+        <label class="field-label">¿Tenéis vídeos guardados en el móvil o el ordenador que aún no estén subidos a ningún sitio?</label>
+        <div class="hint">Súbelos a Google Drive o WeTransfer (gratis, sin cuenta) y pega aquí el enlace — los vídeos pesan demasiado para ir por correo.</div>
+        <input type="url" name="Enlace a vídeos sin subir" placeholder="https://...">
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -938,25 +934,42 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         <div><h2>Archivos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">Marca lo que tengas. Al enviar el cuestionario te abrimos una carpeta y te decimos exactamente qué subir y con qué nombre — incluidas las fotos del equipo y de cada servicio.</p>
+        <p class="step-sub">Sube aquí mismo lo que tengas — cada archivo va pegado a su etiqueta, así sabemos exactamente qué es sin tener que adivinarlo. Ideal por debajo de 8 MB por archivo; si algo pesa más (vídeos, muchas fotos juntas), mejor un enlace de Drive o WeTransfer.</p>
 
-        <div class="chip-grid">
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Logotipo"><span>Logotipo</span></label>
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Fotos del local"><span>Fotos del local</span></label>
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Fotos de trabajos"><span>Fotos de trabajos</span></label>
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Manual de marca"><span>Manual de marca</span></label>
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Textos ya escritos"><span>Textos ya escritos</span></label>
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Tipografías o iconos"><span>Tipografías o iconos</span></label>
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Catálogo de productos"><span>Catálogo de productos</span></label>
-          <label class="chip"><input type="checkbox" name="Material que tiene" value="Textos legales"><span>Textos legales</span></label>
-        </div>
+        <label class="field-label">Logotipo</label>
+        <div class="hint">Si puedes, el AI, SVG o PDF antes que un PNG: se ve nítido a cualquier tamaño.</div>
+        <input type="file" name="Logotipo" accept="image/*,.svg,.ai,.pdf,.eps">
 
-        <div class="luego" style="margin-top:16px;"><span>Del logotipo, si puedes, sube el <b>AI, SVG o PDF</b> antes que un PNG: se ve nítido a cualquier tamaño.</span></div>
+        <label class="field-label">Foto de portada <span style="font-weight:400;color:var(--tenue)">— la que sale de fondo en el inicio de la web</span></label>
+        <input type="file" name="Foto de portada" accept="image/*">
 
-        <label class="field-label">¿Hay algo más que nos quieras pasar?</label>
-        <textarea name="Otros archivos" rows="2" placeholder="Cuéntanos qué es y lo verás en la lista de la carpeta."></textarea>
+        <label class="field-label">Fotos del local</label>
+        <input type="file" name="Fotos del local" accept="image/*" multiple>
 
-        <label class="field-label">¿No tienes fotografía profesional?</label>
+        <label class="field-label">Fotos de trabajos ya hechos</label>
+        <input type="file" name="Fotos de trabajos" accept="image/*" multiple>
+
+        <label class="field-label">Manual de marca <span style="font-weight:400;color:var(--tenue)">— si lo tenéis</span></label>
+        <input type="file" name="Manual de marca" accept=".pdf,image/*">
+
+        <label class="field-label">Catálogo de productos</label>
+        <input type="file" name="Catálogo de productos" accept=".pdf,image/*" multiple>
+
+        <label class="field-label">Tipografías o iconos</label>
+        <input type="file" name="Tipografías o iconos" multiple>
+
+        <label class="field-label">Textos ya escritos</label>
+        <input type="file" name="Textos ya escritos" accept=".pdf,.doc,.docx,.txt">
+
+        <label class="field-label">Textos legales <span style="font-weight:400;color:var(--tenue)">— si ya tenéis algo redactado</span></label>
+        <input type="file" name="Textos legales" accept=".pdf,.doc,.docx" multiple>
+
+        <label class="field-label">¿Algo más que no encaje arriba, o que pese demasiado para adjuntar?</label>
+        <div class="hint">Sube aquí lo que sea (un archivo por ficha) o, si pesa mucho, pega un enlace de Drive o WeTransfer en el nombre.</div>
+        <div id="lista-otros-archivos"></div>
+        <button type="button" class="add-btn" onclick="añadirArchivoExtra()">+ Añadir otro archivo</button>
+
+        <label class="field-label" style="margin-top:16px;">¿No tienes fotografía profesional?</label>
         <select name="Necesita sesión de fotos">
           <option value="" selected></option>
           <option>Nos interesaría una sesión</option>
@@ -993,7 +1006,7 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     </div>
 
     <button type="submit" class="enviar">Enviar mi proyecto</button>
-    <p class="footnote">Al enviar te abrimos la carpeta donde dejas las fotos y los vídeos.<br>Los bloques que hayas marcado como «no lo quiero» no se envían.</p>
+    <p class="footnote">Los archivos que adjuntes van en el mismo correo que tus respuestas.<br>Los bloques que hayas marcado como «no lo quiero» no se envían.</p>
   </form>
 </div>
 
@@ -1009,7 +1022,7 @@ select:invalid,select option[value=""]{color:var(--tenue);}
   var pct = document.getElementById('porcentaje');
 
   /* ---------- Fichas repetibles ---------- */
-  var cuenta = {persona:0, servicio:0, faq:0, reserva:0};
+  var cuenta = {persona:0, servicio:0, faq:0, reserva:0, archivoExtra:0};
 
   function crear(lista, html){
     var d = document.createElement('div');
@@ -1035,11 +1048,7 @@ select:invalid,select option[value=""]{color:var(--tenue);}
       '<label class="field-label">Titulaciones y certificados</label>' +
       '<textarea name="Persona ' + n + ' · Certificados" rows="2"></textarea>' +
       '<label class="field-label">Fotografía de retrato <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>' +
-      '<select name="Persona ' + n + ' · Retrato">' +
-        '<option value="" selected></option>' +
-        '<option>Sí, la subo al final</option>' +
-        '<option>No queremos que aparezca</option>' +
-      '</select>');
+      '<input type="file" name="Persona ' + n + ' · Retrato" accept="image/*">');
   };
 
   window.añadirServicio = function(){
@@ -1055,12 +1064,16 @@ select:invalid,select option[value=""]{color:var(--tenue);}
         '<div><label class="field-label">Qué gana quien lo contrata</label><input type="text" name="Servicio ' + n + ' · Beneficio"></div>' +
       '</div>' +
       '<label class="field-label">Fotografía de este servicio o producto</label>' +
-      '<select name="Servicio ' + n + ' · Fotos">' +
-        '<option value="" selected></option>' +
-        '<option>Sí, la subo al final</option>' +
-        '<option>No tenemos foto todavía</option>' +
-      '</select>' +
-      '<div class="luego" style="margin-top:10px;"><span>Al enviar te damos el <b>nombre exacto</b> que tiene que llevar el archivo, así sabemos qué imagen es de qué.</span></div>');
+      '<input type="file" name="Servicio ' + n + ' · Fotos" accept="image/*" multiple>');
+  };
+
+  window.añadirArchivoExtra = function(){
+    var n = ++cuenta.archivoExtra;
+    crear('lista-otros-archivos',
+      '<label class="field-label">¿Qué es?</label>' +
+      '<input type="text" name="Otro archivo ' + n + ' · Descripción" placeholder="Ej: foto del equipo en el evento, folleto en PDF...">' +
+      '<label class="field-label">Archivo <span style="font-weight:400;color:var(--tenue)">— o pega un enlace arriba si pesa mucho</span></label>' +
+      '<input type="file" name="Otro archivo ' + n + ' · Adjunto">');
   };
 
   window.añadirFaq = function(){
@@ -1231,7 +1244,6 @@ select:invalid,select option[value=""]{color:var(--tenue);}
      ================================================================== */
   var formulario = document.getElementById('cuestionario');
   var CORREO = formulario.dataset.correo || 'info.differentissgood@gmail.com';
-  var CARPETA_ARCHIVOS = formulario.dataset.archivos || '';
   var velo = document.getElementById('velo');
   var veloCaja = document.getElementById('velo-caja');
   var LLAVE = 'cuestionario-differentissgood';
@@ -1308,40 +1320,65 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     fuera.sort(function(a, b){ return orden.indexOf(a.bloque) - orden.indexOf(b.bloque); });
     return fuera;
   }
-  /** Con lo marcado en el formulario, arma la lista de qué archivos hacen
-   *  falta y con qué nombre — así el cliente sabe exactamente qué subir. */
-  function listaDeArchivos(envio){
+  /** Recoge los archivos que el cliente ha adjuntado, con una etiqueta clara
+   *  para cada uno — así sabemos qué es cada imagen sin tener que adivinarlo. */
+  function recogerArchivos(){
     var lista = [];
     function val(nombre){
       var c = formulario.querySelector('[name="' + CSS.escape(nombre) + '"]');
       return (c && !c.disabled) ? c.value : '';
     }
-    // Logotipo, local, trabajos, manual de marca, catálogo, legales
-    formulario.querySelectorAll('[name="Material que tiene"]:checked').forEach(function(c){
-      if(c.disabled || c.closest('.step[hidden]') || c.closest('.step.apagado')) return;
-      lista.push({etiqueta:c.value, nombre:envio + '-' + ruta(c.value)});
-    });
-    // Equipo: una por persona que haya dicho que sí
-    formulario.querySelectorAll('[name$="· Retrato"]').forEach(function(sel){
-      if(sel.disabled || sel.value !== 'Sí, la subo al final') return;
-      var n = sel.name.replace(' · Retrato', '');
-      var nombrePersona = val(n + ' · Nombre') || n;
-      lista.push({etiqueta:'Retrato de ' + nombrePersona, nombre:envio + '-equipo-' + ruta(nombrePersona)});
-    });
-    // Servicios: una por servicio que haya dicho que sí
-    formulario.querySelectorAll('[name$="· Fotos"]').forEach(function(sel){
-      if(sel.tagName !== 'SELECT' || sel.disabled || sel.value !== 'Sí, la subo al final') return;
-      var n = sel.name.replace(' · Fotos', '');
-      var nombreServicio = val(n + ' · Nombre') || n;
-      lista.push({etiqueta:'Fotos de ' + nombreServicio, nombre:envio + '-servicio-' + ruta(nombreServicio)});
-    });
-    // Vídeos de testimonios
-    var vt = formulario.querySelector('[name="Tiene vídeos de testimonios"]');
-    if(vt && !vt.disabled && vt.value === 'Sí'){
-      lista.push({etiqueta:'Vídeos de testimonios', nombre:envio + '-testimonios'});
+    function activo(input){
+      return !input.disabled && !input.closest('.step[hidden]') && !input.closest('.step.apagado');
     }
+    formulario.querySelectorAll('input[type=file]').forEach(function(input){
+      if(!activo(input) || !input.files || !input.files.length) return;
+      var nombre = input.name;
+      if(/ · Retrato$/.test(nombre)){
+        var base = nombre.replace(' · Retrato', '');
+        var persona = val(base + ' · Nombre') || base;
+        lista.push({etiqueta:'Retrato de ' + persona, file:input.files[0]});
+      } else if(/ · Fotos$/.test(nombre)){
+        var base2 = nombre.replace(' · Fotos', '');
+        var servicio = val(base2 + ' · Nombre') || base2;
+        [].forEach.call(input.files, function(f, i){
+          lista.push({etiqueta:'Foto de ' + servicio + (input.files.length > 1 ? ' (' + (i + 1) + ')' : ''), file:f});
+        });
+      } else if(/ · Adjunto$/.test(nombre)){
+        var base3 = nombre.replace(' · Adjunto', '');
+        var descripcion = val(base3 + ' · Descripción') || base3;
+        lista.push({etiqueta:descripcion, file:input.files[0]});
+      } else if(input.multiple){
+        [].forEach.call(input.files, function(f, i){
+          lista.push({etiqueta:nombre + (input.files.length > 1 ? ' (' + (i + 1) + ')' : ''), file:f});
+        });
+      } else {
+        lista.push({etiqueta:nombre, file:input.files[0]});
+      }
+    });
     return lista;
   }
+  function extensionDe(nombre){
+    var punto = String(nombre || '').lastIndexOf('.');
+    return punto > 0 ? nombre.slice(punto) : '';
+  }
+
+  /* ---------- Aviso si un archivo pesa demasiado para ir por correo ---------- */
+  formulario.addEventListener('change', function(e){
+    var input = e.target;
+    if(input.type !== 'file') return;
+    var previo = input.parentNode.querySelector('.aviso-peso');
+    if(previo) previo.remove();
+    var pesados = [].filter.call(input.files || [], function(f){ return f.size > 8 * 1024 * 1024; });
+    if(pesados.length){
+      var aviso = document.createElement('div');
+      aviso.className = 'aviso-peso';
+      aviso.style.cssText = 'font-size:12px;color:var(--rosa);margin:-6px 0 10px;';
+      aviso.textContent = '⚠ ' + pesados.map(function(f){ return f.name; }).join(', ') +
+        ' pesa más de 8 MB — puede que no llegue por correo. Si falla el envío, pásalo como enlace de Drive o WeTransfer.';
+      input.insertAdjacentElement('afterend', aviso);
+    }
+  });
   function ruta(t){
     return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g,'')
       .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40) || 'archivo';
@@ -1389,10 +1426,10 @@ select:invalid,select option[value=""]{color:var(--tenue);}
       t += r.campo + ':\n' + r.valor + '\n\n';
     });
     if(archivos.length){
-      t += '\nARCHIVOS QUE FALTA SUBIR\n';
-      archivos.forEach(function(a){ t += '· ' + a.etiqueta + ' — ' + a.nombre + '\n'; });
+      t += '\nARCHIVOS ADJUNTOS EN ESTE CORREO\n';
+      archivos.forEach(function(a){ t += '· ' + a.etiqueta + ' (' + a.file.name + ')\n'; });
     } else {
-      t += '\nNo se ha marcado ningún archivo pendiente.\n';
+      t += '\nNo se ha adjuntado ningún archivo.\n';
     }
     return t;
   }
@@ -1416,23 +1453,16 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     localStorage.removeItem(LLAVE);
     var listaHtml = '';
     if(archivos.length){
-      listaHtml = '<details class="lista-archivos" open><summary>Lo que subir (' + archivos.length + ')</summary><ul>' +
-        archivos.map(function(a){
-          return '<li>' + a.etiqueta + '<br><code>' + a.nombre + '</code></li>';
-        }).join('') + '</ul></details>';
+      listaHtml = '<details class="lista-archivos" open><summary>Archivos enviados (' + archivos.length + ')</summary><ul>' +
+        archivos.map(function(a){ return '<li>' + a.etiqueta + '</li>'; }).join('') + '</ul></details>';
     } else {
-      listaHtml = '<p style="font-size:12.5px;color:var(--tenue);margin-top:14px;">No has marcado ningún archivo pendiente — con esto ya está todo.</p>';
+      listaHtml = '<p style="font-size:12.5px;color:var(--tenue);margin-top:14px;">No adjuntaste ningún archivo — con esto ya está todo.</p>';
     }
-    var botonArchivos = (archivos.length)
-      ? (CARPETA_ARCHIVOS
-          ? '<a class="subir-btn" href="' + CARPETA_ARCHIVOS + '" target="_blank" rel="noopener">Subir mis fotos y vídeos</a>'
-          : '<div class="velo__error">Aún no hay una carpeta configurada para subir archivos. Mándalos por correo a <b>' + CORREO + '</b> con la referencia <b>' + referencia + '</b> y esta misma lista.</div>')
-      : '';
     veloCaja.innerHTML =
       '<div class="tic">✓</div>' +
       '<h3>Respuestas recibidas</h3>' +
-      '<p>Ya nos ha llegado tu cuestionario. Te respondemos en menos de 48 horas.</p>' +
-      botonArchivos + listaHtml +
+      '<p>Ya nos ha llegado tu cuestionario, junto con los archivos adjuntos. Te respondemos en menos de 48 horas.</p>' +
+      listaHtml +
       '<p class="velo__detalle" style="margin-top:14px;">Referencia: ' + referencia + '</p>';
   }
   function pantallaError(mensaje, referencia, texto){
@@ -1479,24 +1509,34 @@ select:invalid,select option[value=""]{color:var(--tenue);}
     var envio = new Date().toISOString().slice(0,10) + '-' + ruta(negocio);
 
     var respuestas = recogerRespuestas();
-    var archivos = listaDeArchivos(envio);
+    var archivos = recogerArchivos();
     var texto = comoTexto(envio, respuestas, archivos);
 
-    progreso(40, 'Enviando tus respuestas…');
+    progreso(40, archivos.length ? 'Enviando tus respuestas y archivos…' : 'Enviando tus respuestas…');
 
     conReintentos(function(){
+      var datos = new FormData();
+      datos.append('_subject', 'Cuestionario · ' + negocio);
+      datos.append('Referencia', envio);
+      datos.append('Respuestas completas', texto);
+      archivos.forEach(function(a){
+        var nombreArchivo = ruta(envio) + '__' + ruta(a.etiqueta) + extensionDe(a.file.name);
+        datos.append(a.etiqueta, new File([a.file], nombreArchivo, {type:a.file.type}));
+      });
       return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CORREO), {
         method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify({
-          _subject: 'Cuestionario · ' + negocio,
-          Referencia: envio,
-          'Respuestas completas': texto,
-        }),
+        headers:{'Accept':'application/json'},
+        body: datos,
       }).then(function(r){
         if(r.ok) return r.json().catch(function(){ return {}; });
-        var fallo = new Error('El correo no se ha podido enviar (código ' + r.status + ').');
-        if(r.status >= 400 && r.status < 500) fallo.definitivo = true;
+        var fallo;
+        if(r.status === 413){
+          fallo = new Error('Los archivos adjuntos pesan demasiado para ir por correo. Quita alguno pesado o pásalo como enlace de Drive/WeTransfer en «¿Algo más?», y reintenta.');
+          fallo.definitivo = true;
+        } else {
+          fallo = new Error('El correo no se ha podido enviar (código ' + r.status + ').');
+          if(r.status >= 400 && r.status < 500) fallo.definitivo = true;
+        }
         throw fallo;
       });
     }).then(function(){

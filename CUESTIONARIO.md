@@ -1,96 +1,73 @@
 # Puesta en marcha del cuestionario
 
-**Gratis, sin tarjeta y sin terminal.** Dos pasos y ya está en marcha.
+**Gratis, sin tarjeta, sin terminal y sin nada que configurar.** Ya está en
+marcha tal cual está en este repositorio.
 
 ## Cómo funciona
 
-1. El cliente rellena el cuestionario. Al enviarlo, **las respuestas te
-   llegan por correo** a `info.differentissgood@gmail.com` — sin fallos,
-   porque es solo texto y el texto nunca pesa demasiado.
-2. Si el cliente tiene fotos, logotipo o vídeos, en la misma pantalla de
-   confirmación le sale un botón — **«Subir mis fotos y vídeos»** — que lo
-   lleva a una carpeta compartida donde los arrastra, sin registrarse en
-   nada y sin límite de tamaño.
-3. Debajo del botón ve la **lista exacta de lo que tiene que subir**, con el
-   nombre que le hemos puesto a cada archivo (por ejemplo
-   `2026-08-11-panaderia-la-espiga-equipo-ana-ruiz`). Esa misma lista te
-   llega también a ti por correo, así sabes qué buscar en la carpeta.
-4. Tú entras en la carpeta, te descargas lo que haya y lo arrastras a tu
-   repositorio de GitHub. Abres Claude Code ahí y dices *«hazme la web con
-   lo que hay en esta carpeta»*.
+1. El cliente rellena el cuestionario. Cada foto o archivo se adjunta **en
+   su propia pregunta** — el logotipo en «Logotipo», el retrato de cada
+   persona en su ficha, la foto de cada servicio en la suya, etc. No hay que
+   escribir ningún nombre de archivo: el campo ya dice qué es.
+2. Al enviar, **te llega un único correo** a `info.differentissgood@gmail.com`
+   con todas las respuestas en texto y todos los archivos adjuntos — sin
+   pasos intermedios, sin carpetas compartidas y sin depender de que el
+   cliente suba nada por su cuenta.
+3. Al final del correo hay un listado «ARCHIVOS ADJUNTOS EN ESTE CORREO» con
+   la etiqueta de cada uno (de qué pregunta viene), así sabes qué es cada
+   imagen de un vistazo.
+4. Con eso ya tienes todo para construir la web: le pasas el correo (texto e
+   imágenes) a Claude Code y le dices que arranque con lo que hay ahí.
 
 ---
 
-## Los dos pasos
+## Los archivos pesados (vídeos, muchas fotos juntas)
 
-### 1. Crear la carpeta para subir archivos
+El correo tiene un límite de peso razonable — cada archivo debería pesar
+menos de 8 MB. Si un archivo pasa de ahí, el cuestionario avisa al cliente
+antes de enviar, y si el envío falla por peso, se lo dice claramente y le
+pide que:
 
-Recomendamos **Dropbox** — es gratis, no pide tarjeta y el cliente no
-necesita cuenta para dejar archivos ahí.
-
-1. Entra en [dropbox.com](https://www.dropbox.com) y crea una cuenta
-   gratuita (con tu correo, sin tarjeta).
-2. En el panel, busca **«Solicitudes de archivos»** (*File requests*) →
-   **Crear una solicitud de archivos**.
-3. Ponle un nombre, por ejemplo `Cuestionario Differentissgood`, y **crea la
-   solicitud**.
-4. Te da un enlace del tipo `https://www.dropbox.com/request/XXXXXXXXXX`.
-   **Cópialo.**
-
-Con el plan gratuito te avisa por correo cada vez que alguien sube algo, y
-puedes ver y descargar los archivos en cualquier momento desde Dropbox.
-
-> Si prefieres otra cosa (Google Drive con «cualquiera con el enlace puede
-> subir», WeTransfer...), vale igual: solo hace falta un enlace donde se
-> pueda dejar un archivo sin cuenta.
-
-### 2. Pegar el enlace en el cuestionario
-
-Abre **`repo-para-github_1/cuestionario.html`**, busca el `<form>` (al
-principio del archivo, justo después del aviso de las «tres cosas») y
-rellena `data-archivos` con el enlace del paso 1:
-
-```html
-<form id="cuestionario" novalidate
-      data-correo="info.differentissgood@gmail.com"
-      data-archivos="https://www.dropbox.com/request/XXXXXXXXXX">
-```
-
-Guarda, sube el cambio a GitHub y ya está — no hace falta tocar nada más.
-
-Mientras `data-archivos` esté vacío, si el cliente tiene algo que subir, la
-pantalla final le pide que te lo mande por correo en vez de darle el botón.
-El cuestionario funciona igual de bien sin este paso; solo que sin la
-carpeta el cliente tiene que mandarte las fotos aparte.
-
----
+- Suba el archivo a **Google Drive o WeTransfer** (gratis, sin cuenta) y
+  pegue el enlace en el campo «¿Algo más que no encaje arriba, o que pese
+  demasiado para adjuntar?».
+- Para vídeos de testimonios, el cuestionario ya pide directamente un
+  enlace en vez de subir el archivo.
 
 ## Comprobar que va
 
-1. Rellena el cuestionario tú misma con un par de respuestas.
-2. Al enviarlo debe aparecer la pantalla «Respuestas recibidas» con el
-   botón de subir archivos (si marcaste alguno) y su lista.
-3. Revisa que te llegue el correo a `info.differentissgood@gmail.com`.
+1. Rellena el cuestionario tú misma, con un par de fotos de prueba.
+2. Al enviarlo debe aparecer la pantalla «Respuestas recibidas» con la
+   lista de archivos enviados.
+3. Revisa que te llegue el correo a `info.differentissgood@gmail.com`, con
+   las respuestas y las fotos adjuntas.
 
 ## Por qué es así de simple
 
-- **Nada que instalar ni configurar en un servidor.** El correo lo manda un
-  servicio externo (formsubmit.co) que ya está conectado; la carpeta de
-  archivos es Dropbox, con cuenta gratuita.
-- **No hay límite de tamaño que pueda fallar.** El correo solo lleva texto;
-  los archivos, sean del tamaño que sean, van a la carpeta.
+- **Nada que instalar ni configurar.** El correo, con archivos adjuntos
+  incluidos, lo manda un servicio externo (formsubmit.co) que ya está
+  conectado.
+- **Un único sitio donde mirar.** Todo llega junto, en el mismo correo — no
+  hay que entrar en Dropbox ni ninguna otra carpeta a buscar qué ha subido
+  cada cliente.
+- **Sin ambigüedad.** Cada archivo va pegado a la pregunta que lo pide, así
+  que no hace falta que el cliente adivine cómo llamarlo ni tú adivines de
+  qué foto se trata.
 - **Borrador en su navegador.** Lo que el cliente va escribiendo se guarda
-  solo. Si cierra la pestaña sin querer, al volver lo encuentra igual.
-- **Si el envío del correo falla**, se le dice, sus respuestas siguen
-  escritas, puede reintentar sin rellenar nada y además puede **descargar
-  sus respuestas** para mandártelas por otra vía.
+  solo. Si cierra la pestaña sin querer, al volver lo encuentra igual (los
+  archivos adjuntados no se recuperan si cierra sin enviar, pero sí el
+  texto).
+- **Si el envío falla**, se le dice, sus respuestas siguen escritas, puede
+  reintentar sin rellenar nada y además puede **descargar sus respuestas**
+  para mandártelas por otra vía.
 
 ## La ruta automática, para más adelante
 
 En la carpeta `recogida/` queda montado un sistema más avanzado: un Worker
-de Cloudflare que, en vez de mandar un correo, deja las respuestas **y los
-archivos** ya ordenados dentro de un repositorio de GitHub, listos para que
-Claude Code los lea directamente. Es gratis y sin tarjeta, pero tiene más
-pasos de configuración (crear un token, crear el Worker, apuntarlo). Si más
-adelante quieres automatizarlo del todo, esa pieza ya está lista — dímelo y
-retomamos esos pasos.
+de Cloudflare que, en vez de mandar un correo, deja las respuestas y los
+archivos ya ordenados dentro de un repositorio de GitHub, listos para que
+Claude Code los lea directamente sin que tengas que descargar nada a mano.
+Es gratis y sin tarjeta, pero tiene más pasos de configuración (crear un
+token, crear el Worker, apuntarlo) y solo merece la pena si el volumen de
+cuestionarios crece mucho. Si más adelante te interesa, dímelo y retomamos
+esos pasos.
