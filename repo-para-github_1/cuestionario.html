@@ -464,7 +464,7 @@ input[type="file"]::file-selector-button{
   </div>
   <div class="categorias" id="categorias"></div>
 
-  <div class="aviso">
+  <div class="aviso" id="aviso">
     <h3>Antes de empezar, tres cosas</h3>
     <p><b>Al elegir un plan</b>, se seleccionan las preguntas de ese plan y se ocultan las de los demás <span class="marca-ej">Incluido en todos los planes</span>.</p>
     <p><b>Puedes descartar bloques.</b> Marca «No lo quiero en mi web» y ese bloque no se envía.</p>
@@ -1467,7 +1467,22 @@ input[type="file"]::file-selector-button{
     barra.style.width = Math.round((indice + 1) / pasos.length * 100) + '%';
     pct.textContent = (indice + 1) + ' / ' + pasos.length;
     pintarCategorias(pasos);
-    window.scrollTo({top:0, behavior:'smooth'});
+
+    // El aviso de las "tres cosas" solo tiene sentido en la primera pregunta
+    var aviso = document.getElementById('aviso');
+    if(aviso) aviso.hidden = indice !== 0;
+
+    // Lleva la vista directa al bloque de la pregunta y al campo donde hay que escribir
+    requestAnimationFrame(function(){
+      var destino = actual.getBoundingClientRect().top + window.pageYOffset - 74;
+      window.scrollTo({top: Math.max(destino, 0), behavior:'smooth'});
+      var campo = actual.querySelector('input:not([type=hidden]):not([type=file]):not(:disabled), select:not(:disabled), textarea:not(:disabled)');
+      if(campo){
+        setTimeout(function(){
+          try{ campo.focus({preventScroll:true}); }catch(e){ campo.focus(); }
+        }, 320);
+      }
+    });
   }
   /** Comprueba solo el paso actual: campos obligatorios y mínimos de extras. */
   function pasoValido(paso){
