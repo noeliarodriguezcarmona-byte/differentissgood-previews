@@ -649,7 +649,7 @@ input[type="file"]::file-selector-button{
     <div class="step step--seccion" data-planes="impulso crecimiento elite">
       <div class="step-head">
         <span class="step-num">§</span>
-        <div><h2>Sección · Cómo la queréis</h2></div>
+        <div><h2>Sección · Tu web personalizada</h2></div>
       </div>
       <div class="step-cuerpo">
         <p class="seccion-intro">Ahora el diseño: colores, estilo y tipografía. Puedes jugar con un pequeño borrador de la portada antes de decidirte.</p>
@@ -660,18 +660,19 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="impulso crecimiento elite">
       <div class="step-head">
         <span class="step-num">6</span>
-        <div><h2>Cómo quieres que se vea</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Tu web personalizada</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
-        <label class="field-label">¿Tenéis manual de marca?</label>
+        <label class="field-label">¿Contáis ya con una identidad de marca definida?</label>
         <select name="Manual de marca">
           <option value="" selected></option>
-          <option>Sí, lo adjunto</option>
-          <option>No, pero tengo claro cómo lo quiero</option>
+          <option>Sí, os la adjunto</option>
+          <option>No, pero tengo claro cómo la quiero</option>
           <option>No</option>
         </select>
 
-        <label class="field-label" style="margin-top:22px;">¿Qué estilo os atrae?</label>
+        <label class="field-label" style="margin-top:22px;">¿Qué estilo os representa mejor?</label>
+        <div class="hint">Puedes elegir más de uno.</div>
         <div class="estilos-ejemplo">
           <div class="estilo-card"><b>Minimalista</b><span>Mucho blanco, tipografía fina, casi sin adornos. La atención va directa al producto o servicio.</span></div>
           <div class="estilo-card"><b>Clásica y elegante</b><span>Colores cálidos, tipografía serif, composición simétrica. Transmite tradición y confianza.</span></div>
@@ -689,7 +690,7 @@ input[type="file"]::file-selector-button{
           <label class="chip"><input type="checkbox" name="Estilo" value="Artesanal"><span>Artesanal</span></label>
         </div>
 
-        <label class="field-label" style="margin-top:22px;">Elige hasta 3 colores para vuestra web</label>
+        <label class="field-label" style="margin-top:22px;">Selecciona hasta tres colores para vuestra web</label>
         <div class="hint">El primero que toques será el principal, el segundo el secundario y el tercero el de acento (botones, detalles...).</div>
         <div class="paleta" id="paleta-colores">
           <button type="button" data-color="#DD6B3A" data-nombre="Naranja quemado" style="background:#DD6B3A" aria-label="Naranja quemado"></button>
@@ -707,14 +708,14 @@ input[type="file"]::file-selector-button{
           <button type="button" data-color="#171410" data-nombre="Negro" style="background:#171410" aria-label="Negro"></button>
           <button type="button" data-color="#F5EFE4" data-nombre="Blanco roto" style="background:#F5EFE4" aria-label="Blanco roto"></button>
         </div>
-        <p class="paleta__estado" id="paleta-estado">Toca hasta 3 colores.</p>
+        <p class="paleta__estado" id="paleta-estado">Selecciona hasta tres colores.</p>
         <input type="hidden" name="Color principal">
         <input type="hidden" name="Color secundario">
         <input type="hidden" name="Color de acento">
         <label class="field-label">¿Algún color exacto que ya uséis? <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
         <input type="text" name="Colores" placeholder="Ej: el verde de nuestro logo, un Pantone concreto...">
 
-        <label class="field-label" style="margin-top:22px;">¿Qué tipografía os pega más?</label>
+        <label class="field-label" style="margin-top:22px;">¿Qué tipografía representa mejor vuestra marca?</label>
         <div class="chip-grid" id="paleta-tipos">
           <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Fraunces — clásica y elegante"><span style="font-family:'Fraunces',serif;">Clásica</span></label>
           <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Inter — moderna y limpia"><span style="font-family:'Inter',sans-serif;">Moderna</span></label>
@@ -722,8 +723,8 @@ input[type="file"]::file-selector-button{
           <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Poppins — cercana y redondeada"><span style="font-family:'Poppins',sans-serif;">Cercana</span></label>
         </div>
 
-        <label class="field-label" style="margin-top:22px;">Vuestro borrador de portada</label>
-        <div class="hint">Un avance con lo que vas eligiendo arriba — juega con los colores y la tipografía hasta que te convenza.</div>
+        <label class="field-label" style="margin-top:22px;">Previsualización de vuestra portada</label>
+        <div class="hint">Un adelanto con lo que vas eligiendo arriba — juega con los colores y la tipografía hasta que te convenza.</div>
         <div class="borrador-web" id="borrador-web">
           <span class="borrador-web__eyebrow" id="borrador-web-eyebrow">Vuestro negocio</span>
           <h3 class="borrador-web__titulo" id="borrador-web-titulo">Nombre del negocio</h3>
@@ -732,7 +733,7 @@ input[type="file"]::file-selector-button{
         </div>
         <p class="borrador-web__nota">Es solo una guía de color y tipografía — el diseño real lo hacemos nosotros.</p>
 
-        <label class="field-label" style="margin-top:22px;">¿Alguna web que te guste como referencia?</label>
+        <label class="field-label" style="margin-top:22px;">Referencias de webs en las que te gustaría inspirarte</label>
         <div class="hint">Puedes pegar varias, una por línea. También vale decir qué te gusta de ellas.</div>
         <textarea name="Webs de referencia" rows="2" placeholder="https://..."></textarea>
       </div>
@@ -1462,7 +1463,7 @@ input[type="file"]::file-selector-button{
       if(estado){
         estado.innerHTML = elegidos.length
           ? elegidos.map(function(b, i){ return '<b>' + (i + 1) + '.</b> ' + b.dataset.nombre; }).join(' · ')
-          : 'Toca hasta 3 colores.';
+          : 'Selecciona hasta tres colores.';
       }
     }
     botones.forEach(function(b){
@@ -1558,8 +1559,8 @@ input[type="file"]::file-selector-button{
     'Que quieres conseguir':           {cat:'Negocio',    icono:String.fromCodePoint(0x1F3AF)},
     'Quien forma el equipo':           {cat:'Equipo',     icono:String.fromCodePoint(0x1F465)},
     'Que ofreces':                     {cat:'Servicios',  icono:String.fromCodePoint(0x1F6E0)},
-    'Seccion · Como la quereis':       {cat:'Diseño',     icono:String.fromCodePoint(0x1F4D6)},
-    'Como quieres que se vea':         {cat:'Diseño',     icono:String.fromCodePoint(0x1F3A8)},
+    'Seccion · Tu web personalizada':  {cat:'Diseño',     icono:String.fromCodePoint(0x1F4D6)},
+    'Tu web personalizada':            {cat:'Diseño',     icono:String.fromCodePoint(0x1F3A8)},
     'Textos':                          {cat:'Diseño',     icono:String.fromCodePoint(0x270D)},
     'Blog o galeria':                  {cat:'Funciones',  icono:String.fromCodePoint(0x1F4F0)},
     'Reservas y citas':                {cat:'Funciones',  icono:String.fromCodePoint(0x1F4C5)},
