@@ -115,6 +115,8 @@ header p{color:var(--muted);font-size:15px;max-width:520px;margin:18px auto 0;li
 .step.visible{opacity:1;transform:none;}
 .step:focus-within{border-color:rgba(221,107,58,.5);}
 .step[hidden]{display:none;}
+/* Cuestionario en modo "pregunta por pregunta": solo se ve el paso actual */
+.step:not(.paso-actual){display:none;}
 
 .step-head{display:flex;align-items:flex-start;gap:13px;margin-bottom:6px;}
 .step-num{
@@ -183,6 +185,24 @@ input[type="file"]::file-selector-button{
   margin-right:12px;padding:8px 14px;border-radius:100px;border:none;cursor:pointer;
   background:var(--degradado);color:#231c14;font-weight:700;font-size:12.5px;font-family:'Inter',sans-serif;
 }
+
+/* --- Zona de subida múltiple, con etiqueta editable por archivo --- */
+.subida{
+  border:1.5px dashed var(--line);border-radius:14px;padding:20px;text-align:center;
+  cursor:pointer;transition:border-color .25s ease,background .25s ease;position:relative;
+}
+.subida:hover,.subida.sobre{border-color:var(--orange);background:rgba(221,107,58,.06);}
+.subida input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;border:none;padding:0;}
+.subida__texto{font-size:13px;color:var(--muted);pointer-events:none;}
+.subida__texto b{color:var(--orange);}
+.subida-lista{margin-top:12px;display:flex;flex-direction:column;gap:8px;}
+.subida-fila{display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:7px 8px 7px 12px;}
+.subida-fila input[type="text"]{flex:1;padding:7px 9px;font-size:12.5px;border-radius:8px;}
+.subida-fila__quitar{
+  flex-shrink:0;background:none;border:none;color:var(--tenue);cursor:pointer;
+  font-size:16px;line-height:1;padding:4px 6px;border-radius:6px;
+}
+.subida-fila__quitar:hover{color:var(--rosa);}
 
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 @media(max-width:560px){.row2{grid-template-columns:1fr;}}
@@ -269,6 +289,26 @@ input[type="file"]::file-selector-button{
 }
 .enviar:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 14px 32px rgba(221,107,58,.28);}
 .footnote{text-align:center;color:var(--tenue);font-size:12px;margin-top:16px;line-height:1.6;}
+
+/* --- Navegación pregunta por pregunta --- */
+.nav-paso{
+  position:sticky;bottom:0;z-index:20;margin:22px -22px 0;padding:14px 22px;
+  background:rgba(28,23,18,.9);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:12px;
+}
+.nav-paso__contador{flex:1;text-align:center;font-size:12px;color:var(--tenue);order:2;}
+.nav-atras{
+  order:1;flex-shrink:0;background:transparent;border:1px solid var(--line);color:var(--muted);
+  padding:14px 18px;border-radius:100px;font-weight:600;font-size:14px;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:border-color .3s ease,color .3s ease;
+}
+.nav-atras:hover{border-color:var(--orange);color:var(--orange);}
+.nav-atras[hidden]{visibility:hidden;}
+.nav-paso .enviar{order:3;width:auto;flex-shrink:0;margin-top:0;padding:14px 26px;}
+@media(max-width:480px){
+  .nav-paso__contador{display:none;}
+}
 
 /* ==========================================================================
    5. ENVÍO EN CURSO Y CONFIRMACIÓN
@@ -375,13 +415,13 @@ input[type="file"]::file-selector-button{
   <header>
     <p class="eyebrow">Differentissgood</p>
     <h1>Cuéntanos <em>tu proyecto</em></h1>
-    <p>Cuanto más detalle nos des, más ajustada a ti será la primera propuesta. Si algo no lo sabes, déjalo en blanco: lo vemos juntos después.</p>
+    <p>Unos 7 minutos, pregunta por pregunta. Lo que no sepas, déjalo en blanco.</p>
   </header>
 
   <div class="avance">
-    <span>Completado</span>
+    <span>Pregunta</span>
     <span class="avance__barra"><i id="barra"></i></span>
-    <b id="porcentaje">0%</b>
+    <b id="porcentaje">1 / 1</b>
   </div>
 
   <div class="aviso">
@@ -468,9 +508,17 @@ input[type="file"]::file-selector-button{
         <div><h2>Quién forma el equipo</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">Rellena una ficha por persona. Si sois más, ve añadiendo — no hay límite. La fotografía es opcional.</p>
+        <p class="step-sub">Una ficha por persona — añade tantas como hagan falta.</p>
         <div id="lista-equipo"></div>
         <button type="button" class="add-btn" onclick="añadirPersona()">+ Añadir otra persona</button>
+
+        <label class="field-label" style="margin-top:18px;">Fotos del equipo <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
+        <div class="hint">Sube las fotos de todos y pon el nombre de quién es cada una.</div>
+        <div class="subida" id="subida-equipo">
+          <input type="file" accept="image/*" multiple>
+          <p class="subida__texto"><b>Toca o arrastra</b> las fotos aquí</p>
+        </div>
+        <div class="subida-lista" id="subida-equipo-lista"></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -482,9 +530,17 @@ input[type="file"]::file-selector-button{
         <div><h2>Qué ofreces</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">Una ficha por cada servicio o producto. Adjunta aquí mismo su fotografía, así sabemos qué imagen va con qué.</p>
+        <p class="step-sub">Una ficha por servicio o producto — añade los que hagan falta.</p>
         <div id="lista-servicios"></div>
         <button type="button" class="add-btn" onclick="añadirServicio()">+ Añadir otro servicio o producto</button>
+
+        <label class="field-label" style="margin-top:18px;">Fotos de servicios y productos <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
+        <div class="hint">Sube las fotos y pon a cada una de qué servicio o producto es.</div>
+        <div class="subida" id="subida-servicios">
+          <input type="file" accept="image/*" multiple>
+          <p class="subida__texto"><b>Toca o arrastra</b> las fotos aquí</p>
+        </div>
+        <div class="subida-lista" id="subida-servicios-lista"></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -530,7 +586,7 @@ input[type="file"]::file-selector-button{
         <div><h2>Textos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">Nos referimos al contenido escrito que se lee en tu web: el titular de la portada, la descripción de cada servicio, la presentación del equipo, los textos de cada sección... Los textos legales (aviso legal, política de privacidad) van aparte, en el paso de Archivos.</p>
+        <p class="step-sub">El contenido escrito de tu web: titulares, descripciones, presentación del equipo... (Los textos legales van aparte, en Archivos.)</p>
         <label class="field-label">¿Los tienes escritos?</label>
         <select name="Textos">
           <option value="" selected></option>
@@ -960,7 +1016,7 @@ input[type="file"]::file-selector-button{
         <div><h2>Archivos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">Sube aquí mismo lo que tengas — cada archivo va pegado a su etiqueta, así sabemos exactamente qué es sin tener que adivinarlo. Ideal por debajo de 8 MB por archivo; si algo pesa más (vídeos, muchas fotos juntas), mejor un enlace de Drive o WeTransfer.</p>
+        <p class="step-sub">Ideal por debajo de 8 MB por archivo; si algo pesa más (vídeos, muchas fotos juntas), mejor un enlace de Drive o WeTransfer en el campo de abajo.</p>
 
         <label class="field-label">Logotipo</label>
         <div class="hint">Si puedes, el AI, SVG o PDF antes que un PNG: se ve nítido a cualquier tamaño.</div>
@@ -969,31 +1025,16 @@ input[type="file"]::file-selector-button{
         <label class="field-label">Foto de portada <span style="font-weight:400;color:var(--tenue)">— la que sale de fondo en el inicio de la web</span></label>
         <input type="file" name="Foto de portada" accept="image/*">
 
-        <label class="field-label">Fotos del local</label>
-        <input type="file" name="Fotos del local" accept="image/*" multiple>
+        <label class="field-label" style="margin-top:18px;">Todo lo demás <span style="font-weight:400;color:var(--tenue)">— local, trabajos, catálogo, manual de marca, textos, legales...</span></label>
+        <div class="hint">Sube cuantos archivos quieras y ponle a cada uno un nombre corto — así sabemos qué es cada cosa.</div>
+        <div class="subida" id="subida-archivos">
+          <input type="file" multiple>
+          <p class="subida__texto"><b>Toca o arrastra</b> tus archivos aquí</p>
+        </div>
+        <div class="subida-lista" id="subida-archivos-lista"></div>
 
-        <label class="field-label">Fotos de trabajos ya hechos</label>
-        <input type="file" name="Fotos de trabajos" accept="image/*" multiple>
-
-        <label class="field-label">Manual de marca <span style="font-weight:400;color:var(--tenue)">— si lo tenéis</span></label>
-        <input type="file" name="Manual de marca" accept=".pdf,image/*">
-
-        <label class="field-label">Catálogo de productos</label>
-        <input type="file" name="Catálogo de productos" accept=".pdf,image/*" multiple>
-
-        <label class="field-label">Tipografías o iconos</label>
-        <input type="file" name="Tipografías o iconos" multiple>
-
-        <label class="field-label">Textos ya escritos</label>
-        <input type="file" name="Textos ya escritos" accept=".pdf,.doc,.docx,.txt">
-
-        <label class="field-label">Textos legales <span style="font-weight:400;color:var(--tenue)">— si ya tenéis algo redactado</span></label>
-        <input type="file" name="Textos legales" accept=".pdf,.doc,.docx" multiple>
-
-        <label class="field-label">¿Algo más que no encaje arriba, o que pese demasiado para adjuntar?</label>
-        <div class="hint">Sube aquí lo que sea (un archivo por ficha) o, si pesa mucho, pega un enlace de Drive o WeTransfer en el nombre.</div>
-        <div id="lista-otros-archivos"></div>
-        <button type="button" class="add-btn" onclick="añadirArchivoExtra()">+ Añadir otro archivo</button>
+        <label class="field-label">¿Algo pesa demasiado para subirlo aquí?</label>
+        <input type="url" name="Enlace a archivos grandes" placeholder="Enlace de Drive o WeTransfer">
 
         <label class="field-label" style="margin-top:16px;">¿No tienes fotografía profesional?</label>
         <select name="Necesita sesión de fotos">
@@ -1031,7 +1072,11 @@ input[type="file"]::file-selector-button{
       </div>
     </div>
 
-    <button type="submit" class="enviar">Enviar mi proyecto</button>
+    <div class="nav-paso" id="nav-paso">
+      <button type="button" class="nav-atras" id="nav-atras">← Atrás</button>
+      <span class="nav-paso__contador" id="nav-contador"></span>
+      <button type="button" class="enviar" id="nav-siguiente">Siguiente →</button>
+    </div>
     <p class="footnote">Los archivos que adjuntes van en el mismo correo que tus respuestas.<br>Los bloques que hayas marcado como «no lo quiero» no se envían.</p>
   </form>
 </div>
@@ -1086,15 +1131,14 @@ input[type="file"]::file-selector-button{
   var pct = document.getElementById('porcentaje');
 
   /* ---------- Fichas repetibles ---------- */
-  var cuenta = {persona:0, servicio:0, faq:0, reserva:0, archivoExtra:0};
+  var cuenta = {persona:0, servicio:0, faq:0, reserva:0};
 
   function crear(lista, html){
     var d = document.createElement('div');
     d.className = 'repe';
     d.innerHTML = '<button type="button" class="repe-quitar" aria-label="Quitar">✕</button>' + html;
-    d.querySelector('.repe-quitar').addEventListener('click', function(){ d.remove(); avance(); });
+    d.querySelector('.repe-quitar').addEventListener('click', function(){ d.remove(); });
     document.getElementById(lista).appendChild(d);
-    avance();
     return d;
   }
 
@@ -1110,9 +1154,7 @@ input[type="file"]::file-selector-button{
       '<div class="hint">Cuántos años lleva, de dónde viene, qué domina.</div>' +
       '<textarea name="Persona ' + n + ' · Trayectoria" rows="3"></textarea>' +
       '<label class="field-label">Titulaciones y certificados</label>' +
-      '<textarea name="Persona ' + n + ' · Certificados" rows="2"></textarea>' +
-      '<label class="field-label">Fotografía de retrato <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>' +
-      '<input type="file" name="Persona ' + n + ' · Retrato" accept="image/*">');
+      '<textarea name="Persona ' + n + ' · Certificados" rows="2"></textarea>');
   };
 
   window.añadirServicio = function(){
@@ -1126,18 +1168,7 @@ input[type="file"]::file-selector-button{
       '<div class="row2">' +
         '<div><label class="field-label">Precio, si quieres mostrarlo</label><input type="text" name="Servicio ' + n + ' · Precio"></div>' +
         '<div><label class="field-label">Qué gana quien lo contrata</label><input type="text" name="Servicio ' + n + ' · Beneficio"></div>' +
-      '</div>' +
-      '<label class="field-label">Fotografía de este servicio o producto</label>' +
-      '<input type="file" name="Servicio ' + n + ' · Fotos" accept="image/*" multiple>');
-  };
-
-  window.añadirArchivoExtra = function(){
-    var n = ++cuenta.archivoExtra;
-    crear('lista-otros-archivos',
-      '<label class="field-label">¿Qué es?</label>' +
-      '<input type="text" name="Otro archivo ' + n + ' · Descripción" placeholder="Ej: foto del equipo en el evento, folleto en PDF...">' +
-      '<label class="field-label">Archivo <span style="font-weight:400;color:var(--tenue)">— o pega un enlace arriba si pesa mucho</span></label>' +
-      '<input type="file" name="Otro archivo ' + n + ' · Adjunto">');
+      '</div>');
   };
 
   window.añadirFaq = function(){
@@ -1165,13 +1196,64 @@ input[type="file"]::file-selector-button{
   // Cada lista arranca con una ficha, para no partir de la nada
   añadirPersona(); añadirServicio(); añadirFaq();
 
+  /* ---------- Zonas de subida múltiple, con etiqueta editable por archivo ---------- */
+  function crearZonaSubida(zonaId, listaId, etiquetaBase){
+    var zona = document.getElementById(zonaId);
+    var lista = document.getElementById(listaId);
+    var input = zona.querySelector('input[type=file]');
+    zona.archivos = [];
+
+    function repintar(){
+      lista.innerHTML = '';
+      zona.archivos.forEach(function(a, i){
+        var fila = document.createElement('div');
+        fila.className = 'subida-fila';
+        var campo = document.createElement('input');
+        campo.type = 'text';
+        campo.value = a.etiqueta;
+        campo.placeholder = etiquetaBase;
+        campo.addEventListener('input', function(){ a.etiqueta = campo.value; });
+        var quitar = document.createElement('button');
+        quitar.type = 'button';
+        quitar.className = 'subida-fila__quitar';
+        quitar.setAttribute('aria-label', 'Quitar');
+        quitar.textContent = '✕';
+        quitar.addEventListener('click', function(){ zona.archivos.splice(i, 1); repintar(); });
+        fila.appendChild(campo);
+        fila.appendChild(quitar);
+        lista.appendChild(fila);
+      });
+    }
+    function añadirArchivos(ficheros){
+      Array.prototype.forEach.call(ficheros, function(f){
+        var base = f.name.replace(/\.[^.]+$/, '');
+        zona.archivos.push({file:f, etiqueta:etiquetaBase + ' — ' + base});
+      });
+      repintar();
+    }
+    input.addEventListener('change', function(){
+      añadirArchivos(input.files);
+      input.value = '';
+    });
+    zona.addEventListener('dragover', function(e){ e.preventDefault(); zona.classList.add('sobre'); });
+    zona.addEventListener('dragleave', function(){ zona.classList.remove('sobre'); });
+    zona.addEventListener('drop', function(e){
+      e.preventDefault();
+      zona.classList.remove('sobre');
+      if(e.dataTransfer && e.dataTransfer.files) añadirArchivos(e.dataTransfer.files);
+    });
+    return zona;
+  }
+  var zonaEquipo = crearZonaSubida('subida-equipo', 'subida-equipo-lista', 'Equipo');
+  var zonaServicios = crearZonaSubida('subida-servicios', 'subida-servicios-lista', 'Servicio');
+  var zonaArchivos = crearZonaSubida('subida-archivos', 'subida-archivos-lista', 'Archivo');
+
   /* ---------- Preguntas que dependen de otra ---------- */
   function abrir(id, si){
     var caja = document.getElementById(id);
     caja.classList.toggle('abierto', si);
     // Lo que está cerrado no se envía
     caja.querySelectorAll('input,select,textarea').forEach(function(c){ c.disabled = !si; });
-    avance();
   }
   window.alternarBlog = function(){
     abrir('blog-extra', document.getElementById('sel-blog').value === 'Sí');
@@ -1198,12 +1280,12 @@ input[type="file"]::file-selector-button{
         c.disabled = apagado;
         if(apagado) c.required = false;
       });
-      avance();
     });
   });
 
   /* ---------- Solo las preguntas del plan elegido ---------- */
   var bloques = Array.prototype.slice.call(document.querySelectorAll('.step[data-planes]'));
+  var indice = 0;
   function aplicarPlan(){
     var elegido = document.querySelector('input[name="Plan"]:checked');
     // Sin tildes: el valor es "Élite" y la etiqueta del bloque, "elite"
@@ -1228,7 +1310,7 @@ input[type="file"]::file-selector-button{
       gruposExtras.forEach(function(grid){ actualizarGrupoExtras(grid); });
     }
     renumerar();
-    avance();
+    mostrarPaso(indice);
   }
   function renumerar(){
     var i = 0;
@@ -1238,41 +1320,82 @@ input[type="file"]::file-selector-button{
     });
   }
   document.querySelectorAll('input[name="Plan"]').forEach(function(r){
-    r.addEventListener('change', aplicarPlan);
+    r.addEventListener('change', function(){
+      aplicarPlan();
+      // Con una sola pregunta por pantalla, elegir plan avanza sola a la siguiente
+      setTimeout(siguiente, 280);
+    });
   });
 
-  /* ---------- Barra de avance ---------- */
-  function avance(){
-    var vistos = [];
-    var campos = document.querySelectorAll('#cuestionario input:not([type=hidden]):not(:disabled), #cuestionario select:not(:disabled), #cuestionario textarea:not(:disabled)');
-    var total = 0, hechos = 0;
-    campos.forEach(function(c){
-      if(c.type === 'file' || c.hasAttribute('data-ocultar')) return;
-      if(c.closest('.step[hidden]')) return;
-      if(c.type === 'checkbox' || c.type === 'radio'){
-        if(!c.name || vistos.indexOf(c.name) > -1) return;
-        vistos.push(c.name);
-        total++;
-        if(document.querySelector('[name="' + CSS.escape(c.name) + '"]:checked')) hechos++;
-      } else {
-        total++;
-        if(c.value.trim()) hechos++;
-      }
-    });
-    var p = total ? Math.round(hechos / total * 100) : 0;
-    barra.style.width = p + '%';
-    pct.textContent = p + '%';
-  }
-  document.getElementById('cuestionario').addEventListener('input', avance);
-  document.getElementById('cuestionario').addEventListener('change', avance);
+  /* ---------- Cuestionario pregunta por pregunta ---------- */
+  var navAtras = document.getElementById('nav-atras');
+  var navSiguiente = document.getElementById('nav-siguiente');
+  var navContador = document.getElementById('nav-contador');
 
-  /* ---------- Los bloques entran al aparecer ---------- */
-  var mirador = new IntersectionObserver(function(entradas){
-    entradas.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('visible'); mirador.unobserve(e.target); }
+  function pasosVisibles(){
+    return bloques.filter(function(b){ return !b.hidden; });
+  }
+  function mostrarPaso(i){
+    var pasos = pasosVisibles();
+    if(!pasos.length) return;
+    indice = Math.max(0, Math.min(i, pasos.length - 1));
+    bloques.forEach(function(b){ b.classList.remove('paso-actual', 'visible'); });
+    var actual = pasos[indice];
+    actual.classList.add('paso-actual');
+    void actual.offsetWidth; // reinicia la animación de entrada cada vez que se muestra
+    requestAnimationFrame(function(){ actual.classList.add('visible'); });
+
+    navAtras.hidden = indice === 0;
+    var esUltimo = indice === pasos.length - 1;
+    navSiguiente.textContent = esUltimo ? 'Enviar mi proyecto' : 'Siguiente →';
+    navContador.textContent = 'Pregunta ' + (indice + 1) + ' de ' + pasos.length;
+    barra.style.width = Math.round((indice + 1) / pasos.length * 100) + '%';
+    pct.textContent = (indice + 1) + ' / ' + pasos.length;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  /** Comprueba solo el paso actual: campos obligatorios y mínimos de extras. */
+  function pasoValido(paso){
+    var fallo = null;
+    paso.querySelectorAll('[required]').forEach(function(c){
+      if(fallo || c.disabled || c.closest('.step.apagado')) return;
+      var vacio = (c.type === 'radio')
+        ? !paso.querySelector('[name="' + CSS.escape(c.name) + '"]:checked')
+        : !c.value.trim();
+      if(vacio) fallo = c;
     });
-  }, {threshold:.08, rootMargin:'0px 0px -30px 0px'});
-  document.querySelectorAll('.step').forEach(function(s){ mirador.observe(s); });
+    if(!fallo){
+      Array.prototype.slice.call(paso.querySelectorAll('.chip-grid[data-min]')).forEach(function(grid){
+        if(fallo || grid.closest('.step.apagado')) return;
+        var min = parseInt(grid.dataset.min, 10) || 0;
+        var casillas = Array.prototype.slice.call(grid.querySelectorAll('input[type=checkbox]'));
+        var marcadas = casillas.filter(function(c){ return c.checked; }).length;
+        if(marcadas < min) fallo = casillas[0];
+      });
+    }
+    return fallo;
+  }
+  function siguiente(){
+    var pasos = pasosVisibles();
+    var actual = pasos[indice];
+    if(!actual) return;
+    var falla = pasoValido(actual);
+    if(falla){
+      falla.scrollIntoView({behavior:'smooth', block:'center'});
+      setTimeout(function(){ falla.focus(); }, 300);
+      return;
+    }
+    if(indice >= pasos.length - 1){ enviar(); return; }
+    mostrarPaso(indice + 1);
+  }
+  function atras(){ mostrarPaso(indice - 1); }
+  navSiguiente.addEventListener('click', siguiente);
+  navAtras.addEventListener('click', atras);
+  // Enter avanza a la siguiente pregunta (menos dentro de un textarea, donde hace salto de línea)
+  document.getElementById('cuestionario').addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON') return;
+    e.preventDefault();
+    siguiente();
+  });
 
   aplicarPlan();
 
@@ -1345,7 +1468,7 @@ input[type="file"]::file-selector-button{
   formulario.addEventListener('change', guardarBorrador);
 
   if(recuperarBorrador()){
-    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); avance();
+    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas();
     var nota = document.createElement('p');
     nota.className = 'borrador';
     nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
@@ -1388,37 +1511,18 @@ input[type="file"]::file-selector-button{
    *  para cada uno — así sabemos qué es cada imagen sin tener que adivinarlo. */
   function recogerArchivos(){
     var lista = [];
-    function val(nombre){
-      var c = formulario.querySelector('[name="' + CSS.escape(nombre) + '"]');
-      return (c && !c.disabled) ? c.value : '';
+    function activo(el){
+      return !el.disabled && !el.closest('.step[hidden]') && !el.closest('.step.apagado');
     }
-    function activo(input){
-      return !input.disabled && !input.closest('.step[hidden]') && !input.closest('.step.apagado');
-    }
-    formulario.querySelectorAll('input[type=file]').forEach(function(input){
+    // Logotipo y Foto de portada: campos únicos y directos
+    formulario.querySelectorAll('input[type=file][name]').forEach(function(input){
       if(!activo(input) || !input.files || !input.files.length) return;
-      var nombre = input.name;
-      if(/ · Retrato$/.test(nombre)){
-        var base = nombre.replace(' · Retrato', '');
-        var persona = val(base + ' · Nombre') || base;
-        lista.push({etiqueta:'Retrato de ' + persona, file:input.files[0]});
-      } else if(/ · Fotos$/.test(nombre)){
-        var base2 = nombre.replace(' · Fotos', '');
-        var servicio = val(base2 + ' · Nombre') || base2;
-        [].forEach.call(input.files, function(f, i){
-          lista.push({etiqueta:'Foto de ' + servicio + (input.files.length > 1 ? ' (' + (i + 1) + ')' : ''), file:f});
-        });
-      } else if(/ · Adjunto$/.test(nombre)){
-        var base3 = nombre.replace(' · Adjunto', '');
-        var descripcion = val(base3 + ' · Descripción') || base3;
-        lista.push({etiqueta:descripcion, file:input.files[0]});
-      } else if(input.multiple){
-        [].forEach.call(input.files, function(f, i){
-          lista.push({etiqueta:nombre + (input.files.length > 1 ? ' (' + (i + 1) + ')' : ''), file:f});
-        });
-      } else {
-        lista.push({etiqueta:nombre, file:input.files[0]});
-      }
+      lista.push({etiqueta:input.name, file:input.files[0]});
+    });
+    // Zonas de subida múltiple: equipo, servicios y el resto de archivos
+    [zonaEquipo, zonaServicios, zonaArchivos].forEach(function(zona){
+      if(!zona || !activo(zona)) return;
+      zona.archivos.forEach(function(a){ lista.push({etiqueta:a.etiqueta, file:a.file}); });
     });
     return lista;
   }
@@ -1561,7 +1665,9 @@ input[type="file"]::file-selector-button{
     if(falla){
       velo.classList.remove('abierto');
       var bloque = falla.closest('.step');
-      if(bloque) bloque.scrollIntoView({behavior:'smooth', block:'center'});
+      var pasos = pasosVisibles();
+      var i = pasos.indexOf(bloque);
+      if(i > -1) mostrarPaso(i);
       setTimeout(function(){ falla.focus(); }, 400);
       return;
     }
