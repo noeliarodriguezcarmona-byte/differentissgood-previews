@@ -58,17 +58,17 @@ a{color:var(--orange);}
   background-size:160px 160px;
 }
 
-.wrap{max-width:760px;margin:0 auto;padding:76px 22px 110px;position:relative;}
+.wrap{max-width:760px;margin:0 auto;padding:40px 22px 90px;position:relative;}
 
 /* --- Cabecera --- */
 .eyebrow{
-  font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
   background:var(--degradado);-webkit-background-clip:text;background-clip:text;color:transparent;
 }
-header{text-align:center;margin-bottom:22px;}
-header h1{font-size:clamp(31px,5.2vw,50px);margin-top:12px;line-height:1.08;}
+header{text-align:center;margin-bottom:12px;}
+header h1{font-size:clamp(20px,3.4vw,28px);margin-top:6px;line-height:1.15;}
 header h1 em{font-style:italic;background:var(--degradado);-webkit-background-clip:text;background-clip:text;color:transparent;}
-header p{color:var(--muted);font-size:15px;max-width:520px;margin:18px auto 0;line-height:1.7;}
+header p{color:var(--muted);font-size:12.5px;max-width:480px;margin:8px auto 0;line-height:1.55;}
 
 /* --- Barra de avance --- */
 .avance{
@@ -132,6 +132,12 @@ header p{color:var(--muted);font-size:15px;max-width:520px;margin:18px auto 0;li
   opacity:0;
   transition:opacity .45s var(--curva),transform .45s var(--curva),border-color .35s ease;
 }
+/* Paso compacto: para que quepa en pantalla sin desplazarse */
+.step--compacto{padding:18px 20px;}
+.step--compacto .step-head{margin-bottom:2px;}
+.step--compacto .field-label{margin:12px 0 5px;font-size:12px;}
+.step--compacto .hint{margin:-2px 0 5px;font-size:11px;}
+.step--compacto .step-cuerpo > label.field-label:first-child{margin-top:0;}
 /* Entra deslizando: a la derecha al avanzar, a la izquierda al retroceder */
 .step.entra-derecha{transform:translateX(34px);}
 .step.entra-izquierda{transform:translateX(-34px);}
@@ -251,56 +257,92 @@ input[type="file"]::file-selector-button{
 .chip-grid__contador{font-weight:600;color:var(--ink);}
 .chip-grid__contador[data-corto]{color:var(--rosa);}
 
-/* --- Ejemplos de estilo, con una frase que describe cada uno --- */
-.estilos-ejemplo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 18px;}
-@media(max-width:560px){.estilos-ejemplo{grid-template-columns:1fr;}}
-.estilo-card{
-  border:1px solid var(--line);border-radius:14px;padding:14px 15px;background:var(--card2);
+/* --- Estilo: 4 tarjetas grandes, una sola elección --- */
+.estilos-grandes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 16px;}
+@media(max-width:560px){.estilos-grandes{grid-template-columns:1fr;}}
+.estilo-grande{position:relative;display:block;cursor:pointer;}
+.estilo-grande input{position:absolute;opacity:0;width:100%;height:100%;cursor:pointer;margin:0;}
+.estilo-grande span{
+  display:block;border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;background:var(--card2);
+  transition:.25s var(--curva);
 }
-.estilo-card b{display:block;font-size:13px;margin-bottom:5px;color:var(--ink);}
-.estilo-card span{display:block;font-size:12px;color:var(--tenue);line-height:1.55;}
+.estilo-grande span b{display:block;font-size:13.5px;margin-bottom:3px;color:var(--ink);}
+.estilo-grande span em{display:block;font-size:11.5px;font-style:normal;color:var(--tenue);line-height:1.5;}
+.estilo-grande input:checked + span{border-color:var(--orange);background:rgba(221,107,58,.1);box-shadow:0 0 0 2px rgba(221,107,58,.18);}
+.estilo-grande input:checked + span b{color:var(--orange);}
+.estilo-grande input:focus-visible + span{box-shadow:0 0 0 3px rgba(221,107,58,.22);}
 
 /* --- Paleta de colores: hasta 3, numerados por orden de elección --- */
-.paleta{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0 6px;}
+.paleta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px;}
 .paleta button{
-  position:relative;width:42px;height:42px;border-radius:50%;border:2px solid var(--line);
+  position:relative;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);
   cursor:pointer;padding:0;transition:transform .2s ease,border-color .2s ease;flex-shrink:0;
 }
-.paleta button:hover{transform:scale(1.08);}
-.paleta button.elegido{border-color:var(--ink);box-shadow:0 0 0 3px rgba(245,239,228,.18);}
+.paleta button:hover{transform:scale(1.12);}
+.paleta button.elegido{border-color:var(--ink);box-shadow:0 0 0 2px rgba(245,239,228,.18);}
 .paleta button.elegido::after{
-  content:attr(data-orden);position:absolute;top:-6px;right:-6px;width:19px;height:19px;border-radius:50%;
-  background:var(--orange);color:#231c14;font-size:10.5px;font-weight:700;display:grid;place-items:center;
+  content:attr(data-orden);position:absolute;top:-5px;right:-5px;width:16px;height:16px;border-radius:50%;
+  background:var(--orange);color:#231c14;font-size:9.5px;font-weight:700;display:grid;place-items:center;
 }
-.paleta__estado{font-size:12px;color:var(--tenue);margin:4px 0 16px;}
+.paleta__estado{font-size:11.5px;color:var(--tenue);margin:4px 0 12px;}
 .paleta__estado b{color:var(--ink);}
 
-/* --- Elección de tipografía --- */
-.tipo-chip span{font-size:16px !important;padding:12px 18px !important;}
-
-/* --- Borrador jugable de la portada --- */
+/* --- Boceto jugable de la web: nav + hero + tarjetas --- */
 .borrador-web{
-  margin-top:22px;border-radius:18px;overflow:hidden;border:1px solid var(--line);
-  position:relative;min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:34px 24px;gap:10px;
-  transition:background .4s ease,color .4s ease,border-radius .4s ease,box-shadow .4s ease,transform .4s ease;
+  margin-top:18px;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  position:relative;
+  transition:border-radius .4s ease,box-shadow .4s ease,transform .4s ease;
 }
-.borrador-web__eyebrow{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.75;}
-.borrador-web__titulo{font-size:clamp(20px,4vw,28px);line-height:1.15;margin:0;}
-.borrador-web__lema{font-size:13px;max-width:320px;opacity:.85;line-height:1.6;}
+.borrador-web__nav{
+  display:flex;align-items:center;gap:10px;padding:11px 16px;
+  background:rgba(0,0,0,.12);border-bottom:1px solid rgba(255,255,255,.08);
+}
+.borrador-web__logo{width:9px;height:9px;border-radius:50%;background:currentColor;opacity:.8;flex-shrink:0;}
+.borrador-web__navlinks{display:flex;gap:8px;flex:1;justify-content:center;}
+.borrador-web__navlinks i{display:block;width:20px;height:3px;border-radius:2px;background:currentColor;opacity:.35;}
+.borrador-web__navboton{width:44px;height:14px;border-radius:100px;background:currentColor;opacity:.5;flex-shrink:0;}
+.borrador-web__hero{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:30px 22px 24px;gap:9px;
+  transition:background .4s ease,color .4s ease;
+}
+.borrador-web__eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.75;}
+.borrador-web__titulo{font-size:clamp(19px,4vw,26px);line-height:1.15;margin:0;}
+.borrador-web__lema{font-size:12.5px;max-width:300px;opacity:.85;line-height:1.55;}
 .borrador-web__boton{
-  margin-top:8px;padding:10px 22px;border-radius:100px;font-size:12.5px;font-weight:700;
+  margin-top:6px;padding:9px 20px;border-radius:100px;font-size:12px;font-weight:700;
   border:none;pointer-events:none;transition:border-radius .4s ease;
 }
-.borrador-web__nota{text-align:center;font-size:11.5px;color:var(--tenue);margin-top:8px;}
+.borrador-web__tarjetas{display:flex;gap:8px;padding:14px 16px 16px;}
+.borrador-web__tarjeta{
+  flex:1;height:34px;border-radius:10px;background:rgba(255,255,255,.08);
+  transition:border-radius .4s ease,background .4s ease;
+}
+.borrador-web__nota{text-align:center;font-size:11px;color:var(--tenue);margin-top:8px;line-height:1.5;}
 
-/* El estilo elegido cambia el aspecto del boceto */
-.borrador-web--minimalista{border-radius:4px;box-shadow:none;letter-spacing:.01em;}
-.borrador-web--minimalista .borrador-web__boton{border-radius:4px;}
-.borrador-web--clasica{border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.28);border-color:rgba(245,239,228,.25);}
-.borrador-web--moderna{border-radius:30px;box-shadow:0 20px 46px rgba(0,0,0,.32);transform:rotate(-.4deg);}
+/* El estilo elegido cambia por completo el aspecto del boceto */
+.borrador-web--minimalista{border-radius:2px;box-shadow:none;}
+.borrador-web--minimalista .borrador-web__boton,
+.borrador-web--minimalista .borrador-web__tarjeta{border-radius:2px;}
+.borrador-web--minimalista .borrador-web__hero{letter-spacing:.01em;padding-top:38px;padding-bottom:32px;}
+.borrador-web--minimalista .borrador-web__navlinks i{opacity:.22;}
+
+.borrador-web--clasica{border-radius:8px;box-shadow:0 20px 44px rgba(0,0,0,.3);border-color:rgba(245,239,228,.22);}
+.borrador-web--clasica .borrador-web__nav{background:rgba(0,0,0,.2);}
+.borrador-web--clasica .borrador-web__titulo{font-family:'Playfair Display',serif;}
+.borrador-web--clasica .borrador-web__tarjeta{border-radius:3px;}
+
+.borrador-web--moderna{border-radius:28px;box-shadow:0 22px 50px rgba(0,0,0,.34);transform:rotate(-.35deg);}
+.borrador-web--moderna .borrador-web__nav{border-radius:28px 28px 0 0;}
 .borrador-web--moderna .borrador-web__boton{border-radius:14px;}
-.borrador-web--artesanal{border-radius:22px 6px 22px 6px;box-shadow:0 14px 30px rgba(0,0,0,.22);}
+.borrador-web--moderna .borrador-web__titulo{font-family:'Space Grotesk',sans-serif;}
+.borrador-web--moderna .borrador-web__tarjeta{border-radius:16px;}
+.borrador-web--moderna .borrador-web__tarjeta:nth-child(2){transform:translateY(-4px);}
+
+.borrador-web--artesanal{border-radius:26px 8px 26px 8px;box-shadow:0 16px 34px rgba(0,0,0,.24);}
+.borrador-web--artesanal .borrador-web__titulo{font-family:'Lora',serif;}
+.borrador-web--artesanal .borrador-web__tarjeta{border-radius:16px 4px 16px 4px;}
+.borrador-web--artesanal .borrador-web__tarjeta:nth-child(2){border-radius:4px 16px 4px 16px;}
 
 .radio-row{display:flex;flex-direction:column;gap:9px;}
 .radio-row label{
@@ -387,11 +429,6 @@ input[type="file"]::file-selector-button{
 .nav-atras:hover{border-color:var(--orange);color:var(--orange);}
 .nav-atras[hidden]{visibility:hidden;}
 .nav-paso .enviar{order:3;width:auto;flex-shrink:0;margin-top:0;padding:14px 26px;}
-.nav-paso .enviar.nav-siguiente--saltar{
-  background:transparent;color:var(--muted);box-shadow:none;
-  border:1px solid var(--line);
-}
-.nav-paso .enviar.nav-siguiente--saltar:hover{border-color:var(--orange);color:var(--orange);background:transparent;transform:none;box-shadow:none;}
 @media(max-width:480px){
   .nav-paso__contador{display:none;}
 }
@@ -548,7 +585,6 @@ input[type="file"]::file-selector-button{
           <label><input type="radio" name="Plan" value="Impulso" required><span><b>Plan Impulso</b><span class="d">Una página, diseño a medida y contacto directo por WhatsApp.</span></span></label>
           <label><input type="radio" name="Plan" value="Crecimiento"><span><b>Plan Crecimiento</b><span class="d">Varias páginas, blog, galería, reservas y newsletter.</span></span></label>
           <label><input type="radio" name="Plan" value="Élite"><span><b>Plan Élite</b><span class="d">Todo lo anterior más tienda online, pagos, IA y panel de administración.</span></span></label>
-          <label><input type="radio" name="Plan" value="Aún no lo tengo claro"><span><b>Aún no lo tengo claro</b><span class="d">Verás todas las preguntas y te recomendamos nosotros.</span></span></label>
         </div>
       </div>
     </div>
@@ -654,6 +690,144 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
+    <!-- ================= SECCIÓN · EXTRAS ================= -->
+    <div class="step step--seccion" data-planes="impulso crecimiento elite">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Sección · Extras</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Por último, elige los extras de tu plan. Tienes un mínimo y un máximo incluidos — si quieres más, también se puede.</p>
+      </div>
+    </div>
+
+    <!-- ================= 17 · EXTRAS ================= -->
+    <div class="step" data-planes="impulso">
+      <div class="step-head">
+        <span class="step-num">17</span>
+        <div><h2>Extras</h2><span class="plan-badge">Elige de 2 a 4</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">El Plan Impulso incluye entre 2 y 4 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" id="extras-inc-impulso" data-min="2" data-max="4">
+          <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Certificado SSL gestionado"><span>Certificado SSL gestionado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones simple"><span>Formulario de valoraciones simple</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Favicon e identidad visual mínima"><span>Favicon e identidad visual mínima</span></label>
+        </div>
+
+        <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
+        <div class="hint">Cada uno, fuera de los incluidos, cuesta <b>60 € + IVA</b>.</div>
+        <select name="Extras adicionales" id="sel-extras-pago-impulso" onchange="alternarExtrasPago('impulso')">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+        <div class="depende" id="extras-pago-impulso-caja"><div>
+          <label class="field-label">Toca los que te falten</label>
+          <div class="chip-grid" id="extras-pago-impulso" data-espejo="extras-inc-impulso">
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Modo oscuro"><span>Modo oscuro</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="QR personalizado"><span>QR personalizado</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Certificado SSL gestionado"><span>Certificado SSL gestionado</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Formulario de valoraciones simple"><span>Formulario de valoraciones simple</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Favicon e identidad visual mínima"><span>Favicon e identidad visual mínima</span></label>
+          </div>
+        </div></div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step" data-planes="crecimiento">
+      <div class="step-head">
+        <span class="step-num">17</span>
+        <div><h2>Extras</h2><span class="plan-badge" data-nivel="medio">Elige de 4 a 6</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">El Plan Crecimiento incluye entre 4 y 6 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" id="extras-inc-crecimiento" data-min="4" data-max="6">
+          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business"><span>Integración con Google Business</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Calendario de reservas básico"><span>Calendario de reservas básico</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Botón de WhatsApp flotante inteligente"><span>Botón de WhatsApp flotante inteligente</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
+        </div>
+
+        <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
+        <div class="hint">Cada uno, fuera de los incluidos, cuesta <b>70 € + IVA</b>.</div>
+        <select name="Extras adicionales" id="sel-extras-pago-crecimiento" onchange="alternarExtrasPago('crecimiento')">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+        <div class="depende" id="extras-pago-crecimiento-caja"><div>
+          <label class="field-label">Toca los que te falten</label>
+          <div class="chip-grid" id="extras-pago-crecimiento" data-espejo="extras-inc-crecimiento">
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Integración con Google Business"><span>Integración con Google Business</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Calendario de reservas básico"><span>Calendario de reservas básico</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Galería animada"><span>Galería animada</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Botón de WhatsApp flotante inteligente"><span>Botón de WhatsApp flotante inteligente</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
+          </div>
+        </div></div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step" data-planes="elite">
+      <div class="step-head">
+        <span class="step-num">17</span>
+        <div><h2>Extras</h2><span class="plan-badge" data-nivel="elite">Elige hasta 6 de 8</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">El Plan Élite permite elegir hasta 6 de estos 8 extras. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" id="extras-inc-elite" data-min="0" data-max="6">
+          <label class="chip"><input type="checkbox" name="Extras" value="Chat con IA / chatbot"><span>Chat con IA / chatbot</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Carrito de compra avanzado / pasarela de pago"><span>Carrito de compra avanzado / pasarela de pago</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Dashboard de analítica personalizado"><span>Dashboard de analítica personalizado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Multi-idioma"><span>Multi-idioma</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Animaciones 3D / parallax"><span>Animaciones 3D / parallax</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Panel de administración para el cliente"><span>Panel de administración para el cliente</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con automatizaciones avanzadas"><span>Newsletter con automatizaciones avanzadas</span></label>
+        </div>
+
+        <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
+        <div class="hint">Cada uno, fuera de los incluidos, cuesta <b>100 € + IVA</b>.</div>
+        <select name="Extras adicionales" id="sel-extras-pago-elite" onchange="alternarExtrasPago('elite')">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+        <div class="depende" id="extras-pago-elite-caja"><div>
+          <label class="field-label">Toca los que te falten</label>
+          <div class="chip-grid" id="extras-pago-elite" data-espejo="extras-inc-elite">
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Chat con IA / chatbot"><span>Chat con IA / chatbot</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Carrito de compra avanzado / pasarela de pago"><span>Carrito de compra avanzado / pasarela de pago</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Dashboard de analítica personalizado"><span>Dashboard de analítica personalizado</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Multi-idioma"><span>Multi-idioma</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Animaciones 3D / parallax"><span>Animaciones 3D / parallax</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Panel de administración para el cliente"><span>Panel de administración para el cliente</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Newsletter con automatizaciones avanzadas"><span>Newsletter con automatizaciones avanzadas</span></label>
+          </div>
+        </div></div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
     <!-- ================= SECCIÓN · VUESTRA WEB ================= -->
     <div class="step step--seccion" data-planes="impulso crecimiento elite">
       <div class="step-head">
@@ -666,7 +840,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 6 · DISEÑO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step step--compacto" data-planes="impulso crecimiento elite">
       <div class="step-head">
         <span class="step-num">6</span>
         <div><h2>Tu web personalizada</h2><span class="plan-badge">Incluido en todos los planes</span></div>
@@ -680,42 +854,42 @@ input[type="file"]::file-selector-button{
           <option>No</option>
         </select>
 
-        <label class="field-label" style="margin-top:22px;">¿Qué estilo os representa mejor?</label>
-        <div class="hint">Puedes elegir más de uno.</div>
-        <div class="estilos-ejemplo">
-          <div class="estilo-card"><b>Minimalista</b><span>Mucho blanco, tipografía fina, casi sin adornos. La atención va directa al producto o servicio.</span></div>
-          <div class="estilo-card"><b>Clásica y elegante</b><span>Colores cálidos, tipografía serif, composición simétrica. Transmite tradición y confianza.</span></div>
-          <div class="estilo-card"><b>Moderna y creativa</b><span>Formas dinámicas, colores vivos, animaciones sutiles. Ideal para marcas jóvenes y diferentes.</span></div>
-          <div class="estilo-card"><b>Cercana y artesanal</b><span>Texturas naturales, fotos reales, tono conversacional. Se siente hecho a mano.</span></div>
-        </div>
-        <div class="chip-grid">
-          <label class="chip"><input type="checkbox" name="Estilo" value="Moderno"><span>Moderno</span></label>
-          <label class="chip"><input type="checkbox" name="Estilo" value="Elegante"><span>Elegante</span></label>
-          <label class="chip"><input type="checkbox" name="Estilo" value="Minimalista"><span>Minimalista</span></label>
-          <label class="chip"><input type="checkbox" name="Estilo" value="Corporativo"><span>Corporativo</span></label>
-          <label class="chip"><input type="checkbox" name="Estilo" value="Creativo"><span>Creativo</span></label>
-          <label class="chip"><input type="checkbox" name="Estilo" value="Premium"><span>Premium</span></label>
-          <label class="chip"><input type="checkbox" name="Estilo" value="Cercano"><span>Cercano</span></label>
-          <label class="chip"><input type="checkbox" name="Estilo" value="Artesanal"><span>Artesanal</span></label>
+        <label class="field-label" style="margin-top:16px;">¿Qué estilo os representa mejor?</label>
+        <div class="estilos-grandes" id="estilos-grandes">
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Minimalista"><span><b>Minimalista</b><em>Mucho blanco, tipografía fina, sin adornos. La atención va directa a lo importante.</em></span></label>
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Elegante"><span><b>Clásica y elegante</b><em>Composición simétrica, tono cálido. Transmite tradición y confianza.</em></span></label>
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Creativo"><span><b>Moderna y creativa</b><em>Formas dinámicas, color con carácter. Para marcas jóvenes y distintas.</em></span></label>
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Artesanal"><span><b>Cercana y artesanal</b><em>Texturas naturales, tono conversacional. Se siente hecho a mano.</em></span></label>
         </div>
 
-        <label class="field-label" style="margin-top:22px;">Selecciona hasta tres colores para vuestra web</label>
-        <div class="hint">El primero que toques será el principal, el segundo el secundario y el tercero el de acento (botones, detalles...).</div>
+        <label class="field-label" style="margin-top:16px;">Selecciona hasta tres colores para vuestra web</label>
+        <div class="hint">Ordenados como en un círculo cromático — el primero que toques será el principal, el segundo el secundario y el tercero el de acento.</div>
         <div class="paleta" id="paleta-colores">
-          <button type="button" data-color="#DD6B3A" data-nombre="Naranja quemado" style="background:#DD6B3A" aria-label="Naranja quemado"></button>
-          <button type="button" data-color="#C9A24A" data-nombre="Mostaza dorada" style="background:#C9A24A" aria-label="Mostaza dorada"></button>
+          <button type="button" data-color="#A33B3B" data-nombre="Rojo terracota" style="background:#A33B3B" aria-label="Rojo terracota"></button>
+          <button type="button" data-color="#C0392B" data-nombre="Rojo teja" style="background:#C0392B" aria-label="Rojo teja"></button>
           <button type="button" data-color="#C1653D" data-nombre="Terracota" style="background:#C1653D" aria-label="Terracota"></button>
-          <button type="button" data-color="#7A2E2E" data-nombre="Granate" style="background:#7A2E2E" aria-label="Granate"></button>
-          <button type="button" data-color="#D9A5A0" data-nombre="Rosa empolvado" style="background:#D9A5A0" aria-label="Rosa empolvado"></button>
-          <button type="button" data-color="#8B7BB8" data-nombre="Lila" style="background:#8B7BB8" aria-label="Lila"></button>
-          <button type="button" data-color="#1F3A5F" data-nombre="Azul marino" style="background:#1F3A5F" aria-label="Azul marino"></button>
-          <button type="button" data-color="#2B4C5C" data-nombre="Azul petróleo" style="background:#2B4C5C" aria-label="Azul petróleo"></button>
-          <button type="button" data-color="#7FB69E" data-nombre="Verde menta" style="background:#7FB69E" aria-label="Verde menta"></button>
+          <button type="button" data-color="#DD6B3A" data-nombre="Naranja quemado" style="background:#DD6B3A" aria-label="Naranja quemado"></button>
+          <button type="button" data-color="#E08E45" data-nombre="Naranja miel" style="background:#E08E45" aria-label="Naranja miel"></button>
+          <button type="button" data-color="#C9A24A" data-nombre="Mostaza dorada" style="background:#C9A24A" aria-label="Mostaza dorada"></button>
+          <button type="button" data-color="#D4B94E" data-nombre="Amarillo mostaza" style="background:#D4B94E" aria-label="Amarillo mostaza"></button>
+          <button type="button" data-color="#8A9B4F" data-nombre="Verde oliva claro" style="background:#8A9B4F" aria-label="Verde oliva claro"></button>
           <button type="button" data-color="#6B7A4F" data-nombre="Verde oliva" style="background:#6B7A4F" aria-label="Verde oliva"></button>
+          <button type="button" data-color="#4C7A5E" data-nombre="Verde bosque" style="background:#4C7A5E" aria-label="Verde bosque"></button>
+          <button type="button" data-color="#7FB69E" data-nombre="Verde menta" style="background:#7FB69E" aria-label="Verde menta"></button>
+          <button type="button" data-color="#3E8E8A" data-nombre="Verde azulado" style="background:#3E8E8A" aria-label="Verde azulado"></button>
+          <button type="button" data-color="#2B4C5C" data-nombre="Azul petróleo" style="background:#2B4C5C" aria-label="Azul petróleo"></button>
+          <button type="button" data-color="#1F3A5F" data-nombre="Azul marino" style="background:#1F3A5F" aria-label="Azul marino"></button>
+          <button type="button" data-color="#3B6FA0" data-nombre="Azul cielo" style="background:#3B6FA0" aria-label="Azul cielo"></button>
+          <button type="button" data-color="#5B4B8A" data-nombre="Índigo" style="background:#5B4B8A" aria-label="Índigo"></button>
+          <button type="button" data-color="#8B7BB8" data-nombre="Lila" style="background:#8B7BB8" aria-label="Lila"></button>
+          <button type="button" data-color="#A05A8C" data-nombre="Ciruela" style="background:#A05A8C" aria-label="Ciruela"></button>
+          <button type="button" data-color="#B5567B" data-nombre="Frambuesa" style="background:#B5567B" aria-label="Frambuesa"></button>
+          <button type="button" data-color="#D9A5A0" data-nombre="Rosa empolvado" style="background:#D9A5A0" aria-label="Rosa empolvado"></button>
+          <button type="button" data-color="#F5EFE4" data-nombre="Blanco roto" style="background:#F5EFE4" aria-label="Blanco roto"></button>
           <button type="button" data-color="#E8DCC8" data-nombre="Beige cálido" style="background:#E8DCC8" aria-label="Beige cálido"></button>
+          <button type="button" data-color="#8A8A8A" data-nombre="Gris piedra" style="background:#8A8A8A" aria-label="Gris piedra"></button>
           <button type="button" data-color="#3A3A3A" data-nombre="Gris grafito" style="background:#3A3A3A" aria-label="Gris grafito"></button>
           <button type="button" data-color="#171410" data-nombre="Negro" style="background:#171410" aria-label="Negro"></button>
-          <button type="button" data-color="#F5EFE4" data-nombre="Blanco roto" style="background:#F5EFE4" aria-label="Blanco roto"></button>
         </div>
         <p class="paleta__estado" id="paleta-estado">Selecciona hasta tres colores.</p>
         <input type="hidden" name="Color principal">
@@ -724,29 +898,28 @@ input[type="file"]::file-selector-button{
         <label class="field-label">¿Algún color exacto que ya uséis? <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
         <input type="text" name="Colores" placeholder="Ej: el verde de nuestro logo, un Pantone concreto...">
 
-        <label class="field-label" style="margin-top:22px;">¿Qué tipografía representa mejor vuestra marca?</label>
-        <div class="chip-grid" id="paleta-tipos">
-          <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Fraunces — clásica y elegante"><span style="font-family:'Fraunces',serif;">Clásica</span></label>
-          <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Inter — moderna y limpia"><span style="font-family:'Inter',sans-serif;">Moderna</span></label>
-          <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Playfair Display — editorial y sofisticada"><span style="font-family:'Playfair Display',serif;">Editorial</span></label>
-          <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Poppins — cercana y redondeada"><span style="font-family:'Poppins',sans-serif;">Cercana</span></label>
-          <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Space Grotesk — atrevida y contemporánea"><span style="font-family:'Space Grotesk',sans-serif;">Atrevida</span></label>
-          <label class="chip tipo-chip"><input type="radio" name="Tipografía elegida" value="Lora — cálida y artesanal"><span style="font-family:'Lora',serif;">Artesanal</span></label>
-        </div>
-
-        <label class="field-label" style="margin-top:22px;">Referencias de webs en las que te gustaría inspirarte</label>
-        <div class="hint">Puedes pegar varias, una por línea. También vale decir qué te gusta de ellas.</div>
+        <label class="field-label" style="margin-top:16px;">Referencias de webs en las que te gustaría inspirarte</label>
         <textarea name="Webs de referencia" rows="2" placeholder="https://..."></textarea>
 
-        <label class="field-label" style="margin-top:22px;">Boceto de vuestra web</label>
-        <div class="hint">Con todo lo que nos has contado hasta ahora — juega con el estilo, los colores y la tipografía hasta que te convenza.</div>
         <div class="borrador-web" id="borrador-web">
-          <span class="borrador-web__eyebrow" id="borrador-web-eyebrow">Vuestro negocio</span>
-          <h3 class="borrador-web__titulo" id="borrador-web-titulo">Nombre del negocio</h3>
-          <p class="borrador-web__lema" id="borrador-web-lema">Aquí iría vuestra frase de bienvenida, corta y directa.</p>
-          <button type="button" class="borrador-web__boton" id="borrador-web-boton">Contactar</button>
+          <div class="borrador-web__nav">
+            <span class="borrador-web__logo"></span>
+            <span class="borrador-web__navlinks"><i></i><i></i><i></i></span>
+            <span class="borrador-web__navboton"></span>
+          </div>
+          <div class="borrador-web__hero">
+            <span class="borrador-web__eyebrow" id="borrador-web-eyebrow">Vuestro negocio</span>
+            <h3 class="borrador-web__titulo" id="borrador-web-titulo">Nombre del negocio</h3>
+            <p class="borrador-web__lema" id="borrador-web-lema">Aquí iría vuestra frase de bienvenida, corta y directa.</p>
+            <button type="button" class="borrador-web__boton" id="borrador-web-boton">Contactar</button>
+          </div>
+          <div class="borrador-web__tarjetas">
+            <span class="borrador-web__tarjeta"></span>
+            <span class="borrador-web__tarjeta"></span>
+            <span class="borrador-web__tarjeta"></span>
+          </div>
         </div>
-        <p class="borrador-web__nota">Esto es solo una idea orientativa de vuestra web — el diseño real lo creamos nosotros.</p>
+        <p class="borrador-web__nota">Boceto orientativo de vuestra web, con el estilo, los colores y todo lo que nos has contado — el diseño real lo creamos nosotros.</p>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -774,7 +947,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 8 · BLOG ================= -->
-    <div class="step" data-planes="crecimiento elite">
+    <div class="step" data-planes="crecimiento elite" data-extra="Blog asistido con IA">
       <div class="step-head">
         <span class="step-num">8</span>
         <div><h2>Blog o galería</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
@@ -785,7 +958,6 @@ input[type="file"]::file-selector-button{
           <option value="" selected></option>
           <option value="Sí">Sí</option>
           <option value="No">No</option>
-          <option value="Aún no lo tengo claro">Aún no lo tengo claro</option>
         </select>
 
         <div class="depende" id="blog-extra"><div>
@@ -805,7 +977,6 @@ input[type="file"]::file-selector-button{
             <option value="" selected></option>
             <option>Sí</option>
             <option>No</option>
-            <option>Aún no lo tengo claro</option>
           </select>
         </div></div>
       </div>
@@ -813,7 +984,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 9 · RESERVAS ================= -->
-    <div class="step" data-planes="crecimiento elite">
+    <div class="step" data-planes="crecimiento elite" data-extra="Calendario de reservas básico">
       <div class="step-head">
         <span class="step-num">9</span>
         <div><h2>Reservas y citas</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
@@ -858,7 +1029,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 10 · TIENDA ================= -->
-    <div class="step" data-planes="elite">
+    <div class="step" data-planes="elite" data-extra="Carrito de compra avanzado / pasarela de pago">
       <div class="step-head">
         <span class="step-num">10</span>
         <div><h2>Tienda online y pagos</h2><span class="plan-badge" data-nivel="elite">Solo Plan Élite</span></div>
@@ -890,7 +1061,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 11 · IA Y PANEL ================= -->
-    <div class="step" data-planes="elite">
+    <div class="step" data-planes="elite" data-extra="Chat con IA / chatbot|Panel de administración para el cliente">
       <div class="step-head">
         <span class="step-num">11</span>
         <div><h2>Inteligencia artificial y panel</h2><span class="plan-badge" data-nivel="elite">Solo Plan Élite</span></div>
@@ -913,7 +1084,6 @@ input[type="file"]::file-selector-button{
           <option value="" selected></option>
           <option>Sí</option>
           <option>No</option>
-          <option>Aún no lo tengo claro</option>
         </select>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -942,10 +1112,10 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 13 · FAQ ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-planes="impulso crecimiento elite" data-extra="Sección de FAQ desplegable">
       <div class="step-head">
         <span class="step-num">13</span>
-        <div><h2>Preguntas frecuentes</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Preguntas frecuentes</h2><span class="plan-badge" data-nivel="medio">Solo si eliges el extra de FAQ</span></div>
       </div>
       <div class="step-cuerpo">
         <p class="step-sub">Escribe la pregunta y, justo debajo, la respuesta que quieres que aparezca. Añade tantas como quieras.</p>
@@ -959,7 +1129,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="impulso crecimiento elite">
       <div class="step-head">
         <span class="step-num">14</span>
-        <div><h2>Que te encuentren en Google</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Posicionamiento y geolocalización</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿En qué zona trabajáis?</label>
@@ -1015,7 +1185,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 16 · NEWSLETTER ================= -->
-    <div class="step" data-planes="crecimiento elite">
+    <div class="step" data-planes="crecimiento elite" data-extra="Newsletter con bienvenida automática|Newsletter con automatizaciones avanzadas">
       <div class="step-head">
         <span class="step-num">16</span>
         <div><h2>Newsletter</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
@@ -1026,7 +1196,6 @@ input[type="file"]::file-selector-button{
           <option value="" selected></option>
           <option value="Sí">Sí</option>
           <option value="No">No</option>
-          <option value="Aún no lo tengo claro">Aún no lo tengo claro</option>
         </select>
         <div class="depende" id="news-extra"><div>
           <label class="field-label">¿Tenéis ya una lista de contactos?</label>
@@ -1044,90 +1213,6 @@ input[type="file"]::file-selector-button{
             <option>No</option>
           </select>
         </div></div>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= SECCIÓN · EXTRAS ================= -->
-    <div class="step step--seccion" data-planes="impulso crecimiento elite">
-      <div class="step-head">
-        <span class="step-num">§</span>
-        <div><h2>Sección · Extras</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="seccion-intro">Por último, elige los extras de tu plan. Tienes un mínimo y un máximo incluidos — si quieres más, también se puede.</p>
-      </div>
-    </div>
-
-    <!-- ================= 17 · EXTRAS ================= -->
-    <div class="step" data-planes="impulso">
-      <div class="step-head">
-        <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge">Elige de 2 a 4</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="step-sub">El Plan Impulso incluye entre 2 y 4 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" data-min="2" data-max="4">
-          <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Certificado SSL gestionado"><span>Certificado SSL gestionado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones simple"><span>Formulario de valoraciones simple</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Favicon e identidad visual mínima"><span>Favicon e identidad visual mínima</span></label>
-        </div>
-        <div class="note-box"><b>¿Quieres más de los 4 incluidos?</b> Cada extra adicional cuesta <b>60 € + IVA</b>.</div>
-        <label class="field-label">¿Cuáles te interesan de pago, además de los que ya has marcado?</label>
-        <textarea name="Extras de pago adicionales" rows="2" placeholder="Cuéntanos cuáles y cuántos"></textarea>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <div class="step" data-planes="crecimiento">
-      <div class="step-head">
-        <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge" data-nivel="medio">Elige de 4 a 6</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="step-sub">El Plan Crecimiento incluye entre 4 y 6 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" data-min="4" data-max="6">
-          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business"><span>Integración con Google Business</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Calendario de reservas básico"><span>Calendario de reservas básico</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Botón de WhatsApp flotante inteligente"><span>Botón de WhatsApp flotante inteligente</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
-        </div>
-        <div class="note-box"><b>¿Quieres más de los 6 incluidos?</b> Cada extra adicional cuesta <b>70 € + IVA</b>.</div>
-        <label class="field-label">¿Cuáles te interesan de pago, además de los que ya has marcado?</label>
-        <textarea name="Extras de pago adicionales" rows="2" placeholder="Cuéntanos cuáles y cuántos"></textarea>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <div class="step" data-planes="elite">
-      <div class="step-head">
-        <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge" data-nivel="elite">Elige hasta 6 de 8</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="step-sub">El Plan Élite permite elegir hasta 6 de estos 8 extras. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" data-min="0" data-max="6">
-          <label class="chip"><input type="checkbox" name="Extras" value="Chat con IA / chatbot"><span>Chat con IA / chatbot</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Carrito de compra avanzado / pasarela de pago"><span>Carrito de compra avanzado / pasarela de pago</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Dashboard de analítica personalizado"><span>Dashboard de analítica personalizado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Multi-idioma"><span>Multi-idioma</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Animaciones 3D / parallax"><span>Animaciones 3D / parallax</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Panel de administración para el cliente"><span>Panel de administración para el cliente</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con automatizaciones avanzadas"><span>Newsletter con automatizaciones avanzadas</span></label>
-        </div>
-        <div class="note-box"><b>¿Quieres más de los 6 incluidos?</b> Cada extra adicional cuesta <b>100 € + IVA</b>.</div>
-        <label class="field-label">¿Cuáles te interesan de pago, además de los que ya has marcado?</label>
-        <textarea name="Extras de pago adicionales" rows="2" placeholder="Cuéntanos cuáles y cuántos"></textarea>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1151,7 +1236,6 @@ input[type="file"]::file-selector-button{
           <option value="" selected></option>
           <option>Sí, los adjunto</option>
           <option>No, necesitamos que se redacten</option>
-          <option>No lo sé</option>
         </select>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -1161,7 +1245,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="impulso crecimiento elite">
       <div class="step-head">
         <span class="step-num">19</span>
-        <div><h2>Dominio y alojamiento</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Dominio y hosting</h2><span class="plan-badge">Incluido en todos los planes</span></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Tenéis dominio propio?</label>
@@ -1172,13 +1256,16 @@ input[type="file"]::file-selector-button{
         </select>
         <label class="field-label">Si lo tenéis, ¿dónde está registrado?</label>
         <input type="text" name="Dónde está el dominio" placeholder="Ej: GoDaddy, IONOS, Namecheap...">
-        <label class="field-label">¿Y alojamiento contratado?</label>
-        <select name="Tiene alojamiento">
+        <label class="field-label">¿Y hosting contratado?</label>
+        <select name="Tiene alojamiento" id="sel-hosting" onchange="alternarHosting()">
           <option value="" selected></option>
           <option>Sí</option>
           <option>No</option>
-          <option>No lo sé</option>
         </select>
+        <div class="depende" id="hosting-extra"><div>
+          <label class="field-label">¿Dónde tenéis contratado el hosting?</label>
+          <input type="text" name="Dónde está el hosting" placeholder="Ej: Hostinger, SiteGround, Raiola...">
+        </div></div>
         <div class="note-box">No pongas aquí ninguna contraseña. Si hacen falta accesos, te los pediremos después por un canal privado.</div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -1490,28 +1577,12 @@ input[type="file"]::file-selector-button{
       });
     });
 
-    var FUENTES = {
-      'Fraunces — clásica y elegante': "'Fraunces',serif",
-      'Inter — moderna y limpia': "'Inter',sans-serif",
-      'Playfair Display — editorial y sofisticada': "'Playfair Display',serif",
-      'Poppins — cercana y redondeada': "'Poppins',sans-serif",
-      'Space Grotesk — atrevida y contemporánea': "'Space Grotesk',sans-serif",
-      'Lora — cálida y artesanal': "'Lora',serif"
-    };
-    document.querySelectorAll('input[name="Tipografía elegida"]').forEach(function(r){
-      r.addEventListener('change', actualizarBorrador);
-    });
-
-    // El estilo marcado también cambia el aspecto del boceto (bordes, sombra...)
-    var ESTILO_A_CLASE = {
-      'Minimalista': 'borrador-web--minimalista',
-      'Elegante': 'borrador-web--clasica',
-      'Corporativo': 'borrador-web--clasica',
-      'Premium': 'borrador-web--clasica',
-      'Moderno': 'borrador-web--moderna',
-      'Creativo': 'borrador-web--moderna',
-      'Cercano': 'borrador-web--artesanal',
-      'Artesanal': 'borrador-web--artesanal'
+    // Cada estilo trae su propia tipografía y su propio aspecto de boceto
+    var ESTILO_INFO = {
+      'Minimalista': {clase:'borrador-web--minimalista', fuente:"'Inter',sans-serif"},
+      'Elegante':    {clase:'borrador-web--clasica',     fuente:"'Playfair Display',serif"},
+      'Creativo':    {clase:'borrador-web--moderna',     fuente:"'Space Grotesk',sans-serif"},
+      'Artesanal':   {clase:'borrador-web--artesanal',   fuente:"'Lora',serif"}
     };
     document.querySelectorAll('input[name="Estilo"]').forEach(function(c){
       c.addEventListener('change', actualizarBorrador);
@@ -1524,18 +1595,15 @@ input[type="file"]::file-selector-button{
       var c2 = (elegidos[1] && elegidos[1].dataset.color) || '#26201a';
       var c3 = (elegidos[2] && elegidos[2].dataset.color) || '#DD6B3A';
       var tinta = claroUOscuro(c1);
-      var fuenteEl = document.querySelector('input[name="Tipografía elegida"]:checked');
-      var fuente = FUENTES[fuenteEl && fuenteEl.value] || "'Fraunces',serif";
+
+      var estiloEl = document.querySelector('input[name="Estilo"]:checked');
+      var info = ESTILO_INFO[estiloEl && estiloEl.value] || {clase:'', fuente:"'Fraunces',serif"};
+      cajaBorrador.className = 'borrador-web' + (info.clase ? ' ' + info.clase : '');
 
       cajaBorrador.style.background = 'linear-gradient(135deg, ' + c1 + ', ' + c2 + ')';
       cajaBorrador.style.color = tinta;
-      cajaBorrador.querySelector('#borrador-web-titulo').style.fontFamily = fuente;
-      cajaBorrador.querySelector('#borrador-web-lema').style.fontFamily = fuente;
-
-      // El último estilo marcado manda en el aspecto del boceto
-      var estiloEl = document.querySelectorAll('input[name="Estilo"]:checked');
-      var claseEstilo = estiloEl.length ? ESTILO_A_CLASE[estiloEl[estiloEl.length - 1].value] : null;
-      cajaBorrador.className = 'borrador-web' + (claseEstilo ? ' ' + claseEstilo : '');
+      cajaBorrador.querySelector('#borrador-web-titulo').style.fontFamily = info.fuente;
+      cajaBorrador.querySelector('#borrador-web-lema').style.fontFamily = info.fuente;
 
       // Se apoya en todo lo contado hasta ahora: negocio, a qué se dedica y objetivo
       var nombre = (document.querySelector('[name="Nombre del negocio"]') || {}).value;
@@ -1548,6 +1616,7 @@ input[type="file"]::file-selector-button{
       var boton = cajaBorrador.querySelector('#borrador-web-boton');
       boton.style.background = c3;
       boton.style.color = claroUOscuro(c3);
+      cajaBorrador.querySelectorAll('.borrador-web__tarjeta').forEach(function(t){ t.style.background = c3; t.style.opacity = '.28'; });
     };
     document.addEventListener('input', function(e){
       var n = e.target && e.target.name;
@@ -1575,7 +1644,32 @@ input[type="file"]::file-selector-button{
     abrir('reserva-varios', v === 'Más de uno');
     if(v === 'Más de uno' && !cuenta.reserva) añadirReserva();
   };
-  alternarBlog(); alternarNewsletter(); alternarReservas();
+  window.alternarHosting = function(){
+    abrir('hosting-extra', document.getElementById('sel-hosting').value === 'Sí');
+  };
+  window.alternarExtrasPago = function(plan){
+    abrir('extras-pago-' + plan + '-caja', document.getElementById('sel-extras-pago-' + plan).value === 'Sí');
+  };
+  alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting();
+  ['impulso', 'crecimiento', 'elite'].forEach(function(plan){ alternarExtrasPago(plan); });
+
+  /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
+  var sincronizarExtrasPago = [];
+  document.querySelectorAll('.chip-grid[data-espejo]').forEach(function(gridPago){
+    var gridIncluidos = document.getElementById(gridPago.dataset.espejo);
+    if(!gridIncluidos) return;
+    function sincronizar(){
+      var marcados = Array.prototype.slice.call(gridIncluidos.querySelectorAll('input:checked')).map(function(c){ return c.value; });
+      gridPago.querySelectorAll('input[type=checkbox]').forEach(function(c){
+        var yaIncluido = marcados.indexOf(c.value) > -1;
+        c.disabled = yaIncluido;
+        if(yaIncluido) c.checked = false;
+      });
+    }
+    gridIncluidos.addEventListener('change', sincronizar);
+    sincronizarExtrasPago.push(sincronizar);
+    sincronizar();
+  });
 
   /* ---------- Ocultar un bloque entero ---------- */
   document.querySelectorAll('[data-ocultar]').forEach(function(casilla){
@@ -1608,16 +1702,16 @@ input[type="file"]::file-selector-button{
     'Inteligencia artificial y panel': {cat:'Funciones',  icono:String.fromCodePoint(0x1F916)},
     'Lo que dicen de vosotros':        {cat:'Confianza',  icono:String.fromCodePoint(0x2B50)},
     'Preguntas frecuentes':            {cat:'Confianza',  icono:String.fromCodePoint(0x2753)},
-    'Que te encuentren en Google':     {cat:'Difusion',   icono:String.fromCodePoint(0x1F50D)},
+    'Posicionamiento y geolocalizacion': {cat:'Difusion', icono:String.fromCodePoint(0x1F50D)},
     'Redes sociales y Google':         {cat:'Difusion',   icono:String.fromCodePoint(0x1F4F1)},
     'Newsletter':                      {cat:'Difusion',   icono:String.fromCodePoint(0x2709)},
     'Seccion · Extras':                {cat:'Extras',     icono:String.fromCodePoint(0x1F4D6)},
     'Extras':                          {cat:'Extras',     icono:String.fromCodePoint(0x2728)},
     'Datos legales':                   {cat:'Legal',      icono:String.fromCodePoint(0x2696)},
-    'Dominio y alojamiento':           {cat:'Legal',      icono:String.fromCodePoint(0x1F310)},
-    'Preferencias y lineas rojas':     {cat:'Cierre',     icono:String.fromCodePoint(0x1F6A6)},
-    'Archivos':                        {cat:'Cierre',     icono:String.fromCodePoint(0x1F4C1)},
-    'Tus datos':                       {cat:'Cierre',     icono:String.fromCodePoint(0x2705)}
+    'Dominio y hosting':               {cat:'Legal',      icono:String.fromCodePoint(0x1F310)},
+    'Preferencias y lineas rojas':     {cat:'Legal',     icono:String.fromCodePoint(0x1F6A6)},
+    'Archivos':                        {cat:'Legal',     icono:String.fromCodePoint(0x1F4C1)},
+    'Tus datos':                       {cat:'Legal',     icono:String.fromCodePoint(0x2705)}
   };
   function sinAcentos(t){
     return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[¿?¡!]/g, '').trim();
@@ -1630,14 +1724,17 @@ input[type="file"]::file-selector-button{
   /* ---------- Solo las preguntas del plan elegido ---------- */
   var bloques = Array.prototype.slice.call(document.querySelectorAll('.step[data-planes]'));
   var indice = 0;
-  function aplicarPlan(){
+  function recalcularVisibilidad(){
     var elegido = document.querySelector('input[name="Plan"]:checked');
     // Sin tildes: el valor es "Élite" y la etiqueta del bloque, "elite"
     var plan = elegido ? elegido.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'') : null;
-    var todos = !plan || plan.indexOf('aun') === 0;
+    var todos = !plan;
+    var extrasElegidos = Array.prototype.slice.call(document.querySelectorAll('input[name="Extras"]:checked')).map(function(c){ return c.value; });
 
     bloques.forEach(function(b){
-      var sirve = todos || b.dataset.planes.split(' ').indexOf(plan) > -1;
+      var encajaPlan = todos || b.dataset.planes.split(' ').indexOf(plan) > -1;
+      var encajaExtra = todos || !b.dataset.extra || b.dataset.extra.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
+      var sirve = encajaPlan && encajaExtra;
       b.hidden = !sirve;
       // Un bloque escondido tampoco debe enviarse ni exigir respuesta
       b.querySelectorAll('.step-cuerpo input,.step-cuerpo select,.step-cuerpo textarea').forEach(function(c){
@@ -1653,9 +1750,20 @@ input[type="file"]::file-selector-button{
     if(typeof gruposExtras !== 'undefined'){
       gruposExtras.forEach(function(grid){ actualizarGrupoExtras(grid); });
     }
+    if(typeof sincronizarExtrasPago !== 'undefined'){
+      sincronizarExtrasPago.forEach(function(fn){ fn(); });
+    }
     renumerar();
+  }
+  function aplicarPlan(){
+    recalcularVisibilidad();
     mostrarPaso(indice);
   }
+  // Elegir o quitar un extra puede abrir o cerrar preguntas más adelante,
+  // pero sin saltar de pantalla ni robar el foco mientras se sigue marcando
+  document.querySelectorAll('input[name="Extras"]').forEach(function(c){
+    c.addEventListener('change', recalcularVisibilidad);
+  });
   function renumerar(){
     bloques.forEach(function(b){
       if(b.hidden) return;
@@ -1689,17 +1797,6 @@ input[type="file"]::file-selector-button{
   function pasosVisibles(){
     return bloques.filter(function(b){ return !b.hidden; });
   }
-  /** Un paso sin nada obligatorio ni ya respondido se puede saltar. */
-  function pasoEsSaltable(paso){
-    if(paso.querySelector('[required]')) return false;
-    var contestado = false;
-    paso.querySelectorAll('input,select,textarea').forEach(function(c){
-      if(contestado || c.disabled) return;
-      if(c.type === 'checkbox' || c.type === 'radio'){ if(c.checked) contestado = true; }
-      else if(c.value && c.value.trim()) contestado = true;
-    });
-    return !contestado;
-  }
   function pintarCategorias(pasos){
     if(!cajaCategorias) return;
     var vistas = [];
@@ -1725,9 +1822,7 @@ input[type="file"]::file-selector-button{
     navAtras.hidden = indice === 0;
     var esUltimo = indice === pasos.length - 1;
     var esSeccion = actual.classList.contains('step--seccion');
-    var saltable = !esUltimo && !esSeccion && pasoEsSaltable(actual);
-    navSiguiente.classList.toggle('nav-siguiente--saltar', saltable);
-    navSiguiente.textContent = esUltimo ? 'Enviar mi proyecto' : (esSeccion ? 'Empezar →' : (saltable ? 'Saltar →' : 'Siguiente →'));
+    navSiguiente.textContent = esUltimo ? 'Enviar mi proyecto' : (esSeccion ? 'Empezar →' : 'Siguiente →');
     navContador.textContent = 'Pregunta ' + (indice + 1) + ' de ' + pasos.length;
     barra.style.width = Math.round((indice + 1) / pasos.length * 100) + '%';
     pct.textContent = (indice + 1) + ' / ' + pasos.length;
@@ -1872,7 +1967,7 @@ input[type="file"]::file-selector-button{
   formulario.addEventListener('change', guardarBorrador);
 
   if(recuperarBorrador()){
-    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas();
+    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting();
     var nota = document.createElement('p');
     nota.className = 'borrador';
     nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
