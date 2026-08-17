@@ -720,6 +720,19 @@ input[type="file"]::file-selector-button{
           <label class="chip"><input type="checkbox" name="Extras" value="Favicon e identidad visual mínima"><span>Favicon e identidad visual mínima</span></label>
         </div>
 
+        <div data-requiere-extra="QR personalizado">
+          <label class="field-label" style="margin-top:16px;">¿A dónde debe llevar el código QR?</label>
+          <input type="text" name="Destino del QR" placeholder="Ej: a la carta, a WhatsApp, a la ficha de Google...">
+        </div>
+        <div data-requiere-extra="Página de agradecimiento personalizada">
+          <label class="field-label" style="margin-top:16px;">¿Qué quieres que diga la página de agradecimiento?</label>
+          <textarea name="Texto de la página de agradecimiento" rows="2" placeholder="Lo que ve quien acaba de escribiros o comprar"></textarea>
+        </div>
+        <div data-requiere-extra="Formulario de valoraciones simple">
+          <label class="field-label" style="margin-top:16px;">¿A qué correo deben llegar las valoraciones?</label>
+          <input type="email" name="Correo para valoraciones" placeholder="Si es distinto del de contacto">
+        </div>
+
         <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
         <div class="hint">Cada uno, fuera de los incluidos, cuesta <b>60 € + IVA</b>.</div>
         <select name="Extras adicionales" id="sel-extras-pago-impulso" onchange="alternarExtrasPago('impulso')">
@@ -760,6 +773,15 @@ input[type="file"]::file-selector-button{
           <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Botón de WhatsApp flotante inteligente"><span>Botón de WhatsApp flotante inteligente</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
+        </div>
+
+        <div data-requiere-extra="Integración con Google Business">
+          <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
+          <input type="url" name="Enlace de Google Business" placeholder="Pega el enlace si ya la tenéis">
+        </div>
+        <div data-requiere-extra="Botón de WhatsApp flotante inteligente">
+          <label class="field-label" style="margin-top:16px;">¿Qué mensaje predefinido quieres que lleve el botón de WhatsApp?</label>
+          <input type="text" name="Mensaje del botón de WhatsApp" placeholder="Ej: Hola, quiero pedir información sobre...">
         </div>
 
         <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
@@ -946,6 +968,29 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
+    <!-- ================= 7B · IDIOMAS ================= -->
+    <div class="step" data-planes="elite" data-extra="Multi-idioma">
+      <div class="step-head">
+        <span class="step-num">7</span>
+        <div><h2>Idiomas de la web</h2><span class="plan-badge" data-nivel="elite">Solo Plan Élite</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">Además del español, ¿a qué idioma queréis traducir la web?</label>
+        <div class="hint">Elige uno — si necesitáis más de uno, decídnoslo en las notas de más abajo.</div>
+        <div class="radio-row">
+          <label><input type="radio" name="Idioma adicional" value="Inglés"><span><b>Inglés</b></span></label>
+          <label><input type="radio" name="Idioma adicional" value="Francés"><span><b>Francés</b></span></label>
+          <label><input type="radio" name="Idioma adicional" value="Alemán"><span><b>Alemán</b></span></label>
+          <label><input type="radio" name="Idioma adicional" value="Portugués"><span><b>Portugués</b></span></label>
+          <label><input type="radio" name="Idioma adicional" value="Italiano"><span><b>Italiano</b></span></label>
+          <label><input type="radio" name="Idioma adicional" value="Otro"><span><b>Otro</b><span class="d">Nos lo cuentas abajo</span></span></label>
+        </div>
+        <label class="field-label">¿Algo más sobre los idiomas?</label>
+        <textarea name="Notas de idiomas" rows="2" placeholder="Otro idioma, traducción automática vs. revisada a mano..."></textarea>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
     <!-- ================= 8 · BLOG ================= -->
     <div class="step" data-planes="crecimiento elite" data-extra="Blog asistido con IA">
       <div class="step-head">
@@ -1056,6 +1101,14 @@ input[type="file"]::file-selector-button{
         <textarea name="Envíos" rows="2" placeholder="Zonas, precios, plazos, envío gratis a partir de..."></textarea>
         <label class="field-label">¿Y las devoluciones?</label>
         <textarea name="Devoluciones" rows="2"></textarea>
+        <label class="field-label">¿Facturación automática a cada compra?</label>
+        <select name="Facturación automática">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+        <label class="field-label">¿Usáis ya algún sistema de stock, ERP o TPV que debamos conectar?</label>
+        <input type="text" name="Sistema de stock a conectar" placeholder="Déjalo en blanco si no usáis ninguno">
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1067,24 +1120,44 @@ input[type="file"]::file-selector-button{
         <div><h2>Inteligencia artificial y panel</h2><span class="plan-badge" data-nivel="elite">Solo Plan Élite</span></div>
       </div>
       <div class="step-cuerpo">
-        <label class="field-label">¿Qué queréis que haga el chat con IA de vuestra web?</label>
-        <div class="chip-grid">
-          <label class="chip"><input type="checkbox" name="Chat IA" value="Resolver dudas frecuentes"><span>Resolver dudas frecuentes</span></label>
-          <label class="chip"><input type="checkbox" name="Chat IA" value="Recomendar productos"><span>Recomendar productos</span></label>
-          <label class="chip"><input type="checkbox" name="Chat IA" value="Ayudar con la compra"><span>Ayudar con la compra</span></label>
-          <label class="chip"><input type="checkbox" name="Chat IA" value="Recoger datos de contacto"><span>Recoger datos de contacto</span></label>
-          <label class="chip"><input type="checkbox" name="Chat IA" value="Concertar citas"><span>Concertar citas</span></label>
+        <div data-requiere-extra="Chat con IA / chatbot">
+          <label class="field-label">¿Qué queréis que haga el chat con IA de vuestra web?</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Resolver dudas frecuentes"><span>Resolver dudas frecuentes</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Recomendar productos"><span>Recomendar productos</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Ayudar con la compra"><span>Ayudar con la compra</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Recoger datos de contacto"><span>Recoger datos de contacto</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Concertar citas"><span>Concertar citas</span></label>
+          </div>
+          <label class="field-label">¿Con qué tono debe hablar el chat?</label>
+          <input type="text" name="Tono del chat IA" placeholder="Ej: cercano y directo, formal, divertido...">
+          <label class="field-label">Si no sabe responder, ¿lo derivamos a WhatsApp o a un correo?</label>
+          <input type="text" name="Derivación del chat IA" placeholder="Ej: a vuestro WhatsApp, a este mismo correo...">
         </div>
-        <label class="field-label">¿Quién va a gestionar la web una vez esté hecha?</label>
-        <input type="text" name="Quién gestiona la web" placeholder="Ej: yo misma, mi equipo, nadie por ahora">
-        <label class="field-label">¿Qué querríais poder cambiar por vuestra cuenta desde el panel?</label>
-        <textarea name="Qué gestionar desde el panel" rows="2" placeholder="Productos, precios, fotos, entradas del blog, horarios..."></textarea>
-        <label class="field-label">¿Queréis una sesión de formación para manejarlo?</label>
-        <select name="Formación">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
+
+        <div data-requiere-extra="Panel de administración para el cliente">
+          <label class="field-label" style="margin-top:16px;">¿Quién va a gestionar la web una vez esté hecha?</label>
+          <input type="text" name="Quién gestiona la web" placeholder="Ej: yo misma, mi equipo, nadie por ahora">
+          <label class="field-label">¿Qué querríais poder cambiar por vuestra cuenta desde el panel?</label>
+          <textarea name="Qué gestionar desde el panel" rows="2" placeholder="Productos, precios, fotos, entradas del blog, horarios..."></textarea>
+          <label class="field-label">¿Queréis una sesión de formación para manejarlo?</label>
+          <select name="Formación">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div data-requiere-extra="Dashboard de analítica personalizado">
+          <label class="field-label" style="margin-top:16px;">¿Qué te interesa ver en el dashboard de analítica?</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Visitas y origen del tráfico"><span>Visitas y origen del tráfico</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Ventas y facturación"><span>Ventas y facturación</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Productos más vistos o vendidos"><span>Productos más vistos o vendidos</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Tasa de conversión"><span>Tasa de conversión</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Reservas o citas"><span>Reservas o citas</span></label>
+          </div>
+        </div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1101,12 +1174,26 @@ input[type="file"]::file-selector-button{
         <input type="url" name="Enlace a reseñas de Google" placeholder="https://...">
         <label class="field-label">Opiniones sueltas que quieras destacar</label>
         <textarea name="Testimonios escritos" rows="3" placeholder="Pega aquí las que más te gusten, con el nombre de quien las dijo."></textarea>
-        <label class="field-label">Vídeos de clientes hablando de vosotros</label>
-        <div class="hint">Si ya están colgados en Instagram, Drive o YouTube, pega los enlaces.</div>
-        <textarea name="Enlaces a vídeos de testimonios" rows="2" placeholder="https://..."></textarea>
-        <label class="field-label">¿Tenéis vídeos guardados en el móvil o el ordenador que aún no estén subidos a ningún sitio?</label>
-        <div class="hint">Súbelos a Google Drive o WeTransfer (gratis, sin cuenta) y pega aquí el enlace — los vídeos pesan demasiado para ir por correo.</div>
-        <input type="url" name="Enlace a vídeos sin subir" placeholder="https://...">
+
+        <div data-requiere-extra="Testimonios en vídeo">
+          <label class="field-label" style="margin-top:16px;">Vídeos de clientes hablando de vosotros</label>
+          <div class="hint">Si ya están colgados en Instagram, Drive o YouTube, pega los enlaces.</div>
+          <textarea name="Enlaces a vídeos de testimonios" rows="2" placeholder="https://..."></textarea>
+          <label class="field-label">¿Tenéis vídeos guardados en el móvil o el ordenador que aún no estén subidos a ningún sitio?</label>
+          <div class="hint">Súbelos a Google Drive o WeTransfer (gratis, sin cuenta) y pega aquí el enlace — los vídeos pesan demasiado para ir por correo.</div>
+          <input type="url" name="Enlace a vídeos sin subir" placeholder="https://...">
+          <label class="field-label">¿No tenéis todavía vídeos de testimonios grabados?</label>
+          <select name="Necesita contenido audiovisual" id="sel-audiovisual" onchange="alternarAudiovisual()">
+            <option value="" selected></option>
+            <option>Ya los tenemos</option>
+            <option>Nos interesa un presupuesto aparte para grabarlos</option>
+          </select>
+          <div class="depende" id="audiovisual-extra"><div>
+            <div class="note-box">Perfecto — la grabación de vídeo no está incluida en el plan, así que os pasamos un presupuesto aparte una vez veamos el resto del proyecto.</div>
+            <label class="field-label">¿Algo que debamos saber para ese presupuesto?</label>
+            <textarea name="Notas contenido audiovisual" rows="2" placeholder="Cuántos vídeos, de quién, dónde se grabarían..."></textarea>
+          </div></div>
+        </div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1212,6 +1299,15 @@ input[type="file"]::file-selector-button{
             <option>Sí</option>
             <option>No</option>
           </select>
+          <div data-requiere-extra="Newsletter con automatizaciones avanzadas">
+            <label class="field-label" style="margin-top:16px;">¿Qué automatizaciones os interesan?</label>
+            <div class="chip-grid">
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Carrito abandonado"><span>Carrito abandonado</span></label>
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Recordatorio de cita o reserva"><span>Recordatorio de cita o reserva</span></label>
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Felicitación de cumpleaños"><span>Felicitación de cumpleaños</span></label>
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Serie de bienvenida en varios correos"><span>Serie de bienvenida en varios correos</span></label>
+            </div>
+          </div>
         </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -1650,7 +1746,11 @@ input[type="file"]::file-selector-button{
   window.alternarExtrasPago = function(plan){
     abrir('extras-pago-' + plan + '-caja', document.getElementById('sel-extras-pago-' + plan).value === 'Sí');
   };
-  alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting();
+  window.alternarAudiovisual = function(){
+    var el = document.getElementById('sel-audiovisual');
+    abrir('audiovisual-extra', !!el && el.value === 'Nos interesa un presupuesto aparte para grabarlos');
+  };
+  alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
   ['impulso', 'crecimiento', 'elite'].forEach(function(plan){ alternarExtrasPago(plan); });
 
   /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
@@ -1696,6 +1796,7 @@ input[type="file"]::file-selector-button{
     'Seccion · Tu web personalizada':  {cat:'Diseño',     icono:String.fromCodePoint(0x1F4D6)},
     'Tu web personalizada':            {cat:'Diseño',     icono:String.fromCodePoint(0x1F3A8)},
     'Textos':                          {cat:'Diseño',     icono:String.fromCodePoint(0x270D)},
+    'Idiomas de la web':               {cat:'Diseño',     icono:String.fromCodePoint(0x1F310)},
     'Blog o galeria':                  {cat:'Funciones',  icono:String.fromCodePoint(0x1F4F0)},
     'Reservas y citas':                {cat:'Funciones',  icono:String.fromCodePoint(0x1F4C5)},
     'Tienda online y pagos':           {cat:'Funciones',  icono:String.fromCodePoint(0x1F6D2)},
@@ -1753,6 +1854,20 @@ input[type="file"]::file-selector-button{
     if(typeof sincronizarExtrasPago !== 'undefined'){
       sincronizarExtrasPago.forEach(function(fn){ fn(); });
     }
+    // Preguntas sueltas dentro de un paso, atadas a un extra concreto
+    document.querySelectorAll('[data-requiere-extra]').forEach(function(bloque){
+      var aplica = bloque.dataset.requiereExtra.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
+      bloque.hidden = !aplica;
+      bloque.querySelectorAll('input,select,textarea').forEach(function(c){
+        if(!aplica){
+          if(c.required){ c.dataset.eraObligatorio = '1'; c.required = false; }
+          c.disabled = true;
+        } else {
+          c.disabled = false;
+          if(c.dataset.eraObligatorio) c.required = true;
+        }
+      });
+    });
     renumerar();
   }
   function aplicarPlan(){
@@ -1967,7 +2082,7 @@ input[type="file"]::file-selector-button{
   formulario.addEventListener('change', guardarBorrador);
 
   if(recuperarBorrador()){
-    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting();
+    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
     var nota = document.createElement('p');
     nota.className = 'borrador';
     nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
