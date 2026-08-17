@@ -160,6 +160,8 @@ header p{color:var(--muted);font-size:12.5px;max-width:480px;margin:8px auto 0;l
   display:grid;place-items:center;font-size:12.5px;font-weight:700;
   color:#231c14;background:var(--degradado);
 }
+.step-num svg{width:16px;height:16px;}
+.step--seccion .step-num svg{width:26px;height:26px;}
 .step-head h2{font-size:19px;line-height:1.25;}
 
 /* Distintivo del plan al que pertenece cada bloque */
@@ -850,124 +852,6 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
-    <!-- ================= SECCIÓN · VUESTRA WEB ================= -->
-    <div class="step step--seccion" data-planes="impulso crecimiento elite">
-      <div class="step-head">
-        <span class="step-num">§</span>
-        <div><h2>Sección · Tu web personalizada</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="seccion-intro">Ahora el diseño: colores, estilo y tipografía. Puedes jugar con un pequeño borrador de la portada antes de decidirte.</p>
-      </div>
-    </div>
-
-    <!-- ================= 6 · DISEÑO ================= -->
-    <div class="step step--compacto" data-planes="impulso crecimiento elite">
-      <div class="step-head">
-        <span class="step-num">6</span>
-        <div><h2>Tu web personalizada</h2><span class="plan-badge">Incluido en todos los planes</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <label class="field-label">¿Contáis ya con una identidad de marca definida?</label>
-        <select name="Manual de marca">
-          <option value="" selected></option>
-          <option>Sí, os la adjunto</option>
-          <option>No, pero tengo claro cómo la quiero</option>
-          <option>No</option>
-        </select>
-
-        <label class="field-label" style="margin-top:16px;">¿Qué estilo os representa mejor?</label>
-        <div class="estilos-grandes" id="estilos-grandes">
-          <label class="estilo-grande"><input type="radio" name="Estilo" value="Minimalista"><span><b>Minimalista</b><em>Mucho blanco, tipografía fina, sin adornos. La atención va directa a lo importante.</em></span></label>
-          <label class="estilo-grande"><input type="radio" name="Estilo" value="Elegante"><span><b>Clásica y elegante</b><em>Composición simétrica, tono cálido. Transmite tradición y confianza.</em></span></label>
-          <label class="estilo-grande"><input type="radio" name="Estilo" value="Creativo"><span><b>Moderna y creativa</b><em>Formas dinámicas, color con carácter. Para marcas jóvenes y distintas.</em></span></label>
-          <label class="estilo-grande"><input type="radio" name="Estilo" value="Artesanal"><span><b>Cercana y artesanal</b><em>Texturas naturales, tono conversacional. Se siente hecho a mano.</em></span></label>
-        </div>
-
-        <label class="field-label" style="margin-top:16px;">Selecciona hasta tres colores para vuestra web</label>
-        <div class="hint">Ordenados como en un círculo cromático — el primero que toques será el principal, el segundo el secundario y el tercero el de acento.</div>
-        <div class="paleta" id="paleta-colores">
-          <button type="button" data-color="#A33B3B" data-nombre="Rojo terracota" style="background:#A33B3B" aria-label="Rojo terracota"></button>
-          <button type="button" data-color="#C0392B" data-nombre="Rojo teja" style="background:#C0392B" aria-label="Rojo teja"></button>
-          <button type="button" data-color="#C1653D" data-nombre="Terracota" style="background:#C1653D" aria-label="Terracota"></button>
-          <button type="button" data-color="#DD6B3A" data-nombre="Naranja quemado" style="background:#DD6B3A" aria-label="Naranja quemado"></button>
-          <button type="button" data-color="#E08E45" data-nombre="Naranja miel" style="background:#E08E45" aria-label="Naranja miel"></button>
-          <button type="button" data-color="#C9A24A" data-nombre="Mostaza dorada" style="background:#C9A24A" aria-label="Mostaza dorada"></button>
-          <button type="button" data-color="#D4B94E" data-nombre="Amarillo mostaza" style="background:#D4B94E" aria-label="Amarillo mostaza"></button>
-          <button type="button" data-color="#8A9B4F" data-nombre="Verde oliva claro" style="background:#8A9B4F" aria-label="Verde oliva claro"></button>
-          <button type="button" data-color="#6B7A4F" data-nombre="Verde oliva" style="background:#6B7A4F" aria-label="Verde oliva"></button>
-          <button type="button" data-color="#4C7A5E" data-nombre="Verde bosque" style="background:#4C7A5E" aria-label="Verde bosque"></button>
-          <button type="button" data-color="#7FB69E" data-nombre="Verde menta" style="background:#7FB69E" aria-label="Verde menta"></button>
-          <button type="button" data-color="#3E8E8A" data-nombre="Verde azulado" style="background:#3E8E8A" aria-label="Verde azulado"></button>
-          <button type="button" data-color="#2B4C5C" data-nombre="Azul petróleo" style="background:#2B4C5C" aria-label="Azul petróleo"></button>
-          <button type="button" data-color="#1F3A5F" data-nombre="Azul marino" style="background:#1F3A5F" aria-label="Azul marino"></button>
-          <button type="button" data-color="#3B6FA0" data-nombre="Azul cielo" style="background:#3B6FA0" aria-label="Azul cielo"></button>
-          <button type="button" data-color="#5B4B8A" data-nombre="Índigo" style="background:#5B4B8A" aria-label="Índigo"></button>
-          <button type="button" data-color="#8B7BB8" data-nombre="Lila" style="background:#8B7BB8" aria-label="Lila"></button>
-          <button type="button" data-color="#A05A8C" data-nombre="Ciruela" style="background:#A05A8C" aria-label="Ciruela"></button>
-          <button type="button" data-color="#B5567B" data-nombre="Frambuesa" style="background:#B5567B" aria-label="Frambuesa"></button>
-          <button type="button" data-color="#D9A5A0" data-nombre="Rosa empolvado" style="background:#D9A5A0" aria-label="Rosa empolvado"></button>
-          <button type="button" data-color="#F5EFE4" data-nombre="Blanco roto" style="background:#F5EFE4" aria-label="Blanco roto"></button>
-          <button type="button" data-color="#E8DCC8" data-nombre="Beige cálido" style="background:#E8DCC8" aria-label="Beige cálido"></button>
-          <button type="button" data-color="#8A8A8A" data-nombre="Gris piedra" style="background:#8A8A8A" aria-label="Gris piedra"></button>
-          <button type="button" data-color="#3A3A3A" data-nombre="Gris grafito" style="background:#3A3A3A" aria-label="Gris grafito"></button>
-          <button type="button" data-color="#171410" data-nombre="Negro" style="background:#171410" aria-label="Negro"></button>
-        </div>
-        <p class="paleta__estado" id="paleta-estado">Selecciona hasta tres colores.</p>
-        <input type="hidden" name="Color principal">
-        <input type="hidden" name="Color secundario">
-        <input type="hidden" name="Color de acento">
-        <label class="field-label">¿Algún color exacto que ya uséis? <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
-        <input type="text" name="Colores" placeholder="Ej: el verde de nuestro logo, un Pantone concreto...">
-
-        <label class="field-label" style="margin-top:16px;">Referencias de webs en las que te gustaría inspirarte</label>
-        <textarea name="Webs de referencia" rows="2" placeholder="https://..."></textarea>
-
-        <div class="borrador-web" id="borrador-web">
-          <div class="borrador-web__nav">
-            <span class="borrador-web__logo"></span>
-            <span class="borrador-web__navlinks"><i></i><i></i><i></i></span>
-            <span class="borrador-web__navboton"></span>
-          </div>
-          <div class="borrador-web__hero">
-            <span class="borrador-web__eyebrow" id="borrador-web-eyebrow">Vuestro negocio</span>
-            <h3 class="borrador-web__titulo" id="borrador-web-titulo">Nombre del negocio</h3>
-            <p class="borrador-web__lema" id="borrador-web-lema">Aquí iría vuestra frase de bienvenida, corta y directa.</p>
-            <button type="button" class="borrador-web__boton" id="borrador-web-boton">Contactar</button>
-          </div>
-          <div class="borrador-web__tarjetas">
-            <span class="borrador-web__tarjeta"></span>
-            <span class="borrador-web__tarjeta"></span>
-            <span class="borrador-web__tarjeta"></span>
-          </div>
-        </div>
-        <p class="borrador-web__nota">Boceto orientativo de vuestra web, con el estilo, los colores y todo lo que nos has contado — el diseño real lo creamos nosotros.</p>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 7 · TEXTOS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
-      <div class="step-head">
-        <span class="step-num">7</span>
-        <div><h2>Textos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="step-sub">El contenido escrito de tu web: titulares, descripciones, presentación del equipo... (Los textos legales van aparte, en Archivos.)</p>
-        <label class="field-label">¿Los tienes escritos?</label>
-        <select name="Textos">
-          <option value="" selected></option>
-          <option>Sí, os los paso yo</option>
-          <option>No, prefiero que los escribáis vosotros</option>
-          <option>Un poco de cada</option>
-        </select>
-        <div class="note-box">Si preferís que los escribamos nosotros, cuéntanos abajo cómo trabajáis y qué problema le resolvéis a vuestros clientes. Con eso nos basta.</div>
-        <label class="field-label">Cuéntanoslo aquí</label>
-        <textarea name="Info para redactar textos" rows="4"></textarea>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
     <!-- ================= 7B · IDIOMAS ================= -->
     <div class="step" data-planes="elite" data-extra="Multi-idioma">
       <div class="step-head">
@@ -1162,6 +1046,179 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
+    <!-- ================= 13 · FAQ ================= -->
+    <div class="step" data-planes="impulso crecimiento elite" data-extra="Sección de FAQ desplegable">
+      <div class="step-head">
+        <span class="step-num">13</span>
+        <div><h2>Preguntas frecuentes</h2><span class="plan-badge" data-nivel="medio">Solo si eliges el extra de FAQ</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">Escribe la pregunta y, justo debajo, la respuesta que quieres que aparezca. Añade tantas como quieras.</p>
+        <div id="lista-faq"></div>
+        <button type="button" class="add-btn" onclick="añadirFaq()">+ Añadir otra pregunta</button>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <!-- ================= 16 · NEWSLETTER ================= -->
+    <div class="step" data-planes="crecimiento elite" data-extra="Newsletter con bienvenida automática|Newsletter con automatizaciones avanzadas">
+      <div class="step-head">
+        <span class="step-num">16</span>
+        <div><h2>Newsletter</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Queréis una newsletter en la web?</label>
+        <select name="Newsletter" id="sel-news" onchange="alternarNewsletter()">
+          <option value="" selected></option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+        <div class="depende" id="news-extra"><div>
+          <label class="field-label">¿Tenéis ya una lista de contactos?</label>
+          <select name="Lista de contactos">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+          <label class="field-label">¿Qué pensáis enviar?</label>
+          <textarea name="Qué enviar por newsletter" rows="2" placeholder="Novedades, promociones, consejos..."></textarea>
+          <label class="field-label">¿Queréis un correo de bienvenida automático?</label>
+          <select name="Correo de bienvenida">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+          <div data-requiere-extra="Newsletter con automatizaciones avanzadas">
+            <label class="field-label" style="margin-top:16px;">¿Qué automatizaciones os interesan?</label>
+            <div class="chip-grid">
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Carrito abandonado"><span>Carrito abandonado</span></label>
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Recordatorio de cita o reserva"><span>Recordatorio de cita o reserva</span></label>
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Felicitación de cumpleaños"><span>Felicitación de cumpleaños</span></label>
+              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Serie de bienvenida en varios correos"><span>Serie de bienvenida en varios correos</span></label>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <!-- ================= SECCIÓN · VUESTRA WEB ================= -->
+    <div class="step step--seccion" data-planes="impulso crecimiento elite">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Sección · Tu web personalizada</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Ahora el diseño: colores, estilo y tipografía. Puedes jugar con un pequeño borrador de la portada antes de decidirte.</p>
+      </div>
+    </div>
+
+    <!-- ================= 6 · DISEÑO ================= -->
+    <div class="step step--compacto" data-planes="impulso crecimiento elite">
+      <div class="step-head">
+        <span class="step-num">6</span>
+        <div><h2>Tu web personalizada</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Contáis ya con una identidad de marca definida?</label>
+        <select name="Manual de marca">
+          <option value="" selected></option>
+          <option>Sí, os la adjunto</option>
+          <option>No, pero tengo claro cómo la quiero</option>
+          <option>No</option>
+        </select>
+
+        <label class="field-label" style="margin-top:16px;">¿Qué estilo os representa mejor?</label>
+        <div class="estilos-grandes" id="estilos-grandes">
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Minimalista"><span><b>Minimalista</b><em>Mucho blanco, tipografía fina, sin adornos. La atención va directa a lo importante.</em></span></label>
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Elegante"><span><b>Clásica y elegante</b><em>Composición simétrica, tono cálido. Transmite tradición y confianza.</em></span></label>
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Creativo"><span><b>Moderna y creativa</b><em>Formas dinámicas, color con carácter. Para marcas jóvenes y distintas.</em></span></label>
+          <label class="estilo-grande"><input type="radio" name="Estilo" value="Artesanal"><span><b>Cercana y artesanal</b><em>Texturas naturales, tono conversacional. Se siente hecho a mano.</em></span></label>
+        </div>
+
+        <label class="field-label" style="margin-top:16px;">Selecciona hasta tres colores para vuestra web</label>
+        <div class="hint">Ordenados como en un círculo cromático — el primero que toques será el principal, el segundo el secundario y el tercero el de acento.</div>
+        <div class="paleta" id="paleta-colores">
+          <button type="button" data-color="#A33B3B" data-nombre="Rojo terracota" style="background:#A33B3B" aria-label="Rojo terracota"></button>
+          <button type="button" data-color="#C0392B" data-nombre="Rojo teja" style="background:#C0392B" aria-label="Rojo teja"></button>
+          <button type="button" data-color="#C1653D" data-nombre="Terracota" style="background:#C1653D" aria-label="Terracota"></button>
+          <button type="button" data-color="#DD6B3A" data-nombre="Naranja quemado" style="background:#DD6B3A" aria-label="Naranja quemado"></button>
+          <button type="button" data-color="#E08E45" data-nombre="Naranja miel" style="background:#E08E45" aria-label="Naranja miel"></button>
+          <button type="button" data-color="#C9A24A" data-nombre="Mostaza dorada" style="background:#C9A24A" aria-label="Mostaza dorada"></button>
+          <button type="button" data-color="#D4B94E" data-nombre="Amarillo mostaza" style="background:#D4B94E" aria-label="Amarillo mostaza"></button>
+          <button type="button" data-color="#8A9B4F" data-nombre="Verde oliva claro" style="background:#8A9B4F" aria-label="Verde oliva claro"></button>
+          <button type="button" data-color="#6B7A4F" data-nombre="Verde oliva" style="background:#6B7A4F" aria-label="Verde oliva"></button>
+          <button type="button" data-color="#4C7A5E" data-nombre="Verde bosque" style="background:#4C7A5E" aria-label="Verde bosque"></button>
+          <button type="button" data-color="#7FB69E" data-nombre="Verde menta" style="background:#7FB69E" aria-label="Verde menta"></button>
+          <button type="button" data-color="#3E8E8A" data-nombre="Verde azulado" style="background:#3E8E8A" aria-label="Verde azulado"></button>
+          <button type="button" data-color="#2B4C5C" data-nombre="Azul petróleo" style="background:#2B4C5C" aria-label="Azul petróleo"></button>
+          <button type="button" data-color="#1F3A5F" data-nombre="Azul marino" style="background:#1F3A5F" aria-label="Azul marino"></button>
+          <button type="button" data-color="#3B6FA0" data-nombre="Azul cielo" style="background:#3B6FA0" aria-label="Azul cielo"></button>
+          <button type="button" data-color="#5B4B8A" data-nombre="Índigo" style="background:#5B4B8A" aria-label="Índigo"></button>
+          <button type="button" data-color="#8B7BB8" data-nombre="Lila" style="background:#8B7BB8" aria-label="Lila"></button>
+          <button type="button" data-color="#A05A8C" data-nombre="Ciruela" style="background:#A05A8C" aria-label="Ciruela"></button>
+          <button type="button" data-color="#B5567B" data-nombre="Frambuesa" style="background:#B5567B" aria-label="Frambuesa"></button>
+          <button type="button" data-color="#D9A5A0" data-nombre="Rosa empolvado" style="background:#D9A5A0" aria-label="Rosa empolvado"></button>
+          <button type="button" data-color="#F5EFE4" data-nombre="Blanco roto" style="background:#F5EFE4" aria-label="Blanco roto"></button>
+          <button type="button" data-color="#E8DCC8" data-nombre="Beige cálido" style="background:#E8DCC8" aria-label="Beige cálido"></button>
+          <button type="button" data-color="#8A8A8A" data-nombre="Gris piedra" style="background:#8A8A8A" aria-label="Gris piedra"></button>
+          <button type="button" data-color="#3A3A3A" data-nombre="Gris grafito" style="background:#3A3A3A" aria-label="Gris grafito"></button>
+          <button type="button" data-color="#171410" data-nombre="Negro" style="background:#171410" aria-label="Negro"></button>
+        </div>
+        <p class="paleta__estado" id="paleta-estado">Selecciona hasta tres colores.</p>
+        <input type="hidden" name="Color principal">
+        <input type="hidden" name="Color secundario">
+        <input type="hidden" name="Color de acento">
+        <label class="field-label">¿Algún color exacto que ya uséis? <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
+        <input type="text" name="Colores" placeholder="Ej: el verde de nuestro logo, un Pantone concreto...">
+
+        <label class="field-label" style="margin-top:16px;">Referencias de webs en las que te gustaría inspirarte</label>
+        <textarea name="Webs de referencia" rows="2" placeholder="https://..."></textarea>
+
+        <div class="borrador-web" id="borrador-web">
+          <div class="borrador-web__nav">
+            <span class="borrador-web__logo"></span>
+            <span class="borrador-web__navlinks"><i></i><i></i><i></i></span>
+            <span class="borrador-web__navboton"></span>
+          </div>
+          <div class="borrador-web__hero">
+            <span class="borrador-web__eyebrow" id="borrador-web-eyebrow">Vuestro negocio</span>
+            <h3 class="borrador-web__titulo" id="borrador-web-titulo">Nombre del negocio</h3>
+            <p class="borrador-web__lema" id="borrador-web-lema">Aquí iría vuestra frase de bienvenida, corta y directa.</p>
+            <button type="button" class="borrador-web__boton" id="borrador-web-boton">Contactar</button>
+          </div>
+          <div class="borrador-web__tarjetas">
+            <span class="borrador-web__tarjeta"></span>
+            <span class="borrador-web__tarjeta"></span>
+            <span class="borrador-web__tarjeta"></span>
+          </div>
+        </div>
+        <p class="borrador-web__nota">Boceto orientativo de vuestra web, con el estilo, los colores y todo lo que nos has contado — el diseño real lo creamos nosotros.</p>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <!-- ================= 7 · TEXTOS ================= -->
+    <div class="step" data-planes="impulso crecimiento elite">
+      <div class="step-head">
+        <span class="step-num">7</span>
+        <div><h2>Textos</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">El contenido escrito de tu web: titulares, descripciones, presentación del equipo... (Los textos legales van aparte, en Archivos.)</p>
+        <label class="field-label">¿Los tienes escritos?</label>
+        <select name="Textos">
+          <option value="" selected></option>
+          <option>Sí, os los paso yo</option>
+          <option>No, prefiero que los escribáis vosotros</option>
+        </select>
+        <div class="note-box">Si preferís que los escribamos nosotros, cuéntanos abajo cómo trabajáis y qué problema le resolvéis a vuestros clientes. Con eso nos basta.</div>
+        <label class="field-label">Cuéntanoslo aquí</label>
+        <textarea name="Info para redactar textos" rows="4"></textarea>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
     <!-- ================= 12 · TESTIMONIOS ================= -->
     <div class="step" data-planes="impulso crecimiento elite">
       <div class="step-head">
@@ -1194,20 +1251,6 @@ input[type="file"]::file-selector-button{
             <textarea name="Notas contenido audiovisual" rows="2" placeholder="Cuántos vídeos, de quién, dónde se grabarían..."></textarea>
           </div></div>
         </div>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 13 · FAQ ================= -->
-    <div class="step" data-planes="impulso crecimiento elite" data-extra="Sección de FAQ desplegable">
-      <div class="step-head">
-        <span class="step-num">13</span>
-        <div><h2>Preguntas frecuentes</h2><span class="plan-badge" data-nivel="medio">Solo si eliges el extra de FAQ</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="step-sub">Escribe la pregunta y, justo debajo, la respuesta que quieres que aparezca. Añade tantas como quieras.</p>
-        <div id="lista-faq"></div>
-        <button type="button" class="add-btn" onclick="añadirFaq()">+ Añadir otra pregunta</button>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1267,48 +1310,6 @@ input[type="file"]::file-selector-button{
           <option>Sí</option>
           <option>No</option>
         </select>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 16 · NEWSLETTER ================= -->
-    <div class="step" data-planes="crecimiento elite" data-extra="Newsletter con bienvenida automática|Newsletter con automatizaciones avanzadas">
-      <div class="step-head">
-        <span class="step-num">16</span>
-        <div><h2>Newsletter</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <label class="field-label">¿Queréis una newsletter en la web?</label>
-        <select name="Newsletter" id="sel-news" onchange="alternarNewsletter()">
-          <option value="" selected></option>
-          <option value="Sí">Sí</option>
-          <option value="No">No</option>
-        </select>
-        <div class="depende" id="news-extra"><div>
-          <label class="field-label">¿Tenéis ya una lista de contactos?</label>
-          <select name="Lista de contactos">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-          <label class="field-label">¿Qué pensáis enviar?</label>
-          <textarea name="Qué enviar por newsletter" rows="2" placeholder="Novedades, promociones, consejos..."></textarea>
-          <label class="field-label">¿Queréis un correo de bienvenida automático?</label>
-          <select name="Correo de bienvenida">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-          <div data-requiere-extra="Newsletter con automatizaciones avanzadas">
-            <label class="field-label" style="margin-top:16px;">¿Qué automatizaciones os interesan?</label>
-            <div class="chip-grid">
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Carrito abandonado"><span>Carrito abandonado</span></label>
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Recordatorio de cita o reserva"><span>Recordatorio de cita o reserva</span></label>
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Felicitación de cumpleaños"><span>Felicitación de cumpleaños</span></label>
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Serie de bienvenida en varios correos"><span>Serie de bienvenida en varios correos</span></label>
-            </div>
-          </div>
-        </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1400,15 +1401,12 @@ input[type="file"]::file-selector-button{
         <label class="field-label">Foto de portada <span style="font-weight:400;color:var(--tenue)">— la que sale de fondo en el inicio de la web</span></label>
         <input type="file" name="Foto de portada" accept="image/*">
 
-        <label class="field-label" style="margin-top:18px;">Todo lo demás <span style="font-weight:400;color:var(--tenue)">— local, trabajos, catálogo, manual de marca, textos, legales...</span></label>
-        <div class="hint">Sube cuantos archivos quieras y ponle a cada uno un nombre corto — así sabemos qué es cada cosa.</div>
-        <div class="subida" id="subida-archivos">
-          <input type="file" multiple>
-          <p class="subida__texto"><b>Toca o arrastra</b> tus archivos aquí</p>
-        </div>
-        <div class="subida-lista" id="subida-archivos-lista"></div>
+        <label class="field-label" style="margin-top:18px;">Más fotos y documentos <span style="font-weight:400;color:var(--tenue)">— local, trabajos, catálogo, manual de marca, textos, legales...</span></label>
+        <div class="hint">Añade una sección por cada cosa que quieras compartir, con sus propios archivos — así no se amontona todo junto.</div>
+        <div id="lista-secciones-fotos"></div>
+        <button type="button" class="add-btn" onclick="añadirSeccionFotos()">+ Añadir otra sección de fotos</button>
 
-        <label class="field-label">¿Algo pesa demasiado para subirlo aquí?</label>
+        <label class="field-label" style="margin-top:16px;">¿Algo pesa demasiado para subirlo aquí?</label>
         <input type="url" name="Enlace a archivos grandes" placeholder="Enlace de Drive o WeTransfer">
 
         <label class="field-label" style="margin-top:16px;">¿No tienes fotografía profesional?</label>
@@ -1513,7 +1511,7 @@ input[type="file"]::file-selector-button{
   var pct = document.getElementById('porcentaje');
 
   /* ---------- Fichas repetibles ---------- */
-  var cuenta = {persona:0, servicio:0, faq:0, reserva:0};
+  var cuenta = {persona:0, servicio:0, faq:0, reserva:0, seccionFotos:0};
 
   function crear(lista, html){
     var d = document.createElement('div');
@@ -1579,11 +1577,10 @@ input[type="file"]::file-selector-button{
   añadirPersona(); añadirServicio(); añadirFaq();
 
   /* ---------- Zonas de subida múltiple, con etiqueta editable por archivo ---------- */
-  function crearZonaSubida(zonaId, listaId, etiquetaBase){
-    var zona = document.getElementById(zonaId);
-    var lista = document.getElementById(listaId);
+  function crearZonaSubida(zona, lista, etiquetaBase){
     var input = zona.querySelector('input[type=file]');
     zona.archivos = [];
+    function base(){ return typeof etiquetaBase === 'function' ? (etiquetaBase() || 'Archivo') : etiquetaBase; }
 
     function repintar(){
       lista.innerHTML = '';
@@ -1593,7 +1590,7 @@ input[type="file"]::file-selector-button{
         var campo = document.createElement('input');
         campo.type = 'text';
         campo.value = a.etiqueta;
-        campo.placeholder = etiquetaBase;
+        campo.placeholder = base();
         campo.addEventListener('input', function(){ a.etiqueta = campo.value; });
         var quitar = document.createElement('button');
         quitar.type = 'button';
@@ -1608,8 +1605,8 @@ input[type="file"]::file-selector-button{
     }
     function añadirArchivos(ficheros){
       Array.prototype.forEach.call(ficheros, function(f){
-        var base = f.name.replace(/\.[^.]+$/, '');
-        zona.archivos.push({file:f, etiqueta:etiquetaBase + ' — ' + base});
+        var b = f.name.replace(/\.[^.]+$/, '');
+        zona.archivos.push({file:f, etiqueta:base() + ' — ' + b});
       });
       repintar();
     }
@@ -1626,9 +1623,26 @@ input[type="file"]::file-selector-button{
     });
     return zona;
   }
-  var zonaEquipo = crearZonaSubida('subida-equipo', 'subida-equipo-lista', 'Equipo');
-  var zonaServicios = crearZonaSubida('subida-servicios', 'subida-servicios-lista', 'Servicio');
-  var zonaArchivos = crearZonaSubida('subida-archivos', 'subida-archivos-lista', 'Archivo');
+  var zonaEquipo = crearZonaSubida(document.getElementById('subida-equipo'), document.getElementById('subida-equipo-lista'), 'Equipo');
+  var zonaServicios = crearZonaSubida(document.getElementById('subida-servicios'), document.getElementById('subida-servicios-lista'), 'Servicio');
+
+  /* ---------- Archivos: secciones de fotos que se añaden de una en una ---------- */
+  var zonasSeccionesFotos = [];
+  window.añadirSeccionFotos = function(){
+    var n = ++cuenta.seccionFotos;
+    var ficha = crear('lista-secciones-fotos',
+      '<label class="field-label">¿Qué sección es?</label>' +
+      '<input type="text" class="seccion-fotos-nombre" placeholder="Ej: Fotos del local, Catálogo, Manual de marca...">' +
+      '<div class="subida"><input type="file" multiple><p class="subida__texto"><b>Toca o arrastra</b> los archivos aquí</p></div>' +
+      '<div class="subida-lista"></div>'
+    );
+    var nombreInput = ficha.querySelector('.seccion-fotos-nombre');
+    var etiquetaFn = function(){ return nombreInput.value.trim() || 'Sección ' + n; };
+    var zona = crearZonaSubida(ficha.querySelector('.subida'), ficha.querySelector('.subida-lista'), etiquetaFn);
+    zonasSeccionesFotos.push(zona);
+    return zona;
+  };
+  añadirSeccionFotos();
 
   /* ---------- Borrador jugable de la portada: colores + tipografía ---------- */
   (function(){
@@ -1786,40 +1800,70 @@ input[type="file"]::file-selector-button{
   });
 
   /* ---------- Categorias e iconos por bloque tematico ---------- */
+  /* ---------- Iconos de línea, sobrios — nada de emoji ---------- */
+  function svg(inner){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
+  }
+  var ICONOS = {
+    plan:      svg('<circle cx="12" cy="12" r="8.5"/><path d="M14.6 9.4 10.5 11l-1.6 4.1L13 13.5z"/>'),
+    negocio:   svg('<rect x="6" y="3.2" width="12" height="17.6" rx="1"/><path d="M9.2 21v-3.6h5.6V21M9.2 7.2h1.8M13 7.2h1.8M9.2 11h1.8M13 11h1.8M9.2 14.8h1.8M13 14.8h1.8"/>'),
+    objetivo:  svg('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.3"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/>'),
+    equipo:    svg('<circle cx="8.7" cy="8" r="3"/><circle cx="16.3" cy="9.3" r="2.3"/><path d="M3.3 20c0-3.5 2.4-6 5.4-6s5.4 2.5 5.4 6"/><path d="M14.6 14.7c2 .2 3.9 2.1 3.9 5.3"/>'),
+    servicios: svg('<path d="M14.8 6.2a4 4 0 0 0-5.3 5l-5.3 5.3.9 2.3 2.3.9L12.7 14a4 4 0 0 0 5-5.3l-2.8 2.8-2-2z"/>'),
+    diseno:    svg('<path d="M12 3.3a8.7 8.7 0 1 0 0 17.4c1 0 1.6-.8 1.6-1.6 0-.4-.2-.8-.4-1.1-.3-.3-.4-.6-.4-1 0-.8.7-1.4 1.5-1.4H16a4 4 0 0 0 4-4c0-4.5-3.5-8.3-8-8.3z"/><circle cx="8" cy="10" r=".9" fill="currentColor" stroke="none"/><circle cx="8.6" cy="14.2" r=".9" fill="currentColor" stroke="none"/><circle cx="12.5" cy="7.8" r=".9" fill="currentColor" stroke="none"/><circle cx="15.8" cy="10.3" r=".9" fill="currentColor" stroke="none"/>'),
+    textos:    svg('<path d="M4.3 19.7l1-4.3L15.6 5.1a1.5 1.5 0 0 1 2.1 0l1.2 1.2a1.5 1.5 0 0 1 0 2.1L8.6 18.7z"/><path d="M14.2 6.7l3.1 3.1"/>'),
+    idiomas:   svg('<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.3 3.7 5.3 3.7 8.5s-1.3 6.2-3.7 8.5c-2.4-2.3-3.7-5.3-3.7-8.5S9.6 5.8 12 3.5z"/>'),
+    blog:      svg('<rect x="5.5" y="3" width="13" height="18" rx="1.2"/><path d="M8.4 7.8h7.2M8.4 11.3h7.2M8.4 14.8h4.4"/>'),
+    reservas:  svg('<rect x="4" y="5" width="16" height="15" rx="1.5"/><path d="M4 9.5h16M8 3v4M16 3v4"/><circle cx="9" cy="14" r=".9" fill="currentColor" stroke="none"/>'),
+    tienda:    svg('<path d="M4 5h2l1.6 9.6a2 2 0 0 0 2 1.7h6.6a2 2 0 0 0 2-1.6L19.5 8.5H7"/><circle cx="10" cy="19.7" r="1.2" fill="currentColor" stroke="none"/><circle cx="17" cy="19.7" r="1.2" fill="currentColor" stroke="none"/>'),
+    ia:        svg('<rect x="7" y="7" width="10" height="10" rx="1.5"/><circle cx="12" cy="12" r="2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.3 6.3l1.8 1.8M15.9 15.9l1.8 1.8M17.7 6.3l-1.8 1.8M8.1 15.9l-1.8 1.8"/>'),
+    confianza: svg('<path d="M12 3.6l2.3 5 5.4.6-4 3.7 1.1 5.4L12 15.5l-4.8 2.8 1.1-5.4-4-3.7 5.4-.6z"/>'),
+    faq:       svg('<circle cx="12" cy="12" r="8.5"/><path d="M9.5 9.4a2.5 2.5 0 1 1 3.7 2.1c-.9.6-1.3 1.1-1.3 2.2"/><path d="M12 16.9v.02" stroke-width="2.3"/>'),
+    geo:       svg('<path d="M12 21s6.6-5.8 6.6-11A6.6 6.6 0 0 0 5.4 10c0 5.2 6.6 11 6.6 11z"/><circle cx="12" cy="9.7" r="2.2"/>'),
+    redes:     svg('<circle cx="6" cy="12" r="2.1"/><circle cx="17.3" cy="6" r="2.1"/><circle cx="17.3" cy="18" r="2.1"/><path d="M8 11l7.5-3.7M8 13l7.5 3.7"/>'),
+    correo:    svg('<rect x="3.5" y="5.5" width="17" height="13" rx="1.4"/><path d="M4 6.5l8 6.5 8-6.5"/>'),
+    extras:    svg('<path d="M12 3v3.6M12 17.4V21M3 12h3.6M17.4 12H21M6.2 6.2l2.5 2.5M15.3 15.3l2.5 2.5M6.2 17.8l2.5-2.5M15.3 8.7l2.5-2.5"/><circle cx="12" cy="12" r="2.4"/>'),
+    legal:     svg('<path d="M12 3v18M7.2 21h9.6M5 6.7h14M5 6.7l-3 6a3.1 3.1 0 0 0 6 0zM19 6.7l-3 6a3.1 3.1 0 0 0 6 0z"/>'),
+    hosting:   svg('<rect x="4" y="4.5" width="16" height="5.4" rx="1.2"/><rect x="4" y="14.1" width="16" height="5.4" rx="1.2"/><circle cx="8" cy="7.2" r=".7" fill="currentColor" stroke="none"/><circle cx="8" cy="16.8" r=".7" fill="currentColor" stroke="none"/>'),
+    preferencias: svg('<path d="M4.5 7h15M4.5 12h9.5M4.5 17h13"/>'),
+    archivos:  svg('<path d="M4 7.8a1.6 1.6 0 0 1 1.6-1.6H10l2 2h6.4A1.6 1.6 0 0 1 20 9.8v7.7a1.6 1.6 0 0 1-1.6 1.6H5.6A1.6 1.6 0 0 1 4 17.5z"/>'),
+    contacto:  svg('<circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.6 2.6L16 9.4"/>'),
+    seccion:   svg('<path d="M6 3.5h12v17l-6-4-6 4z"/>')
+  };
   var CATEGORIAS = {
-    'Que plan te interesa':          {cat:'Plan',       icono:String.fromCodePoint(0x1F680)},
-    'Seccion · Quienes sois':          {cat:'Negocio',    icono:String.fromCodePoint(0x1F4D6)},
-    'Sobre tu negocio':                {cat:'Negocio',    icono:String.fromCodePoint(0x1F3E2)},
-    'Que quieres conseguir':           {cat:'Negocio',    icono:String.fromCodePoint(0x1F3AF)},
-    'Quien forma el equipo':           {cat:'Equipo',     icono:String.fromCodePoint(0x1F465)},
-    'Que ofreces':                     {cat:'Servicios',  icono:String.fromCodePoint(0x1F6E0)},
-    'Seccion · Tu web personalizada':  {cat:'Diseño',     icono:String.fromCodePoint(0x1F4D6)},
-    'Tu web personalizada':            {cat:'Diseño',     icono:String.fromCodePoint(0x1F3A8)},
-    'Textos':                          {cat:'Diseño',     icono:String.fromCodePoint(0x270D)},
-    'Idiomas de la web':               {cat:'Diseño',     icono:String.fromCodePoint(0x1F310)},
-    'Blog o galeria':                  {cat:'Funciones',  icono:String.fromCodePoint(0x1F4F0)},
-    'Reservas y citas':                {cat:'Funciones',  icono:String.fromCodePoint(0x1F4C5)},
-    'Tienda online y pagos':           {cat:'Funciones',  icono:String.fromCodePoint(0x1F6D2)},
-    'Inteligencia artificial y panel': {cat:'Funciones',  icono:String.fromCodePoint(0x1F916)},
-    'Lo que dicen de vosotros':        {cat:'Confianza',  icono:String.fromCodePoint(0x2B50)},
-    'Preguntas frecuentes':            {cat:'Confianza',  icono:String.fromCodePoint(0x2753)},
-    'Posicionamiento y geolocalizacion': {cat:'Difusion', icono:String.fromCodePoint(0x1F50D)},
-    'Redes sociales y Google':         {cat:'Difusion',   icono:String.fromCodePoint(0x1F4F1)},
-    'Newsletter':                      {cat:'Difusion',   icono:String.fromCodePoint(0x2709)},
-    'Seccion · Extras':                {cat:'Extras',     icono:String.fromCodePoint(0x1F4D6)},
-    'Extras':                          {cat:'Extras',     icono:String.fromCodePoint(0x2728)},
-    'Datos legales':                   {cat:'Legal',      icono:String.fromCodePoint(0x2696)},
-    'Dominio y hosting':               {cat:'Legal',      icono:String.fromCodePoint(0x1F310)},
-    'Preferencias y lineas rojas':     {cat:'Legal',     icono:String.fromCodePoint(0x1F6A6)},
-    'Archivos':                        {cat:'Legal',     icono:String.fromCodePoint(0x1F4C1)},
-    'Tus datos':                       {cat:'Legal',     icono:String.fromCodePoint(0x2705)}
+    'Que plan te interesa':            {cat:'Plan',       icono:ICONOS.plan},
+    'Seccion · Quienes sois':          {cat:'Negocio',    icono:ICONOS.seccion},
+    'Sobre tu negocio':                {cat:'Negocio',    icono:ICONOS.negocio},
+    'Que quieres conseguir':           {cat:'Negocio',    icono:ICONOS.objetivo},
+    'Quien forma el equipo':           {cat:'Equipo',     icono:ICONOS.equipo},
+    'Que ofreces':                     {cat:'Servicios',  icono:ICONOS.servicios},
+    'Seccion · Tu web personalizada':  {cat:'Diseño',     icono:ICONOS.seccion},
+    'Tu web personalizada':            {cat:'Diseño',     icono:ICONOS.diseno},
+    'Textos':                          {cat:'Diseño',     icono:ICONOS.textos},
+    'Idiomas de la web':               {cat:'Diseño',     icono:ICONOS.idiomas},
+    'Blog o galeria':                  {cat:'Funciones',  icono:ICONOS.blog},
+    'Reservas y citas':                {cat:'Funciones',  icono:ICONOS.reservas},
+    'Tienda online y pagos':           {cat:'Funciones',  icono:ICONOS.tienda},
+    'Inteligencia artificial y panel': {cat:'Funciones',  icono:ICONOS.ia},
+    'Lo que dicen de vosotros':        {cat:'Confianza',  icono:ICONOS.confianza},
+    'Preguntas frecuentes':            {cat:'Confianza',  icono:ICONOS.faq},
+    'Posicionamiento y geolocalizacion': {cat:'Difusion', icono:ICONOS.geo},
+    'Redes sociales y Google':         {cat:'Difusion',   icono:ICONOS.redes},
+    'Newsletter':                      {cat:'Difusion',   icono:ICONOS.correo},
+    'Seccion · Extras':                {cat:'Extras',     icono:ICONOS.seccion},
+    'Extras':                          {cat:'Extras',     icono:ICONOS.extras},
+    'Datos legales':                   {cat:'Legal',      icono:ICONOS.legal},
+    'Dominio y hosting':               {cat:'Legal',      icono:ICONOS.hosting},
+    'Preferencias y lineas rojas':     {cat:'Legal',      icono:ICONOS.preferencias},
+    'Archivos':                        {cat:'Legal',      icono:ICONOS.archivos},
+    'Tus datos':                       {cat:'Legal',      icono:ICONOS.contacto}
   };
   function sinAcentos(t){
     return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[¿?¡!]/g, '').trim();
   }
   function infoDe(paso){
     var titulo = sinAcentos(paso.querySelector('h2').textContent.trim());
-    return CATEGORIAS[titulo] || {cat:'Otros', icono:'•'};
+    return CATEGORIAS[titulo] || {cat:'Otros', icono:ICONOS.extras};
   }
 
   /* ---------- Solo las preguntas del plan elegido ---------- */
@@ -1882,7 +1926,7 @@ input[type="file"]::file-selector-button{
   function renumerar(){
     bloques.forEach(function(b){
       if(b.hidden) return;
-      b.querySelector('.step-num').textContent = infoDe(b).icono;
+      b.querySelector('.step-num').innerHTML = infoDe(b).icono;
     });
   }
   document.querySelectorAll('input[name="Plan"]').forEach(function(r){
@@ -2133,9 +2177,9 @@ input[type="file"]::file-selector-button{
       if(!activo(input) || !input.files || !input.files.length) return;
       lista.push({etiqueta:input.name, file:input.files[0]});
     });
-    // Zonas de subida múltiple: equipo, servicios y el resto de archivos
-    [zonaEquipo, zonaServicios, zonaArchivos].forEach(function(zona){
-      if(!zona || !activo(zona)) return;
+    // Zonas de subida múltiple: equipo, servicios y las secciones de fotos añadidas una a una
+    [zonaEquipo, zonaServicios].concat(zonasSeccionesFotos).forEach(function(zona){
+      if(!zona || !zona.isConnected || !activo(zona)) return;
       zona.archivos.forEach(function(a){ lista.push({etiqueta:a.etiqueta, file:a.file}); });
     });
     return lista;
