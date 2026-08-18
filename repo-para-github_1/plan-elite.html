@@ -40,6 +40,12 @@
     /* Fondo del header: tiene que seguir al esquema, si no se queda oscuro
        sobre las paletas claras */
     --header:rgba(32,35,26,.72);
+    /* Color del texto y los iconos que van ENCIMA del degradado (botones,
+       insignias, círculos de paso). En los esquemas oscuros el fondo de la
+       página es oscuro, así que el texto oscuro contrasta bien sobre el
+       degradado. El esquema rosa es el único claro: ahí lo sobreescribe
+       más abajo, si no el texto casi blanco se ilegible sobre el rosa. */
+    --sobre-degradado:var(--bg);
   }
   html[data-scheme="rosa"]{
     --bg:#fdf4f2; --bg2:#ffffff; --card:#ffffff; --surface2:#faeae7; --line:#f0dcd8;
@@ -47,6 +53,9 @@
     --degradado:linear-gradient(115deg,#d9647a,#c98a63 52%,#a86f9c);
     --aurora1:rgba(217,100,122,.18);--aurora2:rgba(201,138,99,.14);--aurora3:rgba(168,111,156,.12);
     --header:rgba(253,244,242,.82);
+    /* Esquema claro: el texto sobre el degradado pasa a tinta oscura, si no
+       queda casi blanco sobre rosa y no se lee. */
+    --sobre-degradado:var(--ink);
   }
   html[data-scheme="verde-oscuro"]{
     --bg:#0f1712; --bg2:#141d17; --card:#19231b; --surface2:#202b21; --line:rgba(255,255,255,.08);
@@ -106,7 +115,7 @@
     display:inline-flex;align-items:center;gap:5px;vertical-align:middle;
     margin-left:8px;padding:2px 9px 2px 7px;border-radius:20px;
     font-size:9.5px;font-weight:700;letter-spacing:.11em;
-    color:var(--bg);background:var(--degradado);
+    color:var(--sobre-degradado);background:var(--degradado);
     box-shadow:0 0 0 1px rgba(255,255,255,.09) inset;
   }
   .ia svg{width:10px;height:10px;fill:currentColor;}
@@ -172,7 +181,7 @@
     font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;flex-shrink:0;width:74px;
     background:var(--degradado);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;
   }
-  .dato dd{margin:0;font-size:14.5px;}
+  .dato dd{margin:0;font-size:14.5px;overflow-wrap:anywhere;}
   .dato dd a:hover{color:var(--orange);}
 
   /* Mapa dibujado a mano: sin la interfaz de Google, y al pulsar la abre */
@@ -203,21 +212,31 @@
   }
   .mapa__ir svg{width:14px;height:14px;stroke:var(--orange);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
-  /* Contacto al final de la página */
+  /* Contacto al final de la página: dos grupos claros — redes y datos de
+     contacto — en vez de una única fila donde todo iba mezclado. */
   .contacto-final{max-width:900px;margin:0 auto;text-align:center;}
-  .redes{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:32px;}
-  .red{
-    display:inline-flex;align-items:center;gap:9px;
-    padding:12px 20px;border-radius:100px;border:1px solid var(--line);
-    font-size:13.5px;position:relative;
+  .contacto-grupo{margin-top:40px;}
+  .contacto-grupo__titulo{
+    font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;font-weight:700;
+    background:var(--degradado);-webkit-background-clip:text;background-clip:text;color:transparent;
+    margin:0 0 16px;
+  }
+  .social-fila{display:flex;justify-content:center;gap:12px;}
+  .social-boton{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
     transition:transform .35s ease,border-color .35s ease,background .35s ease;
   }
-  .red:hover{transform:translateY(-3px);background:var(--surface2);border-color:transparent;}
-  .red svg{width:16px;height:16px;stroke:var(--orange);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  .social-boton:hover{transform:translateY(-3px);background:var(--surface2);border-color:transparent;}
+  .social-boton svg{width:18px;height:18px;stroke:var(--orange);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  /* Reutiliza la relación con filete de .datos (definida más arriba, para el
+     panel de ubicación): así el bloque de contacto habla el mismo lenguaje
+     visual que el resto de la página, en vez de inventar uno nuevo. */
+  .datos--contacto{max-width:460px;margin:16px auto 0;text-align:left;grid-template-columns:1fr;}
   .wa{
     display:inline-flex;align-items:center;gap:10px;margin-top:30px;
     padding:16px 32px;border-radius:100px;
-    background:var(--degradado);color:var(--bg);font-weight:700;font-size:15px;
+    background:var(--degradado);color:var(--sobre-degradado);font-weight:700;font-size:15px;
     background-size:180% 180%;
     transition:background-position .6s ease,transform .3s ease,box-shadow .3s ease;
   }
@@ -305,7 +324,7 @@
   /* Sobre las paletas claras el mismo velo tapa demasiado */
   html[data-scheme="rosa"] .con-fondo::before{opacity:.07;}
   @media(min-width:900px){.con-fondo::before{background-attachment:fixed;}}
-  .cta{display:inline-flex;gap:8px;background:var(--orange);color:#fff;padding:15px 28px;border-radius:30px;font-weight:600;font-size:15px;text-decoration:none;border:none;cursor:pointer;font-family:var(--dig-sans);}
+  .cta{display:inline-flex;gap:8px;background:var(--orange);color:var(--sobre-degradado);padding:15px 28px;border-radius:30px;font-weight:600;font-size:15px;text-decoration:none;border:none;cursor:pointer;font-family:var(--dig-sans);}
   .cta.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
   .cta.ghost:hover{border-color:var(--orange);}
 
@@ -348,7 +367,7 @@
   .serv-row:hover .ico{transform:scale(1.1) rotate(-5deg);}
   .serv-row:hover .ico::before{opacity:1;}
   .serv-row .ico svg{position:relative;width:19px;height:19px;stroke:var(--orange);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .35s ease;}
-  .serv-row:hover .ico svg{stroke:var(--bg);}
+  .serv-row:hover .ico svg{stroke:var(--sobre-degradado);}
   .serv-row .txt{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;min-width:0;}
   .serv-row h3{font-size:15px;font-weight:600;white-space:nowrap;}
   .serv-row p{font-size:12.5px;color:var(--muted);margin:0;}
@@ -457,7 +476,7 @@
   .bloque__num{
     width:34px;height:34px;flex-shrink:0;border-radius:50%;
     display:grid;place-items:center;font-size:12px;font-weight:700;
-    color:var(--bg);background:var(--degradado);
+    color:var(--sobre-degradado);background:var(--degradado);
   }
   .bloque__cab h3{font-family:var(--dig-serif);font-size:clamp(19px,2.2vw,26px);font-weight:500;}
   .bloque__cab p{font-size:13px;color:var(--muted);margin-top:3px;}
@@ -495,9 +514,9 @@
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
     -webkit-mask-composite:xor;mask-composite:exclude;
   }
-  .service-card.selected .check{background:var(--degradado);border-color:transparent;color:var(--bg);}
+  .service-card.selected .check{background:var(--degradado);border-color:transparent;color:var(--sobre-degradado);}
   .service-card.selected .pill-ico{background:var(--degradado);}
-  .service-card.selected .pill-ico svg{stroke:var(--bg);}
+  .service-card.selected .pill-ico svg{stroke:var(--sobre-degradado);}
   .tag{
     display:inline-block;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
     background:var(--surface2);color:var(--sage);border-radius:20px;padding:2px 9px;margin-left:7px;vertical-align:middle;
@@ -558,7 +577,7 @@
     display:grid;place-items:center;font-size:12px;font-weight:700;
     border:1.5px solid var(--line);background:var(--surface2);transition:.4s ease;
   }
-  .miga.activa .miga__num,.miga.hecha .miga__num{background:var(--degradado);border-color:transparent;color:var(--bg);}
+  .miga.activa .miga__num,.miga.hecha .miga__num{background:var(--degradado);border-color:transparent;color:var(--sobre-degradado);}
   .miga__txt{font-size:12.5px;font-weight:600;white-space:nowrap;}
   .miga__linea{width:32px;height:1px;background:var(--line);flex-shrink:0;}
   @media(max-width:640px){.miga__txt{display:none;} .miga__linea{width:16px;}}
@@ -578,7 +597,7 @@
   }
   @keyframes apareceHecho{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
   .done-check{
-    width:66px;height:66px;border-radius:50%;background:var(--degradado);color:var(--bg);
+    width:66px;height:66px;border-radius:50%;background:var(--degradado);color:var(--sobre-degradado);
     font-size:28px;display:grid;place-items:center;margin:0 auto 22px;animation:popCheck .55s ease;
   }
   @keyframes popCheck{0%{transform:scale(0);}70%{transform:scale(1.15);}100%{transform:scale(1);}}
@@ -628,7 +647,7 @@
     display:grid;place-items:center;
     transition:border-color .3s ease,background .3s ease,transform .3s ease;
   }
-  .voces__flecha:hover{border-color:transparent;background:var(--degradado);color:var(--bg);transform:translateY(-2px);}
+  .voces__flecha:hover{border-color:transparent;background:var(--degradado);color:var(--sobre-degradado);transform:translateY(-2px);}
   .voces__flecha svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
   .voces__puntos{display:flex;gap:8px;}
   .voces__puntos button{
@@ -683,7 +702,7 @@
   .arriba{
     position:fixed;bottom:60px;right:18px;z-index:45;
     width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
-    background:var(--degradado);color:var(--bg);display:grid;place-items:center;
+    background:var(--degradado);color:var(--sobre-degradado);display:grid;place-items:center;
     box-shadow:0 10px 26px rgba(0,0,0,.28);
     opacity:0;visibility:hidden;transform:translateY(12px) scale(.9);
     transition:opacity .4s ease,transform .4s cubic-bezier(.22,.61,.36,1),visibility .4s;
@@ -692,7 +711,7 @@
   .arriba:hover{transform:translateY(-3px);}
   .arriba svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
   @media(max-width:600px){.arriba{width:42px;height:42px;right:12px;}}
-  .badge{position:fixed;bottom:18px;right:18px;background:var(--orange);color:#fff;font-size:11.5px;font-weight:600;padding:6px 12px;border-radius:20px;z-index:60;}
+  .badge{position:fixed;bottom:18px;right:18px;background:var(--orange);color:var(--sobre-degradado);font-size:11.5px;font-weight:600;padding:6px 12px;border-radius:20px;z-index:60;}
   /* Justo debajo de la cabecera: arriba tapaba el logotipo, y las esquinas
      de abajo las ocupan el chat, la ayuda y la firma */
   .plan-tag{position:fixed;top:calc(84px + var(--dig-barra-h));left:32px;background:var(--ink);color:var(--bg);font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;opacity:.9;z-index:91;}
@@ -706,7 +725,7 @@
   .chat-head{padding:14px 16px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600;}
   .chat-body{flex:1;padding:14px 16px;overflow-y:auto;font-size:13.5px;display:flex;flex-direction:column;gap:10px;}
   .chat-msg{background:var(--surface2);padding:9px 12px;border-radius:10px;max-width:85%;}
-  .chat-msg.user{align-self:flex-end;background:var(--orange);color:#fff;}
+  .chat-msg.user{align-self:flex-end;background:var(--orange);color:var(--sobre-degradado);}
   .chat-input-row{display:flex;border-top:1px solid var(--line);}
   .chat-input-row input{flex:1;border:none;background:none;color:var(--ink);padding:12px;font-family:var(--dig-sans);font-size:13px;}
   .chat-input-row button{border:none;background:none;color:var(--orange);font-weight:600;padding:0 14px;cursor:pointer;}
@@ -746,8 +765,6 @@
   <nav aria-label="Webs del estudio">
     <a href="../index.html">Inicio</a>
     <a href="index.html" aria-current="page">Planes</a>
-    <a href="../bodas/index.html">Bodas</a>
-    <a href="cuestionario.html">Cuestionario</a>
   </nav>
 </div>
 
@@ -874,56 +891,57 @@
     <span><b>+30</b> marcas confían en nosotros</span>
     <span><b>4 rondas</b> de ajustes incluidas</span>
     <span><b>25 días</b> de entrega</span>
-    <span><b>1.240 €</b> + IVA</span>
+    <span><b>1.460 €</b> + IVA</span>
   </div>
 </section>
 
 <section id="servicios" class="foto-fondo" style="--velo:linear-gradient(180deg,rgba(32,35,26,.88),rgba(32,35,26,.94));--foto:url(assets/paisaje-atardecer-montana.jpg);">
-  <div class="sec-head reveal"><span class="eyebrow degradado">Todo en un solo plan</span><h2>Lo que incluye tu Plan Élite</h2><p style="max-width:560px;margin:14px auto 0;color:var(--muted);font-size:15px;">Una web no es solo diseño. Es una máquina de vender, impulsada por IA, funcionando para ti 24/7.</p></div>
+  <div class="sec-head reveal"><span class="eyebrow degradado">Todo en un solo plan</span><h2>Lo que incluye tu Plan Élite</h2><p style="max-width:560px;margin:14px auto 0;color:var(--muted);font-size:15px;">Para negocios que venden online o quieren una experiencia digital completa y diferenciadora. Incluye todo lo del Plan Crecimiento, y además:</p></div>
   <div class="serv-list" id="serv-list">
-    <div class="serv-row reveal" style="transition-delay:.02s;"><span class="num">01</span><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><circle cx="6.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/><circle cx="9" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg></span><div class="txt"><h3>Desarrollo web profesional</h3><p>diseño y código a medida, pensado para convertir.</p></div></div>
+    <div class="serv-row reveal" style="transition-delay:.02s;"><span class="num">01</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 9l1-5h14l1 5"/><path d="M4 9a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0"/><path d="M5 9v10h14V9"/><path d="M10 19v-6h4v6"/></svg></span><div class="txt"><h3>Carrito de compra / tienda online</h3><p>catálogo completo y pasarela de pago.</p></div></div>
 
-    <div class="serv-row reveal" style="transition-delay:.08s;"><span class="num">02</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 9l1-5h14l1 5"/><path d="M4 9a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0"/><path d="M5 9v10h14V9"/><path d="M10 19v-6h4v6"/></svg></span><div class="txt"><h3>Tienda online</h3><p>catálogo completo, gestión de productos e inventario.</p></div></div>
+    <div class="serv-row reveal" style="transition-delay:.08s;"><span class="num">02</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.3 8.3 0 0 1-3.8-.9L3 20l1.9-5.7a8.3 8.3 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.6 2h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg></span><div class="txt"><h3>Interacción avanzada con el cliente<span class="ia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 13.9 9l6.6 1.9-6.6 1.9L12 19.4l-1.9-6.6L3.5 10.9 10.1 9 12 2.5Z"/></svg>IA</span></h3><p>chat con IA, formularios inteligentes y zona de reseñas interactiva.</p></div></div>
 
-    <div class="serv-row reveal" style="transition-delay:.14s;"><span class="num">03</span><span class="ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1" fill="currentColor" stroke="none"/><path d="M2 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 7H6"/></svg></span><div class="txt"><h3>Carrito de compra</h3><p>proceso de compra en pasos, claro y sin fricción.</p></div></div>
+    <div class="serv-row reveal" style="transition-delay:.14s;"><span class="num">03</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg></span><div class="txt"><h3>Animaciones con IA avanzadas<span class="ia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 13.9 9l6.6 1.9-6.6 1.9L12 19.4l-1.9-6.6L3.5 10.9 10.1 9 12 2.5Z"/></svg>IA</span></h3><p>efectos 3D/parallax y personalización según comportamiento.</p></div></div>
 
-    <div class="serv-row reveal" style="transition-delay:.20s;"><span class="num">04</span><span class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg></span><div class="txt"><h3>Pasarela de pago</h3><p>cobros seguros integrados con Stripe o Redsys.</p></div></div>
+    <div class="serv-row reveal" style="transition-delay:.20s;"><span class="num">04</span><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></svg></span><div class="txt"><h3>Panel de administración</h3><p>para que el cliente edite contenido, precios o stock.</p></div></div>
 
-    <div class="serv-row reveal" style="transition-delay:.26s;"><span class="num">05</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.3 8.3 0 0 1-3.8-.9L3 20l1.9-5.7a8.3 8.3 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.6 2h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg></span><div class="txt"><h3>Chat con IA<span class="ia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 13.9 9l6.6 1.9-6.6 1.9L12 19.4l-1.9-6.6L3.5 10.9 10.1 9 12 2.5Z"/></svg>IA</span></h3><p>resuelve dudas, formularios inteligentes y zona de reseñas interactiva.</p></div></div>
+    <div class="serv-row reveal" style="transition-delay:.26s;"><span class="num">05</span><span class="ico"><svg viewBox="0 0 24 24"><line x1="5" y1="20" x2="5" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="19" y1="20" x2="19" y2="15"/></svg></span><div class="txt"><h3>Analítica avanzada</h3><p>dashboard de rendimiento.</p></div></div>
 
-    <div class="serv-row reveal" style="transition-delay:.32s;"><span class="num">06</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg></span><div class="txt"><h3>Animaciones avanzadas con IA<span class="ia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 13.9 9l6.6 1.9-6.6 1.9L12 19.4l-1.9-6.6L3.5 10.9 10.1 9 12 2.5Z"/></svg>IA</span></h3><p>micro-interacciones que hacen tu web memorable.</p></div></div>
+    <div class="serv-row reveal" style="transition-delay:.32s;"><span class="num">06</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span><div class="txt"><h3>Optimización de velocidad y rendimiento</h3><p>carga rápida en cualquier dispositivo.</p></div></div>
 
     <div class="serv-mas"><div>
-      <div class="serv-row reveal" style="transition-delay:.38s;"><span class="num">07</span><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></svg></span><div class="txt"><h3>Panel de administración</h3><p>gestiona pedidos, contenido y clientes sin depender de nadie.</p></div></div>
+      <div class="serv-row reveal" style="transition-delay:.38s;"><span class="num">07</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span><div class="txt"><h3>Sesión de formación 1:1</h3><p>para que el cliente maneje su web sin depender de nadie.</p></div></div>
 
-      <div class="serv-row reveal" style="transition-delay:.44s;"><span class="num">08</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span><div class="txt"><h3>Optimización del rendimiento</h3><p>carga rápida en cualquier dispositivo.</p></div></div>
+      <div class="serv-row reveal" style="transition-delay:.44s;"><span class="num">08</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><div class="txt"><h3>4 rondas de cambios</h3><p>ajustes incluidos antes de la entrega final.</p></div></div>
 
-      <div class="serv-row reveal" style="transition-delay:.50s;"><span class="num">09</span><span class="ico"><svg viewBox="0 0 24 24"><line x1="5" y1="20" x2="5" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="19" y1="20" x2="19" y2="15"/></svg></span><div class="txt"><h3>Analítica</h3><p>visitas, conversiones y ventas de un vistazo.</p></div></div>
-
-      <div class="serv-row reveal" style="transition-delay:.56s;"><span class="num">10</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span><div class="txt"><h3>Formación al cliente</h3><p>sesión 1:1 para manejar tu web sin depender de nadie.</p></div></div>
-
-      <div class="serv-row reveal" style="transition-delay:.62s;"><span class="num">11</span><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="1"/><line x1="3" y1="13" x2="21" y2="13"/><line x1="12" y1="9" x2="12" y2="21"/><path d="M12 9c-1.5-4-6-4-6-1.5S9 9 12 9z"/><path d="M12 9c1.5-4 6-4 6-1.5S15 9 12 9z"/></svg></span><div class="txt"><h3>Extras incluidos</h3><p>fotos de producto, posts animados, landing y más.</p></div></div>
-
-      <div class="serv-row reveal" style="transition-delay:.68s;"><span class="num">12</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M9 8h6"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg></span><div class="txt"><h3>Paquete legal completo</h3><p>Aviso Legal, Privacidad, Cookies, Términos de venta, Devoluciones y litigios UE.</p></div></div>
-
-      <div class="serv-row reveal" style="transition-delay:.74s;"><span class="num">13</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><div class="txt"><h3>4 rondas de cambios</h3><p>ajustes incluidos antes de la entrega final.</p></div></div>
+      <div class="serv-row reveal" style="transition-delay:.50s;"><span class="num">09</span><span class="ico"><svg viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M9 8h6"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg></span><div class="txt"><h3>Paquete legal completo</h3><p>Aviso Legal + Privacidad + Cookies + Términos y Condiciones de venta + Devoluciones/cancelaciones + enlace a resolución de litigios UE.</p></div></div>
     </div></div>
   </div>
   <button class="serv-abrir" id="serv-abrir" aria-expanded="false" aria-controls="serv-list">
-    <span>Ver las 7 prestaciones restantes</span>
+    <span>Ver las 3 prestaciones restantes</span>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </button>
   <div style="max-width:680px;margin:34px auto 0;">
-    <h4 style="font-size:14px;margin-bottom:12px;color:var(--ink);">Extras opcionales — elige hasta 6 de 8</h4>
+    <h4 style="font-size:14px;margin-bottom:12px;color:var(--ink);">Todos los extras incluidos</h4>
     <ul style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;list-style:none;padding:0;font-size:13.5px;color:var(--muted);">
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Modo oscuro</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>QR personalizado</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Página de agradecimiento personalizada</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Mapa de Google integrado</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Formulario de testimonios</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Newsletter con bienvenida automática</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Integración con Google Business Profile</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Testimonios en vídeo</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Blog asistido con IA</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Galería animada</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Sección de FAQ desplegable</li>
       <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Chat con IA / chatbot</li>
       <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Carrito de compra avanzado / pasarela de pago</li>
       <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Dashboard de analítica personalizado</li>
       <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Multi-idioma</li>
-      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Animaciones 3D / parallax</li>
       <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Panel de administración para el cliente</li>
-      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Testimonios en vídeo</li>
-      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Newsletter con automatizaciones avanzadas</li>
+      <li style="display:flex;gap:8px;"><span style="color:var(--orange);font-weight:700;">+</span>Valoraciones de Google en la web</li>
     </ul>
   </div>
 </section>
@@ -1098,7 +1116,7 @@
 <section id="contacto" class="aurora foto-fondo" style="--velo:linear-gradient(180deg,rgba(32,35,26,.88),rgba(32,35,26,.94));--foto:url(assets/paisaje-atardecer-lila.jpg);">
   <div class="sec-head reveal"><span class="eyebrow degradado">Dudas frecuentes</span><h2>Preguntas y respuestas</h2></div>
   <div class="faq">
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuál es el precio del plan Élite? <span class="plus">+</span></button><div class="faq-a"><p>1.240 € + IVA, sin contar los servicios adicionales que elijas.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuál es el precio del plan Élite? <span class="plus">+</span></button><div class="faq-a"><p>1.460 € + IVA, sin contar los servicios adicionales que elijas.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda un proyecto Élite? <span class="plus">+</span></button><div class="faq-a"><p>25 días laborables. Puede variar según los servicios adicionales que selecciones.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuántas rondas de cambios incluye? <span class="plus">+</span></button><div class="faq-a"><p>El plan Élite incluye 4 rondas de ajustes antes de la entrega final.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿La tienda online incluye pasarela de pago? <span class="plus">+</span></button><div class="faq-a"><p>Sí, configuramos la pasarela de pago (Stripe o similar); la cuenta de cobros la abres tú a tu nombre.</p></div></div>
@@ -1220,35 +1238,37 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.16c-.24.68-1.42 1.31-1.96 1.36-.5.05-1.13.07-1.82-.11-.42-.11-.96-.29-1.65-.59-2.9-1.25-4.8-4.17-4.94-4.36-.15-.19-1.19-1.58-1.19-3.02s.76-2.15 1.03-2.44c.27-.29.59-.37.79-.37h.57c.18 0 .43-.07.67.51.24.59.83 2.03.9 2.18.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.3 2.35 1.45.29.15.46.12.63-.07.17-.19.73-.85.92-1.14.19-.29.39-.24.65-.15.27.1 1.7.8 1.99.95.29.15.48.22.55.34.07.12.07.68-.17 1.36Z"/></svg> Escríbenos por WhatsApp
     </a>
 
-    <div class="redes reveal">
-      <a class="red" href="https://www.instagram.com/differentissgood/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-        Instagram
-      </a>
-      <a class="red" href="https://www.tiktok.com/@differentissgood" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3v11.5a4 4 0 1 1-3.2-3.9"/><path d="M15 6.2A5.2 5.2 0 0 0 20 9.5"/></svg>
-        TikTok
-      </a>
-      <a class="red" href="https://www.linkedin.com/in/differentissgood" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.4v.1M12 17v-3.6a2 2 0 0 1 4 0V17"/></svg>
-        LinkedIn
-      </a>
-      <a class="red" href="mailto:projectmanager@differentissgood.com">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
-        projectmanager@differentissgood.com
-      </a>
-      <a class="red" href="mailto:differentissgood@gmail.com">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
-        differentissgood@gmail.com
-      </a>
-      <a class="red" href="tel:+34662272128">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4 7.2 2 2 0 0 1 6 5Z"/></svg>
-        +34 662 272 128
-      </a>
-      <a class="red" href="https://www.google.com/maps/search/?api=1&query=Barcelona%2C+Espa%C3%B1a" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.8"/></svg>
-        Barcelona, España
-      </a>
+    <div class="contacto-grupo reveal">
+      <p class="contacto-grupo__titulo">Síguenos</p>
+      <div class="social-fila">
+        <a class="social-boton" href="https://www.instagram.com/differentissgood/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="social-boton" href="https://www.tiktok.com/@differentissgood" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3v11.5a4 4 0 1 1-3.2-3.9"/><path d="M15 6.2A5.2 5.2 0 0 0 20 9.5"/></svg>
+        </a>
+        <a class="social-boton" href="https://www.linkedin.com/in/differentissgood" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.4v.1M12 17v-3.6a2 2 0 0 1 4 0V17"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="contacto-grupo reveal">
+      <p class="contacto-grupo__titulo">Escríbenos</p>
+      <dl class="datos datos--contacto">
+        <div class="dato">
+          <dt>Correo</dt>
+          <dd><a href="mailto:projectmanager@differentissgood.com">projectmanager@differentissgood.com</a><br><a href="mailto:differentissgood@gmail.com">differentissgood@gmail.com</a></dd>
+        </div>
+        <div class="dato">
+          <dt>Teléfono</dt>
+          <dd><a href="tel:+34662272128">+34 662 272 128</a></dd>
+        </div>
+        <div class="dato">
+          <dt>Ubicación</dt>
+          <dd><a href="https://www.google.com/maps/search/?api=1&query=Barcelona%2C+Espa%C3%B1a" target="_blank" rel="noopener">Barcelona, España</a></dd>
+        </div>
+      </dl>
     </div>
   </div>
 
@@ -1602,8 +1622,6 @@
     <a href="https://differentissgood.com/">Web oficial</a>
     <a href="../index.html">Índice</a>
     <a href="index.html">Planes</a>
-    <a href="../bodas/index.html">Bodas</a>
-    <a href="cuestionario.html">Cuestionario</a>
   </div>
   <p>
     <a href="mailto:projectmanager@differentissgood.com">projectmanager@differentissgood.com</a> ·
