@@ -716,19 +716,15 @@ input[type="file"]::file-selector-button{
         <div class="chip-grid" id="extras-inc-impulso" data-min="2" data-max="4">
           <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
         </div>
 
         <div data-requiere-extra="QR personalizado">
           <label class="field-label" style="margin-top:16px;">¿A dónde debe llevar el código QR?</label>
           <input type="text" name="Destino del QR" placeholder="Ej: a la carta, a WhatsApp, a la ficha de Google...">
-        </div>
-        <div data-requiere-extra="Página de agradecimiento personalizada">
-          <label class="field-label" style="margin-top:16px;">¿Qué quieres que diga la página de agradecimiento?</label>
-          <textarea name="Texto de la página de agradecimiento" rows="2" placeholder="Lo que ve quien acaba de escribiros o comprar"></textarea>
         </div>
         <div data-requiere-extra="Botón de compartir en redes">
           <label class="field-label" style="margin-top:16px;">¿Dónde quieres que se pueda compartir la web?</label>
@@ -760,10 +756,10 @@ input[type="file"]::file-selector-button{
           <div class="chip-grid" id="extras-pago-impulso" data-espejo="extras-inc-impulso">
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Modo oscuro"><span>Modo oscuro</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="QR personalizado"><span>QR personalizado</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
           </div>
         </div></div>
       </div>
@@ -794,25 +790,6 @@ input[type="file"]::file-selector-button{
           <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
           <input type="url" name="Enlace de Google Business" placeholder="Pega el enlace si ya la tenéis">
         </div>
-
-        <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
-        <div class="hint">Cada uno, fuera de los incluidos, cuesta <b>70 € + IVA</b>.</div>
-        <select name="Extras adicionales" id="sel-extras-pago-crecimiento" onchange="alternarExtrasPago('crecimiento')">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
-        <div class="depende" id="extras-pago-crecimiento-caja"><div>
-          <label class="field-label">Toca los que te falten</label>
-          <div class="chip-grid" id="extras-pago-crecimiento" data-espejo="extras-inc-crecimiento">
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Integración con Google Business"><span>Integración con Google Business</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Galería animada"><span>Galería animada</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
-          </div>
-        </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -954,6 +931,9 @@ input[type="file"]::file-selector-button{
             <option>Sí</option>
             <option>No</option>
           </select>
+          <div class="depende" id="plan-fotovideo-galeria-si"><div>
+            <div class="note-box">Perfecto — ese contenido no está incluido en el plan, así que os pasamos un presupuesto aparte al terminar de revisar el cuestionario.</div>
+          </div></div>
           <div class="depende" id="plan-fotovideo-galeria-no"><div>
             <div class="note-box">Para crear esta sección necesitamos contenido audiovisual — si no queréis que os lo grabemos nosotros, tendréis que proporcionárnoslo vosotros.</div>
           </div></div>
@@ -1102,7 +1082,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 13 · FAQ ================= -->
-    <div class="step" data-planes="crecimiento elite" data-extra="Sección de FAQ desplegable">
+    <div class="step" data-planes="impulso crecimiento elite" data-extra="Sección de FAQ desplegable">
       <div class="step-head">
         <span class="step-num">13</span>
         <div><h2>Preguntas frecuentes</h2></div>
@@ -1348,16 +1328,15 @@ input[type="file"]::file-selector-button{
           <option value="" selected></option>
           <option>Sí</option>
           <option>No</option>
-          <option>No sé qué es</option>
         </select>
-        <label class="field-label">Enlace a la ficha</label>
-        <input type="url" name="Enlace de Google Business" placeholder="https://...">
         <label class="field-label">¿Queréis integrarla en la web?</label>
         <select name="Integrar Google Business">
           <option value="" selected></option>
           <option>Sí</option>
           <option>No</option>
         </select>
+        <label class="field-label">Enlace a la ficha</label>
+        <input type="url" name="Enlace de Google Business" placeholder="https://...">
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1465,11 +1444,22 @@ input[type="file"]::file-selector-button{
         </select>
         <div class="depende" id="fotografia-profesional-extra"><div>
           <label class="field-label">¿Quieres que os hagamos un plan de fotografía personalizado?</label>
-          <select name="Plan de fotografía personalizado">
+          <select name="Plan de fotografía personalizado" id="sel-plan-foto-personalizado" onchange="alternarPlanFotoPersonalizado()">
             <option value="" selected></option>
-            <option>Sí</option>
-            <option>Por el momento seguiré con las imágenes que proporciono</option>
+            <option value="Sí">Sí</option>
+            <option value="Por el momento seguiré con las imágenes que proporciono">Por el momento seguiré con las imágenes que proporciono</option>
           </select>
+          <div class="depende" id="plan-foto-personalizado-si"><div>
+            <label class="field-label">¿Qué idea tenéis para esas fotografías?</label>
+            <textarea name="Idea para el plan de fotografía" rows="2" placeholder="Qué queréis mostrar, dónde, con quién..."></textarea>
+            <label class="field-label">¿Queréis que incluya también vídeo?</label>
+            <select name="Incluir vídeo en plan de fotografía">
+              <option value="" selected></option>
+              <option>Sí</option>
+              <option>No</option>
+            </select>
+            <div class="note-box">Cuando revisemos el plan, os haremos un presupuesto personalizado.</div>
+          </div></div>
         </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -1863,6 +1853,10 @@ input[type="file"]::file-selector-button{
     var el = document.getElementById('sel-fotografia-profesional');
     abrir('fotografia-profesional-extra', !!el && el.value === 'No');
   };
+  window.alternarPlanFotoPersonalizado = function(){
+    var el = document.getElementById('sel-plan-foto-personalizado');
+    abrir('plan-foto-personalizado-si', !!el && el.value === 'Sí');
+  };
   window.alternarFotosGaleria = function(){
     var v = document.getElementById('sel-fotos-galeria').value;
     abrir('fotos-galeria-si', v === 'Sí');
@@ -1870,11 +1864,13 @@ input[type="file"]::file-selector-button{
   };
   window.alternarPlanFotoVideoGaleria = function(){
     var el = document.getElementById('sel-plan-fotovideo-galeria');
-    abrir('plan-fotovideo-galeria-no', !!el && el.value === 'No');
+    var v = el && el.value;
+    abrir('plan-fotovideo-galeria-si', v === 'Sí');
+    abrir('plan-fotovideo-galeria-no', v === 'No');
   };
   alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
-  alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria();
-  ['impulso', 'crecimiento'].forEach(function(plan){ alternarExtrasPago(plan); });
+  alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado();
+  ['impulso'].forEach(function(plan){ alternarExtrasPago(plan); });
 
   /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
   var sincronizarExtrasPago = [];
@@ -2247,7 +2243,7 @@ input[type="file"]::file-selector-button{
 
   if(recuperarBorrador()){
     aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
-    alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria();
+    alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado();
     var nota = document.createElement('p');
     nota.className = 'borrador';
     nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
