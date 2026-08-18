@@ -195,6 +195,8 @@ header p{color:var(--muted);font-size:12.5px;max-width:480px;margin:8px auto 0;l
 label.field-label{font-size:13px;font-weight:600;margin:18px 0 8px;display:block;}
 .step-cuerpo > label.field-label:first-child{margin-top:0;}
 .hint{font-size:12px;color:var(--tenue);margin:-4px 0 8px;line-height:1.5;}
+.extra-pregunta{margin-top:22px;padding-top:16px;border-top:1px dashed var(--line);}
+.extra-pregunta__rotulo{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--rosa);font-weight:700;margin:0 0 8px;}
 
 input[type="text"],input[type="email"],input[type="tel"],input[type="url"],textarea,select{
   width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--line);
@@ -883,7 +885,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="elite" data-extra="Multi-idioma">
       <div class="step-head">
         <span class="step-num">7</span>
-        <div><h2>Idiomas de la web</h2><span class="plan-badge" data-nivel="elite">Solo Plan Élite</span></div>
+        <div><h2>Idiomas de la web</h2></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">Además del español, ¿a qué idioma queréis traducir la web?</label>
@@ -906,7 +908,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="crecimiento elite" data-extra="Blog asistido con IA|Galería animada">
       <div class="step-head">
         <span class="step-num">8</span>
-        <div><h2>Blog o galería</h2><span class="plan-badge" data-nivel="medio">Si elegiste Blog asistido con IA o Galería animada</span></div>
+        <div><h2>Blog o galería</h2></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Queréis publicar noticias o artículos?</label>
@@ -921,19 +923,40 @@ input[type="file"]::file-selector-button{
           <input type="text" name="Frecuencia del blog" placeholder="Ej: una vez al mes">
           <label class="field-label">¿Sobre qué temas?</label>
           <textarea name="Temas del blog" rows="2"></textarea>
-          <label class="field-label">¿Tenéis ya fotografías para la galería?</label>
-          <select name="Fotos de galería">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>Algunas</option>
-            <option>No</option>
-          </select>
           <label class="field-label">¿Queréis que la redacción se apoye en inteligencia artificial?</label>
           <select name="Blog con IA">
             <option value="" selected></option>
             <option>Sí</option>
             <option>No</option>
           </select>
+        </div></div>
+
+        <label class="field-label" style="margin-top:18px;">¿Tenéis ya fotografías para la galería?</label>
+        <select name="Fotos de galería" id="sel-fotos-galeria" onchange="alternarFotosGaleria()">
+          <option value="" selected></option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+
+        <div class="depende" id="fotos-galeria-si"><div>
+          <label class="field-label">Sube las fotos y pon el pie de foto de cada una</label>
+          <div class="subida" id="subida-galeria-blog">
+            <input type="file" accept="image/*" multiple>
+            <p class="subida__texto"><b>Toca o arrastra</b> las fotos aquí</p>
+          </div>
+          <div class="subida-lista" id="subida-galeria-blog-lista"></div>
+        </div></div>
+
+        <div class="depende" id="fotos-galeria-no"><div>
+          <label class="field-label">¿Queréis que os hagamos un plan extra personalizado de fotografía y vídeo?</label>
+          <select name="Plan de fotografía y vídeo para galería" id="sel-plan-fotovideo-galeria" onchange="alternarPlanFotoVideoGaleria()">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+          <div class="depende" id="plan-fotovideo-galeria-no"><div>
+            <div class="note-box">Para crear esta sección necesitamos contenido audiovisual — si no queréis que os lo grabemos nosotros, tendréis que proporcionárnoslo vosotros.</div>
+          </div></div>
         </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -943,7 +966,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="crecimiento elite">
       <div class="step-head">
         <span class="step-num">9</span>
-        <div><h2>Reservas y citas</h2><span class="plan-badge" data-nivel="medio">Incluido en Crecimiento y Élite</span></div>
+        <div><h2>Reservas y citas</h2></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Ofrecéis un solo servicio o varios?</label>
@@ -974,12 +997,11 @@ input[type="file"]::file-selector-button{
           <option>Sí</option>
           <option>No</option>
         </select>
-        <label class="field-label">¿Y que os llegue un aviso al correo con cada reserva?</label>
-        <select name="Aviso por correo">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
+        <label class="field-label">¿Y que os llegue un aviso con cada reserva?</label>
+        <div class="chip-grid">
+          <label class="chip"><input type="checkbox" name="Aviso de reserva" value="Sí, por correo"><span>Sí, por correo</span></label>
+          <label class="chip"><input type="checkbox" name="Aviso de reserva" value="Sí, por WhatsApp"><span>Sí, por WhatsApp</span></label>
+        </div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -988,7 +1010,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="elite" data-extra="Carrito de compra avanzado / pasarela de pago">
       <div class="step-head">
         <span class="step-num">10</span>
-        <div><h2>Tienda online y pagos</h2><span class="plan-badge" data-nivel="elite">Solo Plan Élite</span></div>
+        <div><h2>Tienda online y pagos</h2></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Cuántos productos vais a vender, más o menos?</label>
@@ -1028,7 +1050,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="elite" data-extra="Chat con IA / chatbot|Panel de administración para el cliente">
       <div class="step-head">
         <span class="step-num">11</span>
-        <div><h2>Inteligencia artificial y panel</h2><span class="plan-badge" data-nivel="elite">Solo Plan Élite</span></div>
+        <div><h2>Inteligencia artificial y panel</h2></div>
       </div>
       <div class="step-cuerpo">
         <div data-requiere-extra="Chat con IA / chatbot">
@@ -1040,6 +1062,7 @@ input[type="file"]::file-selector-button{
             <label class="chip"><input type="checkbox" name="Chat IA" value="Recoger datos de contacto"><span>Recoger datos de contacto</span></label>
             <label class="chip"><input type="checkbox" name="Chat IA" value="Concertar citas"><span>Concertar citas</span></label>
           </div>
+          <div class="note-box">Importante: todo lo que marques aquí arriba (dudas frecuentes, recomendar productos, ayudar con la compra, recoger datos, concertar citas...) tiene que llevar su información correspondiente en las preguntas y respuestas de más abajo — si no, el chat no sabrá qué contestar.</div>
           <label class="field-label">¿Con qué tono debe hablar el chat?</label>
           <input type="text" name="Tono del chat IA" placeholder="Ej: cercano y directo, formal, divertido...">
           <label class="field-label">Si no sabe responder, ¿lo derivamos a WhatsApp o a un correo?</label>
@@ -1079,10 +1102,10 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 13 · FAQ ================= -->
-    <div class="step" data-planes="impulso crecimiento elite" data-extra="Sección de FAQ desplegable">
+    <div class="step" data-planes="crecimiento elite" data-extra="Sección de FAQ desplegable">
       <div class="step-head">
         <span class="step-num">13</span>
-        <div><h2>Preguntas frecuentes</h2><span class="plan-badge" data-nivel="medio">Solo si eliges el extra de FAQ</span></div>
+        <div><h2>Preguntas frecuentes</h2></div>
       </div>
       <div class="step-cuerpo">
         <p class="step-sub">Escribe la pregunta y, justo debajo, la respuesta que quieres que aparezca. Añade tantas como quieras.</p>
@@ -1096,7 +1119,7 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="crecimiento elite" data-extra="Newsletter con bienvenida automática">
       <div class="step-head">
         <span class="step-num">16</span>
-        <div><h2>Newsletter</h2><span class="plan-badge" data-nivel="medio">Si elegiste el extra de Newsletter</span></div>
+        <div><h2>Newsletter</h2></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Queréis una newsletter en la web?</label>
@@ -1320,12 +1343,6 @@ input[type="file"]::file-selector-button{
           <option>Sí</option>
           <option>No</option>
         </select>
-        <label class="field-label">¿Y el muro de Instagram, en directo?</label>
-        <select name="Muro de Instagram">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
         <label class="field-label">¿Tenéis ficha de Google Business?</label>
         <select name="Ficha de Google Business">
           <option value="" selected></option>
@@ -1440,12 +1457,20 @@ input[type="file"]::file-selector-button{
         <label class="field-label" style="margin-top:16px;">¿Algo pesa demasiado para subirlo aquí?</label>
         <input type="url" name="Enlace a archivos grandes" placeholder="Enlace de Drive o WeTransfer">
 
-        <label class="field-label" style="margin-top:16px;">¿No tienes fotografía profesional?</label>
-        <select name="Necesita sesión de fotos">
+        <label class="field-label" style="margin-top:16px;">¿Tienes fotografía profesional?</label>
+        <select name="Tiene fotografía profesional" id="sel-fotografia-profesional" onchange="alternarFotografiaProfesional()">
           <option value="" selected></option>
-          <option>Nos interesaría una sesión</option>
-          <option>No hace falta</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
         </select>
+        <div class="depende" id="fotografia-profesional-extra"><div>
+          <label class="field-label">¿Quieres que os hagamos un plan de fotografía personalizado?</label>
+          <select name="Plan de fotografía personalizado">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>Por el momento seguiré con las imágenes que proporciono</option>
+          </select>
+        </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1666,6 +1691,7 @@ input[type="file"]::file-selector-button{
   }
   var zonaEquipo = crearZonaSubida(document.getElementById('subida-equipo'), document.getElementById('subida-equipo-lista'), 'Equipo');
   var zonaServicios = crearZonaSubida(document.getElementById('subida-servicios'), document.getElementById('subida-servicios-lista'), 'Servicio');
+  var zonaGaleriaBlog = crearZonaSubida(document.getElementById('subida-galeria-blog'), document.getElementById('subida-galeria-blog-lista'), 'Galería');
 
   /* ---------- Archivos: secciones de fotos que se añaden de una en una ---------- */
   var zonasSeccionesFotos = [];
@@ -1833,7 +1859,21 @@ input[type="file"]::file-selector-button{
     abrir('audiovisual-extra', v === 'No, quiero un presupuesto aparte');
     if(v === 'Sí' && !cuenta.videoTestimonio) añadirVideoTestimonio();
   };
+  window.alternarFotografiaProfesional = function(){
+    var el = document.getElementById('sel-fotografia-profesional');
+    abrir('fotografia-profesional-extra', !!el && el.value === 'No');
+  };
+  window.alternarFotosGaleria = function(){
+    var v = document.getElementById('sel-fotos-galeria').value;
+    abrir('fotos-galeria-si', v === 'Sí');
+    abrir('fotos-galeria-no', v === 'No');
+  };
+  window.alternarPlanFotoVideoGaleria = function(){
+    var el = document.getElementById('sel-plan-fotovideo-galeria');
+    abrir('plan-fotovideo-galeria-no', !!el && el.value === 'No');
+  };
   alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
+  alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria();
   ['impulso', 'crecimiento'].forEach(function(plan){ alternarExtrasPago(plan); });
 
   /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
@@ -1934,6 +1974,17 @@ input[type="file"]::file-selector-button{
     var titulo = sinAcentos(paso.querySelector('h2').textContent.trim());
     return CATEGORIAS[titulo] || {cat:'Otros', icono:ICONOS.extras};
   }
+
+  /* ---------- Cada extra elegido tiene su propio apartado, bien marcado ---------- */
+  document.querySelectorAll('[data-requiere-extra]').forEach(function(bloque){
+    if(bloque.classList.contains('extra-pregunta')) return;
+    bloque.classList.add('extra-pregunta');
+    var nombre = bloque.dataset.requiereExtra.split('|')[0];
+    var rotulo = document.createElement('p');
+    rotulo.className = 'extra-pregunta__rotulo';
+    rotulo.textContent = 'Sobre el extra: ' + nombre;
+    bloque.insertBefore(rotulo, bloque.firstChild);
+  });
 
   /* ---------- Solo las preguntas del plan elegido ---------- */
   var bloques = Array.prototype.slice.call(document.querySelectorAll('.step[data-planes]'));
@@ -2196,6 +2247,7 @@ input[type="file"]::file-selector-button{
 
   if(recuperarBorrador()){
     aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
+    alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria();
     var nota = document.createElement('p');
     nota.className = 'borrador';
     nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
@@ -2247,7 +2299,7 @@ input[type="file"]::file-selector-button{
       lista.push({etiqueta:input.name, file:input.files[0]});
     });
     // Zonas de subida múltiple: equipo, servicios y las secciones de fotos añadidas una a una
-    [zonaEquipo, zonaServicios].concat(zonasSeccionesFotos).concat(zonasVideosTestimonios).forEach(function(zona){
+    [zonaEquipo, zonaServicios, zonaGaleriaBlog].concat(zonasSeccionesFotos).concat(zonasVideosTestimonios).forEach(function(zona){
       if(!zona || !zona.isConnected || !activo(zona)) return;
       zona.archivos.forEach(function(a){ lista.push({etiqueta:a.etiqueta, file:a.file}); });
     });
