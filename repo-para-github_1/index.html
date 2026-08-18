@@ -1,66 +1,112 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-dig-auto>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Differentissgood — Nuestros planes</title>
 <meta name="description" content="Differentissgood. Tres planes, tres ejemplos de web reales: Impulso, Crecimiento y Élite. Entra y mira cómo quedaría el tuyo.">
-<meta name="theme-color" content="#171410">
+<meta name="theme-color" content="#F7F2E9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151310" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Differentissgood — Nuestros planes">
 <meta property="og:description" content="Tres planes, tres ejemplos de web reales: Impulso, Crecimiento y Élite.">
+<meta property="og:image" content="https://differentissgood.com/assets/og-cover.jpg">
 <meta property="og:locale" content="es_ES">
 <link rel="icon" href="https://differentissgood.com/assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Marca compartida: tipografía, colores, barra y pie. Único sitio donde se tocan. -->
+<link rel="stylesheet" href="../assets/marca.css">
 <style>
-  :root{--bg:#171410;--ink:#F3EEE3;--orange:#DD6B3A;--line:#3a3125;--card:#221b15;}
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;}
-  h1{font-family:'Fraunces',serif;font-size:clamp(28px,5vw,44px);margin:0 0 10px;}
-  p{color:rgba(243,238,227,.65);max-width:480px;margin:0 auto 40px;font-size:15px;line-height:1.6;}
+  body{
+    margin:0;padding:calc(var(--dig-barra-h) + 64px) 20px 0;
+    background:var(--dig-papel);color:var(--dig-tinta);
+    font-family:var(--dig-sans);line-height:var(--dig-interlinea);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    text-align:center;-webkit-font-smoothing:antialiased;
+  }
+  .contenido{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;position:relative;}
+  h1{font-family:var(--dig-serif);font-weight:var(--dig-peso-titulo);font-size:clamp(28px,5vw,44px);margin:0 0 10px;}
+  .intro{color:var(--dig-tinta-suave);max-width:500px;margin:0 auto 40px;font-size:15px;}
   .grid{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;max-width:900px;}
-  a.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 28px;width:230px;text-decoration:none;color:var(--ink);transition:transform .25s ease,border-color .25s ease;}
-  a.card:hover{transform:translateY(-6px);border-color:var(--orange);}
-  a.card .n{color:var(--orange);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
-  a.card h2{font-family:'Fraunces',serif;font-size:22px;margin:10px 0 8px;}
-  a.card p{margin:0;font-size:13px;color:rgba(243,238,227,.6);}
-  footer{margin-top:50px;font-size:12.5px;color:rgba(243,238,227,.45);}
+  a.card{
+    background:var(--dig-superficie);border:1px solid var(--dig-linea);
+    border-radius:var(--dig-radio);padding:32px 28px;width:230px;
+    text-decoration:none;color:var(--dig-tinta);text-align:left;
+    transition:transform .25s var(--dig-curva),border-color .25s var(--dig-curva);
+  }
+  a.card:hover{transform:translateY(-6px);border-color:var(--dig-acento);}
+  a.card .n{color:var(--dig-acento);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+  a.card h2{font-family:var(--dig-serif);font-weight:var(--dig-peso-titulo);font-size:22px;margin:10px 0 8px;}
+  a.card p{margin:0;font-size:13px;color:var(--dig-tinta-suave);line-height:1.55;}
+  .dig-pie{width:100%;margin-top:60px;}
 
-  /* --- Fondo dinámico: manchas de color difusas en movimiento + grano fino --- */
+  /* --- Fondo: manchas de color difusas en movimiento + grano fino --- */
   .fondo{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;}
   .fondo i{position:absolute;display:block;border-radius:50%;filter:blur(90px);width:min(60vw,620px);aspect-ratio:1;}
-  .fondo i:nth-child(1){top:-16%;left:-14%;background:rgba(221,107,58,.22);animation:flota1 20s ease-in-out infinite;}
-  .fondo i:nth-child(2){top:36%;right:-18%;background:rgba(201,162,74,.16);animation:flota2 26s ease-in-out infinite;}
-  .fondo i:nth-child(3){bottom:-18%;left:24%;background:rgba(201,118,90,.17);animation:flota3 32s ease-in-out infinite;}
+  .fondo i:nth-child(1){top:-16%;left:-14%;background:var(--dig-acento-suave);animation:flota1 20s ease-in-out infinite;}
+  .fondo i:nth-child(2){top:36%;right:-18%;background:rgba(201,162,74,.14);animation:flota2 26s ease-in-out infinite;}
+  .fondo i:nth-child(3){bottom:-18%;left:24%;background:rgba(201,118,90,.13);animation:flota3 32s ease-in-out infinite;}
   @keyframes flota1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(8%,6%) scale(1.12);}}
   @keyframes flota2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-7%,-8%) scale(1.08);}}
   @keyframes flota3{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(6%,-6%) scale(1.14);}}
-  .grano{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");background-size:160px 160px;}
+  @media (prefers-reduced-motion:reduce){.fondo i{animation:none;}}
+  .grano{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.10;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");background-size:160px 160px;}
 </style>
 </head>
 <body>
   <div class="fondo" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="grano" aria-hidden="true"></div>
-  <h1>Nuestros planes</h1>
-  <p>Cada plan es un ejemplo completo y navegable de cómo quedaría tu web — con su diseño, sus animaciones y su interacción reales.</p>
-  <div class="grid">
-    <a class="card" href="plan-impulso.html">
-      <div class="n">Plan 01 · Ejemplo</div>
-      <h2>Impulso</h2>
-      <p>Ideal para pequeños negocios y profesionales.</p>
-    </a>
-    <a class="card" href="plan-crecimiento.html">
-      <div class="n">Plan 02 · Ejemplo</div>
-      <h2>Crecimiento</h2>
-      <p>Pensado para empresas que quieren destacar.</p>
-    </a>
-    <a class="card" href="plan-elite.html">
-      <div class="n">Plan 03 · Ejemplo</div>
-      <h2>Élite</h2>
-      <p>El máximo nivel para negocios que venden online.</p>
-    </a>
+
+  <!-- ===== Barra compartida (assets/marca.css) ===== -->
+  <div class="dig-barra">
+    <a class="dig-barra__marca" href="https://differentissgood.com/">Differentissgood</a>
+    <nav aria-label="Webs del estudio">
+      <a href="../index.html">Inicio</a>
+      <a href="index.html" aria-current="page">Planes</a>
+      <a href="../bodas/index.html">Bodas</a>
+      <a href="cuestionario.html">Cuestionario</a>
+    </nav>
   </div>
-  <footer>Differentissgood · projectmanager@differentissgood.com · differentissgood@gmail.com</footer>
+
+  <div class="contenido">
+    <h1>Nuestros planes</h1>
+    <p class="intro">Cada plan es un ejemplo completo y navegable de cómo quedaría tu web — con su diseño, sus animaciones y su interacción reales.</p>
+    <div class="grid">
+      <a class="card" href="plan-impulso.html">
+        <div class="n">Plan 01 · Ejemplo</div>
+        <h2>Impulso</h2>
+        <p>Ideal para pequeños negocios y profesionales.</p>
+      </a>
+      <a class="card" href="plan-crecimiento.html">
+        <div class="n">Plan 02 · Ejemplo</div>
+        <h2>Crecimiento</h2>
+        <p>Pensado para empresas que quieren destacar.</p>
+      </a>
+      <a class="card" href="plan-elite.html">
+        <div class="n">Plan 03 · Ejemplo</div>
+        <h2>Élite</h2>
+        <p>El máximo nivel para negocios que venden online.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== Pie compartido (assets/marca.css) ===== -->
+  <footer class="dig-pie">
+    <p class="dig-pie__marca">Differentissgood</p>
+    <div class="dig-pie__enlaces">
+      <a href="https://differentissgood.com/">Web oficial</a>
+      <a href="../index.html">Índice</a>
+      <a href="../bodas/index.html">Bodas</a>
+      <a href="cuestionario.html">Cuestionario</a>
+    </div>
+    <p>
+      <a href="mailto:projectmanager@differentissgood.com">projectmanager@differentissgood.com</a> ·
+      <a href="mailto:differentissgood@gmail.com">differentissgood@gmail.com</a> ·
+      <a href="https://wa.me/34662272128" rel="noopener">+34 662 272 128</a>
+    </p>
+    <p class="dig-pie__legal">Estudio creativo · Audiovisual, webs, project management, producción y postproducción</p>
+  </footer>
 </body>
 </html>

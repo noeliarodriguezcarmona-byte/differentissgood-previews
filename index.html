@@ -1,32 +1,63 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-dig-auto>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Differentissgood — Índice</title>
+<title>Differentissgood — Índice de trabajos</title>
+<meta name="description" content="Índice de las webs del estudio Differentissgood: planes, cuestionario de proyecto y Differentissgood Weddings.">
 <meta name="robots" content="noindex, follow">
-<meta name="theme-color" content="#171410">
+<meta name="theme-color" content="#F7F2E9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151310" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="https://differentissgood.com/assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Marca compartida: tipografía, colores, barra y pie. Único sitio donde se tocan. -->
+<link rel="stylesheet" href="assets/marca.css">
 <style>
-  :root{--bg:#171410;--ink:#F3EEE3;--orange:#DD6B3A;--line:#3a3125;--card:#221b15;}
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;}
-  .marca{margin:0 0 28px;}
-  .marca img{height:44px;width:auto;}
-  p{color:rgba(243,238,227,.65);max-width:480px;margin:0 auto 34px;font-size:14px;line-height:1.6;}
-  .grid{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:760px;}
-  a.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;width:210px;
-    text-decoration:none;color:var(--ink);transition:transform .25s ease,border-color .25s ease;}
-  a.card:hover{transform:translateY(-4px);border-color:var(--orange);}
-  a.card .n{color:var(--orange);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
-  a.card h2{font-size:18px;margin:8px 0 6px;}
-  a.card p{margin:0;font-size:12.5px;color:rgba(243,238,227,.55);}
-  footer{margin-top:44px;font-size:12px;color:rgba(243,238,227,.4);}
+  body{
+    margin:0;padding:calc(var(--dig-barra-h) + 56px) 20px 0;
+    background:var(--dig-papel);color:var(--dig-tinta);
+    font-family:var(--dig-sans);line-height:var(--dig-interlinea);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    text-align:center;-webkit-font-smoothing:antialiased;
+  }
+  .contenido{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;}
+  .marca img{height:44px;width:auto;margin-bottom:22px;}
+  h1{font-family:var(--dig-serif);font-weight:var(--dig-peso-titulo);font-size:clamp(26px,4.4vw,38px);margin:0 0 12px;}
+  .intro{color:var(--dig-tinta-suave);max-width:500px;margin:0 auto 40px;font-size:14.5px;}
+  .grid{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:780px;}
+  a.card{
+    background:var(--dig-superficie);border:1px solid var(--dig-linea);
+    border-radius:var(--dig-radio);padding:26px 24px;width:220px;
+    text-decoration:none;color:var(--dig-tinta);text-align:left;
+    transition:transform .25s var(--dig-curva),border-color .25s var(--dig-curva);
+  }
+  a.card:hover{transform:translateY(-4px);border-color:var(--dig-acento);}
+  a.card .n{color:var(--dig-acento);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+  a.card h2{font-family:var(--dig-serif);font-weight:var(--dig-peso-titulo);font-size:19px;margin:8px 0 6px;}
+  a.card p{margin:0;font-size:12.5px;color:var(--dig-tinta-suave);line-height:1.55;}
+  .dig-pie{width:100%;margin-top:56px;}
 </style>
 </head>
 <body>
+
+<!-- ===== Barra compartida (assets/marca.css) ===== -->
+<div class="dig-barra">
+  <a class="dig-barra__marca" href="https://differentissgood.com/">Differentissgood</a>
+  <nav aria-label="Webs del estudio">
+    <a href="index.html" aria-current="page">Inicio</a>
+    <a href="repo-para-github_1/index.html">Planes</a>
+    <a href="bodas/index.html">Bodas</a>
+    <a href="repo-para-github_1/cuestionario.html">Cuestionario</a>
+  </nav>
+</div>
+
+<div class="contenido">
   <div class="marca"><img src="https://differentissgood.com/assets/logo.png" alt="Differentissgood"></div>
-  <p>Índice de este repositorio. La web principal de la agencia sigue en su dirección de siempre.</p>
+  <h1>Nuestros trabajos</h1>
+  <p class="intro">Índice de las webs del estudio. Todas comparten tipografía, colores y cabecera con la web oficial.</p>
+
   <div class="grid">
     <a class="card" href="repo-para-github_1/index.html">
       <div class="n">Planes</div>
@@ -44,6 +75,24 @@
       <p>Portfolio de fotografía y vídeo de boda.</p>
     </a>
   </div>
-  <footer>Differentissgood · projectmanager@differentissgood.com · differentissgood@gmail.com</footer>
+</div>
+
+<!-- ===== Pie compartido (assets/marca.css) ===== -->
+<footer class="dig-pie">
+  <p class="dig-pie__marca">Differentissgood</p>
+  <div class="dig-pie__enlaces">
+    <a href="https://differentissgood.com/">Web oficial</a>
+    <a href="repo-para-github_1/index.html">Planes</a>
+    <a href="bodas/index.html">Bodas</a>
+    <a href="repo-para-github_1/cuestionario.html">Cuestionario</a>
+  </div>
+  <p>
+    <a href="mailto:projectmanager@differentissgood.com">projectmanager@differentissgood.com</a> ·
+    <a href="mailto:differentissgood@gmail.com">differentissgood@gmail.com</a> ·
+    <a href="https://wa.me/34662272128" rel="noopener">+34 662 272 128</a>
+  </p>
+  <p class="dig-pie__legal">Estudio creativo · Audiovisual, webs, project management, producción y postproducción</p>
+</footer>
+
 </body>
 </html>

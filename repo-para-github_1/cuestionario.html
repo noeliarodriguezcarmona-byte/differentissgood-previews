@@ -10,7 +10,11 @@
 <link rel="icon" href="https://differentissgood.com/assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;700&family=Poppins:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<!-- Marca compartida: tipografía, colores, barra y pie. Único sitio donde se tocan. -->
+<link rel="stylesheet" href="../assets/marca.css">
+<!-- Sólo para los borradores de estilo web que se le enseñan al cliente:
+     ahí las tipografías distintas son el contenido, no la marca. -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@500;700&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
 /* ==========================================================================
    1. FUNDAMENTOS
@@ -18,7 +22,7 @@
 :root{
   --bg:#1c1712;
   --ink:#F5EFE4;
-  --orange:#DD6B3A;
+  --orange:var(--dig-acento-sobre-oscuro);
   --oro:#C9A24A;
   --rosa:#C9765A;
   --line:#3a3125;
@@ -33,10 +37,10 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;background:var(--bg);color:var(--ink);
-  font-family:'Inter',sans-serif;line-height:1.55;
+  font-family:var(--dig-sans);line-height:1.55;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-h1,h2,h3,h4{font-family:'Fraunces',serif;margin:0;font-weight:500;}
+h1,h2,h3,h4{font-family:var(--dig-serif);margin:0;font-weight:500;}
 p{margin:0;}
 a{color:var(--orange);}
 
@@ -58,7 +62,7 @@ a{color:var(--orange);}
   background-size:160px 160px;
 }
 
-.wrap{max-width:760px;margin:0 auto;padding:40px 22px 90px;position:relative;}
+.wrap{max-width:760px;margin:0 auto;padding:calc(40px + var(--dig-barra-h)) 22px 90px;position:relative;}
 
 /* --- Cabecera --- */
 .eyebrow{
@@ -72,7 +76,7 @@ header p{color:var(--muted);font-size:12.5px;max-width:480px;margin:8px auto 0;l
 
 /* --- Barra de avance --- */
 .avance{
-  position:sticky;top:0;z-index:20;margin:0 -22px 0;padding:12px 22px;
+  position:sticky;top:var(--dig-barra-h);z-index:20;margin:0 -22px 0;padding:12px 22px;
   background:rgba(28,23,18,.86);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--muted);
@@ -200,7 +204,7 @@ label.field-label{font-size:13px;font-weight:600;margin:18px 0 8px;display:block
 
 input[type="text"],input[type="email"],input[type="tel"],input[type="url"],textarea,select{
   width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--line);
-  background:var(--card2);color:var(--ink);font-family:'Inter',sans-serif;font-size:14px;
+  background:var(--card2);color:var(--ink);font-family:var(--dig-sans);font-size:14px;
   transition:border-color .3s ease,box-shadow .3s ease;
 }
 input:focus,textarea:focus,select:focus{
@@ -217,13 +221,13 @@ select:invalid,select option[value=""]{color:var(--tenue);}
 
 input[type="file"]{
   width:100%;padding:11px 12px;border-radius:11px;border:1px dashed var(--line);
-  background:var(--card2);color:var(--tenue);font-family:'Inter',sans-serif;font-size:12.5px;
+  background:var(--card2);color:var(--tenue);font-family:var(--dig-sans);font-size:12.5px;
   transition:border-color .3s ease;
 }
 input[type="file"]:hover{border-color:var(--orange);}
 input[type="file"]::file-selector-button{
   margin-right:12px;padding:8px 14px;border-radius:100px;border:none;cursor:pointer;
-  background:var(--degradado);color:#231c14;font-weight:700;font-size:12.5px;font-family:'Inter',sans-serif;
+  background:var(--degradado);color:#231c14;font-weight:700;font-size:12.5px;font-family:var(--dig-sans);
 }
 
 /* --- Zona de subida múltiple, con etiqueta editable por archivo --- */
@@ -377,7 +381,7 @@ input[type="file"]::file-selector-button{
 @keyframes entraRepe{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
 .repe h4{
   font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:14px;
-  font-family:'Inter',sans-serif;font-weight:700;
+  font-family:var(--dig-sans);font-weight:700;
   background:var(--degradado);-webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .repe-quitar{
@@ -389,7 +393,7 @@ input[type="file"]::file-selector-button{
 .add-btn{
   background:none;border:1.5px dashed var(--line);color:var(--muted);
   width:100%;padding:13px;border-radius:13px;cursor:pointer;
-  font-size:13px;font-weight:600;font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:600;font-family:var(--dig-sans);
   transition:border-color .3s ease,color .3s ease,background .3s ease;
 }
 .add-btn:hover{border-color:var(--orange);color:var(--orange);background:rgba(221,107,58,.06);}
@@ -411,7 +415,7 @@ input[type="file"]::file-selector-button{
   width:100%;background:var(--degradado);background-size:180% 180%;
   color:#231c14;border:none;padding:17px;border-radius:100px;
   font-weight:700;font-size:15.5px;cursor:pointer;margin-top:14px;
-  font-family:'Inter',sans-serif;
+  font-family:var(--dig-sans);
   transition:background-position .6s ease,transform .3s ease,box-shadow .3s ease;
 }
 .enviar:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 14px 32px rgba(221,107,58,.28);}
@@ -428,7 +432,7 @@ input[type="file"]::file-selector-button{
 .nav-atras{
   order:1;flex-shrink:0;background:transparent;border:1px solid var(--line);color:var(--muted);
   padding:14px 18px;border-radius:100px;font-weight:600;font-size:14px;cursor:pointer;
-  font-family:'Inter',sans-serif;transition:border-color .3s ease,color .3s ease;
+  font-family:var(--dig-sans);transition:border-color .3s ease,color .3s ease;
 }
 .nav-atras:hover{border-color:var(--orange);color:var(--orange);}
 .nav-atras[hidden]{visibility:hidden;}
@@ -463,7 +467,7 @@ input[type="file"]::file-selector-button{
 .velo__acciones{display:flex;gap:10px;margin-top:18px;}
 .velo__acciones button{
   flex:1;padding:12px;border-radius:100px;cursor:pointer;
-  font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;
+  font-family:var(--dig-sans);font-size:13.5px;font-weight:600;
   border:1px solid var(--line);background:none;color:var(--ink);
 }
 .velo__acciones button.principal{border-color:transparent;background:var(--degradado);color:#231c14;}
@@ -480,7 +484,7 @@ input[type="file"]::file-selector-button{
 }
 .borrador button{
   background:none;border:1px solid var(--line);color:var(--tenue);
-  border-radius:100px;padding:5px 13px;font-size:11.5px;cursor:pointer;font-family:'Inter',sans-serif;
+  border-radius:100px;padding:5px 13px;font-size:11.5px;cursor:pointer;font-family:var(--dig-sans);
 }
 .borrador button:hover{border-color:var(--orange);color:var(--orange);}
 .velo__caja{max-height:88vh;overflow-y:auto;}
@@ -521,6 +525,17 @@ input[type="file"]::file-selector-button{
 </style>
 </head>
 <body>
+<!-- ===== Barra Differentissgood (compartida — assets/marca.css) ===== -->
+<div class="dig-barra">
+  <a class="dig-barra__marca" href="https://differentissgood.com/">Differentissgood</a>
+  <nav aria-label="Webs del estudio">
+    <a href="../index.html">Inicio</a>
+    <a href="index.html">Planes</a>
+    <a href="../bodas/index.html">Bodas</a>
+    <a href="cuestionario.html" aria-current="page">Cuestionario</a>
+  </nav>
+</div>
+
 
 <div class="fondo" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="grano" aria-hidden="true"></div>
@@ -1752,7 +1767,7 @@ input[type="file"]::file-selector-button{
 
     // Cada estilo trae su propia tipografía y su propio aspecto de boceto
     var ESTILO_INFO = {
-      'Minimalista': {clase:'borrador-web--minimalista', fuente:"'Inter',sans-serif"},
+      'Minimalista': {clase:'borrador-web--minimalista', fuente:"var(--dig-sans)"},
       'Elegante':    {clase:'borrador-web--clasica',     fuente:"'Playfair Display',serif"},
       'Creativo':    {clase:'borrador-web--moderna',     fuente:"'Space Grotesk',sans-serif"},
       'Artesanal':   {clase:'borrador-web--artesanal',   fuente:"'Lora',serif"}
@@ -1770,7 +1785,7 @@ input[type="file"]::file-selector-button{
       var tinta = claroUOscuro(c1);
 
       var estiloEl = document.querySelector('input[name="Estilo"]:checked');
-      var info = ESTILO_INFO[estiloEl && estiloEl.value] || {clase:'', fuente:"'Fraunces',serif"};
+      var info = ESTILO_INFO[estiloEl && estiloEl.value] || {clase:'', fuente:"var(--dig-serif)"};
       cajaBorrador.className = 'borrador-web' + (info.clase ? ' ' + info.clase : '');
 
       cajaBorrador.style.background = 'linear-gradient(135deg, ' + c1 + ', ' + c2 + ')';
@@ -2491,5 +2506,24 @@ input[type="file"]::file-selector-button{
   formulario.addEventListener('submit', function(e){ e.preventDefault(); enviar(); });
 })();
 </script>
+
+<!-- ===== Pie Differentissgood (compartido — assets/marca.css) ===== -->
+<footer class="dig-pie">
+  <p class="dig-pie__marca">Differentissgood</p>
+  <div class="dig-pie__enlaces">
+    <a href="https://differentissgood.com/">Web oficial</a>
+    <a href="../index.html">Índice</a>
+    <a href="index.html">Planes</a>
+    <a href="../bodas/index.html">Bodas</a>
+    <a href="cuestionario.html">Cuestionario</a>
+  </div>
+  <p>
+    <a href="mailto:projectmanager@differentissgood.com">projectmanager@differentissgood.com</a> ·
+    <a href="mailto:differentissgood@gmail.com">differentissgood@gmail.com</a> ·
+    <a href="https://wa.me/34662272128" rel="noopener">+34 662 272 128</a>
+  </p>
+  <p class="dig-pie__legal">Estudio creativo · Audiovisual, webs, project management, producción y postproducción</p>
+</footer>
+
 </body>
 </html>

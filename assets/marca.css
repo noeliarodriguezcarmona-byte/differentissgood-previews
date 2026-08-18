@@ -1,0 +1,162 @@
+/* =============================================================================
+   Differentissgood · Hoja de marca compartida
+   -----------------------------------------------------------------------------
+   Este archivo es el ÚNICO sitio donde se definen la tipografía, los colores y
+   la cabecera/pie comunes de todas las webs del estudio. Todas las páginas de
+   este repositorio lo cargan antes de su propio <style>, y luego traducen sus
+   variables internas a los tokens de aquí.
+
+   Para cambiar la marca entera (por ejemplo, al igualarla con differentissgood.com)
+   sólo hay que tocar el bloque «TOKENS DE MARCA» de abajo. Nada más.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+   TOKENS DE MARCA  ←←←  AQUÍ SE TOCA
+   --------------------------------------------------------------------------
+   PENDIENTE: sustituir estos valores por los reales de differentissgood.com.
+   Los de ahora son los que ya usaba plan-impulso.html, que es la página del
+   repositorio más cercana a la web oficial. Al cambiarlos aquí, cambian a la
+   vez el índice, los tres planes, el cuestionario y la web de bodas.
+   ========================================================================== */
+:root{
+  /* --- Tipografía --- */
+  --dig-serif:'Fraunces',Georgia,'Times New Roman',serif;   /* titulares */
+  --dig-sans:'Inter',system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; /* texto */
+  --dig-peso-titulo:500;
+  --dig-interlinea:1.6;
+
+  /* --- Color: modo claro (papel) --- */
+  --dig-papel:#F7F2E9;
+  --dig-papel-2:#F1EADD;
+  --dig-superficie:#FFFDF9;
+  --dig-tinta:#1c1a17;
+  --dig-tinta-suave:rgba(28,26,23,.62);
+  --dig-tinta-tenue:rgba(28,26,23,.38);
+  --dig-linea:rgba(28,26,23,.13);
+  --dig-acento:#E0611C;
+  --dig-acento-suave:rgba(224,97,28,.10);
+  /* Naranja pensado para fondos oscuros (cuestionario, plan Crecimiento).
+     No cambia con el modo claro/oscuro: siempre va sobre fondo oscuro. */
+  --dig-acento-sobre-oscuro:#F0783A;
+  --dig-oro:#C9A24A;
+  --dig-rosa:#C9765A;
+
+  /* --- Medidas comunes --- */
+  --dig-radio:20px;
+  --dig-ancho:1180px;
+  --dig-curva:cubic-bezier(.22,.61,.36,1);
+  --dig-barra-h:34px;   /* alto de la barra superior compartida */
+}
+
+/* --- Color: modo oscuro ---------------------------------------------------
+   Se aplica por preferencia del sistema y también con data-tema="oscuro" /
+   data-theme="dark", que es lo que usan los interruptores de cada página. */
+/* Sólo se sigue la preferencia del sistema en las páginas que lo piden con
+   <html data-dig-auto>. Las que llevan su propio interruptor (los planes, el
+   cuestionario) no lo ponen: así la hoja de marca no les cambia el tema por
+   detrás y mandan ellas. */
+@media (prefers-color-scheme:dark){
+  :root[data-dig-auto]:not([data-tema="claro"]):not([data-theme="light"]){
+    --dig-papel:#151310;
+    --dig-papel-2:#1b1814;
+    --dig-superficie:#1f1b16;
+    --dig-tinta:#F5F0E6;
+    --dig-tinta-suave:rgba(245,240,230,.64);
+    --dig-tinta-tenue:rgba(245,240,230,.40);
+    --dig-linea:rgba(245,240,230,.15);
+    --dig-acento:#F0783A;
+    --dig-acento-suave:rgba(240,120,58,.13);
+  }
+}
+/* Algunas páginas ponen el atributo en <body> en vez de en <html>; las
+   variables se heredan igual, así que la barra y el pie también cambian. */
+:root[data-tema="oscuro"],
+:root[data-theme="dark"],
+body[data-tema="oscuro"],
+body[data-theme="dark"]{
+  --dig-papel:#151310;
+  --dig-papel-2:#1b1814;
+  --dig-superficie:#1f1b16;
+  --dig-tinta:#F5F0E6;
+  --dig-tinta-suave:rgba(245,240,230,.64);
+  --dig-tinta-tenue:rgba(245,240,230,.40);
+  --dig-linea:rgba(245,240,230,.15);
+  --dig-acento:#F0783A;
+  --dig-acento-suave:rgba(240,120,58,.13);
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR COMPARTIDA
+   Es el hilo que une todas las webs del estudio: se ve igual en el índice, en
+   los planes, en el cuestionario y en bodas, y siempre lleva a la web oficial.
+   Va fija arriba del todo; las cabeceras propias de cada página se bajan
+   --dig-barra-h para no quedar debajo (ver el bloque «puente» de cada página).
+   ========================================================================== */
+.dig-barra{
+  position:fixed;top:0;left:0;right:0;z-index:2000;
+  height:var(--dig-barra-h);
+  display:flex;align-items:center;gap:18px;
+  padding:0 clamp(12px,3vw,24px);
+  background:var(--dig-papel);
+  border-bottom:1px solid var(--dig-linea);
+  font-family:var(--dig-sans);
+  font-size:11.5px;letter-spacing:.02em;
+  color:var(--dig-tinta-suave);
+  overflow-x:auto;scrollbar-width:none;
+  -webkit-font-smoothing:antialiased;
+}
+.dig-barra::-webkit-scrollbar{display:none;}
+
+.dig-barra a{
+  color:inherit;text-decoration:none;white-space:nowrap;
+  transition:color .2s var(--dig-curva);
+}
+.dig-barra a:hover{color:var(--dig-acento);}
+
+/* La marca, siempre lo primero y siempre hacia la web oficial */
+.dig-barra__marca{
+  font-family:var(--dig-serif);
+  font-size:13px;font-weight:var(--dig-peso-titulo);
+  color:var(--dig-tinta);letter-spacing:.01em;
+  padding-right:16px;border-right:1px solid var(--dig-linea);
+  flex:none;
+}
+.dig-barra__marca:hover{color:var(--dig-acento);}
+
+.dig-barra nav{display:flex;align-items:center;gap:16px;}
+.dig-barra a[aria-current="page"]{color:var(--dig-acento);font-weight:500;}
+
+@media (max-width:640px){
+  :root{--dig-barra-h:30px;}
+  .dig-barra{font-size:11px;gap:14px;}
+  .dig-barra__marca{font-size:12px;padding-right:12px;}
+  .dig-barra nav{gap:12px;}
+}
+@media print{.dig-barra{display:none;}}
+
+/* ==========================================================================
+   PIE COMPARTIDO
+   Mismos datos de contacto y mismos enlaces en todas las páginas.
+   ========================================================================== */
+.dig-pie{
+  font-family:var(--dig-sans);
+  background:var(--dig-papel);
+  color:var(--dig-tinta-tenue);
+  border-top:1px solid var(--dig-linea);
+  padding:34px clamp(16px,5vw,56px);
+  text-align:center;font-size:12.5px;line-height:1.7;
+  position:relative;z-index:5;
+}
+.dig-pie a{color:var(--dig-tinta-suave);text-decoration:none;}
+.dig-pie a:hover{color:var(--dig-acento);}
+.dig-pie__enlaces{
+  display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;
+  margin:0 0 14px;
+}
+.dig-pie__marca{
+  font-family:var(--dig-serif);font-size:15px;
+  color:var(--dig-tinta);margin:0 0 10px;
+}
+.dig-pie__legal{margin:12px 0 0;font-size:11.5px;color:var(--dig-tinta-tenue);}

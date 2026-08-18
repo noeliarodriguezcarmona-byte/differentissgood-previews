@@ -19,30 +19,32 @@
 <link rel="icon" href="https://differentissgood.com/assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Marca compartida: tipografía, colores, barra y pie. Único sitio donde se tocan. -->
+<link rel="stylesheet" href="../assets/marca.css">
 <style>
 /* ==========================================================================
    1. FUNDAMENTOS — paleta, tipografía y ritmo vertical
    ========================================================================== */
 :root{
-  --bg:#F7F2E9;
-  --bg-soft:#F1EADD;
-  --ink:#1c1a17;
-  --ink-soft:rgba(28,26,23,.62);
-  --ink-faint:rgba(28,26,23,.38);
-  --line:rgba(28,26,23,.13);
+  /* Todo esto sale de assets/marca.css: no se tocan aquí los valores */
+  --bg:var(--dig-papel);
+  --bg-soft:var(--dig-papel-2);
+  --ink:var(--dig-tinta);
+  --ink-soft:var(--dig-tinta-suave);
+  --ink-faint:var(--dig-tinta-tenue);
+  --line:var(--dig-linea);
   --line-soft:rgba(28,26,23,.07);
-  --card:#FFFDF9;
-  --accent:#E0611C;
-  --accent-soft:rgba(224,97,28,.10);
+  --card:var(--dig-superficie);
+  --accent:var(--dig-acento);
+  --accent-soft:var(--dig-acento-suave);
   --shadow:0 18px 44px rgba(28,26,23,.09);
   /* Velos sobre los vídeos de fondo: el texto de la página es oscuro,
      así que el velo es del color del papel, no negro */
   --velo-video:linear-gradient(180deg,rgba(247,242,233,.88),rgba(247,242,233,.94));
   --velo-video-suave:linear-gradient(180deg,rgba(247,242,233,.80),rgba(247,242,233,.90));
 
-  --serif:'Fraunces',Georgia,serif;
-  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --serif:var(--dig-serif);
+  --sans:var(--dig-sans);
 
   /* Ritmo vertical único para toda la página: así los espacios entre
      secciones son siempre iguales y la maquetación no se descuadra. */
@@ -53,16 +55,17 @@
   --curva:cubic-bezier(.22,.61,.36,1);
 }
 [data-theme="dark"]{
-  --bg:#151310;
-  --bg-soft:#1b1814;
-  --ink:#F5F0E6;
-  --ink-soft:rgba(245,240,230,.64);
-  --ink-faint:rgba(245,240,230,.40);
-  --line:rgba(245,240,230,.15);
+  /* Los valores oscuros también viven en assets/marca.css */
+  --bg:var(--dig-papel);
+  --bg-soft:var(--dig-papel-2);
+  --ink:var(--dig-tinta);
+  --ink-soft:var(--dig-tinta-suave);
+  --ink-faint:var(--dig-tinta-tenue);
+  --line:var(--dig-linea);
   --line-soft:rgba(245,240,230,.08);
-  --card:#1f1b16;
-  --accent:#F0783A;
-  --accent-soft:rgba(240,120,58,.13);
+  --card:var(--dig-superficie);
+  --accent:var(--dig-acento);
+  --accent-soft:var(--dig-acento-suave);
   --shadow:0 18px 44px rgba(0,0,0,.4);
   --velo-video:linear-gradient(180deg,rgba(21,19,16,.86),rgba(21,19,16,.93));
   --velo-video-suave:linear-gradient(180deg,rgba(21,19,16,.76),rgba(21,19,16,.88));
@@ -91,7 +94,7 @@ button,input,textarea,select{font:inherit;color:inherit;}
 .contenedor{max-width:var(--ancho);margin:0 auto;padding-inline:var(--lado);width:100%;}
 section{padding-block:var(--seccion);position:relative;}
 /* Compensa la cabecera fija al saltar desde el menú */
-section[id],footer[id]{scroll-margin-top:92px;}
+section[id],footer[id]{scroll-margin-top:calc(92px + var(--dig-barra-h));}
 
 /* --- Rótulos de sección, comunes a toda la página --- */
 .rotulo{
@@ -159,7 +162,8 @@ section[id],footer[id]{scroll-margin-top:92px;}
 }
 
 .cabecera{
-  position:fixed;top:0;left:0;right:0;z-index:50;
+  /* top: debajo de la barra compartida del estudio */
+  position:fixed;top:var(--dig-barra-h);left:0;right:0;z-index:50;
   display:flex;align-items:center;justify-content:space-between;
   gap:16px;padding:16px var(--lado);
   background:transparent;border-bottom:1px solid transparent;
@@ -226,7 +230,7 @@ section[id],footer[id]{scroll-margin-top:92px;}
 /* Portada a pantalla completa, con todo centrado. El hueco inferior deja
    libre la franja del indicador de scroll, que antes caía sobre la tira. */
 .inicio{
-  min-height:100svh;display:flex;flex-direction:column;
+  min-height:calc(100svh - var(--dig-barra-h));display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;
   /* Los huecos se miden en vh para que la portada quepa entera también en
      pantallas anchas y bajas y el indicador de scroll no caiga fuera */
@@ -841,6 +845,17 @@ section[id],footer[id]{scroll-margin-top:92px;}
 </style>
 </head>
 <body>
+<!-- ===== Barra Differentissgood (compartida — assets/marca.css) ===== -->
+<div class="dig-barra">
+  <a class="dig-barra__marca" href="https://differentissgood.com/">Differentissgood</a>
+  <nav aria-label="Webs del estudio">
+    <a href="../index.html">Inicio</a>
+    <a href="index.html" aria-current="page">Planes</a>
+    <a href="../bodas/index.html">Bodas</a>
+    <a href="cuestionario.html">Cuestionario</a>
+  </nav>
+</div>
+
 
 <div class="etiqueta-plan">EJEMPLO · PLAN IMPULSO</div>
 
@@ -1758,5 +1773,24 @@ section[id],footer[id]{scroll-margin-top:92px;}
   boton.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 })();
 </script>
+
+<!-- ===== Pie Differentissgood (compartido — assets/marca.css) ===== -->
+<footer class="dig-pie">
+  <p class="dig-pie__marca">Differentissgood</p>
+  <div class="dig-pie__enlaces">
+    <a href="https://differentissgood.com/">Web oficial</a>
+    <a href="../index.html">Índice</a>
+    <a href="index.html">Planes</a>
+    <a href="../bodas/index.html">Bodas</a>
+    <a href="cuestionario.html">Cuestionario</a>
+  </div>
+  <p>
+    <a href="mailto:projectmanager@differentissgood.com">projectmanager@differentissgood.com</a> ·
+    <a href="mailto:differentissgood@gmail.com">differentissgood@gmail.com</a> ·
+    <a href="https://wa.me/34662272128" rel="noopener">+34 662 272 128</a>
+  </p>
+  <p class="dig-pie__legal">Estudio creativo · Audiovisual, webs, project management, producción y postproducción</p>
+</footer>
+
 </body>
 </html>

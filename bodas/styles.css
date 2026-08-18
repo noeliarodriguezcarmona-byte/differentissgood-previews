@@ -4,14 +4,17 @@
    ========================================================= */
 
 :root {
-  --marfil: #faf6f0;
-  --marfil-2: #f2ebe1;
-  --carbon: #201b16;
-  --carbon-suave: #55493d;
-  --dorado: #a9824f;
+  /* Los neutros y el dorado vienen de ../assets/marca.css, la hoja de marca
+     común del estudio. Así bodas comparte papel, tinta y línea con los planes
+     y con la web oficial, y sólo el dorado marca su carácter propio. */
+  --marfil: var(--dig-papel);
+  --marfil-2: var(--dig-papel-2);
+  --carbon: var(--dig-tinta);
+  --carbon-suave: var(--dig-tinta-suave);
+  --dorado: var(--dig-oro);
   --dorado-claro: #cba36c;
-  --linea: #e4d9c9;
-  --blanco: #fffdfa;
+  --linea: var(--dig-linea);
+  --blanco: var(--dig-superficie);
 
   --fondo: var(--marfil);
   --fondo-2: var(--marfil-2);
@@ -21,21 +24,21 @@
   --superficie: var(--blanco);
   --borde: var(--linea);
 
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --serif: var(--dig-serif);
+  --sans: var(--dig-sans);
 
   --ancho: 1240px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fondo: #17130f;
-    --fondo-2: #1d1812;
-    --texto: #f2ebe1;
-    --texto-suave: #cdbfab;
+    --fondo: var(--dig-papel);
+    --fondo-2: var(--dig-papel-2);
+    --texto: var(--dig-tinta);
+    --texto-suave: var(--dig-tinta-suave);
     --acento: var(--dorado-claro);
-    --superficie: #211a13;
-    --borde: #382d22;
+    --superficie: var(--dig-superficie);
+    --borde: var(--dig-linea);
   }
 }
 
@@ -86,7 +89,8 @@ p { margin: 0 0 1em; }
 
 /* ---------- Cabecera ---------- */
 .cabecera {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+  /* top: justo debajo de la barra compartida del estudio */
+  position: fixed; top: var(--dig-barra-h); left: 0; right: 0; z-index: 30;
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
   padding: 26px 28px; transition: background .35s, box-shadow .35s, padding .35s;
   color: #fff;
@@ -154,7 +158,7 @@ p { margin: 0 0 1em; }
 
 /* ---------- HERO: slideshow a pantalla completa ---------- */
 .hero {
-  position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--carbon);
+  position: relative; height: calc(100svh - var(--dig-barra-h)); min-height: 560px; overflow: hidden; background: var(--carbon);
 }
 .hero__diapositiva {
   position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s ease;

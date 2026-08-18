@@ -21,3 +21,12 @@ una clienta y no deben mezclarse con contenido de Differentissgood.
   Actions para GitHub Pages, la primera vez hay que activar
   Settings → Pages → Source: GitHub Actions a mano (no se puede automatizar,
   requiere permisos de administración del repositorio).
+- **La marca vive en `assets/marca.css`.** Tipografías, colores, barra superior
+  y pie son de ahí y de ningún otro sitio. Si una página necesita un color o una
+  tipografía, los coge con `var(--dig-…)`; no se escriben valores sueltos en el
+  `<style>` de la página. Para cambiar la marca entera se toca el bloque
+  `TOKENS DE MARCA` de ese archivo, y ya.
+- **Cabeceras fijas**: la barra compartida ocupa `--dig-barra-h` arriba del todo.
+  Cualquier elemento con `position:fixed;top:0` tiene que bajar esa altura, y las
+  portadas a pantalla completa restarla (`calc(100svh - var(--dig-barra-h))`).
+- **Traspaso a differentissgood.com**: los pasos están en `MIGRACION.md`.
