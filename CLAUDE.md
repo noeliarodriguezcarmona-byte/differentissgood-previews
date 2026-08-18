@@ -29,4 +29,10 @@ una clienta y no deben mezclarse con contenido de Differentissgood.
 - **Cabeceras fijas**: la barra compartida ocupa `--dig-barra-h` arriba del todo.
   Cualquier elemento con `position:fixed;top:0` tiene que bajar esa altura, y las
   portadas a pantalla completa restarla (`calc(100svh - var(--dig-barra-h))`).
+- **El logotipo también sale de `assets/marca.css`** (`--dig-logo`). Hay dos
+  archivos: `assets/logo.png` (tinta negra, para fondo claro) y
+  `assets/logo-claro.png` (tinta color papel, para fondo oscuro). En modo
+  oscuro se cambia solo; en páginas que son oscuras siempre se fuerza con la
+  clase `.dig-logo--claro`. Nunca se enlaza el logotipo desde otra web ni se
+  vuelve a dibujar con CSS.
 - **Traspaso a differentissgood.com**: los pasos están en `MIGRACION.md`.

@@ -103,6 +103,11 @@ p { margin: 0 0 1em; }
 .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 
 /* ---------- Logotipo Differentissgood (texto + ola) ---------- */
+/* El logotipo real sale de ../assets/marca.css; aquí sólo se le da tamaño.
+   En la cabecera va sobre fotografía, por eso la versión de tinta clara. */
+.marca-bodas { display: block; height: 30px; width: calc(30px * var(--dig-logo-proporcion)); }
+.marca-bodas--pie { height: 44px; width: calc(44px * var(--dig-logo-proporcion)); margin: 0 auto; }
+
 .logo-dg { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: .82; }
 .logo-dg__texto {
   font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-weight: 900; font-style: italic;

@@ -71,7 +71,7 @@ a{color:var(--orange);}
 }
 header{text-align:center;margin-bottom:12px;}
 /* El logotipo sale de assets/marca.css; aquí sólo se le da tamaño */
-.marca-cabecera{height:34px;width:calc(34px * var(--dig-logo-proporcion));margin:0 auto 10px;}
+.marca-cabecera{display:block;height:30px;width:calc(30px * var(--dig-logo-proporcion));margin:0 auto 12px;}
 header h1{font-size:clamp(20px,3.4vw,28px);margin-top:6px;line-height:1.15;}
 header h1 em{font-style:italic;background:var(--degradado);-webkit-background-clip:text;background-clip:text;color:transparent;}
 header p{color:var(--muted);font-size:12.5px;max-width:480px;margin:8px auto 0;line-height:1.55;}
@@ -567,7 +567,7 @@ input[type="file"]::file-selector-button{
 <div class="wrap">
 
   <header>
-    <span class="dig-logo marca-cabecera" role="img" aria-label="Differentissgood"></span>
+    <span class="dig-logo dig-logo--claro marca-cabecera" role="img" aria-label="Differentissgood"></span>
     <p class="eyebrow">Differentissgood</p>
     <h1>Cuéntanos <em>tu proyecto</em></h1>
     <p>Pregunta por pregunta, a tu ritmo. Lo que no sepas, déjalo en blanco.</p>

@@ -175,8 +175,10 @@ section[id],footer[id]{scroll-margin-top:calc(92px + var(--dig-barra-h));}
   border-bottom-color:var(--line-soft);padding-block:12px;
 }
 .marca{display:flex;align-items:center;gap:10px;font-weight:500;font-size:14.5px;letter-spacing:-.01em;}
-.marca img{height:28px;width:28px;object-fit:contain;border-radius:6px;}
-.marca span{white-space:nowrap;}
+/* El logotipo entero (palabra + ola + lema) sale de assets/marca.css.
+   Antes era un cuadrado de 28px con la palabra escrita al lado: el logotipo
+   es apaisado y ya dice «Differentissgood», así que sobraba el texto. */
+.marca .dig-logo{height:26px;width:calc(26px * var(--dig-logo-proporcion));}
 .cabecera__acciones{display:flex;align-items:center;gap:10px;}
 
 .redondo{
@@ -862,8 +864,7 @@ section[id],footer[id]{scroll-margin-top:calc(92px + var(--dig-barra-h));}
 <!-- ====================== CABECERA ====================== -->
 <header class="cabecera" id="cabecera">
   <a class="marca" href="#inicio">
-    <img src="https://differentissgood.com/assets/logo.png" alt="">
-    <span>Differentissgood</span>
+    <span class="dig-logo" role="img" aria-label="Differentissgood"></span>
   </a>
 
   <div class="cabecera__acciones">

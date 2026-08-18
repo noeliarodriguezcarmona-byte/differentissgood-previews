@@ -75,9 +75,18 @@ que dependen las rutas relativas (`../assets/marca.css`):
 | `repo-para-github_1/`  | `planes/`       |
 | `bodas/`               | `bodas/`        |
 | `assets/marca.css`     | `assets/marca.css` |
+| `assets/logo.png`      | `assets/logo.png` (¡ojo, ver abajo!) |
+| `assets/logo-claro.png`| `assets/logo-claro.png` |
 
 `assets/` de DIG ya existe (ahí están `logo.png`, `og-cover.jpg`, `clients/…`),
 así que `marca.css` se suma a esa carpeta; no la sustituye.
+
+**Cuidado con `logo.png`**: en DIG ya hay un archivo con ese nombre. El de aquí
+es el logotipo recortado sin fondo. NO sobreescribas el de DIG. Si chocan,
+renombra los de aquí (por ejemplo `logo-web.png` y `logo-web-claro.png`) y
+cambia las dos líneas `--dig-logo` de `assets/marca.css`. Comprueba también si
+el `logo.png` que ya tiene DIG es transparente: si lo es y se ve bien sobre
+fondo claro y oscuro, mejor usar ése y borrar los de aquí.
 
 El `index.html` de la raíz de previews **no se copia**: en DIG la portada es la
 de la web oficial. Sus enlaces se reparten entre la navegación de DIG y la barra
