@@ -743,25 +743,6 @@ input[type="file"]::file-selector-button{
           <label class="field-label" style="margin-top:16px;">¿A qué correo deben llegar las valoraciones?</label>
           <input type="email" name="Correo para valoraciones" placeholder="Si es distinto del de contacto">
         </div>
-
-        <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
-        <div class="hint">Cada uno, fuera de los incluidos, cuesta <b>60 € + IVA</b>.</div>
-        <select name="Extras adicionales" id="sel-extras-pago-impulso" onchange="alternarExtrasPago('impulso')">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
-        <div class="depende" id="extras-pago-impulso-caja"><div>
-          <label class="field-label">Toca los que te falten</label>
-          <div class="chip-grid" id="extras-pago-impulso" data-espejo="extras-inc-impulso">
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Modo oscuro"><span>Modo oscuro</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="QR personalizado"><span>QR personalizado</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
-          </div>
-        </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1839,9 +1820,6 @@ input[type="file"]::file-selector-button{
   window.alternarHosting = function(){
     abrir('hosting-extra', document.getElementById('sel-hosting').value === 'Sí');
   };
-  window.alternarExtrasPago = function(plan){
-    abrir('extras-pago-' + plan + '-caja', document.getElementById('sel-extras-pago-' + plan).value === 'Sí');
-  };
   window.alternarAudiovisual = function(){
     var el = document.getElementById('sel-audiovisual');
     var v = el && el.value;
@@ -1870,7 +1848,6 @@ input[type="file"]::file-selector-button{
   };
   alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
   alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado();
-  ['impulso'].forEach(function(plan){ alternarExtrasPago(plan); });
 
   /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
   var sincronizarExtrasPago = [];
