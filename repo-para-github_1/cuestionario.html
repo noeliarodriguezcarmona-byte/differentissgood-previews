@@ -718,8 +718,9 @@ input[type="file"]::file-selector-button{
           <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Valoraciones de Google integradas en la web"><span>Valoraciones de Google integradas en la web</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Integración con redes sociales"><span>Integración con redes sociales</span></label>
         </div>
 
         <div data-requiere-extra="QR personalizado">
@@ -727,21 +728,16 @@ input[type="file"]::file-selector-button{
           <input type="text" name="Destino del QR" placeholder="Ej: a la carta, a WhatsApp, a la ficha de Google...">
         </div>
         <div data-requiere-extra="Botón de compartir en redes">
-          <label class="field-label" style="margin-top:16px;">¿Dónde quieres que se pueda compartir la web?</label>
-          <div class="chip-grid">
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="WhatsApp"><span>WhatsApp</span></label>
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Facebook"><span>Facebook</span></label>
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="X (Twitter)"><span>X (Twitter)</span></label>
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Copiar enlace"><span>Copiar enlace</span></label>
-          </div>
+          <label class="field-label" style="margin-top:16px;">¿En qué redes sociales quieres que se pueda compartir la web?</label>
+          <input type="text" name="Redes para compartir" placeholder="Ej: WhatsApp, Facebook, Instagram, X...">
         </div>
         <div data-requiere-extra="Mapa de Google integrado">
           <label class="field-label" style="margin-top:16px;">¿Qué dirección o ubicación debe mostrar el mapa?</label>
           <input type="text" name="Ubicación del mapa" placeholder="Dirección exacta, o pega el enlace de Google Maps">
         </div>
-        <div data-requiere-extra="Formulario de valoraciones">
-          <label class="field-label" style="margin-top:16px;">¿A qué correo deben llegar las valoraciones?</label>
-          <input type="email" name="Correo para valoraciones" placeholder="Si es distinto del de contacto">
+        <div data-requiere-extra="Integración con redes sociales">
+          <label class="field-label" style="margin-top:16px;">¿Qué redes sociales quieres que aparezcan en tu web? Pon el nombre y el enlace de cada una</label>
+          <textarea name="Redes sociales a integrar" rows="3" placeholder="Ej: Instagram — https://instagram.com/tunegocio&#10;Facebook — https://facebook.com/tunegocio"></textarea>
         </div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -765,11 +761,21 @@ input[type="file"]::file-selector-button{
           <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de testimonios"><span>Formulario de testimonios</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Integración con redes sociales"><span>Integración con redes sociales</span></label>
         </div>
 
         <div data-requiere-extra="Integración con Google Business">
           <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
           <input type="url" name="Enlace de Google Business" placeholder="Pega el enlace si ya la tenéis">
+        </div>
+        <div data-requiere-extra="Formulario de testimonios">
+          <label class="field-label" style="margin-top:16px;">Cada cliente podrá dejar su propia valoración directamente en la web. ¿A qué correo queréis que os avisemos cuando llegue una nueva?</label>
+          <input type="email" name="Correo para avisos de testimonios" placeholder="Si es distinto del de contacto">
+        </div>
+        <div data-requiere-extra="Integración con redes sociales">
+          <label class="field-label" style="margin-top:16px;">¿Qué redes sociales quieres que aparezcan en tu web? Pon el nombre y el enlace de cada una</label>
+          <textarea name="Redes sociales a integrar" rows="3" placeholder="Ej: Instagram — https://instagram.com/tunegocio&#10;Facebook — https://facebook.com/tunegocio"></textarea>
         </div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
@@ -782,15 +788,16 @@ input[type="file"]::file-selector-button{
       </div>
       <div class="step-cuerpo">
         <p class="step-sub"><b>El Plan Élite incluye todos los extras.</b> Marca los que quieras para tu web — a continuación solo te preguntaremos por los que hayas marcado.</p>
-        <div class="chip-grid" id="extras-inc-elite" data-min="0" data-max="17">
+        <div class="chip-grid" id="extras-inc-elite" data-min="0" data-max="18">
           <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de testimonios"><span>Formulario de testimonios</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business Profile"><span>Integración con Google Business Profile</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Integración con redes sociales"><span>Integración con redes sociales</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
@@ -811,21 +818,20 @@ input[type="file"]::file-selector-button{
           <textarea name="Texto de la página de agradecimiento" rows="2" placeholder="Lo que ve quien acaba de escribiros o comprar"></textarea>
         </div>
         <div data-requiere-extra="Botón de compartir en redes">
-          <label class="field-label" style="margin-top:16px;">¿Dónde quieres que se pueda compartir la web?</label>
-          <div class="chip-grid">
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="WhatsApp"><span>WhatsApp</span></label>
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Facebook"><span>Facebook</span></label>
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="X (Twitter)"><span>X (Twitter)</span></label>
-            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Copiar enlace"><span>Copiar enlace</span></label>
-          </div>
+          <label class="field-label" style="margin-top:16px;">¿En qué redes sociales quieres que se pueda compartir la web?</label>
+          <input type="text" name="Redes para compartir" placeholder="Ej: WhatsApp, Facebook, Instagram, X...">
         </div>
         <div data-requiere-extra="Mapa de Google integrado">
           <label class="field-label" style="margin-top:16px;">¿Qué dirección o ubicación debe mostrar el mapa?</label>
           <input type="text" name="Ubicación del mapa" placeholder="Dirección exacta, o pega el enlace de Google Maps">
         </div>
-        <div data-requiere-extra="Formulario de valoraciones">
-          <label class="field-label" style="margin-top:16px;">¿A qué correo deben llegar las valoraciones?</label>
-          <input type="email" name="Correo para valoraciones" placeholder="Si es distinto del de contacto">
+        <div data-requiere-extra="Formulario de testimonios">
+          <label class="field-label" style="margin-top:16px;">Cada cliente podrá dejar su propia valoración directamente en la web. ¿A qué correo queréis que os avisemos cuando llegue una nueva?</label>
+          <input type="email" name="Correo para avisos de testimonios" placeholder="Si es distinto del de contacto">
+        </div>
+        <div data-requiere-extra="Integración con redes sociales">
+          <label class="field-label" style="margin-top:16px;">¿Qué redes sociales quieres que aparezcan en tu web? Pon el nombre y el enlace de cada una</label>
+          <textarea name="Redes sociales a integrar" rows="3" placeholder="Ej: Instagram — https://instagram.com/tunegocio&#10;Facebook — https://facebook.com/tunegocio"></textarea>
         </div>
         <div data-requiere-extra="Integración con Google Business Profile">
           <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
@@ -1234,10 +1240,10 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 12 · TESTIMONIOS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-planes="impulso crecimiento elite" data-extra-impulso="Valoraciones de Google integradas en la web">
       <div class="step-head">
         <span class="step-num">12</span>
-        <div><h2>Lo que dicen de vosotros</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Lo que dicen de vosotros</h2></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">Enlace a vuestras reseñas de Google</label>
@@ -1271,10 +1277,10 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 14 · SEO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-planes="impulso crecimiento elite" data-extra-impulso="Mapa de Google integrado">
       <div class="step-head">
         <span class="step-num">14</span>
-        <div><h2>Posicionamiento y geolocalización</h2><span class="plan-badge">Incluido en todos los planes</span></div>
+        <div><h2>Posicionamiento y geolocalización</h2></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿En qué zona trabajáis?</label>
@@ -1434,11 +1440,15 @@ input[type="file"]::file-selector-button{
             <label class="field-label">¿Qué idea tenéis para esas fotografías?</label>
             <textarea name="Idea para el plan de fotografía" rows="2" placeholder="Qué queréis mostrar, dónde, con quién..."></textarea>
             <label class="field-label">¿Queréis que incluya también vídeo?</label>
-            <select name="Incluir vídeo en plan de fotografía">
+            <select name="Incluir vídeo en plan de fotografía" id="sel-incluir-video-foto" onchange="alternarIncluirVideoFoto()">
               <option value="" selected></option>
-              <option>Sí</option>
-              <option>No</option>
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
             </select>
+            <div class="depende" id="incluir-video-foto-si"><div>
+              <label class="field-label">Describe qué vídeo os gustaría que hagamos — del local, del equipo, de un servicio... — así preparamos mejor el presupuesto</label>
+              <textarea name="Descripción del vídeo deseado" rows="2"></textarea>
+            </div></div>
             <div class="note-box">Cuando revisemos el plan, os haremos un presupuesto personalizado.</div>
           </div></div>
         </div></div>
@@ -1835,6 +1845,10 @@ input[type="file"]::file-selector-button{
     var el = document.getElementById('sel-plan-foto-personalizado');
     abrir('plan-foto-personalizado-si', !!el && el.value === 'Sí');
   };
+  window.alternarIncluirVideoFoto = function(){
+    var el = document.getElementById('sel-incluir-video-foto');
+    abrir('incluir-video-foto-si', !!el && el.value === 'Sí');
+  };
   window.alternarFotosGaleria = function(){
     var v = document.getElementById('sel-fotos-galeria').value;
     abrir('fotos-galeria-si', v === 'Sí');
@@ -1847,7 +1861,7 @@ input[type="file"]::file-selector-button{
     abrir('plan-fotovideo-galeria-no', v === 'No');
   };
   alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
-  alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado();
+  alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto();
 
   /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
   var sincronizarExtrasPago = [];
@@ -1971,7 +1985,9 @@ input[type="file"]::file-selector-button{
 
     bloques.forEach(function(b){
       var encajaPlan = todos || b.dataset.planes.split(' ').indexOf(plan) > -1;
-      var encajaExtra = todos || !b.dataset.extra || b.dataset.extra.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
+      // data-extra-<plan> exige el extra solo para ese plan; si no existe, se usa data-extra (o ninguno)
+      var extraAttr = (!todos && b.getAttribute('data-extra-' + plan)) || b.dataset.extra;
+      var encajaExtra = todos || !extraAttr || extraAttr.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
       var sirve = encajaPlan && encajaExtra;
       b.hidden = !sirve;
       // Un bloque escondido tampoco debe enviarse ni exigir respuesta
@@ -2220,7 +2236,7 @@ input[type="file"]::file-selector-button{
 
   if(recuperarBorrador()){
     aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
-    alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado();
+    alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto();
     var nota = document.createElement('p');
     nota.className = 'borrador';
     nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
