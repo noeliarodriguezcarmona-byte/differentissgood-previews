@@ -218,6 +218,7 @@ p { margin: 0 0 1em; }
 .seccion--compacta { padding: 90px 0; }
 .seccion__cab { max-width: 640px; margin: 0 auto 56px; text-align: center; }
 .seccion__cab h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
+.seccion__cab__intro { color: var(--texto-suave); font-size: .95rem; margin-top: 10px; }
 
 /* ---------- Quiénes somos ---------- */
 .quienes { background: var(--fondo-2); }
@@ -293,6 +294,10 @@ p { margin: 0 0 1em; }
   box-shadow: 0 40px 80px -30px rgba(0,0,0,.6);
 }
 .video-especial__marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+/* Por si el vídeo no se puede incrustar (privado, restringido...): enlace
+   directo, siempre visible, para verlo en YouTube. */
+.video-especial__respaldo { text-align: center; margin-top: 18px; font-size: .84rem; }
+.video-especial__respaldo a { color: var(--dorado-claro); }
 .video-especial .hueco { background: #1c1712; color: #cdbfab; }
 .video-especial .hueco p { color: var(--marfil); }
 
@@ -340,28 +345,18 @@ p { margin: 0 0 1em; }
 .presupuesto__envio { text-align: center; max-width: 640px; margin: 0 auto; }
 .presupuesto__envio p { color: var(--texto-suave); font-size: .92rem; }
 
-/* ---------- Otros servicios ---------- */
-.otros-servicios__fila {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; max-width: var(--ancho); margin: 0 auto; padding: 0 28px;
+/* ---------- Servicios digitales de boda ---------- */
+.servicios-digitales__fila {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 900px; margin: 0 auto;
 }
-.otros-servicios__fila--extra { margin-top: 16px; }
-.otros-servicios__fila--extra[hidden] { display: none; }
-.servicio-visual {
-  position: relative; aspect-ratio: 3/4; border-radius: 6px; overflow: hidden; background: var(--carbon);
+.servicio-digital {
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: 10px;
+  padding: 26px 24px; transition: border-color .25s;
 }
-.servicio-visual img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease;
-}
-.servicio-visual img.activa { opacity: 1; }
-.servicio-visual .hueco { background: #1c1712; color: #cdbfab; }
-.servicio-visual .hueco svg { width: 24px; height: 24px; }
-.servicio-visual .hueco p { color: var(--marfil); font-size: .82rem; }
-.servicio-visual .hueco small { font-size: .68rem; }
-.servicio-visual__etiqueta {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 12px;
-  background: linear-gradient(0deg, rgba(10,8,6,.75), transparent); color: #fff; font-size: .84rem; font-weight: 600;
-}
-.otros-servicios__vermas { text-align: center; margin-top: 40px; }
+.servicio-digital:hover { border-color: var(--acento); }
+.servicio-digital h3 { font-size: 1.06rem; margin: 0 0 12px; }
+.servicio-digital ul { margin: 0; padding-left: 18px; color: var(--texto-suave); font-size: .88rem; line-height: 1.65; }
+.servicios-digitales__cta { text-align: center; margin-top: 34px; }
 
 /* ---------- Contacto ---------- */
 .contacto { padding: 130px 0; }
@@ -458,11 +453,10 @@ p { margin: 0 0 1em; }
   .cuadricula-completa { grid-template-columns: repeat(2, 1fr); }
   .blog__fila, .servicios__fila { grid-template-columns: 1fr; max-width: 520px; }
   .campos { grid-template-columns: 1fr; }
-  .otros-servicios__fila { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
   .seccion { padding: 84px 0; }
   .portfolio__bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
   .cuadricula-completa { grid-template-columns: 1fr; }
-  .otros-servicios__fila { grid-template-columns: 1fr; }
+  .servicios-digitales__fila { grid-template-columns: 1fr; }
 }

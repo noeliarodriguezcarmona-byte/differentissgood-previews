@@ -146,14 +146,31 @@ const SERVICIOS = [
 ];
 
 /* ---------------------------------------------------------
-   Otros servicios (aparte de bodas): tarjetas que rotan sus
-   fotos cada 2 s. "carpeta" indica dónde están (por defecto
-   media/fotos/). "fotos" vacío = tarjeta "próximamente".
+   Servicios digitales de boda: dos tarjetas fijas, sin fotos que
+   rotar. "detalles" es la lista corta que aparece bajo cada uno,
+   mismo formato que SERVICIOS más arriba.
    --------------------------------------------------------- */
-const OTROS_SERVICIOS = [
-  { id: 'retrato', nombre: 'Retrato', carpeta: 'fotos', fotos: ['boda-01.jpg', 'boda-18.jpg', 'boda-36.jpg'] },
-  { id: 'eventos', nombre: 'Eventos', carpeta: 'fotos', fotos: ['boda-38.jpg', 'boda-45.jpg', 'boda-51.jpg'] },
-  { id: 'producto', nombre: 'Producto / Ecommerce', carpeta: 'otros', fotos: ['producto-01.jpg', 'producto-02.jpg', 'producto-03.jpg', 'producto-04.jpg', 'producto-05.jpg'] },
-  { id: 'gastronomia', nombre: 'Gastronomía', carpeta: 'fotos', fotos: [] },
-  { id: 'beauty', nombre: 'Beauty', carpeta: 'fotos', fotos: [] },
+const SERVICIOS_DIGITALES = [
+  {
+    id: 'portfolio',
+    nombre: 'Portfolio de vuestra boda',
+    detalles: [
+      'Web propia con vuestras mejores fotos, organizada por momentos del día',
+      'Diseño con vuestros nombres y la fecha, no una plantilla genérica',
+      'Enlace privado para compartir con quien queráis',
+      'Fotos descargables en alta resolución',
+    ],
+  },
+  {
+    id: 'invitacion',
+    nombre: 'Página de invitación para vuestros invitados',
+    detalles: [
+      'Cuenta atrás y programa del día: ceremonia, cóctel, banquete, fiesta',
+      'Ubicación de la ceremonia y del convite, con mapa para llegar',
+      'Confirmación de asistencia (RSVP) online, con acompañantes y alergias',
+      'Alojamientos recomendados para los invitados de fuera',
+      'Código de vestimenta y preguntas frecuentes (aparcamiento, niños...)',
+      'Lista de boda o datos para el regalo',
+    ],
+  },
 ];

@@ -200,32 +200,19 @@ function pintarServicios() {
 }
 
 /* ---------------------------------------------------------
-   Otros servicios: tarjetas que rotan sus fotos cada 2 s
+   Servicios digitales de boda: dos tarjetas fijas (portfolio
+   posterior a la boda, y página de invitación para invitados)
    --------------------------------------------------------- */
 
-function otrosServicios() {
-  const fila = $('#otros-servicios-fila');
-  if (!fila || typeof OTROS_SERVICIOS === 'undefined') return;
+function pintarServiciosDigitales() {
+  const fila = $('#servicios-digitales-fila');
+  if (!fila || typeof SERVICIOS_DIGITALES === 'undefined') return;
 
-  fila.innerHTML = OTROS_SERVICIOS.map(({ id, nombre, carpeta, fotos }) => `
-    <div class="servicio-visual sube" data-servicio="${id}">
-      ${fotos.length
-        ? fotos.map((archivo, i) => `<img src="media/${carpeta}/${archivo}" alt="${nombre}" loading="lazy" class="${i === 0 ? 'activa' : ''}">`).join('')
-        : `<div class="hueco"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg><p>Próximamente</p><small>Añade fotos en <code>OTROS_SERVICIOS</code></small></div>`}
-      <span class="servicio-visual__etiqueta">${nombre}</span>
+  fila.innerHTML = SERVICIOS_DIGITALES.map(({ id, nombre, detalles }) => `
+    <div class="servicio-digital sube" data-servicio="${id}">
+      <h3>${nombre}</h3>
+      <ul>${detalles.map((d) => `<li>${d}</li>`).join('')}</ul>
     </div>`).join('');
-
-  $$('.servicio-visual', fila).forEach((tarjeta) => {
-    const imgs = $$('img', tarjeta);
-    if (imgs.length < 2) return;
-    let actual = 0;
-    setInterval(() => {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      imgs[actual].classList.remove('activa');
-      actual = (actual + 1) % imgs.length;
-      imgs[actual].classList.add('activa');
-    }, 2000);
-  });
 }
 
 /* ---------------------------------------------------------
@@ -363,7 +350,7 @@ heroSlideshow();
 pintarPortfolioDestacado();
 pintarServicios();
 pintarVideo();
-otrosServicios();
+pintarServiciosDigitales();
 opinionesCarrusel();
 avisoProvisional();
 cabecera();
