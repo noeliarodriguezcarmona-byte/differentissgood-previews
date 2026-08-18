@@ -41,6 +41,8 @@
   a.card h2{font-family:var(--dig-serif);font-weight:var(--dig-peso-titulo);font-size:22px;margin:10px 0 8px;}
   a.card p{margin:0;font-size:13px;color:var(--dig-tinta-suave);line-height:1.55;}
   .dig-pie{width:100%;margin-top:60px;}
+  /* El logotipo sale de assets/marca.css; aquí sólo se le da tamaño */
+  .marca-grande{height:46px;width:calc(46px * var(--dig-logo-proporcion));margin:0 auto 22px;}
 
   /* --- Fondo: manchas de color difusas en movimiento + grano fino --- */
   .fondo{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;}
@@ -71,6 +73,7 @@
   </div>
 
   <div class="contenido">
+    <span class="dig-logo marca-grande" role="img" aria-label="Differentissgood"></span>
     <h1>Nuestros planes</h1>
     <p class="intro">Cada plan es un ejemplo completo y navegable de cómo quedaría tu web — con su diseño, sus animaciones y su interacción reales.</p>
     <div class="grid">

@@ -23,7 +23,8 @@
     text-align:center;-webkit-font-smoothing:antialiased;
   }
   .contenido{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;}
-  .marca img{height:44px;width:auto;margin-bottom:22px;}
+  /* El logotipo sale de assets/marca.css; aquí sólo se le da tamaño */
+  .marca-grande{height:44px;width:calc(44px * var(--dig-logo-proporcion));margin:0 auto 22px;}
   h1{font-family:var(--dig-serif);font-weight:var(--dig-peso-titulo);font-size:clamp(26px,4.4vw,38px);margin:0 0 12px;}
   .intro{color:var(--dig-tinta-suave);max-width:500px;margin:0 auto 40px;font-size:14.5px;}
   .grid{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;max-width:780px;}
@@ -54,7 +55,7 @@
 </div>
 
 <div class="contenido">
-  <div class="marca"><img src="https://differentissgood.com/assets/logo.png" alt="Differentissgood"></div>
+  <span class="dig-logo marca-grande" role="img" aria-label="Differentissgood"></span>
   <h1>Nuestros trabajos</h1>
   <p class="intro">Índice de las webs del estudio. Todas comparten tipografía, colores y cabecera con la web oficial.</p>
 
