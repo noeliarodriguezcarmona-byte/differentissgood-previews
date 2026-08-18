@@ -584,9 +584,9 @@ input[type="file"]::file-selector-button{
       </div>
       <div class="step-cuerpo">
         <div class="radio-row" id="selector-plan">
-          <label><input type="radio" name="Plan" value="Impulso" required><span><b>Plan Impulso</b><span class="d">Una página, diseño a medida y contacto directo por WhatsApp.</span></span></label>
-          <label><input type="radio" name="Plan" value="Crecimiento"><span><b>Plan Crecimiento</b><span class="d">Varias páginas, blog, galería, reservas y newsletter.</span></span></label>
-          <label><input type="radio" name="Plan" value="Élite"><span><b>Plan Élite</b><span class="d">Todo lo anterior más tienda online, pagos, IA y panel de administración.</span></span></label>
+          <label><input type="radio" name="Plan" value="Impulso" required><span><b>Plan Impulso</b><span class="d">Página única a medida, 100% adaptada a móvil, con SEO básico y contacto por WhatsApp.</span></span></label>
+          <label><input type="radio" name="Plan" value="Crecimiento"><span><b>Plan Crecimiento</b><span class="d">Web multipágina con blog o galería, reservas, redes sociales y SEO avanzado.</span></span></label>
+          <label><input type="radio" name="Plan" value="Élite"><span><b>Plan Élite</b><span class="d">Todo lo anterior, más tienda online, chat con IA, panel de administración y todos los extras incluidos.</span></span></label>
         </div>
       </div>
     </div>
@@ -715,11 +715,9 @@ input[type="file"]::file-selector-button{
           <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Certificado SSL gestionado"><span>Certificado SSL gestionado</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones simple"><span>Formulario de valoraciones simple</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Favicon e identidad visual mínima"><span>Favicon e identidad visual mínima</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
         </div>
 
         <div data-requiere-extra="QR personalizado">
@@ -730,7 +728,20 @@ input[type="file"]::file-selector-button{
           <label class="field-label" style="margin-top:16px;">¿Qué quieres que diga la página de agradecimiento?</label>
           <textarea name="Texto de la página de agradecimiento" rows="2" placeholder="Lo que ve quien acaba de escribiros o comprar"></textarea>
         </div>
-        <div data-requiere-extra="Formulario de valoraciones simple">
+        <div data-requiere-extra="Botón de compartir en redes">
+          <label class="field-label" style="margin-top:16px;">¿Dónde quieres que se pueda compartir la web?</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="WhatsApp"><span>WhatsApp</span></label>
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Facebook"><span>Facebook</span></label>
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="X (Twitter)"><span>X (Twitter)</span></label>
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Copiar enlace"><span>Copiar enlace</span></label>
+          </div>
+        </div>
+        <div data-requiere-extra="Mapa de Google integrado">
+          <label class="field-label" style="margin-top:16px;">¿Qué dirección o ubicación debe mostrar el mapa?</label>
+          <input type="text" name="Ubicación del mapa" placeholder="Dirección exacta, o pega el enlace de Google Maps">
+        </div>
+        <div data-requiere-extra="Formulario de valoraciones">
           <label class="field-label" style="margin-top:16px;">¿A qué correo deben llegar las valoraciones?</label>
           <input type="email" name="Correo para valoraciones" placeholder="Si es distinto del de contacto">
         </div>
@@ -748,11 +759,9 @@ input[type="file"]::file-selector-button{
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Modo oscuro"><span>Modo oscuro</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="QR personalizado"><span>QR personalizado</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Certificado SSL gestionado"><span>Certificado SSL gestionado</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Formulario de valoraciones simple"><span>Formulario de valoraciones simple</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Favicon e identidad visual mínima"><span>Favicon e identidad visual mínima</span></label>
+            <label class="chip"><input type="checkbox" name="Extras de pago" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
           </div>
         </div></div>
       </div>
@@ -762,28 +771,26 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="crecimiento">
       <div class="step-head">
         <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge" data-nivel="medio">Elige de 4 a 6</span></div>
+        <div><h2>Extras</h2><span class="plan-badge" data-nivel="medio">Elige de 2 a 4</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">El Plan Crecimiento incluye entre 4 y 6 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" id="extras-inc-crecimiento" data-min="4" data-max="6">
+        <div class="note-box">Vuestro plan ya incluye, sin elegir nada, el botón de reserva/cita con calendario integrado y el botón flotante de WhatsApp inteligente.</div>
+        <label class="field-label">¿Qué mensaje predefinido quieres que lleve el botón de WhatsApp?</label>
+        <input type="text" name="Mensaje del botón de WhatsApp" placeholder="Ej: Hola, quiero pedir información sobre...">
+
+        <p class="step-sub" style="margin-top:18px;">El Plan Crecimiento incluye entre 2 y 4 extras a elegir, además de todo lo anterior. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" id="extras-inc-crecimiento" data-min="2" data-max="4">
           <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business"><span>Integración con Google Business</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Calendario de reservas básico"><span>Calendario de reservas básico</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Botón de WhatsApp flotante inteligente"><span>Botón de WhatsApp flotante inteligente</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
         </div>
 
         <div data-requiere-extra="Integración con Google Business">
           <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
           <input type="url" name="Enlace de Google Business" placeholder="Pega el enlace si ya la tenéis">
-        </div>
-        <div data-requiere-extra="Botón de WhatsApp flotante inteligente">
-          <label class="field-label" style="margin-top:16px;">¿Qué mensaje predefinido quieres que lleve el botón de WhatsApp?</label>
-          <input type="text" name="Mensaje del botón de WhatsApp" placeholder="Ej: Hola, quiero pedir información sobre...">
         </div>
 
         <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
@@ -800,9 +807,7 @@ input[type="file"]::file-selector-button{
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Integración con Google Business"><span>Integración con Google Business</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Calendario de reservas básico"><span>Calendario de reservas básico</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Galería animada"><span>Galería animada</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Botón de WhatsApp flotante inteligente"><span>Botón de WhatsApp flotante inteligente</span></label>
             <label class="chip"><input type="checkbox" name="Extras de pago" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
           </div>
         </div></div>
@@ -813,41 +818,63 @@ input[type="file"]::file-selector-button{
     <div class="step" data-planes="elite">
       <div class="step-head">
         <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge" data-nivel="elite">Elige hasta 6 de 8</span></div>
+        <div><h2>Extras</h2><span class="plan-badge" data-nivel="elite">Todos incluidos</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub">El Plan Élite permite elegir hasta 6 de estos 8 extras. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" id="extras-inc-elite" data-min="0" data-max="6">
+        <p class="step-sub"><b>El Plan Élite incluye todos los extras.</b> Marca los que quieras para tu web — a continuación solo te preguntaremos por los que hayas marcado.</p>
+        <div class="chip-grid" id="extras-inc-elite" data-min="0" data-max="17">
+          <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de valoraciones"><span>Formulario de valoraciones</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business Profile"><span>Integración con Google Business Profile</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
+          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Chat con IA / chatbot"><span>Chat con IA / chatbot</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Carrito de compra avanzado / pasarela de pago"><span>Carrito de compra avanzado / pasarela de pago</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Dashboard de analítica personalizado"><span>Dashboard de analítica personalizado</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Multi-idioma"><span>Multi-idioma</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Animaciones 3D / parallax"><span>Animaciones 3D / parallax</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Panel de administración para el cliente"><span>Panel de administración para el cliente</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con automatizaciones avanzadas"><span>Newsletter con automatizaciones avanzadas</span></label>
         </div>
 
-        <label class="field-label" style="margin-top:18px;">¿Quieres añadir algún extra adicional de pago?</label>
-        <div class="hint">Cada uno, fuera de los incluidos, cuesta <b>100 € + IVA</b>.</div>
-        <select name="Extras adicionales" id="sel-extras-pago-elite" onchange="alternarExtrasPago('elite')">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
-        <div class="depende" id="extras-pago-elite-caja"><div>
-          <label class="field-label">Toca los que te falten</label>
-          <div class="chip-grid" id="extras-pago-elite" data-espejo="extras-inc-elite">
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Chat con IA / chatbot"><span>Chat con IA / chatbot</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Carrito de compra avanzado / pasarela de pago"><span>Carrito de compra avanzado / pasarela de pago</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Dashboard de analítica personalizado"><span>Dashboard de analítica personalizado</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Multi-idioma"><span>Multi-idioma</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Animaciones 3D / parallax"><span>Animaciones 3D / parallax</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Panel de administración para el cliente"><span>Panel de administración para el cliente</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-            <label class="chip"><input type="checkbox" name="Extras de pago" value="Newsletter con automatizaciones avanzadas"><span>Newsletter con automatizaciones avanzadas</span></label>
+        <div data-requiere-extra="QR personalizado">
+          <label class="field-label" style="margin-top:16px;">¿A dónde debe llevar el código QR?</label>
+          <input type="text" name="Destino del QR" placeholder="Ej: a la carta, a WhatsApp, a la ficha de Google...">
+        </div>
+        <div data-requiere-extra="Página de agradecimiento personalizada">
+          <label class="field-label" style="margin-top:16px;">¿Qué quieres que diga la página de agradecimiento?</label>
+          <textarea name="Texto de la página de agradecimiento" rows="2" placeholder="Lo que ve quien acaba de escribiros o comprar"></textarea>
+        </div>
+        <div data-requiere-extra="Botón de compartir en redes">
+          <label class="field-label" style="margin-top:16px;">¿Dónde quieres que se pueda compartir la web?</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="WhatsApp"><span>WhatsApp</span></label>
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Facebook"><span>Facebook</span></label>
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="X (Twitter)"><span>X (Twitter)</span></label>
+            <label class="chip"><input type="checkbox" name="Compartir en redes" value="Copiar enlace"><span>Copiar enlace</span></label>
           </div>
-        </div></div>
+        </div>
+        <div data-requiere-extra="Mapa de Google integrado">
+          <label class="field-label" style="margin-top:16px;">¿Qué dirección o ubicación debe mostrar el mapa?</label>
+          <input type="text" name="Ubicación del mapa" placeholder="Dirección exacta, o pega el enlace de Google Maps">
+        </div>
+        <div data-requiere-extra="Formulario de valoraciones">
+          <label class="field-label" style="margin-top:16px;">¿A qué correo deben llegar las valoraciones?</label>
+          <input type="email" name="Correo para valoraciones" placeholder="Si es distinto del de contacto">
+        </div>
+        <div data-requiere-extra="Integración con Google Business Profile">
+          <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
+          <input type="url" name="Enlace de Google Business" placeholder="Pega el enlace si ya la tenéis">
+        </div>
+
+        <div class="note-box" style="margin-top:16px;">Vuestro plan ya incluye, sin elegir nada, el botón de reserva/cita con calendario integrado y el botón flotante de WhatsApp inteligente.</div>
+        <label class="field-label">¿Qué mensaje predefinido quieres que lleve el botón de WhatsApp?</label>
+        <input type="text" name="Mensaje del botón de WhatsApp" placeholder="Ej: Hola, quiero pedir información sobre...">
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -876,10 +903,10 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 8 · BLOG ================= -->
-    <div class="step" data-planes="crecimiento elite" data-extra="Blog asistido con IA">
+    <div class="step" data-planes="crecimiento elite" data-extra="Blog asistido con IA|Galería animada">
       <div class="step-head">
         <span class="step-num">8</span>
-        <div><h2>Blog o galería</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
+        <div><h2>Blog o galería</h2><span class="plan-badge" data-nivel="medio">Si elegiste Blog asistido con IA o Galería animada</span></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Queréis publicar noticias o artículos?</label>
@@ -913,10 +940,10 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 9 · RESERVAS ================= -->
-    <div class="step" data-planes="crecimiento elite" data-extra="Calendario de reservas básico">
+    <div class="step" data-planes="crecimiento elite">
       <div class="step-head">
         <span class="step-num">9</span>
-        <div><h2>Reservas y citas</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
+        <div><h2>Reservas y citas</h2><span class="plan-badge" data-nivel="medio">Incluido en Crecimiento y Élite</span></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Ofrecéis un solo servicio o varios?</label>
@@ -1017,6 +1044,11 @@ input[type="file"]::file-selector-button{
           <input type="text" name="Tono del chat IA" placeholder="Ej: cercano y directo, formal, divertido...">
           <label class="field-label">Si no sabe responder, ¿lo derivamos a WhatsApp o a un correo?</label>
           <input type="text" name="Derivación del chat IA" placeholder="Ej: a vuestro WhatsApp, a este mismo correo...">
+
+          <label class="field-label" style="margin-top:16px;">Preguntas y respuestas que debe saber contestar</label>
+          <div class="hint">Escribe cada pregunta tal y como te la haría un cliente, y justo debajo la respuesta exacta que quieres que dé el chat. Añade las que hagan falta.</div>
+          <div id="lista-preguntas-chat"></div>
+          <button type="button" class="add-btn" onclick="añadirPreguntaChat()">+ Añadir otra pregunta para el chat</button>
         </div>
 
         <div data-requiere-extra="Panel de administración para el cliente">
@@ -1061,10 +1093,10 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 16 · NEWSLETTER ================= -->
-    <div class="step" data-planes="crecimiento elite" data-extra="Newsletter con bienvenida automática|Newsletter con automatizaciones avanzadas">
+    <div class="step" data-planes="crecimiento elite" data-extra="Newsletter con bienvenida automática">
       <div class="step-head">
         <span class="step-num">16</span>
-        <div><h2>Newsletter</h2><span class="plan-badge" data-nivel="medio">Planes Crecimiento y Élite</span></div>
+        <div><h2>Newsletter</h2><span class="plan-badge" data-nivel="medio">Si elegiste el extra de Newsletter</span></div>
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Queréis una newsletter en la web?</label>
@@ -1088,14 +1120,12 @@ input[type="file"]::file-selector-button{
             <option>Sí</option>
             <option>No</option>
           </select>
-          <div data-requiere-extra="Newsletter con automatizaciones avanzadas">
-            <label class="field-label" style="margin-top:16px;">¿Qué automatizaciones os interesan?</label>
-            <div class="chip-grid">
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Carrito abandonado"><span>Carrito abandonado</span></label>
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Recordatorio de cita o reserva"><span>Recordatorio de cita o reserva</span></label>
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Felicitación de cumpleaños"><span>Felicitación de cumpleaños</span></label>
-              <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Serie de bienvenida en varios correos"><span>Serie de bienvenida en varios correos</span></label>
-            </div>
+          <label class="field-label" style="margin-top:16px;">¿Qué automatizaciones os interesan? <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Carrito abandonado"><span>Carrito abandonado</span></label>
+            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Recordatorio de cita o reserva"><span>Recordatorio de cita o reserva</span></label>
+            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Felicitación de cumpleaños"><span>Felicitación de cumpleaños</span></label>
+            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Serie de bienvenida en varios correos"><span>Serie de bienvenida en varios correos</span></label>
           </div>
         </div></div>
       </div>
@@ -1233,18 +1263,19 @@ input[type="file"]::file-selector-button{
         <textarea name="Testimonios escritos" rows="3" placeholder="Pega aquí las que más te gusten, con el nombre de quien las dijo."></textarea>
 
         <div data-requiere-extra="Testimonios en vídeo">
-          <label class="field-label" style="margin-top:16px;">Vídeos de clientes hablando de vosotros</label>
-          <div class="hint">Si ya están colgados en Instagram, Drive o YouTube, pega los enlaces.</div>
-          <textarea name="Enlaces a vídeos de testimonios" rows="2" placeholder="https://..."></textarea>
-          <label class="field-label">¿Tenéis vídeos guardados en el móvil o el ordenador que aún no estén subidos a ningún sitio?</label>
-          <div class="hint">Súbelos a Google Drive o WeTransfer (gratis, sin cuenta) y pega aquí el enlace — los vídeos pesan demasiado para ir por correo.</div>
-          <input type="url" name="Enlace a vídeos sin subir" placeholder="https://...">
-          <label class="field-label">¿No tenéis todavía vídeos de testimonios grabados?</label>
-          <select name="Necesita contenido audiovisual" id="sel-audiovisual" onchange="alternarAudiovisual()">
+          <label class="field-label" style="margin-top:16px;">¿Tenéis los vídeos de testimonios?</label>
+          <select name="Tiene vídeos de testimonios" id="sel-audiovisual" onchange="alternarAudiovisual()">
             <option value="" selected></option>
-            <option>Ya los tenemos</option>
-            <option>Nos interesa un presupuesto aparte para grabarlos</option>
+            <option value="Sí">Sí</option>
+            <option value="No, quiero un presupuesto aparte">No, quiero que me hagáis un presupuesto aparte y me los grabéis vosotros</option>
           </select>
+
+          <div class="depende" id="videos-testimonios-si"><div>
+            <p class="step-sub">Adjúntalos, o pega el enlace si ya están subidos — una ficha por vídeo, con quién sale y el pie de vídeo que quieres que pongamos.</p>
+            <div id="lista-videos-testimonios"></div>
+            <button type="button" class="add-btn" onclick="añadirVideoTestimonio()">+ Añadir otro vídeo</button>
+          </div></div>
+
           <div class="depende" id="audiovisual-extra"><div>
             <div class="note-box">Perfecto — la grabación de vídeo no está incluida en el plan, así que os pasamos un presupuesto aparte una vez veamos el resto del proyecto.</div>
             <label class="field-label">¿Algo que debamos saber para ese presupuesto?</label>
@@ -1511,7 +1542,7 @@ input[type="file"]::file-selector-button{
   var pct = document.getElementById('porcentaje');
 
   /* ---------- Fichas repetibles ---------- */
-  var cuenta = {persona:0, servicio:0, faq:0, reserva:0, seccionFotos:0};
+  var cuenta = {persona:0, servicio:0, faq:0, reserva:0, seccionFotos:0, videoTestimonio:0, preguntaChat:0};
 
   function crear(lista, html){
     var d = document.createElement('div');
@@ -1573,8 +1604,18 @@ input[type="file"]::file-selector-button{
       '</div>');
   };
 
+  window.añadirPreguntaChat = function(){
+    var n = ++cuenta.preguntaChat;
+    crear('lista-preguntas-chat',
+      '<h4>Pregunta ' + n + ' del chat</h4>' +
+      '<label class="field-label">La pregunta</label>' +
+      '<input type="text" name="Chat IA · Pregunta ' + n + '" placeholder="Ej: ¿Hacéis envíos a toda España?">' +
+      '<label class="field-label">La respuesta que debe dar</label>' +
+      '<textarea name="Chat IA · Respuesta ' + n + '" rows="2"></textarea>');
+  };
+
   // Cada lista arranca con una ficha, para no partir de la nada
-  añadirPersona(); añadirServicio(); añadirFaq();
+  añadirPersona(); añadirServicio(); añadirFaq(); añadirPreguntaChat();
 
   /* ---------- Zonas de subida múltiple, con etiqueta editable por archivo ---------- */
   function crearZonaSubida(zona, lista, etiquetaBase){
@@ -1643,6 +1684,31 @@ input[type="file"]::file-selector-button{
     return zona;
   };
   añadirSeccionFotos();
+
+  /* ---------- Testimonios en vídeo: una ficha por vídeo, con quién sale y el pie ---------- */
+  var zonasVideosTestimonios = [];
+  window.añadirVideoTestimonio = function(){
+    var n = ++cuenta.videoTestimonio;
+    var ficha = crear('lista-videos-testimonios',
+      '<h4>Vídeo ' + n + '</h4>' +
+      '<label class="field-label">¿Quién sale en el vídeo?</label>' +
+      '<input type="text" name="Vídeo testimonio ' + n + ' · Quién sale" placeholder="Nombre y, si quieres, el negocio o cargo">' +
+      '<label class="field-label">¿Qué pie de vídeo quieres que pongamos?</label>' +
+      '<input type="text" name="Vídeo testimonio ' + n + ' · Pie de vídeo" placeholder="El texto corto que aparecerá junto al vídeo">' +
+      '<label class="field-label" style="margin-top:10px;">Súbelo aquí, o pega el enlace si ya está en Instagram, Drive o YouTube</label>' +
+      '<div class="subida"><input type="file" accept="video/*" multiple><p class="subida__texto"><b>Toca o arrastra</b> el vídeo aquí</p></div>' +
+      '<div class="subida-lista"></div>' +
+      '<input type="url" name="Vídeo testimonio ' + n + ' · Enlace" placeholder="https://...">'
+    );
+    var quienInput = ficha.querySelector('input[name="Vídeo testimonio ' + n + ' · Quién sale"]');
+    var etiquetaFn = function(){
+      var quien = quienInput.value.trim();
+      return 'Vídeo testimonio ' + n + (quien ? ' — ' + quien : '');
+    };
+    var zona = crearZonaSubida(ficha.querySelector('.subida'), ficha.querySelector('.subida-lista'), etiquetaFn);
+    zonasVideosTestimonios.push(zona);
+    return zona;
+  };
 
   /* ---------- Borrador jugable de la portada: colores + tipografía ---------- */
   (function(){
@@ -1762,10 +1828,13 @@ input[type="file"]::file-selector-button{
   };
   window.alternarAudiovisual = function(){
     var el = document.getElementById('sel-audiovisual');
-    abrir('audiovisual-extra', !!el && el.value === 'Nos interesa un presupuesto aparte para grabarlos');
+    var v = el && el.value;
+    abrir('videos-testimonios-si', v === 'Sí');
+    abrir('audiovisual-extra', v === 'No, quiero un presupuesto aparte');
+    if(v === 'Sí' && !cuenta.videoTestimonio) añadirVideoTestimonio();
   };
   alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
-  ['impulso', 'crecimiento', 'elite'].forEach(function(plan){ alternarExtrasPago(plan); });
+  ['impulso', 'crecimiento'].forEach(function(plan){ alternarExtrasPago(plan); });
 
   /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
   var sincronizarExtrasPago = [];
@@ -2178,7 +2247,7 @@ input[type="file"]::file-selector-button{
       lista.push({etiqueta:input.name, file:input.files[0]});
     });
     // Zonas de subida múltiple: equipo, servicios y las secciones de fotos añadidas una a una
-    [zonaEquipo, zonaServicios].concat(zonasSeccionesFotos).forEach(function(zona){
+    [zonaEquipo, zonaServicios].concat(zonasSeccionesFotos).concat(zonasVideosTestimonios).forEach(function(zona){
       if(!zona || !zona.isConnected || !activo(zona)) return;
       zona.archivos.forEach(function(a){ lista.push({etiqueta:a.etiqueta, file:a.file}); });
     });
