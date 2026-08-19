@@ -35,7 +35,16 @@ una clienta y no deben mezclarse con contenido de Differentissgood.
   oscuro se cambia solo; en páginas que son oscuras siempre se fuerza con la
   clase `.dig-logo--claro`. Nunca se enlaza el logotipo desde otra web ni se
   vuelve a dibujar con CSS.
-- **Traspaso a differentissgood.com**: los pasos están en `MIGRACION.md`.
+- **Traspaso a differentissgood.com**: los pasos están en `MIGRACION.md`. IMPORTANTE:
+  esto ha dejado de ser "no tocar la web oficial" — Noelia ha autorizado
+  expresamente editarla de verdad (19/08). Regla vigente desde entonces, ver
+  `REGLA-MAESTRA.md`: `differentissgood.com` es la fuente de identidad visual
+  (tipografía, colores, logo real, cabecera, pie, animaciones); bodas, planes
+  y cuestionario son URLs propias (`/bodas/`, `/planes/`, `/cuestionario/`)
+  que se editan cada una por separado y nunca tocan la portada. Este
+  repositorio de previews sigue sirviendo como borrador/campo de pruebas, pero
+  el destino final de los cambios es siempre DIG (`differentissgood/DIG`), no
+  aquí — este sitio no reemplaza a differentissgood.com.
 - **La web de previsualización vive en GitHub Pages, no en Cloudflare.**
   Dirección: https://noeliarodriguezcarmona-byte.github.io/differentissgood-previews/
   Se actualiza sola en cuanto se hace push a `main` (workflow
