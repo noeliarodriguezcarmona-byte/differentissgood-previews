@@ -365,6 +365,39 @@ input[type="file"]::file-selector-button{
 .radio-row b{display:block;font-size:14px;margin-bottom:2px;}
 .radio-row span.d{color:var(--muted);font-size:12.5px;}
 
+/* Plan contratado: viene del código, no se elige — solo se confirma */
+.plan-fijado{
+  border:1.5px solid var(--orange);border-radius:13px;padding:18px 20px;
+  background:rgba(221,107,58,.09);
+}
+.plan-fijado__nombre{
+  font-size:19px;font-weight:700;color:var(--ink);margin:0 0 4px;
+}
+.plan-fijado__desc{color:var(--muted);font-size:13px;line-height:1.6;margin:0;}
+.plan-fijado__codigo{
+  margin:12px 0 0;font-size:12px;color:var(--tenue);
+  letter-spacing:.02em;
+}
+.plan-fijado__codigo b{color:var(--orange);font-weight:700;}
+
+/* Confirmación obligatoria antes de enviar */
+.confirmacion{
+  display:flex;align-items:flex-start;gap:12px;
+  border:1.5px solid var(--line);border-radius:13px;padding:16px 18px;
+  font-size:13.5px;line-height:1.6;cursor:pointer;transition:.25s var(--curva);
+}
+.confirmacion:has(input:checked){border-color:var(--orange);background:rgba(221,107,58,.09);}
+.confirmacion[data-falta]{border-color:var(--rosa);background:rgba(214,109,120,.08);}
+.confirmacion input{margin-top:3px;accent-color:var(--orange);flex-shrink:0;width:18px;height:18px;}
+
+/* Aviso de validación al intentar enviar */
+.aviso-envio{
+  display:none;margin:0 0 14px;padding:13px 15px;border-radius:13px;
+  border:1.5px solid var(--rosa);background:rgba(214,109,120,.08);
+  font-size:13px;line-height:1.55;color:var(--ink);
+}
+.aviso-envio.visible{display:block;}
+
 /* Recordatorio de que ese archivo se sube al final, en un solo sitio */
 .luego{
   display:flex;align-items:flex-start;gap:9px;
@@ -545,20 +578,19 @@ input[type="file"]::file-selector-button{
   <div class="velo__caja">
     <div id="puerta-formulario">
       <h3>Antes de empezar</h3>
-      <p>Introduce el código de cliente que te hemos dado por email o WhatsApp al firmar tu contrato.</p>
-      <input type="text" id="puerta-input" placeholder="Ej: DIG-2026-001" style="width:100%;margin-top:14px;text-align:center;text-transform:uppercase;" autocomplete="off">
-      <p class="velo__error" id="puerta-error" style="display:none;">Escribe tu código de cliente para continuar.</p>
+      <p>Introduce el código de proyecto que te hemos dado por email o WhatsApp al firmar tu contrato.</p>
+      <input type="text" id="puerta-input" placeholder="Ej: DIG-2026-001-I" style="width:100%;margin-top:14px;text-align:center;text-transform:uppercase;" autocomplete="off">
+      <p class="velo__error" id="puerta-error" style="display:none;">Escribe tu código de proyecto para continuar.</p>
       <div class="velo__acciones">
         <button type="button" class="principal" id="puerta-continuar">Continuar</button>
       </div>
     </div>
     <div id="puerta-repetido" style="display:none;">
       <div class="tic">✓</div>
-      <h3>Ya hemos recibido tu cuestionario</h3>
-      <p>Con este código ya nos llegaron tus respuestas.</p>
-      <div class="velo__acciones">
-        <button type="button" class="principal" id="puerta-corregir">Quiero corregir o completar algo</button>
-      </div>
+      <h3>Cuestionario recibido</h3>
+      <p>Hemos registrado correctamente la información y selección de tu proyecto.</p>
+      <p class="velo__detalle" id="puerta-repetido-detalle" style="margin-top:14px;"></p>
+      <p class="velo__detalle" style="margin-top:10px;">Si necesitas comentarnos algo, escríbenos y lo vemos contigo.</p>
     </div>
   </div>
 </div>
@@ -582,7 +614,7 @@ input[type="file"]::file-selector-button{
 
   <div class="aviso" id="aviso">
     <h3>Antes de empezar, tres cosas</h3>
-    <p><b>Al elegir un plan</b>, se seleccionan las preguntas de ese plan y se ocultan las de los demás <span class="marca-ej">Incluido en todos los planes</span>.</p>
+    <p><b>Tu plan ya está fijado</b> por el código de tu contrato: solo verás las preguntas de ese plan <span class="marca-ej">Incluido en todos los planes</span>.</p>
     <p><b>Puedes descartar bloques.</b> Marca «No lo quiero en mi web» y ese bloque no se envía.</p>
     <p><b>Cada foto va con su pregunta.</b> Se adjunta ahí mismo y llega junto con tus respuestas, en un solo correo.</p>
   </div>
@@ -592,21 +624,25 @@ input[type="file"]::file-selector-button{
     <form id="cuestionario" novalidate
           data-correo="info.differentissgood@gmail.com">
 
-    <!-- ================= 1 · PLAN ================= -->
+    <!-- ================= 1 · PLAN CONTRATADO (solo lectura) =================
+         El plan NO se elige aquí: viene determinado por el código de proyecto
+         vinculado al contrato firmado. Este bloque solo lo confirma. -->
     <div class="step" data-planes="impulso crecimiento elite">
       <div class="step-head">
         <span class="step-num">1</span>
         <div>
-          <h2>¿Qué plan te interesa?</h2>
-          <span class="plan-badge">Esta respuesta decide el resto del cuestionario</span>
+          <h2>Tu plan contratado</h2>
+          <span class="plan-badge">Viene de tu contrato — no se puede cambiar aquí</span>
         </div>
       </div>
       <div class="step-cuerpo">
-        <div class="radio-row" id="selector-plan">
-          <label><input type="radio" name="Plan" value="Impulso" required><span><b>Plan Impulso</b><span class="d">Página única a medida, 100% adaptada a móvil, con SEO básico y contacto por WhatsApp.</span></span></label>
-          <label><input type="radio" name="Plan" value="Crecimiento"><span><b>Plan Crecimiento</b><span class="d">Web multipágina con blog o galería, reservas, redes sociales y SEO avanzado.</span></span></label>
-          <label><input type="radio" name="Plan" value="Élite"><span><b>Plan Élite</b><span class="d">Todo lo anterior, más tienda online, chat con IA, panel de administración y todos los extras incluidos.</span></span></label>
+        <input type="hidden" name="Plan" id="plan-contratado-input">
+        <div class="plan-fijado" id="plan-fijado">
+          <p class="plan-fijado__nombre" id="plan-fijado-nombre">—</p>
+          <p class="plan-fijado__desc" id="plan-fijado-desc"></p>
+          <p class="plan-fijado__codigo">Código de proyecto: <b id="plan-fijado-codigo">—</b></p>
         </div>
+        <div class="note-box" style="margin-top:16px;">A partir de aquí solo verás las preguntas de tu plan. Si crees que el plan que aparece no es el que firmaste, escríbenos antes de seguir.</div>
       </div>
     </div>
 
@@ -794,8 +830,8 @@ input[type="file"]::file-selector-button{
         <div><h2>Extras</h2><span class="plan-badge" data-nivel="elite">Todos incluidos</span></div>
       </div>
       <div class="step-cuerpo">
-        <p class="step-sub"><b>El Plan Élite incluye todos los extras.</b> Marca los que quieras para tu web — a continuación solo te preguntaremos por los que hayas marcado.</p>
-        <div class="chip-grid" id="extras-inc-elite" data-min="0" data-max="18">
+        <p class="step-sub"><b>El Plan Élite incluye todos los extras, sin coste adicional.</b> Marca los que quieras implementar en tu web — a continuación solo te preguntaremos por los que hayas marcado. <span class="chip-grid__contador" data-contador></span></p>
+        <div class="chip-grid" id="extras-inc-elite" data-min="1" data-max="18" data-sin-tope>
           <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
           <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
@@ -1489,6 +1525,27 @@ input[type="file"]::file-selector-button{
       </div>
     </div>
 
+    <!-- ================= 23 · CONFIRMACIÓN FINAL (obligatoria) ================= -->
+    <div class="step" data-planes="impulso crecimiento elite" id="paso-confirmacion">
+      <div class="step-head">
+        <span class="step-num">23</span>
+        <div><h2>Confirma y envía</h2><span class="plan-badge">Último paso</span></div>
+      </div>
+      <div class="step-cuerpo">
+        <div id="resumen-final" class="plan-fijado" style="margin-bottom:16px;">
+          <p class="plan-fijado__nombre" id="resumen-final-plan">—</p>
+          <p class="plan-fijado__desc" id="resumen-final-extras"></p>
+          <p class="plan-fijado__codigo">Código de proyecto: <b id="resumen-final-codigo">—</b></p>
+        </div>
+        <label class="confirmacion" id="confirmacion-caja">
+          <input type="checkbox" name="Confirmación de envío definitivo" id="chk-confirmacion" value="Confirmado" required>
+          <span>Confirmo que he revisado mis respuestas y la selección de extras y funcionalidades. Entiendo que, una vez enviado el cuestionario, esta selección será definitiva y determinará el alcance de mi proyecto conforme al contrato firmado.</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="aviso-envio" id="aviso-envio" role="alert" aria-live="assertive"></div>
+
     <div class="nav-paso" id="nav-paso">
       <button type="button" class="nav-atras" id="nav-atras">← Atrás</button>
       <span class="nav-paso__contador" id="nav-contador"></span>
@@ -1515,40 +1572,92 @@ input[type="file"]::file-selector-button{
      ================================================================== */
   var LLAVE_COMPLETADOS = 'cuestionario-differentissgood-completados';
   var codigoCliente = '';
-  var esCorreccion = false;
+  var planContratado = null;   // 'impulso' | 'crecimiento' | 'elite' — sale del código, nunca del cliente
   var puerta = document.getElementById('puerta');
   var puertaInput = document.getElementById('puerta-input');
   var puertaError = document.getElementById('puerta-error');
 
-  function codigosCompletados(){
-    try{ return JSON.parse(localStorage.getItem(LLAVE_COMPLETADOS) || '[]'); }
-    catch(e){ return []; }
-  }
-  function marcarCompletado(codigo){
+  /* El plan va dentro del propio código de proyecto: la última letra.
+     DIG-2026-001-I → Impulso · -C → Crecimiento · -E → Élite
+     Así el plan viaja con el código que se entrega al firmar y el cliente
+     no puede elegirlo ni cambiarlo desde el cuestionario. */
+  var PLANES_POR_LETRA = {
+    I: {clave:'impulso',     etiqueta:'Plan Impulso',     desc:'Página única a medida, 100% adaptada a móvil, con SEO básico y contacto por WhatsApp. Incluye de 2 a 4 extras a elegir.'},
+    C: {clave:'crecimiento', etiqueta:'Plan Crecimiento', desc:'Web multipágina con blog o galería, reservas, redes sociales y SEO avanzado. Incluye de 2 a 4 extras a elegir.'},
+    E: {clave:'elite',       etiqueta:'Plan Élite',       desc:'Todo lo anterior, más tienda online, chat con IA y panel de administración. Todos los extras incluidos en el precio.'},
+  };
+  var RE_CODIGO = /^DIG-\d{4}-\d{3}-([ICE])$/;
+
+  /** Estado de envíos guardado en este navegador.
+   *  Formato nuevo: { "DIG-2026-001-I": {estado, plan, extras, enviadoEn, referencia} }
+   *  Se acepta también el formato antiguo (lista de códigos) para no perder bloqueos ya hechos. */
+  function registroEnvios(){
     try{
-      var lista = codigosCompletados();
-      if(lista.indexOf(codigo) === -1){ lista.push(codigo); localStorage.setItem(LLAVE_COMPLETADOS, JSON.stringify(lista)); }
+      var crudo = JSON.parse(localStorage.getItem(LLAVE_COMPLETADOS) || '{}');
+      if(Array.isArray(crudo)){
+        var migrado = {};
+        crudo.forEach(function(c){ migrado[c] = {estado:'completado'}; });
+        return migrado;
+      }
+      return crudo && typeof crudo === 'object' ? crudo : {};
+    }catch(e){ return {}; }
+  }
+  function envioDe(codigo){
+    var r = registroEnvios()[codigo];
+    return (r && r.estado === 'completado') ? r : null;
+  }
+  function marcarCompletado(codigo, ficha){
+    try{
+      var reg = registroEnvios();
+      reg[codigo] = ficha;
+      localStorage.setItem(LLAVE_COMPLETADOS, JSON.stringify(reg));
     }catch(e){ /* modo privado: no pasa nada, solo no recordará este código */ }
   }
-  document.getElementById('puerta-continuar').addEventListener('click', function(){
-    var valor = puertaInput.value.trim().toUpperCase();
-    if(!valor){ puertaError.textContent = 'Escribe tu código de cliente para continuar.'; puertaError.style.display = 'block'; return; }
-    if(codigosCompletados().indexOf(valor) > -1){
-      codigoCliente = valor;
-      document.getElementById('puerta-formulario').style.display = 'none';
-      document.getElementById('puerta-repetido').style.display = 'block';
+
+  function mostrarBloqueado(ficha){
+    document.getElementById('puerta-formulario').style.display = 'none';
+    document.getElementById('puerta-repetido').style.display = 'block';
+    var detalle = document.getElementById('puerta-repetido-detalle');
+    if(detalle && ficha && ficha.enviadoEn){
+      detalle.textContent = 'Enviado el ' + new Date(ficha.enviadoEn).toLocaleString('es-ES') +
+        (ficha.plan ? ' · ' + ficha.plan : '');
+    }
+    puerta.classList.add('abierto');
+  }
+
+  function abrirConCodigo(valor){
+    var m = valor.match(RE_CODIGO);
+    if(!m){
+      puertaError.textContent = 'Ese código no es válido. Revisa el que te dimos al firmar (por ejemplo DIG-2026-001-I) o escríbenos.';
+      puertaError.style.display = 'block';
       return;
     }
+    var ficha = envioDe(valor);
+    if(ficha){ codigoCliente = valor; mostrarBloqueado(ficha); return; }
+
     codigoCliente = valor;
+    planContratado = PLANES_POR_LETRA[m[1]].clave;
+    pintarPlanContratado(PLANES_POR_LETRA[m[1]]);
+    aplicarPlan();
     puerta.classList.remove('abierto');
+  }
+
+  function pintarPlanContratado(info){
+    document.getElementById('plan-contratado-input').value = info.etiqueta.replace('Plan ', '');
+    document.getElementById('plan-fijado-nombre').textContent = info.etiqueta;
+    document.getElementById('plan-fijado-desc').textContent = info.desc;
+    document.getElementById('plan-fijado-codigo').textContent = codigoCliente;
+    document.getElementById('resumen-final-codigo').textContent = codigoCliente;
+    document.getElementById('resumen-final-plan').textContent = info.etiqueta;
+  }
+
+  document.getElementById('puerta-continuar').addEventListener('click', function(){
+    var valor = puertaInput.value.trim().toUpperCase();
+    if(!valor){ puertaError.textContent = 'Escribe tu código de proyecto para continuar.'; puertaError.style.display = 'block'; return; }
+    abrirConCodigo(valor);
   });
   puertaInput.addEventListener('keydown', function(e){
     if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('puerta-continuar').click(); }
-  });
-  // Reutilizar el mismo código para corregir o completar un envío ya hecho
-  document.getElementById('puerta-corregir').addEventListener('click', function(){
-    esCorreccion = true;
-    puerta.classList.remove('abierto');
   });
 
   var barra = document.getElementById('barra');
@@ -1983,11 +2092,33 @@ input[type="file"]::file-selector-button{
   /* ---------- Solo las preguntas del plan elegido ---------- */
   var bloques = Array.prototype.slice.call(document.querySelectorAll('.step[data-planes]'));
   var indice = 0;
+  /** Borra lo escrito dentro de un bloque que deja de aplicar. */
+  function limpiarCampos(el){
+    el.querySelectorAll('input,select,textarea').forEach(function(c){
+      if(c.type === 'checkbox' || c.type === 'radio'){ c.checked = false; }
+      else { try{ c.value = ''; }catch(e){} }
+    });
+  }
+  /** Extras realmente activos: marcados, visibles y no descartados. */
+  function extrasActivos(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[name="Extras"]:checked'))
+      .filter(function(c){ return !c.closest('.step[hidden]') && !c.closest('.step.apagado'); })
+      .map(function(c){ return c.value; });
+  }
+  function actualizarResumenFinal(){
+    var el = document.getElementById('resumen-final-extras');
+    if(!el) return;
+    var ex = extrasActivos();
+    el.textContent = ex.length
+      ? ex.length + ' extra' + (ex.length === 1 ? '' : 's') + ' seleccionado' + (ex.length === 1 ? '' : 's') + ': ' + ex.join(', ') + '.'
+      : 'Todavía no has marcado ningún extra.';
+  }
+
   function recalcularVisibilidad(){
-    var elegido = document.querySelector('input[name="Plan"]:checked');
-    // Sin tildes: el valor es "Élite" y la etiqueta del bloque, "elite"
-    var plan = elegido ? elegido.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'') : null;
-    var todos = !plan;
+    // El plan NO se elige en el cuestionario: viene del código de proyecto.
+    // Mientras no haya código validado, no se muestra ninguna pregunta.
+    var plan = planContratado;
+    var todos = false;   // sin plan validado no se muestra ninguna pregunta
     var extrasElegidos = Array.prototype.slice.call(document.querySelectorAll('input[name="Extras"]:checked')).map(function(c){ return c.value; });
 
     bloques.forEach(function(b){
@@ -1996,6 +2127,10 @@ input[type="file"]::file-selector-button{
       var extraAttr = (!todos && b.getAttribute('data-extra-' + plan)) || b.dataset.extra;
       var encajaExtra = todos || !extraAttr || extraAttr.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
       var sirve = encajaPlan && encajaExtra;
+      // Si el bloque estaba visible y deja de estarlo (extra desmarcado),
+      // se borra lo escrito dentro para no dejar respuestas residuales.
+      if(!sirve && b.dataset.visible === '1' && planContratado) limpiarCampos(b);
+      b.dataset.visible = sirve ? '1' : '0';
       b.hidden = !sirve;
       // Un bloque escondido tampoco debe enviarse ni exigir respuesta
       b.querySelectorAll('.step-cuerpo input,.step-cuerpo select,.step-cuerpo textarea').forEach(function(c){
@@ -2007,6 +2142,8 @@ input[type="file"]::file-selector-button{
           if(c.dataset.eraObligatorio) c.required = true;
         }
       });
+      // El interruptor de "no lo quiero" solo se apaga si el bloque entero no aplica
+      b.querySelectorAll('label.ocultar input[data-ocultar]').forEach(function(c){ c.disabled = !sirve; });
     });
     if(typeof gruposExtras !== 'undefined'){
       gruposExtras.forEach(function(grid){ actualizarGrupoExtras(grid); });
@@ -2017,6 +2154,8 @@ input[type="file"]::file-selector-button{
     // Preguntas sueltas dentro de un paso, atadas a un extra concreto
     document.querySelectorAll('[data-requiere-extra]').forEach(function(bloque){
       var aplica = bloque.dataset.requiereExtra.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
+      if(!aplica && bloque.dataset.visible === '1' && planContratado) limpiarCampos(bloque);
+      bloque.dataset.visible = aplica ? '1' : '0';
       bloque.hidden = !aplica;
       bloque.querySelectorAll('input,select,textarea').forEach(function(c){
         if(!aplica){
@@ -2028,6 +2167,7 @@ input[type="file"]::file-selector-button{
         }
       });
     });
+    actualizarResumenFinal();
     renumerar();
   }
   function aplicarPlan(){
@@ -2045,13 +2185,6 @@ input[type="file"]::file-selector-button{
       b.querySelector('.step-num').innerHTML = infoDe(b).icono;
     });
   }
-  document.querySelectorAll('input[name="Plan"]').forEach(function(r){
-    r.addEventListener('change', function(){
-      aplicarPlan();
-      // Con una sola pregunta por pantalla, elegir plan avanza sola a la siguiente
-      setTimeout(siguiente, 280);
-    });
-  });
   // Algunas preguntas de si/no, si la respuesta no abre mas campos, avanzan solas
   ['sel-blog', 'sel-news'].forEach(function(id){
     var el = document.getElementById(id);
@@ -2167,19 +2300,34 @@ input[type="file"]::file-selector-button{
 
   /* ---------- Extras: mínimo y máximo por plan ---------- */
   var gruposExtras = Array.prototype.slice.call(document.querySelectorAll('.chip-grid[data-min]'));
+  function topeDe(grid){
+    var sinTope = grid.hasAttribute('data-sin-tope');
+    return {
+      min: parseInt(grid.dataset.min, 10) || 0,
+      max: sinTope ? Infinity : (parseInt(grid.dataset.max, 10) || Infinity),
+      sinTope: sinTope,
+    };
+  }
   function actualizarGrupoExtras(grid){
-    var min = parseInt(grid.dataset.min, 10) || 0;
-    var max = parseInt(grid.dataset.max, 10) || Infinity;
+    var t = topeDe(grid);
     var casillas = Array.prototype.slice.call(grid.querySelectorAll('input[type=checkbox]'));
     var marcadas = casillas.filter(function(c){ return c.checked; }).length;
-    casillas.forEach(function(c){ c.disabled = !c.checked && marcadas >= max; });
+    // Si la rejilla es de otro plan (paso oculto) o el bloque está descartado,
+    // se desactiva entera: no debe quedar ni un extra de otro plan activo.
+    var inactiva = !!(grid.closest('.step[hidden]') || grid.closest('.step.apagado'));
+    // Al llegar al máximo, el resto se bloquea (en Élite no hay tope)
+    casillas.forEach(function(c){ c.disabled = inactiva || (!c.checked && marcadas >= t.max); });
     var contador = grid.closest('.step-cuerpo').querySelector('[data-contador]');
     if(!contador) return;
-    if(marcadas < min){
-      contador.textContent = 'Llevas ' + marcadas + ' — te faltan ' + (min - marcadas) + ' para el mínimo.';
+    if(marcadas < t.min){
+      contador.textContent = t.sinTope
+        ? 'No has marcado ninguno todavía — elige al menos 1.'
+        : 'Llevas ' + marcadas + ' — te falta' + (t.min - marcadas === 1 ? '' : 'n') + ' ' + (t.min - marcadas) + ' para el mínimo de ' + t.min + '.';
       contador.setAttribute('data-corto', '');
     } else {
-      contador.textContent = 'Llevas ' + marcadas + ' de ' + max + ' como máximo.';
+      contador.textContent = t.sinTope
+        ? 'Llevas ' + marcadas + ' marcado' + (marcadas === 1 ? '' : 's') + ' — todos están incluidos en tu plan.'
+        : 'Llevas ' + marcadas + ' de ' + t.max + ' como máximo.';
       contador.removeAttribute('data-corto');
     }
   }
@@ -2330,23 +2478,63 @@ input[type="file"]::file-selector-button{
   /* ---------- Comprobaciones antes de enviar ---------- */
   function faltaAlgo(){
     var fallo = null;
+
+    // 1 · Campos obligatorios visibles y activos
     formulario.querySelectorAll('[required]').forEach(function(c){
       if(fallo || c.disabled || c.closest('.step[hidden]') || c.closest('.step.apagado')) return;
+      if(c.id === 'chk-confirmacion') return;   // tiene su propio mensaje, al final
       var vacio = (c.type === 'radio')
         ? !formulario.querySelector('[name="' + CSS.escape(c.name) + '"]:checked')
-        : !c.value.trim();
-      if(vacio) fallo = c;
+        : (c.type === 'checkbox' ? !c.checked : !c.value.trim());
+      if(vacio) fallo = {campo:c, mensaje:'Te falta rellenar «' + (c.name || 'un campo') + '» para poder enviar.'};
     });
+
+    // 2 · Límites de extras del plan contratado
     if(!fallo){
       gruposExtras.forEach(function(grid){
         if(fallo || grid.closest('.step[hidden]') || grid.closest('.step.apagado')) return;
-        var min = parseInt(grid.dataset.min, 10) || 0;
+        var t = topeDe(grid);
         var casillas = Array.prototype.slice.call(grid.querySelectorAll('input[type=checkbox]'));
         var marcadas = casillas.filter(function(c){ return c.checked; }).length;
-        if(marcadas < min) fallo = casillas[0];
+        if(marcadas < t.min){
+          fallo = {campo:casillas[0], mensaje: t.sinTope
+            ? 'Marca al menos un extra: en tu plan están todos incluidos, pero necesitamos saber cuáles quieres implementar.'
+            : 'Tu plan incluye entre ' + t.min + ' y ' + t.max + ' extras. Llevas ' + marcadas + ' — te falta' + (t.min - marcadas === 1 ? '' : 'n') + ' ' + (t.min - marcadas) + '.'};
+        } else if(marcadas > t.max){
+          fallo = {campo:casillas[0], mensaje:'Tu plan admite como máximo ' + t.max + ' extras. Llevas ' + marcadas + ' — quita ' + (marcadas - t.max) + '.'};
+        }
       });
     }
+
+    // 3 · Confirmación final obligatoria
+    if(!fallo){
+      var chk = document.getElementById('chk-confirmacion');
+      if(chk && !chk.checked){
+        fallo = {campo:chk, mensaje:'Para enviar tienes que marcar la casilla de confirmación: a partir de ese momento la selección es definitiva.'};
+      }
+    }
     return fallo;
+  }
+
+  /* ---------- Aviso visible de validación ---------- */
+  var cajaAviso = document.getElementById('aviso-envio');
+  function mostrarAvisoEnvio(msg){
+    if(!cajaAviso) return;
+    cajaAviso.textContent = msg;
+    cajaAviso.classList.add('visible');
+  }
+  function ocultarAvisoEnvio(){
+    if(cajaAviso) cajaAviso.classList.remove('visible');
+    var caja = document.getElementById('confirmacion-caja');
+    if(caja) caja.removeAttribute('data-falta');
+  }
+
+  /* ---------- Bloqueo definitivo tras el envío ---------- */
+  function bloquearCuestionario(){
+    formulario.querySelectorAll('input,select,textarea,button').forEach(function(c){ c.disabled = true; });
+    var nav = document.getElementById('nav-paso');
+    if(nav) nav.style.display = 'none';
+    if(cajaAviso) cajaAviso.classList.remove('visible');
   }
 
   /* ---------- Reintentos ---------- */
@@ -2402,8 +2590,8 @@ input[type="file"]::file-selector-button{
     } else {
       listaHtml = '<p style="font-size:12.5px;color:var(--tenue);margin-top:14px;">No adjuntaste ningún archivo — con esto ya está todo.</p>';
     }
-    var plan = ((formulario.querySelector('input[name="Plan"]:checked') || {}).value) || 'sin especificar';
-    var extras = formulario.querySelectorAll('input[name="Extras"]:checked:not(:disabled)').length;
+    var plan = (document.getElementById('plan-contratado-input') || {}).value || 'sin especificar';
+    var extras = extrasActivos().length;
     var resumen = '<div class="resumen-envio">' +
       '<span>Plan ' + plan + '</span>' +
       '<span>' + extras + ' extra' + (extras === 1 ? '' : 's') + ' elegido' + (extras === 1 ? '' : 's') + '</span>' +
@@ -2443,16 +2631,23 @@ input[type="file"]::file-selector-button{
   function enviar(){
     if(enviando) return;
 
+    // 1 · y 2 · Campos obligatorios y límites de extras del plan
     var falla = faltaAlgo();
     if(falla){
       velo.classList.remove('abierto');
-      var bloque = falla.closest('.step');
+      mostrarAvisoEnvio(falla.mensaje);
+      if(falla.campo.id === 'chk-confirmacion'){
+        var cajaConf = document.getElementById('confirmacion-caja');
+        if(cajaConf) cajaConf.setAttribute('data-falta', '');
+      }
+      var bloque = falla.campo.closest('.step');
       var pasos = pasosVisibles();
       var i = pasos.indexOf(bloque);
       if(i > -1) mostrarPaso(i);
-      setTimeout(function(){ falla.focus(); }, 400);
+      setTimeout(function(){ try{ falla.campo.focus(); }catch(e){} }, 400);
       return;
     }
+    ocultarAvisoEnvio();
 
     enviando = true;
     pantallaProgreso();
@@ -2460,7 +2655,11 @@ input[type="file"]::file-selector-button{
     // La referencia lleva el código de cliente delante, luego la fecha y el nombre del negocio
     var negocio = (formulario.querySelector('[name="Nombre del negocio"]') || {}).value || 'cliente';
     var envio = (codigoCliente ? codigoCliente + '_' : '') + new Date().toISOString().slice(0,10) + '-' + ruta(negocio) +
-                (esCorreccion ? '-correccion' : '');
+                '';
+
+    var planEtiqueta = (document.getElementById('plan-contratado-input') || {}).value || '';
+    var extrasElegidos = extrasActivos();
+    var enviadoEn = new Date().toISOString();
 
     var respuestas = recogerRespuestas();
     var archivos = recogerArchivos();
@@ -2470,8 +2669,11 @@ input[type="file"]::file-selector-button{
 
     conReintentos(function(){
       var datos = new FormData();
-      datos.append('_subject', (esCorreccion ? 'CORRECCIÓN · ' : 'Cuestionario · ') + (codigoCliente ? codigoCliente + ' · ' : '') + negocio);
-      datos.append('Código de cliente', codigoCliente + (esCorreccion ? ' (corrección de un envío anterior)' : ''));
+      datos.append('_subject', 'Cuestionario · ' + (codigoCliente ? codigoCliente + ' · ' : '') + negocio);
+      datos.append('Código de proyecto', codigoCliente);
+      datos.append('Plan contratado', planEtiqueta);
+      datos.append('Extras seleccionados', extrasElegidos.length ? extrasElegidos.join(', ') : '(ninguno)');
+      datos.append('Enviado el', enviadoEn);
       datos.append('Referencia', envio);
       datos.append('Respuestas completas', texto);
       archivos.forEach(function(a){
@@ -2496,14 +2698,29 @@ input[type="file"]::file-selector-button{
       });
     }).then(function(){
       progreso(100, 'Listo');
+      // 3-7 · Se registra el envío: código, plan, extras, fecha y estado completado
+      marcarCompletado(codigoCliente, {
+        estado: 'completado',
+        codigo: codigoCliente,
+        plan: planEtiqueta,
+        extras: extrasElegidos,
+        enviadoEn: enviadoEn,
+        referencia: envio,
+      });
+      // 8 · Ese acceso deja de permitir modificaciones
+      bloquearCuestionario();
       pantallaHecho(envio, archivos);
-      marcarCompletado(codigoCliente);
       enviando = false;
     }).catch(function(e){
       enviando = false;
       pantallaError(String(e && e.message ? e.message : e), envio, texto);
     });
   }
+
+  var chkConfirmacion = document.getElementById('chk-confirmacion');
+  if(chkConfirmacion) chkConfirmacion.addEventListener('change', function(){
+    if(chkConfirmacion.checked) ocultarAvisoEnvio();
+  });
 
   formulario.addEventListener('submit', function(e){ e.preventDefault(); enviar(); });
 })();
