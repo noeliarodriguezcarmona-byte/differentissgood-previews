@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Contrato Differentissgood</title>
+<style>
+  :root{
+    --paper:#FBF7EF; --ink:#221D17; --muted:#6b6255; --muted2:#8a8071;
+    --accent:#C1571F; --accent-ink:#7a3712; --accent-soft:#F1DDCB;
+    --secundario:#3B5568; --secundario-ink:#26404F; --secundario-soft:#DEE7EA;
+    --line:#E4D9C6; --card:#FFFFFF; --toolbar:#F4EEE1;
+    --shadow: 0 18px 50px -20px rgba(34,29,23,.35);
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171310; --ink:#F3ECE2; --muted:#B8AC9B; --muted2:#9c9081;
+      --accent:#E28349; --accent-ink:#F6C9A0; --accent-soft:#3A2A1E;
+      --secundario:#7CA0B5; --secundario-ink:#BFDAE8; --secundario-soft:#20313B;
+      --line:#3A2F24; --card:#1F1A15; --toolbar:#1B1611;
+      --shadow: 0 18px 50px -20px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171310; --ink:#F3ECE2; --muted:#B8AC9B; --muted2:#9c9081;
+    --accent:#E28349; --accent-ink:#F6C9A0; --accent-soft:#3A2A1E;
+    --secundario:#7CA0B5; --secundario-ink:#BFDAE8; --secundario-soft:#20313B;
+    --line:#3A2F24; --card:#1F1A15; --toolbar:#1B1611;
+    --shadow: 0 18px 50px -20px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:15.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-soft); }
+
+  /* ---------- Barra de control ---------- */
+  .toolbar{
+    position:sticky; top:0; z-index:20;
+    background:var(--toolbar); border-bottom:1px solid var(--line);
+    padding:14px 20px; backdrop-filter: blur(10px);
+  }
+  .toolbar-inner{
+    max-width:900px; margin:0 auto;
+    display:flex; align-items:flex-start; gap:18px; flex-wrap:wrap;
+  }
+  .toolbar-inner .btn-imprimir{ margin-top:19px; }
+  .toolbar-group{ display:flex; flex-direction:column; gap:6px; }
+  .toolbar-label{
+    font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--muted2); font-weight:600;
+  }
+  .tabs{ display:flex; gap:4px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:3px; }
+  .tab{
+    appearance:none; border:none; background:none; cursor:pointer;
+    padding:7px 14px; border-radius:7px; font-family:var(--sans); font-size:13.5px;
+    font-weight:600; color:var(--muted); transition:background .18s ease, color .18s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{ color:var(--ink); }
+  .tab.activa{ background:var(--accent); color:#fff; }
+  .tab .precio{ font-weight:400; opacity:.85; margin-left:5px; font-variant-numeric:tabular-nums; }
+  .tab.activa .precio{ opacity:.95; }
+
+  input[type="date"]{
+    font-family:var(--mono); font-size:13.5px; color:var(--ink);
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    padding:7px 10px;
+  }
+  .btn-imprimir{
+    margin-left:auto; appearance:none; cursor:pointer;
+    background:var(--accent); color:#fff; border:none; border-radius:9px;
+    padding:10px 18px; font-family:var(--sans); font-size:13.5px; font-weight:700;
+    display:flex; align-items:center; gap:8px;
+  }
+  .btn-imprimir:hover{ background:var(--accent-ink); }
+  .btn-imprimir svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; }
+
+  /* ---------- Documento ---------- */
+  .escenario{ padding:40px 20px 80px; }
+  .doc{
+    max-width:760px; margin:0 auto; background:var(--card);
+    border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow);
+    padding:64px 68px;
+  }
+  @media (max-width:640px){ .doc{ padding:36px 24px; } .escenario{ padding:20px 10px 60px; } }
+
+  .marca{
+    font-family:var(--serif); font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--accent); text-align:center; margin:0 0 6px;
+  }
+  .titulo{
+    font-family:var(--serif); font-size:27px; text-align:center; margin:0 0 6px;
+    text-wrap:balance; font-weight:400;
+  }
+  .subtitulo{
+    text-align:center; color:var(--muted); font-size:13.5px; margin:0 0 40px;
+  }
+
+  .ref-caja{
+    display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:12px 0; margin-bottom:40px; flex-wrap:wrap;
+  }
+  .ref-caja .etiqueta{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted2); }
+  .ref-caja .valor{ font-family:var(--mono); font-size:14px; color:var(--accent); font-weight:600; }
+
+  h2{
+    font-family:var(--serif); font-weight:400; font-size:17px; margin:34px 0 12px;
+    display:flex; align-items:baseline; gap:9px;
+  }
+  h2 .num{ color:var(--accent); font-variant-numeric:tabular-nums; }
+  h3{ font-family:var(--sans); font-weight:700; font-size:13.5px; margin:18px 0 8px; }
+  p{ margin:0 0 12px; }
+  .nota{ color:var(--muted); font-style:italic; font-size:13.5px; }
+
+  ul.limpia{ margin:0 0 14px; padding-left:20px; }
+  ul.limpia li{ margin-bottom:5px; }
+  ul.limpia li::marker{ color:var(--accent); }
+
+  hr.sep{ border:none; border-top:1px solid var(--line); margin:38px 0; }
+
+  .blank{
+    display:inline-block; min-width:70px; padding:0 3px; margin:0 1px;
+    border-bottom:1.5px dashed var(--accent); color:var(--ink);
+    font-family:var(--mono); font-size:14px; outline:none; cursor:text;
+  }
+  .blank:empty:before{ content:attr(data-placeholder); color:var(--muted2); font-family:var(--sans); font-style:italic; font-size:13.5px; }
+  .blank:focus{ background:var(--accent-soft); border-bottom-style:solid; }
+  .blank.ancho{ min-width:220px; }
+  .blank.corto{ min-width:40px; }
+
+  .calc{ font-weight:700; color:var(--accent-ink); font-variant-numeric:tabular-nums; }
+
+  .caja-plan{
+    background:var(--accent-soft); border:1px solid var(--line); border-radius:10px;
+    padding:20px 22px; margin:14px 0 22px;
+  }
+  table.precios{ width:100%; border-collapse:collapse; font-size:14px; margin-bottom:4px; }
+  table.precios td{ padding:6px 0; border-bottom:1px solid var(--line); }
+  table.precios td:last-child{ text-align:right; font-weight:700; font-variant-numeric:tabular-nums; color:var(--accent-ink); }
+  table.precios tr:last-child td{ border-bottom:none; }
+
+  .checkline{ display:flex; align-items:center; gap:9px; margin:8px 0 20px; }
+  .checkline input{ width:16px; height:16px; accent-color:var(--accent); }
+
+  /* ---------- Partes: dos empresas, dos identidades visuales ---------- */
+  .partes-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:14px 0 20px; }
+  @media (max-width:640px){ .partes-grid{ grid-template-columns:1fr; } }
+  .parte-caja{
+    border:1px solid var(--line); border-radius:10px; padding:18px 20px 6px;
+    border-top-width:4px; background:var(--card);
+  }
+  .parte-caja.proveedor{ border-top-color:var(--accent); }
+  .parte-caja.cliente{ border-top-color:var(--secundario); }
+  .parte-caja .etiqueta-parte{
+    font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; font-weight:700;
+    margin-bottom:12px;
+  }
+  .parte-caja.proveedor .etiqueta-parte{ color:var(--accent-ink); }
+  .parte-caja.cliente .etiqueta-parte{ color:var(--secundario-ink); }
+  .parte-caja p{ font-size:14px; }
+  .parte-caja .blank{ display:block; margin:2px 0 10px; min-width:0; width:100%; }
+  .parte-caja .campo-etq{ font-size:10.5px; color:var(--muted2); text-transform:uppercase; letter-spacing:.04em; }
+  .parte-caja.cliente .blank{ border-bottom-color:var(--secundario); }
+  .parte-caja.cliente .blank:focus{ background:var(--secundario-soft); }
+
+  .firmas{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:44px; }
+  .firma{ border-radius:10px; border:1px solid var(--line); border-top-width:4px; padding:16px 18px; }
+  .firma.proveedor{ border-top-color:var(--accent); }
+  .firma.cliente{ border-top-color:var(--secundario); }
+  .firma .linea{ border-top:1px solid var(--ink); margin:48px 0 8px; }
+  .firma .rol{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted2); }
+  .firma .nombre{ font-family:var(--serif); font-size:14.5px; margin-top:3px; min-height:20px; }
+
+  /* ---------- Cláusulas opcionales de rondas extra ---------- */
+  .clausula-opcional{
+    border:1.5px dashed var(--secundario); border-radius:10px;
+    padding:16px 20px; margin:14px 0 22px; background:var(--secundario-soft);
+  }
+  .clausula-opcional .etq{
+    font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:700;
+    color:var(--secundario-ink); margin-bottom:8px;
+  }
+  select#selectRondas{
+    font-family:var(--sans); font-size:13.5px; color:var(--ink);
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    padding:7px 10px;
+  }
+  .rondas-ayuda{
+    max-width:290px; font-size:12px; line-height:1.5; color:var(--muted);
+    margin:7px 0 0;
+  }
+
+  .pie{ text-align:center; margin-top:56px; color:var(--muted2); font-size:11.5px; }
+
+  @media print{
+    .toolbar{ display:none; }
+    .escenario{ padding:0; }
+    body{ background:#fff; }
+    .doc{ box-shadow:none; border:none; max-width:none; padding:0; }
+    .blank:empty:before{ color:#bbb; }
+    .blank{ border-bottom-color:#999; }
+    .toolbar-solo-pantalla{ display:none; }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="toolbar-group">
+      <span class="toolbar-label">Plan contratado</span>
+      <div class="tabs" id="tabs" role="tablist"></div>
+    </div>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Fecha de firma</span>
+      <input type="date" id="fechaFirma">
+    </div>
+    <div class="toolbar-group toolbar-solo-pantalla">
+      <span class="toolbar-label">Rondas extra (opcional)</span>
+      <select id="selectRondas">
+        <option value="ninguna">No añadir cláusula</option>
+        <option value="A">Cláusula A — ya sabe cuántas quiere</option>
+        <option value="B">Cláusula B — puede que pida más adelante</option>
+      </select>
+      <p class="rondas-ayuda" id="rondasAyuda"></p>
+    </div>
+    <button class="btn-imprimir" id="btnImprimir" type="button">
+      <svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg>
+      Imprimir / exportar
+    </button>
+  </div>
+</div>
+
+<div class="escenario">
+  <div class="doc" id="doc">
+
+    <p class="marca">Differentissgood</p>
+    <h1 class="titulo">Contrato de prestación de servicios</h1>
+    <p class="subtitulo">Creación de página web</p>
+
+    <div class="ref-caja">
+      <div>
+        <div class="etiqueta">Código de cliente</div>
+        <div class="valor"><span class="blank" contenteditable="true" data-placeholder="DIG-2026-001"></span></div>
+      </div>
+      <div>
+        <div class="etiqueta">Plan contratado</div>
+        <div class="valor" id="etiquetaPlan">Plan Impulso</div>
+      </div>
+    </div>
+
+    <h2><span class="num">1.</span> Partes</h2>
+    <div class="partes-grid">
+      <div class="parte-caja proveedor">
+        <div class="etiqueta-parte">Prestador del servicio</div>
+        <div class="campo-etq">Razón social</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaProveedor"></span>
+        <div class="campo-etq">NIF/CIF</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Domicilio</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Email de contacto</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <p class="nota">En adelante, «Differentissgood» o «el prestador».</p>
+      </div>
+      <div class="parte-caja cliente">
+        <div class="etiqueta-parte">El cliente</div>
+        <div class="campo-etq">Nombre / razón social</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaCliente"></span>
+        <div class="campo-etq">NIF/CIF</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Domicilio</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Email de contacto</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <p class="nota">En adelante, «el cliente». Declara actuar en el ejercicio de su actividad profesional o empresarial (autónomo o empresa).</p>
+      </div>
+    </div>
+
+    <p>Fecha de firma: <span class="calc" id="txtFechaFirma">[·]</span></p>
+
+    <h2><span class="num">2.</span> Objeto del contrato</h2>
+    <p>Differentissgood se compromete a diseñar y desarrollar una página web para el cliente según el <b id="txtNombrePlan">Plan Impulso</b>, detallado a continuación, junto con la configuración técnica del dominio y el hosting asociados.</p>
+
+    <div class="caja-plan">
+      <table class="precios">
+        <tr><td>Precio del plan (IVA no incluido)</td><td id="cPrecio">560 €</td></tr>
+        <tr><td>Plazo de entrega</td><td id="cDias">7 días laborables</td></tr>
+        <tr><td>Rondas de cambios incluidas</td><td id="cRondas">2</td></tr>
+      </table>
+      <p class="nota" id="cPara" style="margin-top:10px;"></p>
+      <h3>Qué incluye</h3>
+      <ul class="limpia" id="cIncluye"></ul>
+      <h3 id="cExtrasTitulo">Extras opcionales</h3>
+      <ul class="limpia" id="cExtras"></ul>
+    </div>
+
+    <h2><span class="num">3.</span> Precio y forma de pago</h2>
+    <p>El precio total es el indicado arriba para el plan contratado, IVA no incluido.</p>
+    <h3>3.1 Pago inicial (30%)</h3>
+    <p>Antes de comenzar el cuestionario y los ajustes de la web, el cliente abona el 30% del valor del plan contratado. Este importe se descuenta del precio final del plan — nunca se suma al total.</p>
+    <h3>3.2 Pago final (70%)</h3>
+    <p>El 70% restante se abona 1 día antes de la fecha de entrega pactada. Si el cliente no realiza este pago en la fecha establecida, Differentissgood no hará entrega de la web ese día y retendrá el 30% abonado inicialmente.</p>
+    <h3>3.3 Forma de pago</h3>
+    <p>Transferencia bancaria o efectivo. Cuenta bancaria: <span class="blank ancho" contenteditable="true" data-placeholder="[IBAN]"></span></p>
+    <h3>3.4 Dominio y hosting</h3>
+    <p>Differentissgood se encarga de la configuración técnica del dominio y el hosting. El coste recurrente de ambos servicios lo abona directamente el cliente, añadiendo su propio método de pago en la plataforma correspondiente.</p>
+
+    <h2><span class="num">4.</span> Plazos</h2>
+    <p>Desde la fecha de firma de este contrato (<span class="calc" id="txtFechaFirma2">[·]</span>), el cliente dispone de <b>7 días naturales</b> para completar el cuestionario y enviar todo el contenido necesario (textos, imágenes, accesos y demás material) para iniciar el proyecto.</p>
+    <p>Si el cliente no envía dicho contenido dentro de ese plazo, el contrato quedará resuelto por causa imputable al cliente y Differentissgood no devolverá el 30% abonado inicialmente.</p>
+    <p><b>El plazo de entrega del plan contratado comienza a contar automáticamente 7 días naturales después de la firma</b> — el mismo día en que finaliza el plazo de envío del contenido, se haya enviado ya o no.</p>
+    <p>Fecha límite para el envío del cuestionario y el contenido: <span class="calc" id="fContenido">—</span></p>
+    <p>Fecha de entrega estimada de la web: <span class="calc" id="fEntrega">—</span></p>
+    <p>Fecha límite de pago del 70% restante (1 día antes de la entrega): <span class="calc" id="fPago">—</span></p>
+
+    <h2><span class="num">5.</span> Reunión de ronda de cambios</h2>
+    <p>Se acuerda la siguiente fecha y hora para la reunión de revisión y ronda de cambios: <span class="blank" contenteditable="true" data-placeholder="[·]"></span></p>
+    <p>Si el cliente no se presenta a la reunión pactada y no ha avisado con al menos 48 horas de antelación de que no podrá acudir, el proyecto se cancelará automáticamente y Differentissgood retendrá el 30% del importe inicial en concepto de compensación.</p>
+
+    <h2><span class="num">6.</span> Rondas de cambios adicionales</h2>
+    <p>Cada plan incluye el número de rondas de cambios indicado arriba. Cualquier ronda adicional solicitada por el cliente por encima de las incluidas tendrá un coste adicional de <b>40 €</b> por ronda, facturado aparte.</p>
+
+    <div class="clausula-opcional" id="clausulaA" hidden>
+      <div class="etq">Cláusula opcional A — pactada en la firma</div>
+      <p>Además de las rondas incluidas en su plan, el cliente contrata <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> rondas de cambios adicionales, a razón de 40 € por ronda. Este importe se suma al precio total del plan y se abona junto con el pago final del 70%.</p>
+    </div>
+
+    <div class="clausula-opcional" id="clausulaB" hidden>
+      <div class="etq">Cláusula opcional B — solicitada durante el proyecto</div>
+      <p>Si durante el desarrollo del proyecto el cliente solicita una o más rondas de cambios adicionales a las incluidas en su plan, cada ronda extra tendrá un coste de 40 €, que deberá abonarse antes de que Differentissgood aplique los cambios solicitados.</p>
+    </div>
+
+    <h2><span class="num">7.</span> Retrasos en la entrega</h2>
+    <p>Si el retraso en la fecha de entrega es imputable a Differentissgood, se aplicará un descuento del <b>15%</b> sobre el valor total del presupuesto del plan contratado.</p>
+    <p>Si dicho retraso supera los 15 días naturales sobre la fecha pactada y el cliente decide no continuar con el proyecto, Differentissgood devolverá al cliente el 30% abonado inicialmente.</p>
+
+    <h2><span class="num">8.</span> Contenido audiovisual</h2>
+    <p>Los textos redactados por Differentissgood para la web están incluidos en el precio de cualquier plan.</p>
+    <p>La producción de contenido audiovisual (fotografía y/o vídeo) no está incluida en el precio del plan. Si el cliente desea contratar este servicio, se firmará una cláusula adicional a este contrato con el presupuesto específico del contenido solicitado.</p>
+
+    <h2><span class="num">9.</span> Propiedad, contenido y derechos de autor</h2>
+    <p>El cliente garantiza que es titular, o cuenta con la autorización suficiente, de todos los textos, imágenes, logotipos, vídeos y demás material que entregue para su publicación en la web, y autoriza expresamente a Differentissgood a incorporarlos a la página. El cliente garantiza asimismo que cualquier persona que aparezca en dicho contenido ha dado su consentimiento para ello, siendo el cliente el único responsable ante cualquier reclamación de terceros derivada de este material.</p>
+    <p>Una vez completado el pago del 100% del precio, el cliente es propietario de la página web entregada y puede trasladarla al proveedor de hosting que desee.</p>
+    <p>No obstante, el cliente no podrá modificar el código ni el diseño de la web salvo que sea a través de Differentissgood.</p>
+    <p>La web deberá mostrar de forma visible el crédito «Designed by Differentissgood». El cliente podrá solicitar la eliminación de este crédito abonando un coste adicional de <b>150 €</b>.</p>
+
+    <h2><span class="num">10.</span> Cancelación del proyecto por parte de Differentissgood</h2>
+    <p>Differentissgood podrá decidir no continuar con el proyecto en cualquier momento antes de la entrega final. En ese caso, devolverá al cliente el 30% abonado inicialmente.</p>
+
+    <h2><span class="num">11.</span> Confidencialidad y protección de datos</h2>
+    <p>Ambas partes se comprometen a mantener la confidencialidad de la información compartida durante la prestación del servicio.</p>
+    <p>Los datos personales que el cliente facilite a Differentissgood serán tratados únicamente para la ejecución de este contrato, se compartirán exclusivamente entre el cliente y Differentissgood, y no se cederán a terceros salvo obligación legal.</p>
+
+    <h2><span class="num">12.</span> Mantenimiento posterior a la entrega</h2>
+    <p>El servicio de seguimiento y mantenimiento posterior a la entrega no está incluido en el precio del plan. Puede contratarse aparte, con un coste mensual adicional a acordar.</p>
+
+    <h2><span class="num">13.</span> Naturaleza del contrato</h2>
+    <p>Ambas partes actúan en el ejercicio de su actividad profesional o empresarial. En consecuencia, no resulta de aplicación el régimen de protección de consumidores y usuarios, incluido el derecho de desistimiento previsto para contratos con consumidores.</p>
+
+    <h2><span class="num">14.</span> Uso del proyecto en el portfolio de Differentissgood</h2>
+    <p>Salvo que el cliente indique expresamente lo contrario marcando la casilla siguiente, Differentissgood podrá mostrar el proyecto realizado en su portfolio, web y redes sociales como muestra de su trabajo.</p>
+    <div class="checkline"><input type="checkbox" id="chkPortfolio"><label for="chkPortfolio">El cliente NO autoriza el uso de este proyecto en el portfolio de Differentissgood.</label></div>
+
+    <h2><span class="num">15.</span> Ley aplicable y jurisdicción</h2>
+    <p>Este contrato se rige por la legislación española. Para cualquier controversia derivada de su interpretación o cumplimiento, ambas partes se someten a los juzgados y tribunales de <span class="blank" contenteditable="true" data-placeholder="[ciudad]"></span>, con renuncia expresa a cualquier otro fuero que pudiera corresponderles.</p>
+
+    <hr class="sep">
+
+    <h2><span class="num">16.</span> Firmas</h2>
+    <p>Lugar y fecha: <span class="blank ancho" contenteditable="true" data-placeholder="[·]"></span></p>
+    <div class="firmas">
+      <div class="firma proveedor">
+        <div class="rol">Por Differentissgood</div>
+        <div class="nombre" id="firmaProveedor"></div>
+        <div class="linea"></div>
+        <div class="rol">Firma y sello</div>
+      </div>
+      <div class="firma cliente">
+        <div class="rol">Por el cliente</div>
+        <div class="nombre" id="firmaCliente"></div>
+        <div class="linea"></div>
+        <div class="rol">Firma</div>
+      </div>
+    </div>
+
+    <p class="pie">Differentissgood · Estudio creativo</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var PLANES = {
+    impulso: {
+      nombre: 'Plan Impulso', precio: '560 €', dias: 7, rondas: '2',
+      para: 'Para negocios pequeños o profesionales que necesitan presencia online sencilla y efectiva.',
+      incluye: [
+        'Página única (one-page) con hasta 5 secciones (ej: marca, servicios, valoraciones…).',
+        'Diseño a medida, 100% adaptado a móvil.',
+        'Formulario de contacto vía WhatsApp.',
+        'SEO básico.',
+        'Animaciones con IA básicas.',
+        'Certificado SSL gestionado.',
+        'Aviso Legal.',
+        'Favicon e identidad visual.',
+        'Integración con redes sociales.',
+        'Configuración de dominio y hosting (coste del servicio no incluido en el precio del plan).',
+        'Crédito «Designed by Differentissgood» incluido.',
+      ],
+      extras: ['Modo oscuro', 'QR personalizado', 'Botón de compartir en redes', 'Mapa de Google integrado', 'Sección de FAQ desplegable', 'Valoraciones de Google en la web'],
+      extrasTitulo: 'Extras opcionales — el cliente elige de 2 a 4, incluidos en el precio del plan',
+    },
+    crecimiento: {
+      nombre: 'Plan Crecimiento', precio: '780 €', dias: 14, rondas: '3',
+      para: 'Para negocios que quieren destacar y necesitan más estructura y presencia digital.',
+      incluye: [
+        'Todo lo incluido en el Plan Impulso.',
+        'Web multipágina (3-5 páginas): ej: inicio, sobre mí/nosotros, servicios/productos, blog o galería, contacto.',
+        'Animaciones con IA: transiciones suaves y microinteracciones al hacer scroll.',
+        'Blog o galería actualizable.',
+        'Integración con redes sociales.',
+        'SEO avanzado.',
+        'Botón de reserva/cita (calendario de reservas integrado).',
+        'Botón de WhatsApp flotante inteligente.',
+        'Formulario de testimonios.',
+        'Valoraciones de Google en la web.',
+        'Aviso Legal + Política de Privacidad + Política de Cookies.',
+      ],
+      extras: ['Newsletter con bienvenida automática', 'Integración con Google Business', 'Testimonios en vídeo', 'Blog asistido con IA', 'Galería animada', 'Sección de FAQ desplegable'],
+      extrasTitulo: 'Extras opcionales — el cliente elige de 2 a 4, incluidos en el precio del plan',
+    },
+    elite: {
+      nombre: 'Plan Élite', precio: '1.460 €', dias: 25, rondas: '4',
+      para: 'Para negocios que venden online o quieren una experiencia digital completa y diferenciadora.',
+      incluye: [
+        'Todo lo incluido en el Plan Crecimiento.',
+        'Carrito de compra / tienda online (catálogo + pasarela de pago).',
+        'Interacción avanzada con el cliente: chat con IA, formularios inteligentes, zona de reseñas interactiva.',
+        'Animaciones con IA avanzadas (efectos 3D/parallax, personalización según comportamiento).',
+        'Panel de administración para que el cliente edite contenido, precios o stock.',
+        'Analítica avanzada (dashboard de rendimiento).',
+        'Optimización de velocidad y rendimiento.',
+        'Sesión de formación 1:1 para el cliente.',
+        'Paquete legal completo: Aviso Legal + Privacidad + Cookies + Términos y Condiciones de venta + Devoluciones/cancelaciones + enlace a resolución de litigios UE.',
+      ],
+      extras: ['Modo oscuro', 'QR personalizado', 'Página de agradecimiento personalizada', 'Mapa de Google integrado', 'Formulario de testimonios', 'Newsletter con bienvenida automática', 'Integración con Google Business Profile', 'Testimonios en vídeo', 'Blog asistido con IA', 'Galería animada', 'Sección de FAQ desplegable', 'Chat con IA / chatbot', 'Carrito de compra avanzado / pasarela de pago', 'Dashboard de analítica personalizado', 'Multi-idioma', 'Panel de administración para el cliente', 'Valoraciones de Google en la web'],
+      extrasTitulo: 'Todos los extras están incluidos en el precio del plan',
+    },
+  };
+  var ORDEN = ['impulso', 'crecimiento', 'elite'];
+  var actual = 'impulso';
+
+  var tabsEl = document.getElementById('tabs');
+  ORDEN.forEach(function(clave){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'tab'; b.dataset.plan = clave;
+    b.innerHTML = PLANES[clave].nombre + '<span class="precio">' + PLANES[clave].precio + '</span>';
+    b.addEventListener('click', function(){ seleccionarPlan(clave); });
+    tabsEl.appendChild(b);
+  });
+
+  function li(texto){ var l = document.createElement('li'); l.textContent = texto; return l; }
+
+  function seleccionarPlan(clave){
+    actual = clave;
+    var d = PLANES[clave];
+    [].forEach.call(tabsEl.children, function(b){ b.classList.toggle('activa', b.dataset.plan === clave); });
+    document.getElementById('etiquetaPlan').textContent = d.nombre;
+    document.getElementById('txtNombrePlan').textContent = d.nombre;
+    document.getElementById('cPrecio').textContent = d.precio;
+    document.getElementById('cDias').textContent = d.dias + ' días laborables';
+    document.getElementById('cRondas').textContent = d.rondas;
+    document.getElementById('cPara').textContent = d.para;
+    var incluye = document.getElementById('cIncluye'); incluye.innerHTML = '';
+    d.incluye.forEach(function(t){ incluye.appendChild(li(t)); });
+    document.getElementById('cExtrasTitulo').textContent = d.extrasTitulo;
+    var extras = document.getElementById('cExtras'); extras.innerHTML = '';
+    d.extras.forEach(function(t){ extras.appendChild(li(t)); });
+    calcularFechas();
+  }
+
+  var MESES_FMT = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  function formatear(fecha){ return MESES_FMT.format(fecha); }
+  function sumarDias(fecha, n){ var f = new Date(fecha); f.setDate(f.getDate() + n); return f; }
+
+  var inputFecha = document.getElementById('fechaFirma');
+  function calcularFechas(){
+    if(!inputFecha.value){
+      ['txtFechaFirma','txtFechaFirma2'].forEach(function(id){ document.getElementById(id).textContent = '[·]'; });
+      ['fContenido','fEntrega','fPago'].forEach(function(id){ document.getElementById(id).textContent = '—'; });
+      return;
+    }
+    var partes = inputFecha.value.split('-').map(Number);
+    var firma = new Date(partes[0], partes[1] - 1, partes[2]);
+    var contenido = sumarDias(firma, 7);
+    var entrega = sumarDias(contenido, PLANES[actual].dias);
+    var pago = sumarDias(entrega, -1);
+    var txtFirma = formatear(firma);
+    document.getElementById('txtFechaFirma').textContent = txtFirma;
+    document.getElementById('txtFechaFirma2').textContent = txtFirma;
+    document.getElementById('fContenido').textContent = formatear(contenido);
+    document.getElementById('fEntrega').textContent = formatear(entrega);
+    document.getElementById('fPago').textContent = formatear(pago);
+  }
+  inputFecha.addEventListener('change', calcularFechas);
+
+  /* Espejo: lo que se escribe en razón social / nombre cliente aparece también en las firmas */
+  document.querySelectorAll('[data-espejo]').forEach(function(origen){
+    var destino = document.getElementById(origen.dataset.espejo);
+    origen.addEventListener('input', function(){ destino.textContent = origen.textContent; });
+  });
+
+  document.getElementById('btnImprimir').addEventListener('click', function(){ window.print(); });
+
+  /* Cláusulas opcionales de rondas extra */
+  var selectRondas = document.getElementById('selectRondas');
+  var clausulaA = document.getElementById('clausulaA');
+  var clausulaB = document.getElementById('clausulaB');
+  var rondasAyuda = document.getElementById('rondasAyuda');
+  var AYUDA_RONDAS = {
+    ninguna: 'El contrato se queda solo con las rondas incluidas en el plan — sin cláusula extra.',
+    A: 'Para cuando el cliente ya sabe, al firmar, que quiere más rondas de las incluidas. Se pacta el número ahora mismo y su coste (40 €/ronda) se suma al precio total, pagadero con el 70% final.',
+    B: 'Para cuando no se sabe si pedirá más rondas. Deja constancia de que, si lo hace durante el proyecto, cada ronda extra cuesta 40 € y se paga antes de aplicarla — sin comprometer un número.',
+  };
+  function actualizarAyudaRondas(){
+    rondasAyuda.textContent = AYUDA_RONDAS[selectRondas.value];
+    clausulaA.hidden = selectRondas.value !== 'A';
+    clausulaB.hidden = selectRondas.value !== 'B';
+  }
+  selectRondas.addEventListener('change', actualizarAyudaRondas);
+  actualizarAyudaRondas();
+
+  seleccionarPlan('impulso');
+})();
+</script>
+</body>
+</html>
