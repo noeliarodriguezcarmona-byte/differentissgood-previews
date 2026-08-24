@@ -260,16 +260,13 @@
     </div>
 
     <h2><span class="num">0.</span> Código de proyecto del cliente</h2>
-    <p>A cada proyecto contratado se le asigna un código de proyecto único (formato DIG-AAAA-NNN). Dicho código:</p>
+    <p>A cada proyecto se le asigna un código único (formato DIG-AAAA-NNN). Con ese código:</p>
     <ul class="limpia">
-      <li>Se genera o activa una vez firmado el presente contrato — no es necesario que exista ni se conozca en el momento de la firma.</li>
-      <li>Queda vinculado de forma indisociable al cliente y al plan contratado en este documento.</li>
-      <li>Es el medio de acceso al cuestionario de inicio de proyecto correspondiente a su plan.</li>
-      <li>Identifica el proyecto en el cuestionario, en los archivos adjuntos y en cualquier comunicación relacionada.</li>
-      <li>No incorpora ni contiene datos de carácter personal.</li>
-      <li>No habilita en ningún caso el cambio del plan contratado.</li>
+      <li>El cliente entra al cuestionario de su proyecto. Es la única forma de entrar.</li>
+      <li>Queda fijado el plan contratado: desde el cuestionario no se puede cambiar de plan.</li>
+      <li>Se identifica el proyecto en el cuestionario, en los archivos y en cualquier mensaje.</li>
     </ul>
-    <p>El código se comunicará al cliente por email o WhatsApp una vez formalizada la firma.</p>
+    <p>El código se crea después de firmar y se envía al cliente por email o WhatsApp. No contiene datos personales.</p>
 
     <h2><span class="num">1.</span> Partes</h2>
     <div class="partes-grid">
@@ -295,15 +292,15 @@
         <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
         <div class="campo-etq">Email de contacto</div>
         <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
-        <p class="nota">En adelante, «el cliente». Declara actuar en el ejercicio de su actividad profesional o empresarial (autónomo o empresa) — véase la cláusula 23.</p>
+        <p class="nota">En adelante, «el cliente». Declara actuar en el ejercicio de su actividad profesional o empresarial (autónomo o empresa) — véase la cláusula 19.</p>
       </div>
     </div>
 
     <p>Fecha de firma: <span class="calc" id="txtFechaFirma">[·]</span></p>
 
     <h2><span class="num">2.</span> Objeto del contrato</h2>
-    <p>Differentissgood se compromete a diseñar y desarrollar una página web para el cliente según el <b id="txtNombrePlan">Plan Impulso</b>, detallado a continuación, junto con la configuración técnica del dominio y el hosting asociados.</p>
-    <p>El plan contratado queda fijado en este documento. El código de proyecto del cliente (cláusula 0) da acceso exclusivamente al cuestionario correspondiente a dicho plan — el cliente no podrá elegir ni cambiar de plan dentro del cuestionario.</p>
+    <p>Differentissgood diseña y desarrolla una página web para el cliente según el <b id="txtNombrePlan">Plan Impulso</b>, con lo que se detalla debajo, y configura el dominio y el hosting.</p>
+    <p>El plan contratado es el que figura en este documento y no cambia.</p>
 
     <div class="caja-plan">
       <table class="precios">
@@ -311,7 +308,6 @@
         <tr><td>Plazo de entrega</td><td id="cDias">7 días laborables</td></tr>
         <tr><td>Rondas de cambios incluidas</td><td id="cRondas">2</td></tr>
       </table>
-      <p class="nota" id="cPara" style="margin-top:10px;"></p>
       <h3>Qué incluye</h3>
       <ul class="limpia" id="cIncluye"></ul>
       <h3 id="cExtrasTitulo">Extras opcionales</h3>
@@ -319,142 +315,114 @@
     </div>
 
     <h2><span class="num">3.</span> Precio y forma de pago</h2>
-    <p>El precio total es el indicado arriba para el plan contratado, IVA no incluido.</p>
+    <p>El precio es el indicado arriba para el plan contratado, sin IVA. El IVA se suma aparte en la factura.</p>
     <h3>3.1 Pago inicial (30%)</h3>
-    <p>Antes de comenzar el cuestionario y los ajustes de la web, el cliente abona el 30% del valor del plan contratado. Este importe se descuenta del precio final del plan — nunca se suma al total.</p>
+    <p>El cliente paga el 30% antes de que empiece el proyecto. Ese dinero se descuenta del precio del plan: no se suma.</p>
     <h3>3.2 Pago final (70%)</h3>
-    <p>El 70% restante se abona 1 día antes de la fecha de entrega pactada. Si el cliente no realiza este pago en la fecha establecida, Differentissgood no hará entrega de la web ese día y retendrá el 30% abonado inicialmente.</p>
+    <p>El 70% restante se paga un día antes de la fecha de entrega. Si ese día no está pagado, la web no se entrega y Differentissgood se queda el 30% inicial.</p>
     <h3>3.3 Forma de pago</h3>
     <p>Transferencia bancaria o efectivo. Cuenta bancaria: <span class="blank ancho" contenteditable="true" data-placeholder="[IBAN]"></span></p>
     <h3>3.4 Dominio y hosting</h3>
-    <p>Differentissgood se encarga de la configuración técnica del dominio y el hosting. El coste recurrente de ambos servicios lo abona directamente el cliente, añadiendo su propio método de pago en la plataforma correspondiente.</p>
+    <p>Differentissgood los configura. El cliente los paga directamente, poniendo su propia tarjeta en la plataforma correspondiente.</p>
 
     <h2><span class="num">4.</span> Plazos</h2>
-    <p>Desde la fecha de firma de este contrato (<span class="calc" id="txtFechaFirma2">[·]</span>), el cliente dispone de <b>7 días naturales</b> para completar el cuestionario y enviar todo el contenido necesario (textos, imágenes, accesos y demás material) para iniciar el proyecto.</p>
-    <p>Si el cliente no envía dicho contenido dentro de ese plazo, Differentissgood podrá <b>suspender</b> el proyecto y sus plazos de entrega hasta que el cliente cumpla. Si el incumplimiento se prolonga <b>10 días naturales</b> adicionales desde la suspensión, Differentissgood podrá <b>resolver</b> el contrato conforme a la cláusula 20, reteniendo el 30% abonado inicialmente.</p>
-    <p><b>El plazo de entrega del plan contratado comienza a contar automáticamente 7 días naturales después de la firma</b> — el mismo día en que finaliza el plazo de envío del contenido, se haya enviado ya o no. La suspensión prevista en el párrafo anterior detiene este cómputo mientras dure.</p>
-    <p>Fecha límite para el envío del cuestionario y el contenido: <span class="calc" id="fContenido">—</span></p>
+    <p>Desde la firma (<span class="calc" id="txtFechaFirma2">[·]</span>), el cliente tiene <b>7 días naturales</b> para enviar el cuestionario y todo el contenido: textos, imágenes, accesos y cualquier otro material.</p>
+    <p><b>Si no lo envía dentro de esos 7 días, el proyecto queda cancelado y Differentissgood se queda el 30% abonado inicialmente.</b></p>
+    <p>El plazo de entrega empieza a contar cuando llega el cuestionario completo.</p>
+    <p>Fecha límite para enviar el cuestionario y el contenido: <span class="calc" id="fContenido">—</span></p>
     <p>Fecha de entrega estimada de la web: <span class="calc" id="fEntrega">—</span></p>
-    <p>Fecha límite de pago del 70% restante (1 día antes de la entrega): <span class="calc" id="fPago">—</span></p>
+    <p>Fecha límite de pago del 70% (un día antes de la entrega): <span class="calc" id="fPago">—</span></p>
+    <p class="nota">Las dos últimas fechas son una estimación calculada suponiendo que el cuestionario llega dentro del plazo. Si llega antes, se adelantan.</p>
 
     <h2><span class="num">5.</span> Reunión de ronda de cambios</h2>
-    <p>Se acuerda la siguiente fecha y hora para la reunión de revisión y ronda de cambios: <span class="blank" contenteditable="true" data-placeholder="[·]"></span></p>
-    <p>Si el cliente no se presenta a la reunión pactada y no ha avisado con al menos 48 horas de antelación de que no podrá acudir, perderá dicha reunión y la ronda de cambios asociada, sin perjuicio de que pueda reprogramarse sujeta a la disponibilidad de Differentissgood y, en su caso, a un coste adicional por la reorganización de agenda.</p>
-    <p>Solo en caso de ausencias reiteradas (dos o más) o de un incumplimiento grave por parte del cliente, Differentissgood podrá resolver el contrato conforme a la cláusula 20, reteniendo el 30% del importe inicial en concepto de compensación.</p>
+    <p>Fecha y hora acordadas para la reunión: <span class="blank" contenteditable="true" data-placeholder="[·]"></span></p>
+    <p>Si el cliente no puede asistir, tiene que avisar con al menos <b>48 horas</b> de antelación. <b>Si no avisa y no se presenta, el proyecto queda cancelado y Differentissgood se queda el 30% abonado inicialmente.</b></p>
 
-    <h2><span class="num">6.</span> Rondas de cambios adicionales</h2>
-    <p>Se entiende por «ronda de cambios» una entrega agrupada de modificaciones sobre lo ya desarrollado. Las solicitudes de cambios que el cliente envíe de forma fragmentada dentro de un mismo periodo de revisión se agrupan y computan como una sola ronda.</p>
-    <p>Las rondas de cambios no incluyen la creación de nuevas páginas, nuevas funcionalidades, cambios de alcance del proyecto ni servicios no contratados — dichas peticiones se rigen por la cláusula 7 (Trabajos fuera de alcance).</p>
-    <p>Cada plan incluye el número de rondas de cambios indicado arriba. Cualquier ronda adicional solicitada por el cliente por encima de las incluidas tendrá un coste adicional de <b>40 €</b> por ronda, facturado aparte.</p>
+    <h2><span class="num">6.</span> Rondas de cambios</h2>
+    <p>Una ronda de cambios es una tanda de correcciones sobre lo que ya está hecho. Si el cliente manda sus peticiones en varios mensajes dentro del mismo periodo de revisión, todas cuentan como una sola ronda.</p>
+    <p>Cada plan incluye las rondas indicadas en la cláusula 2.</p>
 
     <div class="clausula-opcional" id="clausulaA" hidden>
       <div class="etq">Cláusula opcional A — pactada en la firma</div>
-      <p>Además de las rondas incluidas en su plan, el cliente contrata <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> rondas de cambios adicionales, a razón de 40 € por ronda. Este importe se suma al precio total del plan y se abona junto con el pago final del 70%.</p>
+      <p>Además de las rondas incluidas en su plan, el cliente contrata <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> rondas de cambios adicionales, a 40 € cada una. Este importe se suma al precio del plan y se paga junto con el 70% final.</p>
     </div>
 
     <div class="clausula-opcional" id="clausulaB" hidden>
       <div class="etq">Cláusula opcional B — solicitada durante el proyecto</div>
-      <p>Si durante el desarrollo del proyecto el cliente solicita una o más rondas de cambios adicionales a las incluidas en su plan, cada ronda extra tendrá un coste de 40 €, que deberá abonarse antes de que Differentissgood aplique los cambios solicitados.</p>
+      <p>Si durante el proyecto el cliente pide rondas de cambios por encima de las incluidas en su plan, cada ronda extra cuesta 40 €, que se abonan antes de aplicar los cambios.</p>
     </div>
 
-    <h2><span class="num">7.</span> Trabajos fuera de alcance</h2>
-    <p>Cualquier página, funcionalidad, integración, servicio o modificación no incluida expresamente en el plan contratado o en los extras seleccionados por el cliente tendrá la consideración de trabajo adicional fuera del alcance de este contrato.</p>
-    <p>Differentissgood no estará obligada a realizar dicho trabajo sin un presupuesto y una aceptación por escrito previos por parte del cliente, que podrán implicar un coste adicional y una modificación del plazo de entrega inicialmente pactado.</p>
+    <h2><span class="num">7.</span> Entrega y aceptación</h2>
+    <p>Cuando se entrega la web, el cliente tiene <b>5 días laborables</b> para avisar por escrito de cualquier fallo. Si no dice nada en ese plazo, la web se da por aceptada.</p>
+    <p>Un <b>fallo</b> es que la web no hace lo que se acordó: eso se corrige sin coste. Querer <b>algo distinto o algo nuevo</b> no es un fallo, y entra en las rondas de cambios de la cláusula 6.</p>
 
-    <h2><span class="num">8.</span> El cuestionario como documento de especificaciones</h2>
-    <p>La elección de extras, funcionalidades y demás opciones de configuración del proyecto se realiza exclusivamente a través del cuestionario de inicio de proyecto vinculado al código de cliente.</p>
-    <p>El cuestionario, una vez enviado, pasa a formar parte de las especificaciones del proyecto y se incorpora como documento anexo a este contrato.</p>
-    <p><b>En caso de contradicción entre lo dispuesto en este contrato y lo indicado en el cuestionario, prevalecerá lo establecido en este contrato.</b></p>
+    <h2><span class="num">8.</span> Retrasos en la entrega</h2>
+    <p>Si el retraso es culpa de Differentissgood, el cliente tiene un <b>15%</b> de descuento sobre el precio del plan.</p>
+    <p>Si ese retraso pasa de 15 días naturales y el cliente prefiere no seguir, Differentissgood le devuelve el 30% inicial.</p>
 
-    <h2><span class="num">9.</span> Selección definitiva de extras y funcionalidades</h2>
-    <p>Una vez enviado el cuestionario, las selecciones realizadas por el cliente (extras, funcionalidades y demás opciones que determinan el alcance del proyecto) tendrán carácter definitivo. En consecuencia, no podrán:</p>
-    <ul class="limpia">
-      <li>Añadirse extras no seleccionados originalmente.</li>
-      <li>Sustituirse extras por otros distintos.</li>
-      <li>Intercambiarse extras entre sí.</li>
-      <li>Recuperarse un extra previamente descartado.</li>
-      <li>Añadirse funcionalidades que no hayan sido seleccionadas en el cuestionario.</li>
-      <li>Modificarse posteriormente las opciones que determinan el alcance contratado.</li>
-    </ul>
-    <p>Esta norma se aplica por igual a los planes Impulso, Crecimiento y Élite.</p>
-    <p>Si, con posterioridad al envío del cuestionario, el cliente solicita algo distinto de lo seleccionado, dicha solicitud tendrá la consideración de trabajo fuera de alcance conforme a la cláusula 7. Ante tal solicitud, Differentissgood podrá rechazarla o aceptarla mediante presupuesto adicional por escrito, pudiendo dicho presupuesto modificar el precio y el plazo de entrega inicialmente pactados.</p>
-    <p>Un extra seleccionado que el cliente finalmente decida no utilizar no podrá sustituirse por otro, no podrá acumularse, no podrá trasladarse a otro servicio, ni generará devolución económica alguna.</p>
+    <h2><span class="num">9.</span> Fotos y vídeos</h2>
+    <p>Los textos de la web los escribe Differentissgood y van incluidos en todos los planes.</p>
+    <p>Las fotos y los vídeos no están incluidos en ningún plan. Si el cliente quiere que se los hagamos, se presupuesta aparte y se firma un anexo.</p>
 
-    <h2><span class="num">10.</span> Confirmación del cliente en el cuestionario</h2>
-    <p>Antes de enviar el cuestionario, el cliente deberá aceptar expresamente una declaración con el siguiente contenido, o equivalente:</p>
-    <p class="nota">«Confirmo que he revisado mis respuestas y la selección de extras y funcionalidades. Entiendo que, una vez enviado el cuestionario, esta selección será definitiva y determinará el alcance de mi proyecto conforme al contrato firmado.»</p>
+    <h2><span class="num">10.</span> Propiedad, contenido y derechos de autor</h2>
+    <p>El cliente garantiza que todo el material que entrega (textos, imágenes, logotipos, vídeos) es suyo o tiene permiso para usarlo, y autoriza a Differentissgood a ponerlo en la web. También garantiza que las personas que salgan en ese material han dado su permiso. Si alguien reclama por este material, responde el cliente.</p>
+    <p>Hay que distinguir tres cosas: lo creado en exclusiva para este proyecto; el código, componentes y herramientas propias que Differentissgood ya tenía y usa para trabajar; y el software de terceros que se integre en la web (pasarelas de pago, herramientas de IA, plantillas), que se rige por sus propias licencias.</p>
+    <p>Una vez pagado el 100%, la web es del cliente: puede usarla y llevársela al hosting que quiera. Differentissgood conserva sus propios sistemas y componentes reutilizables.</p>
+    <p>Differentissgood no responde de los problemas que aparezcan si alguien toca el código después de la entrega — véase la cláusula 11.</p>
+    <p>La web tiene que mostrar el crédito «Designed by Differentissgood». Quitarlo cuesta <b>150 €</b>.</p>
 
-    <h2><span class="num">11.</span> Entrega y aceptación</h2>
-    <p>Tras la entrega de la web, el cliente dispondrá de un plazo de <b>5 días laborables</b> para comunicar por escrito la existencia de errores o defectos objetivos respecto de lo especificado en el contrato y el cuestionario. Transcurrido dicho plazo sin comunicación, el proyecto se considerará aceptado.</p>
-    <p>Se distingue expresamente entre un <b>error o defecto</b> (que la web no cumple lo especificado) y un <b>cambio de opinión, nueva preferencia estética, nuevo contenido o nueva funcionalidad</b> (que no son defectos y se rigen, según corresponda, por la cláusula 6 de rondas de cambios o por la cláusula 7 de trabajos fuera de alcance).</p>
+    <h2><span class="num">11.</span> Cambios hechos por otros</h2>
+    <p>Después de la entrega, Differentissgood no responde de fallos ni caídas provocados por el propio cliente, por otros desarrolladores o agencias, por plugins, por actualizaciones, por cambios de hosting o de configuración, ni por cualquier modificación del código hecha al margen de Differentissgood.</p>
 
-    <h2><span class="num">12.</span> Retrasos en la entrega</h2>
-    <p>Si el retraso en la fecha de entrega es imputable a Differentissgood, se aplicará un descuento del <b>15%</b> sobre el valor total del presupuesto del plan contratado.</p>
-    <p>Si dicho retraso supera los 15 días naturales sobre la fecha pactada y el cliente decide no continuar con el proyecto, Differentissgood devolverá al cliente el 30% abonado inicialmente, conforme a la cláusula 20.</p>
+    <h2><span class="num">12.</span> Servicios de terceros</h2>
+    <p>La web necesita servicios que no son de Differentissgood: dominio, hosting, Google, WhatsApp, correo, newsletter, calendarios, pasarelas de pago, herramientas de IA, analítica y similares.</p>
+    <p>Differentissgood no responde de sus caídas, cierres, subidas de precio ni cambios de condiciones. Sus costes no están incluidos en el precio del plan salvo que se diga expresamente (véase la cláusula 3.4).</p>
 
-    <h2><span class="num">13.</span> Contenido audiovisual</h2>
-    <p>Los textos redactados por Differentissgood para la web están incluidos en el precio de cualquier plan.</p>
-    <p>La producción de contenido audiovisual (fotografía y/o vídeo) no está incluida en el precio del plan. Si el cliente desea contratar este servicio, sus condiciones específicas (incluido el presupuesto) podrán recogerse en un anexo independiente a este contrato.</p>
+    <h2><span class="num">13.</span> Inteligencia artificial</h2>
+    <p>Las funciones con inteligencia artificial dependen de proveedores externos y están sujetas a su disponibilidad, límites de uso, precios y condiciones, que Differentissgood no controla.</p>
 
-    <h2><span class="num">14.</span> Propiedad, contenido y derechos de autor</h2>
-    <p>El cliente garantiza que es titular, o cuenta con la autorización suficiente, de todos los textos, imágenes, logotipos, vídeos y demás material que entregue para su publicación en la web, y autoriza expresamente a Differentissgood a incorporarlos a la página. El cliente garantiza asimismo que cualquier persona que aparezca en dicho contenido ha dado su consentimiento para ello, siendo el cliente el único responsable ante cualquier reclamación de terceros derivada de este material.</p>
-    <p>Se distingue entre: (i) los elementos creados específicamente para el cliente en el marco de este proyecto; (ii) el código, componentes, plantillas, librerías, metodologías y herramientas internas preexistentes de Differentissgood, empleados para desarrollar el proyecto; y (iii) los recursos o software de terceros integrados en la web (pasarelas de pago, herramientas de IA, plantillas de terceros, etc.), sujetos a sus propias licencias.</p>
-    <p>Una vez completado el pago del 100% del precio, el cliente podrá utilizar y explotar el proyecto entregado conforme a lo acordado en este contrato, incluyendo trasladarlo al proveedor de hosting que desee. Differentissgood conserva la titularidad de sus sistemas, componentes reutilizables, metodologías y demás recursos preexistentes mencionados en el punto (ii) anterior.</p>
-    <p>Differentissgood no será responsable de los problemas, errores o incompatibilidades derivados de modificaciones realizadas con posterioridad a la entrega por el cliente o por terceros distintos de Differentissgood — véase la cláusula 15.</p>
-    <p>La web deberá mostrar de forma visible el crédito «Designed by Differentissgood». El cliente podrá solicitar la eliminación de este crédito abonando un coste adicional de <b>150 €</b>.</p>
+    <h2><span class="num">14.</span> Textos legales de la web</h2>
+    <p>Differentissgood prepara los textos legales base (aviso legal, privacidad, cookies) con la información que le da el cliente, pero eso no es asesoramiento jurídico.</p>
+    <p>El cliente debe comprobar con un abogado que esos textos encajan con su actividad, sobre todo si vende online. <span class="nota">(Punto señalado para validación con un abogado — ver resumen.)</span></p>
 
-    <h2><span class="num">15.</span> Modificaciones y actuaciones de terceros</h2>
-    <p>Differentissgood no responderá de incidencias, errores o caídas producidos con posterioridad a la entrega como consecuencia de actuaciones del propio cliente, de otros desarrolladores o agencias, de plugins o extensiones, de actualizaciones de software, de cambios de hosting o de configuración, de proveedores externos, o de cualquier modificación del código realizada al margen de Differentissgood.</p>
+    <h2><span class="num">15.</span> Fuerza mayor</h2>
+    <p>Ninguna de las dos partes responde de lo que no pueda cumplir por causas fuera de su control razonable. En ese caso, los plazos se ajustan lo necesario.</p>
 
-    <h2><span class="num">16.</span> Servicios y proveedores externos</h2>
-    <p>Differentissgood no controla ni garantiza la disponibilidad permanente de servicios de terceros necesarios para el funcionamiento de la web, tales como el dominio, el hosting, Google, WhatsApp, servicios de email o newsletter, calendarios, pasarelas de pago, APIs, herramientas de inteligencia artificial, plataformas de analítica, bases de datos u otros servicios externos.</p>
-    <p>Differentissgood no será responsable de caídas, cierres, cambios de precio, de API o de condiciones, ni de cualquier otra incidencia imputable a dichos proveedores. Los costes recurrentes de estos servicios de terceros no están incluidos en el precio del plan salvo que se indique expresamente lo contrario (véase la cláusula 3.4).</p>
+    <h2><span class="num">16.</span> Cancelación del contrato</h2>
+    <p>En los casos previstos en las cláusulas 4 y 5, Differentissgood puede cancelar el contrato y quedarse el 30% inicial como compensación por el trabajo y la agenda ya reservados.</p>
+    <p>Differentissgood también puede decidir no continuar antes de la entrega por causas justificadas que no sean un incumplimiento del cliente. En ese caso devuelve todo lo cobrado por lo que no se haya hecho.</p>
+    <p>Si la cancelación es por incumplimiento de Differentissgood, devuelve igualmente lo cobrado por lo no ejecutado, además de lo previsto en la cláusula 8.</p>
 
-    <h2><span class="num">17.</span> Inteligencia artificial</h2>
-    <p>Las funcionalidades basadas en inteligencia artificial incluidas en el proyecto pueden depender de proveedores externos y estar sujetas a su disponibilidad, límites de uso, precios, cambios tecnológicos y condiciones de servicio, que quedan fuera del control de Differentissgood.</p>
+    <h2><span class="num">17.</span> Confidencialidad y protección de datos</h2>
+    <p>Las dos partes se comprometen a no divulgar la información que compartan durante el trabajo.</p>
+    <p>Los datos del cliente se usan solo para este proyecto, quedan entre el cliente y Differentissgood, y no se ceden a nadie salvo obligación legal.</p>
+    <p>Distinto es el caso de los datos de terceros que se gestionen dentro de la web del cliente (formularios, reservas, clientes de su tienda): si Differentissgood accede a ellos por cuenta del cliente y la ley lo exige, se firmará el anexo de encargado de tratamiento correspondiente. <span class="nota">(Punto señalado para validación con un abogado — ver resumen.)</span></p>
 
-    <h2><span class="num">18.</span> Textos legales de las webs</h2>
-    <p>Differentissgood puede preparar e implementar documentación legal base (aviso legal, política de privacidad, cookies y similares) a partir de la información facilitada por el cliente, pero no presta con ello asesoramiento jurídico profesional.</p>
-    <p>El cliente deberá verificar con un profesional competente que dicha documentación se ajusta a su actividad concreta cuando sea necesario, especialmente en proyectos de comercio electrónico. <span class="nota">(Punto señalado para validación con un abogado — ver resumen.)</span></p>
+    <h2><span class="num">18.</span> Mantenimiento posterior</h2>
+    <p>El mantenimiento después de la entrega no está incluido. Se puede contratar aparte, con un coste mensual a acordar.</p>
 
-    <h2><span class="num">19.</span> Fuerza mayor</h2>
-    <p>Ninguna de las partes será responsable por el incumplimiento de sus obligaciones cuando dicho incumplimiento se deba a circunstancias fuera de su control razonable. En tales casos, los plazos previstos en este contrato se ajustarán en la medida necesaria.</p>
+    <h2><span class="num">19.</span> Cliente profesional</h2>
+    <p>El cliente declara que contrata este servicio para su actividad profesional o empresarial, no como consumidor particular.</p>
+    <p>Por eso no se aplica la normativa de consumidores, incluido el derecho de desistimiento.</p>
+    <p class="nota">Este contrato es para autónomos y empresas. No se usa para bodas ni para clientes particulares, que tienen sus propias condiciones.</p>
 
-    <h2><span class="num">20.</span> Resolución del contrato</h2>
-    <p>En los supuestos de incumplimiento del cliente previstos en las cláusulas 4 y 5, Differentissgood podrá resolver el contrato reteniendo el 30% abonado inicialmente en concepto de compensación por el trabajo y la reserva de agenda ya comprometidos.</p>
-    <p>Differentissgood podrá también decidir no continuar con el proyecto en cualquier momento antes de la entrega final por causas justificadas ajenas a un incumplimiento del cliente. En tal caso, devolverá al cliente la totalidad de las cantidades abonadas correspondientes a servicios, rondas adicionales o contenido no ejecutados hasta ese momento.</p>
-    <p>Si la resolución es imputable a Differentissgood por incumplimiento de sus propias obligaciones, se aplicará asimismo la devolución de las cantidades correspondientes a servicios no ejecutados, sin perjuicio de lo dispuesto en la cláusula 12.</p>
-
-    <h2><span class="num">21.</span> Confidencialidad y protección de datos</h2>
-    <p>Ambas partes se comprometen a mantener la confidencialidad de la información compartida durante la prestación del servicio.</p>
-    <p>Los datos personales del propio cliente que este facilite a Differentissgood para la ejecución de este contrato serán tratados únicamente con dicha finalidad, se compartirán exclusivamente entre el cliente y Differentissgood, y no se cederán a terceros salvo obligación legal.</p>
-    <p>Distinto es el caso de los datos personales de terceros que puedan gestionarse dentro de la propia web del cliente (por ejemplo, formularios de contacto, reservas o clientes de su tienda online): cuando Differentissgood tenga acceso a dichos datos por cuenta del cliente y ello resulte legalmente exigible, se formalizará el correspondiente acuerdo o anexo de encargado de tratamiento. <span class="nota">(Punto señalado para validación con un abogado — ver resumen.)</span></p>
-
-    <h2><span class="num">22.</span> Mantenimiento posterior a la entrega</h2>
-    <p>El servicio de seguimiento y mantenimiento posterior a la entrega no está incluido en el precio del plan. Puede contratarse aparte, con un coste mensual adicional a acordar.</p>
-
-    <h2><span class="num">23.</span> Naturaleza del contrato y cliente profesional</h2>
-    <p>El cliente declara que contrata los servicios objeto del presente contrato exclusivamente para fines relacionados con su actividad empresarial o profesional, y no como consumidor o usuario final.</p>
-    <p>En consecuencia, no resulta de aplicación el régimen de protección de consumidores y usuarios, incluido el derecho de desistimiento previsto para contratos con consumidores.</p>
-    <p class="nota">Este contrato está diseñado para clientes profesionales (autónomos o empresas). No se aplica automáticamente a bodas ni a clientes particulares, que se rigen por sus propias condiciones.</p>
-
-    <h2><span class="num">24.</span> Uso del proyecto en el portfolio de Differentissgood</h2>
-    <p>El cliente autoriza o no el uso del proyecto realizado en el portfolio, la web y las redes sociales de Differentissgood como muestra de su trabajo:</p>
+    <h2><span class="num">20.</span> Uso del proyecto en el portfolio</h2>
+    <p>El cliente autoriza o no que Differentissgood enseñe este proyecto en su portfolio, su web y sus redes sociales:</p>
     <div class="checkline"><input type="radio" id="chkPortfolioSi" name="portfolio"><label for="chkPortfolioSi">Sí autorizo el uso de este proyecto en el portfolio de Differentissgood.</label></div>
     <div class="checkline"><input type="radio" id="chkPortfolioNo" name="portfolio"><label for="chkPortfolioNo">No autorizo el uso de este proyecto en el portfolio de Differentissgood.</label></div>
 
-    <h2><span class="num">25.</span> Comunicaciones</h2>
-    <p>Las comunicaciones realizadas a través de los canales designados por las partes (email, WhatsApp u otros que se acuerden) podrán utilizarse como medio de prueba para documentar aprobaciones, solicitudes, decisiones, cambios y la aceptación de entregas.</p>
+    <h2><span class="num">21.</span> Comunicaciones</h2>
+    <p>Lo que se hable por los canales acordados (email, WhatsApp u otros) sirve como prueba de aprobaciones, peticiones, decisiones, cambios y aceptación de entregas.</p>
 
-    <h2><span class="num">26.</span> Firma electrónica</h2>
-    <p>Este contrato podrá formalizarse mediante firma electrónica y conservarse en formato digital, con plena validez entre las partes.</p>
+    <h2><span class="num">22.</span> Firma electrónica</h2>
+    <p>Este contrato se puede firmar electrónicamente y guardarse en digital, con plena validez entre las partes.</p>
 
-    <h2><span class="num">27.</span> Ley aplicable y jurisdicción</h2>
-    <p>Este contrato se rige por la legislación española. Para cualquier controversia derivada de su interpretación o cumplimiento, ambas partes se someten a los juzgados y tribunales de <span class="blank" contenteditable="true" data-placeholder="[ciudad]"></span>, con renuncia expresa a cualquier otro fuero que pudiera corresponderles.</p>
+    <h2><span class="num">23.</span> Ley aplicable y jurisdicción</h2>
+    <p>Este contrato se rige por la ley española. Para cualquier discrepancia, ambas partes se someten a los juzgados de <span class="blank" contenteditable="true" data-placeholder="[ciudad]"></span>, renunciando a cualquier otro fuero.</p>
 
     <hr class="sep">
 
-    <h2><span class="num">28.</span> Firmas</h2>
+    <h2><span class="num">24.</span> Firmas</h2>
     <p>Lugar y fecha: <span class="blank ancho" contenteditable="true" data-placeholder="[·]"></span></p>
     <div class="firmas">
       <div class="firma proveedor">
@@ -482,7 +450,6 @@
   var PLANES = {
     impulso: {
       nombre: 'Plan Impulso', precio: '560 €', dias: 7, rondas: '2',
-      para: 'Para negocios pequeños o profesionales que necesitan presencia online sencilla y efectiva.',
       incluye: [
         'Página única (one-page) con hasta 5 secciones (ej: marca, servicios, valoraciones…).',
         'Diseño a medida, 100% adaptado a móvil.',
@@ -501,7 +468,6 @@
     },
     crecimiento: {
       nombre: 'Plan Crecimiento', precio: '780 €', dias: 14, rondas: '3',
-      para: 'Para negocios que quieren destacar y necesitan más estructura y presencia digital.',
       incluye: [
         'Todo lo incluido en el Plan Impulso.',
         'Web multipágina (3-5 páginas): ej: inicio, sobre mí/nosotros, servicios/productos, blog o galería, contacto.',
@@ -520,7 +486,6 @@
     },
     elite: {
       nombre: 'Plan Élite', precio: '1.460 €', dias: 25, rondas: '4',
-      para: 'Para negocios que venden online o quieren una experiencia digital completa y diferenciadora.',
       incluye: [
         'Todo lo incluido en el Plan Crecimiento.',
         'Carrito de compra / tienda online (catálogo + pasarela de pago).',
@@ -559,7 +524,6 @@
     document.getElementById('cPrecio').textContent = d.precio;
     document.getElementById('cDias').textContent = d.dias + ' días laborables';
     document.getElementById('cRondas').textContent = d.rondas;
-    document.getElementById('cPara').textContent = d.para;
     var incluye = document.getElementById('cIncluye'); incluye.innerHTML = '';
     d.incluye.forEach(function(t){ incluye.appendChild(li(t)); });
     document.getElementById('cExtrasTitulo').textContent = d.extrasTitulo;
