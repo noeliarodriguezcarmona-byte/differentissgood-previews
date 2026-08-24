@@ -211,7 +211,7 @@ contrato; aquí están las que afectan a lo comercial:
 - **Ronda de cambios extra:** 40 € cada una, más allá de las incluidas en el plan.
 - **Retraso imputable a Differentissgood:** 15% de descuento.
 - **Dominio y hosting:** los configura Differentissgood, los paga el cliente.
-- **Crédito:** «Designed by Differentissgood» en la web. Retirarlo cuesta 150 €.
+- **Crédito:** la web muestra «Designed by Differentissgood».
 - **Audiovisual:** la fotografía y el vídeo no entran en ningún plan; van por
   presupuesto aparte.
 - **Solo empresas y profesionales.** No se firman contratos con particulares.
@@ -225,3 +225,5 @@ contrato; aquí están las que afectan a lo comercial:
   máximo, pero con un **mínimo de 1**.
 - **Impulso, «Integración con redes sociales» (24/08/2026).** Va **incluida en
   el plan**, no es un extra. No ocupa ninguna de las plazas de extras.
+- **Crédito «Designed by Differentissgood» (24/08/2026).** Se retira del
+  contrato la opción de quitarlo por 150 €. El crédito va en la web y ya.
