@@ -251,7 +251,7 @@
     <div class="ref-caja">
       <div>
         <div class="etiqueta">Código de cliente</div>
-        <div class="valor"><span class="blank" contenteditable="true" data-placeholder="DIG-2026-001"></span></div>
+        <div class="valor"><span class="blank" id="refCodigo" contenteditable="true" data-placeholder="DIG-2026-001-I"></span></div>
       </div>
       <div>
         <div class="etiqueta">Plan contratado</div>
@@ -260,10 +260,10 @@
     </div>
 
     <h2><span class="num">0.</span> Código de proyecto del cliente</h2>
-    <p>A cada proyecto se le asigna un código único (formato DIG-AAAA-NNN). Con ese código:</p>
+    <p>A cada proyecto se le asigna un código único con el formato <b>DIG-AAAA-NNN-X</b>, donde <b>AAAA</b> es el año, <b>NNN</b> el número de proyecto y <b>X</b> la letra del plan contratado: <b>I</b> para Impulso, <b>C</b> para Crecimiento y <b>E</b> para Élite (por ejemplo, <span id="cEjemploCodigo">DIG-2026-001-I</span>). Con ese código:</p>
     <ul class="limpia">
       <li>El cliente entra al cuestionario de su proyecto. Es la única forma de entrar.</li>
-      <li>Queda fijado el plan contratado: desde el cuestionario no se puede cambiar de plan.</li>
+      <li>Queda fijado el plan contratado, que es el que indica la letra final: desde el cuestionario no se puede elegir ni cambiar de plan.</li>
       <li>Se identifica el proyecto en el cuestionario, en los archivos y en cualquier mensaje.</li>
     </ul>
     <p>El código se crea después de firmar y se envía al cliente por email o WhatsApp. No contiene datos personales.</p>
@@ -457,6 +457,7 @@
 
   var PLANES = {
     impulso: {
+      letra: 'I',
       nombre: 'Plan Impulso', precio: '560 €', dias: 7, rondas: '2',
       incluye: [
         'Página única (one-page) con hasta 5 secciones (ej: marca, servicios, valoraciones…).',
@@ -475,6 +476,7 @@
       extrasTitulo: 'Extras opcionales — el cliente elegirá de 2 a 4, incluidos en el precio del plan. La selección definitiva se realizará en el cuestionario de inicio del proyecto, dentro del plazo establecido para su cumplimentación.',
     },
     crecimiento: {
+      letra: 'C',
       nombre: 'Plan Crecimiento', precio: '780 €', dias: 14, rondas: '3',
       incluye: [
         'Todo lo incluido en el Plan Impulso.',
@@ -493,6 +495,7 @@
       extrasTitulo: 'Extras opcionales — el cliente elegirá de 2 a 4, incluidos en el precio del plan. La selección definitiva se realizará en el cuestionario de inicio del proyecto, dentro del plazo establecido para su cumplimentación.',
     },
     elite: {
+      letra: 'E',
       nombre: 'Plan Élite', precio: '1.460 €', dias: 25, rondas: '4',
       incluye: [
         'Todo lo incluido en el Plan Crecimiento.',
@@ -528,6 +531,9 @@
     var d = PLANES[clave];
     [].forEach.call(tabsEl.children, function(b){ b.classList.toggle('activa', b.dataset.plan === clave); });
     document.getElementById('etiquetaPlan').textContent = d.nombre;
+    var ejemplo = 'DIG-2026-001-' + d.letra;
+    document.getElementById('cEjemploCodigo').textContent = ejemplo;
+    document.getElementById('refCodigo').setAttribute('data-placeholder', ejemplo);
     document.getElementById('txtNombrePlan').textContent = d.nombre;
     document.getElementById('cPrecio').textContent = d.precio;
     document.getElementById('cDias').textContent = d.dias + ' días laborables';
