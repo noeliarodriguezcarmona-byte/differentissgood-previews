@@ -260,13 +260,8 @@
     </div>
 
     <h2><span class="num">0.</span> Código de proyecto del cliente</h2>
-    <p>A cada proyecto se le asigna un código único, por ejemplo <b><span id="cEjemploCodigo">DIG-2026-001-I</span></b>. La última letra es la del plan: <b>I</b> de Impulso, <b>C</b> de Crecimiento y <b>E</b> de Élite. Con ese código:</p>
-    <ul class="limpia">
-      <li>El cliente entra al cuestionario de su proyecto. Es la única forma de entrar.</li>
-      <li>Queda fijado el plan contratado, que es el que indica la letra final: desde el cuestionario no se puede elegir ni cambiar de plan.</li>
-      <li>Se identifica el proyecto en el cuestionario, en los archivos y en cualquier mensaje.</li>
-    </ul>
-    <p>El código se crea después de firmar y se envía al cliente por email o WhatsApp. No contiene datos personales.</p>
+    <p>El código de proyecto es la llave del cliente para entrar a su cuestionario, y solo abre el del plan contratado en este documento: desde el cuestionario no se puede elegir ni cambiar de plan. También identifica el proyecto en los archivos y en cualquier mensaje.</p>
+    <p>Se crea después de firmar y se envía al cliente por email o WhatsApp. No contiene datos personales.</p>
 
     <h2><span class="num">1.</span> Partes</h2>
     <div class="partes-grid">
@@ -395,8 +390,8 @@
     <p>El cliente debe comprobar con un abogado que esos textos encajan con su actividad, sobre todo si vende online.</p>
 
     <h2><span class="num">17.</span> Fuerza mayor</h2>
-    <p>Ninguna de las dos partes responde de lo que no pueda cumplir por causas graves ajenas a su voluntad. Por ejemplo: una enfermedad o un accidente, un fallecimiento, un incendio o una inundación, una catástrofe natural, un corte general de luz o de internet, una huelga, o una caída prolongada de los servicios de terceros que la web necesita.</p>
-    <p>En esos casos los plazos se paran y se ajustan lo necesario, sin que ello suponga incumplimiento de ninguna de las dos partes.</p>
+    <p>Solo se consideran causas de fuerza mayor estas: enfermedad o accidente grave, fallecimiento, incendio, inundación, catástrofe natural, corte general de luz o de internet, huelga, y caída de más de 48 horas de los servicios de terceros que la web necesita.</p>
+    <p>Si se da alguna, los plazos se paran mientras dure y se reanudan cuando termine. No cuenta como incumplimiento y no da lugar a penalización, descuento ni devolución para ninguna de las dos partes. Quien se vea afectado avisa al otro dentro de los 5 días naturales siguientes.</p>
 
     <h2><span class="num">18.</span> Cancelación del contrato</h2>
     <p>En los casos previstos en las cláusulas 4 y 5, Differentissgood puede cancelar el contrato y quedarse el 30% inicial como compensación por el trabajo y la agenda ya reservados.</p>
@@ -533,9 +528,7 @@
     var d = PLANES[clave];
     [].forEach.call(tabsEl.children, function(b){ b.classList.toggle('activa', b.dataset.plan === clave); });
     document.getElementById('etiquetaPlan').textContent = d.nombre;
-    var ejemplo = 'DIG-2026-001-' + d.letra;
-    document.getElementById('cEjemploCodigo').textContent = ejemplo;
-    document.getElementById('refCodigo').setAttribute('data-placeholder', ejemplo);
+    document.getElementById('refCodigo').setAttribute('data-placeholder', 'DIG-2026-001-' + d.letra);
     document.getElementById('txtNombrePlan').textContent = d.nombre;
     document.getElementById('cPrecio').textContent = d.precio;
     document.getElementById('cDias').textContent = d.dias + ' días laborables';
