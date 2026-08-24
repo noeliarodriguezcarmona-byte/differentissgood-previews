@@ -35,7 +35,7 @@ autorización.
 | **Precio** | 560 € + IVA | 780 € + IVA | 1.460 € + IVA |
 | **Entrega** | 7 días laborables | 14 días laborables | 25 días laborables |
 | **Rondas de cambios** | 2 | 3 | 4 |
-| **Extras** | de 2 a 4, incluidos | de 2 a 4, incluidos | todos incluidos |
+| **Extras** | de 2 a 4, incluidos | de 2 a 4, incluidos | todos incluidos, elige mín. 1 |
 | **Estructura** | Página única (one-page), hasta 5 secciones | Web multipágina (3-5 páginas) | Web multipágina completa con tienda |
 
 El precio se presenta siempre como **precio del plan + IVA aparte**.
@@ -77,6 +77,9 @@ completo**, no desde la firma.
 - Mapa de Google integrado
 - Sección de FAQ desplegable
 - Valoraciones de Google integradas en la web
+
+«Integración con redes sociales» **no** está en esta lista: va incluida en el
+plan y no ocupa plaza de extra.
 
 ### No incluye
 
@@ -144,7 +147,8 @@ completo**, no desde la firma.
 - **Precio:** 1.460 € + IVA
 - **Entrega:** 25 días laborables
 - **Rondas de cambios incluidas:** 4
-- **Extras:** todos incluidos en el precio
+- **Extras:** todos incluidos en el precio. El cliente elige cuáles quiere: sin
+  máximo, mínimo 1.
 
 ### Incluye
 
@@ -214,15 +218,10 @@ contrato; aquí están las que afectan a lo comercial:
 
 ---
 
-## Pendiente de confirmar por Noelia
+## Decisiones tomadas
 
-Dos puntos que **no están decididos** y que no deben darse por buenos hasta que
-ella lo diga:
-
-1. **Élite: ¿mínimo de extras?** Como en Élite entran todos los extras, no hay
-   un mínimo que elegir. El cuestionario, tal y como está montado ahora, exige
-   marcar **al menos 1** para que la selección quede registrada. Falta confirmar
-   si esa regla se queda o se quita.
-2. **Impulso: «Integración con redes sociales».** Figura a la vez como
-   funcionalidad incluida y como extra a elegir. Hay que decidir en cuál de las
-   dos listas se queda, porque si es un extra, ocupa una de las 4 plazas.
+- **Élite, elección de extras (24/08/2026).** Aunque en Élite entran todos los
+  extras en el precio, el cliente **sí tiene que elegir cuáles quiere**: sin
+  máximo, pero con un **mínimo de 1**.
+- **Impulso, «Integración con redes sociales» (24/08/2026).** Va **incluida en
+  el plan**, no es un extra. No ocupa ninguna de las plazas de extras.
