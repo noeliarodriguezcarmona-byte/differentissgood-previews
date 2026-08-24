@@ -30,7 +30,7 @@
   --card2:#2c2419;
   --muted:rgba(245,239,228,.62);
   --tenue:rgba(245,239,228,.38);
-  --degradado:linear-gradient(115deg,var(--orange),var(--oro) 52%,var(--rosa));
+  --degradado:linear-gradient(115deg,var(--dig-acento),var(--orange) 60%,#ffb37a);
   --curva:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;}
@@ -91,6 +91,11 @@ header p{color:var(--muted);font-size:12.5px;max-width:480px;margin:8px auto 0;l
   transition:opacity .3s ease,transform .3s ease;white-space:nowrap;
 }
 .guardado-ok.visible{opacity:1;transform:none;}
+.avance__reset{
+  margin-left:auto;flex-shrink:0;background:none;border:1px solid var(--line);color:var(--tenue);
+  border-radius:100px;padding:5px 13px;font-size:11px;cursor:pointer;font-family:var(--dig-sans);white-space:nowrap;
+}
+.avance__reset:hover{border-color:var(--orange);color:var(--orange);}
 
 /* --- Puntos de categoría --- */
 .categorias{
@@ -144,6 +149,21 @@ header p{color:var(--muted);font-size:12.5px;max-width:480px;margin:8px auto 0;l
 .step--compacto .field-label{margin:12px 0 5px;font-size:12px;}
 .step--compacto .hint{margin:-2px 0 5px;font-size:11px;}
 .step--compacto .step-cuerpo > label.field-label:first-child{margin-top:0;}
+/* Compacta aún más el diseño: estilos, paleta y boceto más pequeños, para que quepa sin scroll */
+.step--compacto .estilos-grandes{gap:6px;margin:6px 0 10px;}
+.step--compacto .estilo-grande span{padding:9px 11px;}
+.step--compacto .estilo-grande span b{font-size:12px;margin-bottom:1px;}
+.step--compacto .estilo-grande span em{font-size:10.5px;line-height:1.35;}
+.step--compacto .paleta{gap:5px;margin:6px 0 4px;}
+.step--compacto .paleta button{width:22px;height:22px;}
+.step--compacto .paleta__estado{margin:2px 0 8px;}
+.step--compacto .borrador-web{margin-top:10px;}
+.step--compacto .borrador-web__hero{padding:16px 18px 12px;gap:5px;}
+.step--compacto .borrador-web__titulo{font-size:clamp(15px,3vw,19px);}
+.step--compacto .borrador-web__lema{font-size:11px;}
+.step--compacto .borrador-web__tarjetas{padding:8px 16px 10px;}
+.step--compacto .borrador-web__tarjeta{height:22px;}
+.step--compacto .borrador-web__nota{margin-top:5px;}
 /* Entra deslizando: a la derecha al avanzar, a la izquierda al retroceder */
 .step.entra-derecha{transform:translateX(34px);}
 .step.entra-izquierda{transform:translateX(-34px);}
@@ -557,6 +577,13 @@ input[type="file"]::file-selector-button{
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
   .step{opacity:1;transform:none;}
 }
+
+/* El pie compartido es claro de base; en esta página oscura lo oscurecemos a juego */
+.dig-pie{background:var(--bg);color:var(--muted);border-top-color:var(--line);}
+.dig-pie a{color:var(--muted);}
+.dig-pie a:hover{color:var(--orange);}
+.dig-pie__marca{background-image:url('../assets/logo-claro.png');}
+.dig-pie__legal{color:var(--tenue);}
 </style>
 </head>
 <body>
@@ -609,6 +636,7 @@ input[type="file"]::file-selector-button{
     <span class="avance__barra"><i id="barra"></i></span>
     <b id="porcentaje">1 / 1</b>
     <span class="guardado-ok" id="guardado-ok">Guardado ✓</span>
+    <button type="button" class="avance__reset" id="btn-empezar-cero">Empezar de cero</button>
   </div>
   <div class="categorias" id="categorias"></div>
 
@@ -669,13 +697,13 @@ input[type="file"]::file-selector-button{
         <label class="field-label">¿A qué os dedicáis?</label>
         <textarea name="A qué se dedica" rows="2" required></textarea>
         <label class="field-label">¿Cómo empezó todo?</label>
-        <textarea name="Historia" rows="3"></textarea>
+        <textarea name="Historia" rows="3" placeholder="Ej: empezamos en 2018 en un local pequeño, casi de casualidad, y hemos ido creciendo poco a poco..."></textarea>
         <label class="field-label">¿Qué os mueve? Vuestra forma de trabajar y lo que no negociáis</label>
-        <textarea name="Valores" rows="2"></textarea>
+        <textarea name="Valores" rows="2" placeholder="Ej: cercanía, materia prima de calidad, hacer las cosas bien aunque cueste más tiempo..."></textarea>
         <label class="field-label">¿Qué os hace distintos de quien hace algo parecido?</label>
-        <textarea name="Diferenciación" rows="2"></textarea>
+        <textarea name="Diferenciación" rows="2" placeholder="Ej: atención personalizada, precios claros, llevamos 15 años en el barrio..."></textarea>
         <label class="field-label">¿A quién queréis llegar?</label>
-        <textarea name="Cliente ideal" rows="2"></textarea>
+        <textarea name="Cliente ideal" rows="2" placeholder="Ej: familias del barrio, autónomos que buscan rapidez, gente que valora lo hecho a mano..."></textarea>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -721,6 +749,18 @@ input[type="file"]::file-selector-button{
           <p class="subida__texto"><b>Toca o arrastra</b> las fotos aquí</p>
         </div>
         <div class="subida-lista" id="subida-equipo-lista"></div>
+
+        <label class="field-label" style="margin-top:16px;">¿Quieres que os hagamos nosotros las fotos del equipo?</label>
+        <select name="Fotos del equipo por Differentissgood" id="sel-contenido-equipo" onchange="alternarContenidoPropio('sel-contenido-equipo','contenido-equipo-si')">
+          <option value="" selected></option>
+          <option value="Sí">Sí</option>
+          <option value="No">No, subo las mías</option>
+        </select>
+        <div class="depende" id="contenido-equipo-si"><div>
+          <label class="field-label">Cuéntanos qué queréis y cómo lo imagináis</label>
+          <textarea name="Idea de fotos del equipo" rows="2" placeholder="Ej: retratos individuales en el local, un plano de grupo en la entrada, ambiente informal..."></textarea>
+          <div class="note-box">Cuando revisemos el plan, os haremos un presupuesto personalizado para esta sesión.</div>
+        </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -743,6 +783,18 @@ input[type="file"]::file-selector-button{
           <p class="subida__texto"><b>Toca o arrastra</b> las fotos aquí</p>
         </div>
         <div class="subida-lista" id="subida-servicios-lista"></div>
+
+        <label class="field-label" style="margin-top:16px;">¿Quieres que os hagamos nosotros las fotos de servicios y productos?</label>
+        <select name="Fotos de servicios por Differentissgood" id="sel-contenido-servicios" onchange="alternarContenidoPropio('sel-contenido-servicios','contenido-servicios-si')">
+          <option value="" selected></option>
+          <option value="Sí">Sí</option>
+          <option value="No">No, subo las mías</option>
+        </select>
+        <div class="depende" id="contenido-servicios-si"><div>
+          <label class="field-label">Cuéntanos qué queréis y cómo lo imagináis</label>
+          <textarea name="Idea de fotos de servicios" rows="2" placeholder="Ej: producto sobre fondo blanco, plato terminado en mesa, proceso de trabajo..."></textarea>
+          <div class="note-box">Cuando revisemos el plan, os haremos un presupuesto personalizado para esta sesión.</div>
+        </div></div>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -928,7 +980,7 @@ input[type="file"]::file-selector-button{
           <label class="field-label">¿Cada cuánto pensáis publicar?</label>
           <input type="text" name="Frecuencia del blog" placeholder="Ej: una vez al mes">
           <label class="field-label">¿Sobre qué temas?</label>
-          <textarea name="Temas del blog" rows="2"></textarea>
+          <textarea name="Temas del blog" rows="2" placeholder="Ej: novedades, consejos del sector, casos de clientes, detrás de las cámaras..."></textarea>
           <label class="field-label">¿Queréis que la redacción se apoye en inteligencia artificial?</label>
           <select name="Blog con IA">
             <option value="" selected></option>
@@ -999,7 +1051,7 @@ input[type="file"]::file-selector-button{
         </div></div>
 
         <label class="field-label">¿Cómo lleváis las citas ahora mismo?</label>
-        <textarea name="Cómo funcionan las citas ahora" rows="2"></textarea>
+        <textarea name="Cómo funcionan las citas ahora" rows="2" placeholder="Ej: por WhatsApp, por teléfono, con una agenda de papel..."></textarea>
         <label class="field-label">¿Queréis que se confirme la cita automáticamente?</label>
         <select name="Confirmación automática">
           <option value="" selected></option>
@@ -1042,7 +1094,7 @@ input[type="file"]::file-selector-button{
         <label class="field-label">¿Hacéis envíos? ¿Con qué condiciones?</label>
         <textarea name="Envíos" rows="2" placeholder="Zonas, precios, plazos, envío gratis a partir de..."></textarea>
         <label class="field-label">¿Y las devoluciones?</label>
-        <textarea name="Devoluciones" rows="2"></textarea>
+        <textarea name="Devoluciones" rows="2" placeholder="Ej: 14 días para devolver, el cliente paga el envío de vuelta..."></textarea>
         <label class="field-label">¿Facturación automática a cada compra?</label>
         <select name="Facturación automática">
           <option value="" selected></option>
@@ -1234,8 +1286,8 @@ input[type="file"]::file-selector-button{
         <label class="field-label">¿Algún color exacto que ya uséis? <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
         <input type="text" name="Colores" placeholder="Ej: el verde de nuestro logo, un Pantone concreto...">
 
-        <label class="field-label" style="margin-top:16px;">Referencias de webs en las que te gustaría inspirarte</label>
-        <textarea name="Webs de referencia" rows="2" placeholder="https://..."></textarea>
+        <label class="field-label" style="margin-top:12px;">Referencias de webs en las que te gustaría inspirarte <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
+        <textarea name="Webs de referencia" rows="1" placeholder="https://..."></textarea>
 
         <div class="borrador-web" id="borrador-web">
           <div class="borrador-web__nav">
@@ -1276,7 +1328,7 @@ input[type="file"]::file-selector-button{
         </select>
         <div class="note-box">Si preferís que los escribamos nosotros, cuéntanos abajo cómo trabajáis y qué problema le resolvéis a vuestros clientes. Con eso nos basta.</div>
         <label class="field-label">Cuéntanoslo aquí</label>
-        <textarea name="Info para redactar textos" rows="4"></textarea>
+        <textarea name="Info para redactar textos" rows="4" placeholder="Ej: llevamos 10 años ayudando a X a conseguir Y, trabajamos así..., lo que nos diferencia es..."></textarea>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1330,7 +1382,7 @@ input[type="file"]::file-selector-button{
         <label class="field-label">¿Qué es lo más importante que quieres que se encuentre?</label>
         <input type="text" name="Qué posicionar">
         <label class="field-label">¿Qué escribiría en Google alguien que te busca sin conocerte?</label>
-        <textarea name="Palabras clave" rows="2"></textarea>
+        <textarea name="Palabras clave" rows="2" placeholder="Ej: peluquería en Malasaña, reformas económicas en Valencia..."></textarea>
         <label class="field-label">¿Tenéis web ahora mismo?</label>
         <input type="url" name="Web actual" placeholder="https://...">
       </div>
@@ -1432,11 +1484,11 @@ input[type="file"]::file-selector-button{
       </div>
       <div class="step-cuerpo">
         <label class="field-label">¿Hay algo que no quieres que aparezca?</label>
-        <textarea name="Qué no incluir" rows="2"></textarea>
+        <textarea name="Qué no incluir" rows="2" placeholder="Ej: nada de fotos de stock, sin colores muy llamativos, sin precios visibles..."></textarea>
         <label class="field-label">¿Hay algo que sí o sí tiene que estar?</label>
-        <textarea name="Imprescindible" rows="2"></textarea>
+        <textarea name="Imprescindible" rows="2" placeholder="Ej: que se vea el teléfono en todas las páginas, el logo bien grande..."></textarea>
         <label class="field-label">¿Alguna idea que te ronde la cabeza?</label>
-        <textarea name="Ideas" rows="2"></textarea>
+        <textarea name="Ideas" rows="2" placeholder="Ej: algo parecido a tal web pero con nuestros colores, un vídeo de fondo..."></textarea>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
@@ -1520,7 +1572,7 @@ input[type="file"]::file-selector-button{
           <div><label class="field-label">Enlace de Google Maps</label><input type="url" name="Google Maps" placeholder="https://..."></div>
         </div>
         <label class="field-label">¿Algo más que quieras contarnos?</label>
-        <textarea name="Notas" rows="3"></textarea>
+        <textarea name="Notas" rows="3" placeholder="Cualquier cosa que no haya salido antes y creas que debemos saber"></textarea>
       </div>
     </div>
 
@@ -2024,6 +2076,10 @@ input[type="file"]::file-selector-button{
     var el = document.getElementById('sel-incluir-video-foto');
     abrir('incluir-video-foto-si', !!el && el.value === 'Sí');
   };
+  window.alternarContenidoPropio = function(selId, cajaId){
+    var el = document.getElementById(selId);
+    abrir(cajaId, !!el && el.value === 'Sí');
+  };
   window.alternarFotosGaleria = function(){
     var v = document.getElementById('sel-fotos-galeria').value;
     abrir('fotos-galeria-si', v === 'Sí');
@@ -2036,7 +2092,7 @@ input[type="file"]::file-selector-button{
     abrir('plan-fotovideo-galeria-no', v === 'No');
   };
   alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
-  alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto();
+  alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto(); alternarContenidoPropio('sel-contenido-equipo','contenido-equipo-si'); alternarContenidoPropio('sel-contenido-servicios','contenido-servicios-si');
 
   /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
   var sincronizarExtrasPago = [];
@@ -2299,9 +2355,14 @@ input[type="file"]::file-selector-button{
     var aviso = document.getElementById('aviso');
     if(aviso) aviso.hidden = indice !== 0;
 
-    // Lleva la vista directa al bloque de la pregunta y al campo donde hay que escribir
+    // Lleva la vista directa al bloque de la pregunta y al campo donde hay que escribir.
+    // Si la pregunta cabe entera en pantalla, se centra verticalmente; si no, se ancla arriba.
     requestAnimationFrame(function(){
-      var destino = actual.getBoundingClientRect().top + window.pageYOffset - 74;
+      var rect = actual.getBoundingClientRect();
+      var alto = window.innerHeight;
+      var destino = rect.height < alto - 100
+        ? window.pageYOffset + rect.top - Math.max((alto - rect.height) / 2, 74)
+        : window.pageYOffset + rect.top - 74;
       window.scrollTo({top: Math.max(destino, 0), behavior:'smooth'});
       var campo = actual.querySelector('input:not([type=hidden]):not([type=file]):not(:disabled), select:not(:disabled), textarea:not(:disabled)');
       if(campo){
@@ -2450,13 +2511,16 @@ input[type="file"]::file-selector-button{
 
   if(recuperarBorrador()){
     aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
-    alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto();
+    alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto(); alternarContenidoPropio('sel-contenido-equipo','contenido-equipo-si'); alternarContenidoPropio('sel-contenido-servicios','contenido-servicios-si');
     var nota = document.createElement('p');
     nota.className = 'borrador';
-    nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>' +
-      '<button type="button" id="tirar-borrador">Empezar de cero</button>';
+    nota.innerHTML = '<span>Hemos recuperado lo que dejaste escrito la última vez.</span>';
     formulario.parentNode.insertBefore(nota, formulario);
-    document.getElementById('tirar-borrador').addEventListener('click', function(){
+  }
+  var btnEmpezarCero = document.getElementById('btn-empezar-cero');
+  if(btnEmpezarCero){
+    btnEmpezarCero.addEventListener('click', function(){
+      if(!confirm('¿Seguro que quieres empezar de cero? Se borrará todo lo que has escrito.')) return;
       localStorage.removeItem(LLAVE); location.reload();
     });
   }
