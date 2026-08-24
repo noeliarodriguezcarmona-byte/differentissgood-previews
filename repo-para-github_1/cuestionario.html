@@ -1577,6 +1577,48 @@ input[type="file"]::file-selector-button{
   var puertaInput = document.getElementById('puerta-input');
   var puertaError = document.getElementById('puerta-error');
 
+  /* Recogida en la bóveda privada (Worker de Cloudflare → repositorio `clientes`).
+     Vacío = APAGADA: el cuestionario se comporta exactamente igual que hasta
+     ahora, solo por correo. Se enciende añadiendo al <form> del cuestionario:
+         data-recogida="https://loquesea.workers.dev"
+     Los pasos para desplegar el Worker están en `recogida/DESPLIEGUE.md`. */
+  var RECOGIDA = ((document.getElementById('cuestionario') || {dataset:{}}).dataset.recogida || '').replace(/\/+$/, '');
+
+  /** ¿Consta ya un envío de este código en la bóveda?
+   *  Devuelve true, false, o null si no se ha podido comprobar.
+   *  Ante la duda NUNCA bloquea: un fallo de red no puede dejar fuera a un
+   *  cliente que todavía no ha enviado nada. */
+  /** fetch con tiempo máximo: un Worker colgado no puede dejar al cliente
+   *  esperando sin fin. Al agotarse, se aborta y se sigue por correo. */
+  function fetchConTiempo(url, opciones, ms){
+    var ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    var op = {};
+    for(var k in (opciones || {})) op[k] = opciones[k];
+    if(ctrl) op.signal = ctrl.signal;
+
+    return new Promise(function(ok, mal){
+      var reloj = setTimeout(function(){
+        if(ctrl){ try{ ctrl.abort(); }catch(e){} }
+        var fallo = new Error('La bóveda ha tardado demasiado');
+        fallo.definitivo = true;   // no insistir: se pasa al correo
+        mal(fallo);
+      }, ms);
+      fetch(url, op).then(
+        function(r){ clearTimeout(reloj); ok(r); },
+        function(e){ clearTimeout(reloj); mal(e); }
+      );
+    });
+  }
+
+  function bovedaEstado(codigo){
+    if(!RECOGIDA) return Promise.resolve(null);
+    return fetchConTiempo(RECOGIDA + '/api/estado?codigo=' + encodeURIComponent(codigo),
+                          {headers:{'Accept':'application/json'}}, 8000)
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){ return d && typeof d.enviado === 'boolean' ? d.enviado : null; })
+      .catch(function(){ return null; });
+  }
+
   /* El plan va dentro del propio código de proyecto: la última letra.
      DIG-2026-001-I → Impulso · -C → Crecimiento · -E → Élite
      Así el plan viaja con el código que se entrega al firmar y el cliente
@@ -1635,9 +1677,27 @@ input[type="file"]::file-selector-button{
     var ficha = envioDe(valor);
     if(ficha){ codigoCliente = valor; mostrarBloqueado(ficha); return; }
 
+    // Con la bóveda conectada el bloqueo deja de depender de este navegador:
+    // si el cuestionario ya se envió desde otro móvil u ordenador, también aquí.
+    var boton = document.getElementById('puerta-continuar');
+    var textoBoton = boton ? boton.textContent : '';
+    if(RECOGIDA && boton){ boton.disabled = true; boton.textContent = 'Comprobando…'; }
+    bovedaEstado(valor).then(function(yaEnviado){
+      if(RECOGIDA && boton){ boton.disabled = false; boton.textContent = textoBoton; }
+      if(yaEnviado === true){
+        codigoCliente = valor;
+        marcarCompletado(valor, {estado:'completado', codigo:valor});
+        mostrarBloqueado(envioDe(valor));
+        return;
+      }
+      entrarConPlan(valor, m[1]);
+    });
+  }
+
+  function entrarConPlan(valor, letra){
     codigoCliente = valor;
-    planContratado = PLANES_POR_LETRA[m[1]].clave;
-    pintarPlanContratado(PLANES_POR_LETRA[m[1]]);
+    planContratado = PLANES_POR_LETRA[letra].clave;
+    pintarPlanContratado(PLANES_POR_LETRA[letra]);
     aplicarPlan();
     puerta.classList.remove('abierto');
   }
@@ -2547,6 +2607,64 @@ input[type="file"]::file-selector-button{
     });
   }
 
+  /* ---------- Subida a la bóveda privada ----------
+     Sube primero los archivos y después el texto del envío, que es lo que
+     convierte la carpeta en un proyecto cerrado. Nunca lanza excepción:
+     devuelve un objeto {guardado, yaEnviado}. Si algo falla, `guardado` viene
+     a false y el envío sigue su camino normal por correo — no se pierde nada. */
+  function subirABoveda(codigo, texto, archivos){
+    if(!RECOGIDA) return Promise.resolve({guardado:false, yaEnviado:false});
+
+    var total = archivos.length + 1;
+    var hechos = 0;
+    function avanzar(){
+      hechos++;
+      progreso(40 + Math.round((hechos / total) * 30), 'Guardando en tu carpeta de proyecto…');
+    }
+
+    var cadena = Promise.resolve();
+    archivos.forEach(function(a){
+      cadena = cadena.then(function(){
+        return conReintentos(function(){
+          var q = '?codigo=' + encodeURIComponent(codigo) +
+                  '&campo=' + encodeURIComponent(a.etiqueta) +
+                  '&archivo=' + encodeURIComponent(a.file.name);
+          return fetchConTiempo(RECOGIDA + '/api/archivo' + q, {method:'POST', body:a.file}, 60000).then(function(r){
+            if(r.ok) return true;
+            var fallo = new Error('archivo ' + r.status);
+            if(r.status >= 400 && r.status < 500 && r.status !== 429) fallo.definitivo = true;
+            throw fallo;
+          });
+        }, 2);
+      }).then(avanzar);
+    });
+
+    return cadena.then(function(){
+      return conReintentos(function(){
+        return fetchConTiempo(RECOGIDA + '/api/enviar', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({codigo: codigo, texto: texto}),
+        }, 20000).then(function(r){
+          if(r.ok) return {guardado:true, yaEnviado:false};
+          // 409: la bóveda ya tiene un envío de este proyecto. Es definitivo.
+          if(r.status === 409) return {guardado:false, yaEnviado:true};
+          var fallo = new Error('envío ' + r.status);
+          if(r.status >= 400 && r.status < 500 && r.status !== 429) fallo.definitivo = true;
+          throw fallo;
+        });
+      }, 2);
+    }).then(function(res){
+      avanzar();
+      return res;
+    }).catch(function(e){
+      // Se anota en consola para poder mirarlo, pero el cliente no ve un error:
+      // el correo sigue siendo el canal garantizado.
+      try{ console.warn('Bóveda no disponible, se envía solo por correo:', e); }catch(_){}
+      return {guardado:false, yaEnviado:false};
+    });
+  }
+
   /* ---------- Texto de respaldo / cuerpo del correo ---------- */
   function comoTexto(envio, respuestas, archivos){
     var t = 'CUESTIONARIO DIFFERENTISSGOOD\nCódigo de cliente: ' + codigoCliente +
@@ -2667,36 +2785,59 @@ input[type="file"]::file-selector-button{
 
     progreso(40, archivos.length ? 'Enviando tus respuestas y archivos…' : 'Enviando tus respuestas…');
 
-    conReintentos(function(){
-      var datos = new FormData();
-      datos.append('_subject', 'Cuestionario · ' + (codigoCliente ? codigoCliente + ' · ' : '') + negocio);
-      datos.append('Código de proyecto', codigoCliente);
-      datos.append('Plan contratado', planEtiqueta);
-      datos.append('Extras seleccionados', extrasElegidos.length ? extrasElegidos.join(', ') : '(ninguno)');
-      datos.append('Enviado el', enviadoEn);
-      datos.append('Referencia', envio);
-      datos.append('Respuestas completas', texto);
-      archivos.forEach(function(a){
-        var nombreArchivo = ruta(envio) + '__' + ruta(a.etiqueta) + extensionDe(a.file.name);
-        datos.append(a.etiqueta, new File([a.file], nombreArchivo, {type:a.file.type}));
-      });
-      return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CORREO), {
-        method:'POST',
-        headers:{'Accept':'application/json'},
-        body: datos,
-      }).then(function(r){
-        if(r.ok) return r.json().catch(function(){ return {}; });
-        var fallo;
-        if(r.status === 413){
-          fallo = new Error('Los archivos adjuntos pesan demasiado para ir por correo. Quita alguno pesado o pásalo como enlace de Drive/WeTransfer en «¿Algo más?», y reintenta.');
-          fallo.definitivo = true;
-        } else {
-          fallo = new Error('El correo no se ha podido enviar (código ' + r.status + ').');
-          if(r.status >= 400 && r.status < 500) fallo.definitivo = true;
+    // Si los archivos ya están a salvo en la bóveda no se vuelven a adjuntar
+    // al correo: sería subirlos dos veces desde el móvil del cliente.
+    function enviarCorreo(conArchivos){
+      return conReintentos(function(){
+        var datos = new FormData();
+        datos.append('_subject', 'Cuestionario · ' + (codigoCliente ? codigoCliente + ' · ' : '') + negocio);
+        datos.append('Código de proyecto', codigoCliente);
+        datos.append('Plan contratado', planEtiqueta);
+        datos.append('Extras seleccionados', extrasElegidos.length ? extrasElegidos.join(', ') : '(ninguno)');
+        datos.append('Enviado el', enviadoEn);
+        datos.append('Referencia', envio);
+        datos.append('Respuestas completas', texto);
+        if(conArchivos){
+          archivos.forEach(function(a){
+            var nombreArchivo = ruta(envio) + '__' + ruta(a.etiqueta) + extensionDe(a.file.name);
+            datos.append(a.etiqueta, new File([a.file], nombreArchivo, {type:a.file.type}));
+          });
+        } else if(archivos.length){
+          datos.append('Archivos', archivos.length + ' archivo(s) guardados en proyectos/' + codigoCliente + '/archivos/');
         }
-        throw fallo;
+        return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CORREO), {
+          method:'POST',
+          headers:{'Accept':'application/json'},
+          body: datos,
+        }).then(function(r){
+          if(r.ok) return r.json().catch(function(){ return {}; });
+          var fallo;
+          if(r.status === 413){
+            fallo = new Error('Los archivos adjuntos pesan demasiado para ir por correo. Quita alguno pesado o pásalo como enlace de Drive/WeTransfer en «¿Algo más?», y reintenta.');
+            fallo.definitivo = true;
+          } else {
+            fallo = new Error('El correo no se ha podido enviar (código ' + r.status + ').');
+            if(r.status >= 400 && r.status < 500) fallo.definitivo = true;
+          }
+          throw fallo;
+        });
       });
-    }).then(function(){
+    }
+
+    subirABoveda(codigoCliente, texto, archivos).then(function(res){
+      if(res.yaEnviado){
+        // La bóveda dice que este proyecto ya envió su cuestionario: es definitivo.
+        marcarCompletado(codigoCliente, {estado:'completado', codigo:codigoCliente, plan:planEtiqueta});
+        bloquearCuestionario();
+        enviando = false;
+        velo.classList.remove('abierto');
+        mostrarBloqueado(envioDe(codigoCliente));
+        return null;
+      }
+      progreso(75, 'Enviando el aviso por correo…');
+      return enviarCorreo(!res.guardado);
+    }).then(function(hecho){
+      if(hecho === null) return;
       progreso(100, 'Listo');
       // 3-7 · Se registra el envío: código, plan, extras, fecha y estado completado
       marcarCompletado(codigoCliente, {

@@ -1,23 +1,29 @@
 /**
  * Recogida del cuestionario de Differentissgood.
  *
- * Deja cada envío dentro de un repositorio de GitHub, listo para abrirlo con
- * Claude Code y construir la web sin mover un archivo:
+ * Deja cada envío dentro del repositorio PRIVADO `clientes`, en la carpeta del
+ * código de proyecto, con la estructura que ya espera `generar-brief.mjs`:
  *
- *   clientes/2026-08-11-panaderia-la-espiga/
- *     respuestas.md
- *     equipo/…  servicios/…  local/…  logotipo…
+ *   proyectos/DIG-2026-001-I/
+ *     envio.txt          el envío tal y como llegó, sin tocar
+ *     archivos/
+ *       equipo/…  servicios/…  local/…  logotipo…
+ *
+ * Después, en local:  node _herramientas/generar-brief.mjs proyectos/DIG-2026-001-I/envio.txt
  *
  * Se pega tal cual en el editor de Workers de Cloudflare. No hace falta
  * terminal ni tarjeta: el plan gratuito de Workers no pide método de pago.
  *
  * Variables a definir en Settings → Variables and Secrets:
- *   GITHUB_TOKEN   (secreto)  token con permiso de escritura solo en ese repo
+ *   GITHUB_TOKEN   (secreto)  token con permiso de escritura SOLO en `clientes`
  *   GITHUB_REPO               p. ej. noeliarodriguezcarmona-byte/clientes
  *   ORIGENES                  direcciones desde las que se aceptan envíos
+ *
+ * Los pasos completos están en `recogida/DESPLIEGUE.md`.
  */
 
 const MAX_MB = 20;              // tope por archivo que admite bien la API de GitHub
+const RE_CODIGO = /^DIG-\d{4}-\d{3}-[ICE]$/;   // mismo formato que el cuestionario y el contrato
 const CABECERAS = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
 
 export default {
@@ -29,7 +35,7 @@ export default {
 
     try {
       if (url.pathname === '/api/estado') {
-        return json({ ok: true, repo: entorno.GITHUB_REPO || null, maxMB: MAX_MB }, 200, origen);
+        return await estado(url, entorno, origen);
       }
       if (url.pathname === '/api/archivo' && peticion.method === 'POST') {
         return await guardarArchivo(peticion, entorno, origen);
@@ -70,6 +76,15 @@ function json(cuerpo, estado, origen) {
   });
 }
 
+/**
+ * Normaliza y valida el código de proyecto. Todo lo que guarda este Worker
+ * cuelga de él: si no es un código válido, no se escribe nada en ningún sitio.
+ */
+function codigoDe(valor) {
+  const c = String(valor || '').trim().toUpperCase();
+  return RE_CODIGO.test(c) ? c : '';
+}
+
 /** Convierte un texto en algo válido para una ruta: sin tildes ni signos. */
 function ruta(texto, largo = 70) {
   return String(texto || '')
@@ -104,24 +119,44 @@ function base64(buffer) {
 
 /* -------------------------------------------------------------- GitHub */
 
-async function escribirEnGitHub(entorno, camino, contenidoB64, mensaje) {
+function urlContenidos(entorno, camino) {
+  return `https://api.github.com/repos/${entorno.GITHUB_REPO}/contents/${
+    camino.split('/').map(encodeURIComponent).join('/')}`;
+}
+
+function cabecerasGitHub(entorno) {
+  return {
+    Authorization: `Bearer ${entorno.GITHUB_TOKEN}`,
+    Accept: 'application/vnd.github+json',
+    'Content-Type': 'application/json',
+    'User-Agent': 'cuestionario-differentissgood',
+  };
+}
+
+function exigirConfiguracion(entorno) {
   if (!entorno.GITHUB_TOKEN || !entorno.GITHUB_REPO) {
     throw new Error('Falta configurar GITHUB_TOKEN o GITHUB_REPO');
   }
-  const url = `https://api.github.com/repos/${entorno.GITHUB_REPO}/contents/${
-    camino.split('/').map(encodeURIComponent).join('/')}`;
+}
+
+/** ¿Existe ya ese archivo en el repositorio? */
+async function existeEnGitHub(entorno, camino) {
+  exigirConfiguracion(entorno);
+  const r = await fetch(urlContenidos(entorno, camino), { headers: cabecerasGitHub(entorno) });
+  if (r.status === 404) return false;
+  if (r.ok) return true;
+  throw new Error('GitHub: ' + r.status + ' ' + (await r.text()).slice(0, 300));
+}
+
+async function escribirEnGitHub(entorno, camino, contenidoB64, mensaje) {
+  exigirConfiguracion(entorno);
 
   // Dos intentos: un tropiezo de red no debe costar un archivo
   let ultimo = '';
   for (let intento = 1; intento <= 2; intento++) {
-    const r = await fetch(url, {
+    const r = await fetch(urlContenidos(entorno, camino), {
       method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${entorno.GITHUB_TOKEN}`,
-        Accept: 'application/vnd.github+json',
-        'Content-Type': 'application/json',
-        'User-Agent': 'cuestionario-differentissgood',
-      },
+      headers: cabecerasGitHub(entorno),
       body: JSON.stringify({ message: mensaje, content: contenidoB64 }),
     });
     if (r.ok) return (await r.json()).content.path;
@@ -132,15 +167,34 @@ async function escribirEnGitHub(entorno, camino, contenidoB64, mensaje) {
   throw new Error('GitHub: ' + ultimo);
 }
 
+/* ------------------------------------------------------------------ estado */
+
+/**
+ * Sin código: comprobación de vida, para saber si el Worker está configurado.
+ * Con código: dice si ese proyecto YA tiene un envío definitivo registrado.
+ * Esto es lo que convierte el bloqueo del cuestionario en algo real — hasta
+ * ahora sólo vivía en el navegador del cliente.
+ */
+async function estado(url, entorno, origen) {
+  const codigo = codigoDe(url.searchParams.get('codigo'));
+  if (!url.searchParams.get('codigo')) {
+    return json({ ok: true, repo: entorno.GITHUB_REPO || null, maxMB: MAX_MB }, 200, origen);
+  }
+  if (!codigo) return json({ error: 'Código de proyecto no válido' }, 400, origen);
+
+  const enviado = await existeEnGitHub(entorno, `proyectos/${codigo}/envio.txt`);
+  return json({ ok: true, codigo, enviado, maxMB: MAX_MB }, 200, origen);
+}
+
 /* ------------------------------------------------------- guardar archivo */
 
 async function guardarArchivo(peticion, entorno, origen) {
   const url = new URL(peticion.url);
-  const carpetaEnvio = ruta(url.searchParams.get('envio'), 90);
+  const codigo = codigoDe(url.searchParams.get('codigo'));
   const campo = url.searchParams.get('campo') || '';
   const nombre = url.searchParams.get('archivo') || 'archivo';
 
-  if (!carpetaEnvio) return json({ error: 'Falta la carpeta del envío' }, 400, origen);
+  if (!codigo) return json({ error: 'Código de proyecto no válido' }, 400, origen);
 
   const datos = await peticion.arrayBuffer();
   if (datos.byteLength > MAX_MB * 1024 * 1024) {
@@ -155,71 +209,38 @@ async function guardarArchivo(peticion, entorno, origen) {
   // El nombre del campo va delante: así se sabe de qué persona o servicio es
   const etiqueta = ruta(campo, 40);
   const archivo = `${etiqueta}-${base}.${extension}`;
-  const camino = `clientes/${carpetaEnvio}/${sub ? sub + '/' : ''}${archivo}`;
+  const camino = `proyectos/${codigo}/archivos/${sub ? sub + '/' : ''}${archivo}`;
 
   const guardado = await escribirEnGitHub(
-    entorno, camino, base64(datos), `Cuestionario ${carpetaEnvio}: ${archivo}`
+    entorno, camino, base64(datos), `${codigo}: ${archivo}`
   );
   return json({ ok: true, camino: guardado }, 200, origen);
 }
 
 /* --------------------------------------------------- guardar respuestas */
 
+/**
+ * Guarda el envío tal y como llegó, en `proyectos/<CÓDIGO>/envio.txt`.
+ * No reescribe el texto ni interpreta nada: ese archivo es la fuente, y quien
+ * lo convierte en brief es `generar-brief.mjs`, en local y a mano.
+ */
 async function guardarCuestionario(peticion, entorno, origen) {
   let d;
   try { d = await peticion.json(); } catch { return json({ error: 'No se han podido leer las respuestas' }, 400, origen); }
 
-  const carpetaEnvio = ruta(d.envio, 90);
-  const respuestas = Array.isArray(d.respuestas) ? d.respuestas : [];
-  const archivos = Array.isArray(d.archivos) ? d.archivos : [];
-  if (!carpetaEnvio || !respuestas.length) return json({ error: 'El cuestionario venía vacío' }, 400, origen);
+  const codigo = codigoDe(d.codigo);
+  const texto = typeof d.texto === 'string' ? d.texto : '';
+  if (!codigo) return json({ error: 'Código de proyecto no válido' }, 400, origen);
+  if (!texto.trim()) return json({ error: 'El cuestionario venía vacío' }, 400, origen);
 
-  const md = componerMarkdown(carpetaEnvio, respuestas, archivos);
-  const camino = `clientes/${carpetaEnvio}/respuestas.md`;
-  const contenido = base64(new TextEncoder().encode(md).buffer);
+  const camino = `proyectos/${codigo}/envio.txt`;
 
-  await escribirEnGitHub(entorno, camino, contenido, `Cuestionario ${carpetaEnvio}: respuestas`);
-  return json({ ok: true, envio: carpetaEnvio, camino }, 200, origen);
-}
-
-/** El documento que después se lee para construir la web. */
-function componerMarkdown(carpetaEnvio, respuestas, archivos) {
-  const negocio = (respuestas.find((r) => /Nombre del negocio/i.test(r.campo)) || {}).valor || carpetaEnvio;
-  const plan = (respuestas.find((r) => /^Plan$/i.test(r.campo)) || {}).valor || 'sin especificar';
-
-  let t = `# ${negocio}\n\n`;
-  t += `- **Plan:** ${plan}\n`;
-  t += `- **Recibido:** ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}\n`;
-  t += `- **Carpeta:** \`${carpetaEnvio}\`\n\n---\n`;
-
-  // Agrupado por bloques, en el orden en que se rellenó
-  let bloqueActual = null;
-  for (const r of respuestas) {
-    const bloque = r.bloque || 'Otras respuestas';
-    if (bloque !== bloqueActual) {
-      t += `\n## ${bloque}\n\n`;
-      bloqueActual = bloque;
-    }
-    const valor = String(r.valor || '').trim();
-    t += `**${r.campo}**\n\n${valor.includes('\n') ? valor : valor}\n\n`;
+  // El envío es definitivo: si ya hay uno, no se pisa
+  if (await existeEnGitHub(entorno, camino)) {
+    return json({ error: 'Este proyecto ya tiene un cuestionario enviado', yaEnviado: true }, 409, origen);
   }
 
-  if (archivos.length) {
-    t += `\n---\n\n## Archivos adjuntos\n\n`;
-    const porCarpeta = {};
-    for (const a of archivos) {
-      const c = a.camino.split('/').slice(2, -1).join('/') || '(raíz)';
-      (porCarpeta[c] = porCarpeta[c] || []).push(a);
-    }
-    for (const c of Object.keys(porCarpeta).sort()) {
-      t += `### ${c}\n\n`;
-      for (const a of porCarpeta[c]) {
-        t += `- **${a.campo}** — \`${a.camino.split('/').slice(2).join('/')}\`\n`;
-      }
-      t += '\n';
-    }
-  } else {
-    t += `\n---\n\n_No se adjuntó ningún archivo._\n`;
-  }
-  return t;
+  const contenido = base64(new TextEncoder().encode(texto).buffer);
+  await escribirEnGitHub(entorno, camino, contenido, `${codigo}: cuestionario`);
+  return json({ ok: true, codigo, camino }, 200, origen);
 }
