@@ -8,6 +8,37 @@ de la agencia y las webs que no pertenecen a un cliente concreto con su
 propio repositorio — a diferencia de repos como `Proyecto-miriam`, que son de
 una clienta y no deben mezclarse con contenido de Differentissgood.
 
+## Planes de páginas web — fuente de verdad
+
+Todo lo relacionado con los planes de creación de páginas web se llama
+**PLANES PÁGINA WEB** y vive en un único sitio:
+
+**`docs/PLANES-PAGINA-WEB.md`**
+
+Ese archivo es la fuente oficial de Plan Impulso, Plan Crecimiento y Plan Élite:
+precios, plazos de entrega, características, funcionalidades, extras, rondas de
+cambios, información legal incluida, diferencias entre planes y cualquier cambio
+futuro.
+
+**No usar `docs/PLANES.md`.** Si existiera o llegara a crearse, se traslada la
+información válida a `docs/PLANES-PAGINA-WEB.md` y se usa solo este último.
+
+Reglas al trabajar con planes:
+
+- El orden de los cambios es siempre: **Noelia decide → se actualiza
+  `docs/PLANES-PAGINA-WEB.md` → después `/planes/`, el cuestionario y el
+  contrato.** Nunca al revés.
+- Al tocar `/planes/` (`plan-impulso.html`, `plan-crecimiento.html`,
+  `plan-elite.html`) o cualquier parte del cuestionario o del contrato que use
+  datos de los planes, la referencia oficial es `docs/PLANES-PAGINA-WEB.md`.
+- Si la web, el cuestionario, el contrato o cualquier otro archivo **contradicen**
+  ese documento: **no inventar ni decidir por cuenta propia.** Se avisa a Noelia
+  de la contradicción antes de cambiar nada de información comercial.
+- No mezclar características entre planes.
+- No atribuir a un plan una funcionalidad que no figure en su información oficial.
+- No eliminar funcionalidades incluidas sin su autorización.
+- No cambiar precios, plazos, rondas ni extras si ella no lo ha pedido.
+
 ## Convenciones al trabajar aquí
 
 - **Fotos y vídeos para webs siempre a tamaño web antes de subir** (no
