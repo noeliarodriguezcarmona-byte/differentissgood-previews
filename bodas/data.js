@@ -82,8 +82,8 @@ const PORTFOLIO = [
 // Selección curada para la portada del portfolio (composición tipo bento:
 // una foto grande, varias medianas y una tarjeta de "ver todo" al final).
 const PORTFOLIO_DESTACADO = [
-  'boda-13.jpg', 'boda-32.jpg', 'boda-08.jpg', 'boda-37.jpg',
-  'boda-47.jpg', 'boda-02.jpg', 'boda-58.jpg', 'boda-33.jpg',
+  'boda-13.jpg', 'boda-33.jpg', 'boda-08.jpg', 'boda-50.jpg',
+  'boda-40.jpg', 'boda-37.jpg', 'boda-09.jpg', 'boda-47.jpg',
 ];
 
 // Las imágenes de la portada, en este orden exacto: primero las 4 elegidas,

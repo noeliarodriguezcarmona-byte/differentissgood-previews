@@ -116,7 +116,6 @@ function protegerImagenes(raiz) {
 
 function heroSlideshow() {
   const contenedor = $('#hero-diapositivas');
-  const puntos = $('#hero-puntos');
   if (!contenedor || typeof FOTOS_HERO === 'undefined') return;
 
   contenedor.innerHTML = FOTOS_HERO.map((archivo, i) => `
@@ -126,19 +125,14 @@ function heroSlideshow() {
     </figure>`).join('');
   protegerImagenes(contenedor);
 
-  puntos.innerHTML = FOTOS_HERO.map((_, i) => `<button type="button" aria-current="${i === 0}" aria-label="Foto ${i + 1}"></button>`).join('');
-
   const diapositivas = $$('.hero__diapositiva', contenedor);
-  const botones = $$('button', puntos);
   let actual = 0;
   let temporizador;
 
   function mostrar(i) {
     diapositivas[actual].classList.remove('activa');
-    botones[actual].setAttribute('aria-current', 'false');
     actual = i;
     diapositivas[actual].classList.add('activa');
-    botones[actual].setAttribute('aria-current', 'true');
   }
 
   function siguiente() { mostrar((actual + 1) % diapositivas.length); }
@@ -150,7 +144,6 @@ function heroSlideshow() {
     }
   }
 
-  botones.forEach((b, i) => b.addEventListener('click', () => { mostrar(i); reiniciar(); }));
   reiniciar();
 }
 
