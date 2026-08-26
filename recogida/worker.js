@@ -182,7 +182,22 @@ async function escribirEnGitHub(entorno, camino, contenidoB64, mensaje) {
 async function estado(url, entorno, origen) {
   const codigo = codigoDe(url.searchParams.get('codigo'));
   if (!url.searchParams.get('codigo')) {
-    return json({ ok: true, repo: entorno.GITHUB_REPO || null, maxMB: MAX_MB }, 200, origen);
+    // Diagnóstico: dice si el token está y si tiene pinta de estar bien, sin
+    // revelarlo nunca. Un token de GitHub válido mide 93 y empieza por github_pat_
+    const t = entorno.GITHUB_TOKEN;
+    return json({
+      ok: true,
+      repo: entorno.GITHUB_REPO || null,
+      maxMB: MAX_MB,
+      token: {
+        existe: typeof t === 'string',
+        vacio: !t,
+        largo: typeof t === 'string' ? t.length : 0,
+        empiezaBien: typeof t === 'string' && t.startsWith('github_pat_'),
+        conEspacios: typeof t === 'string' && t !== t.trim(),
+      },
+      origenes: (entorno.ORIGENES || '').split(',').filter(Boolean).length,
+    }, 200, origen);
   }
   if (!codigo) return json({ error: 'Código de proyecto no válido' }, 400, origen);
 
