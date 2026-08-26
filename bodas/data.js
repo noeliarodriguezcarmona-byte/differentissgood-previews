@@ -28,20 +28,16 @@ const PORTFOLIO = [
   { archivo: 'boda-08.jpg', categoria: 'flores' },
   { archivo: 'boda-09.jpg', categoria: 'familia' },
   { archivo: 'boda-10.jpg', categoria: 'grupo' },
-  { archivo: 'boda-11.jpg', categoria: 'grupo' },
   { archivo: 'boda-12.jpg', categoria: 'parejas' },
   { archivo: 'boda-13.jpg', categoria: 'parejas' },
   { archivo: 'boda-14.jpg', categoria: 'detalles' },
   { archivo: 'boda-15.jpg', categoria: 'flores' },
-  { archivo: 'boda-16.jpg', categoria: 'parejas' },
   { archivo: 'boda-17.jpg', categoria: 'parejas' },
   { archivo: 'boda-18.jpg', categoria: 'momentos' },
   { archivo: 'boda-19.jpg', categoria: 'parejas' },
-  { archivo: 'boda-20.jpg', categoria: 'parejas' },
   { archivo: 'boda-21.jpg', categoria: 'detalles' },
   { archivo: 'boda-22.jpg', categoria: 'flores' },
   { archivo: 'boda-23.jpg', categoria: 'detalles' },
-  { archivo: 'boda-24.jpg', categoria: 'detalles' },
   { archivo: 'boda-25.jpg', categoria: 'flores' },
   { archivo: 'boda-26.jpg', categoria: 'parejas' },
   { archivo: 'boda-27.jpg', categoria: 'grupo' },
@@ -62,7 +58,6 @@ const PORTFOLIO = [
   { archivo: 'boda-42.jpg', categoria: 'grupo' },
   { archivo: 'boda-43.jpg', categoria: 'celebracion' },
   { archivo: 'boda-44.jpg', categoria: 'grupo' },
-  { archivo: 'boda-45.jpg', categoria: 'celebracion' },
   { archivo: 'boda-46.jpg', categoria: 'celebracion' },
   { archivo: 'boda-47.jpg', categoria: 'paisajes' },
   { archivo: 'boda-48.jpg', categoria: 'paisajes' },
@@ -82,8 +77,8 @@ const PORTFOLIO = [
 // Selección curada para la portada del portfolio (composición tipo bento:
 // una foto grande, varias medianas y una tarjeta de "ver todo" al final).
 const PORTFOLIO_DESTACADO = [
-  'boda-13.jpg', 'boda-32.jpg', 'boda-08.jpg', 'boda-37.jpg',
-  'boda-47.jpg', 'boda-02.jpg', 'boda-58.jpg', 'boda-33.jpg',
+  'boda-13.jpg', 'boda-33.jpg', 'boda-08.jpg', 'boda-50.jpg',
+  'boda-40.jpg', 'boda-37.jpg', 'boda-09.jpg', 'boda-47.jpg',
 ];
 
 // Las imágenes de la portada, en este orden exacto: primero las 4 elegidas,

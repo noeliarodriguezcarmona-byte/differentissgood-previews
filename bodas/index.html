@@ -23,18 +23,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27><circle cx=%2732%27 cy=%2732%27 r=%2730%27 fill=%27%23faf6f0%27 stroke=%27%23a9824f%27 stroke-width=%272%27/><text x=%2732%27 y=%2743%27 font-size=%2726%27 font-family=%27Georgia,serif%27 fill=%27%23a9824f%27 text-anchor=%27middle%27>D</text></svg>">
 </head>
-<body>
-<!-- ===== Barra Differentissgood (compartida — ../assets/marca.css) ===== -->
-<div class="dig-barra">
-  <a class="dig-barra__marca" href="https://differentissgood.com/">Differentissgood</a>
-  <nav aria-label="Webs del estudio">
-    <a href="../index.html">Inicio</a>
-    <a href="../planesweb/index.html">Planes</a>
-    <a href="index.html" aria-current="page">Bodas</a>
-  </nav>
-</div>
-
-
+<body class="sin-barra-superior">
   <div class="grano" aria-hidden="true"></div>
 
   <!-- ============ AVISO DE CONTENIDO PROVISIONAL ============ -->
@@ -46,14 +35,13 @@
   <!-- ============ CABECERA ============ -->
   <header class="cabecera" id="cabecera">
     <a class="marca" href="#inicio">
-      <span class="dig-logo dig-logo--claro marca-bodas" role="img" aria-label="Differentissgood"></span>
+      <span class="dig-logo dig-logo--claro marca-bodas" id="logo-cabecera" role="img" aria-label="Differentissgood"></span>
     </a>
 
     <nav class="menu" aria-label="Secciones">
-      <a href="#quienes-somos">Quiénes somos</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#video">Vídeo</a>
-      <a href="#servicios-extra">Más servicios</a>
+      <a href="#antes">Antes</a>
+      <a href="#durante">Durante</a>
+      <a href="#despues">Después</a>
       <a href="#contacto">Contacto</a>
     </nav>
 
@@ -66,74 +54,72 @@
 
   <div class="menu-movil" id="menu-movil" hidden>
     <button class="menu-movil__x" id="menu-movil-cerrar" aria-label="Cerrar menú">×</button>
-    <a href="#quienes-somos">Quiénes somos</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#video">Vídeo</a>
-    <a href="#servicios-extra">Más servicios</a>
+    <a href="#antes">Antes</a>
+    <a href="#durante">Durante</a>
+    <a href="#despues">Después</a>
     <a href="#contacto" class="destacado">Contacto</a>
   </div>
 
   <!-- ============ 01 · PORTADA ============ -->
   <section class="hero" id="inicio">
-    <div id="hero-diapositivas"><!-- Generado por script.js a partir de FOTOS_HERO --></div>
+    <div id="hero-diapositivas" data-cursor-capa><!-- Generado por script.js a partir de FOTOS_HERO --></div>
     <div class="hero__velo"></div>
     <div class="hero__contenido">
-      <h1 class="hero__nombre">Differentissgood Weddings</h1>
-      <p class="hero__frase">Fotografía y vídeo de vuestro día especial desde una perspectiva diferente.</p>
+      <h1 class="hero__nombre reveal-palabras">Differentissgood Weddings</h1>
+      <p class="hero__frase sube">Fotografía y vídeo de boda desde una perspectiva diferente.</p>
     </div>
-    <div class="hero__puntos" id="hero-puntos"></div>
     <span class="hero__bajar" aria-hidden="true"></span>
   </section>
 
-  <!-- ============ 02 · QUIÉNES SOMOS ============ -->
-  <section class="seccion quienes" id="quienes-somos">
-    <div class="envoltura quienes__grid">
-      <figure class="quienes__foto sube">
-        <img src="media/fotos/boda-19.jpg" alt="Pareja de novios mirándose" loading="lazy">
+  <!-- ============ PREFACIO ============ -->
+  <section class="prefacio">
+    <p class="prefacio__linea reveal-palabras">La primera impresión de vuestra boda ocurre antes de la ceremonia.</p>
+  </section>
+
+  <!-- ============ ANTES · Invitación digital ============ -->
+  <section class="acto" id="antes">
+    <div class="envoltura acto__grid">
+      <figure class="acto__foto sube" data-parallax="0.05">
+        <img src="media/fotos/boda-03.jpg" alt="Detalle de la ceremonia: pluma y documento" loading="lazy">
         <div class="hueco" hidden>
           <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg>
           <p>Foto pendiente</p>
         </div>
       </figure>
-      <div class="quienes__texto">
-        <p class="etiqueta sube">Quiénes somos</p>
-        <h2 class="sube">Documentamos bodas con una mirada natural, elegante y cinematográfica.</h2>
-        <p class="sube">Somos Differentissgood, un estudio audiovisual con más de 8 años de experiencia
-          especializado en fotografía y vídeo profesional.</p>
-        <p class="sube">Acompañamos a agencias, wedding planners y espacios para bodas creando contenido
-          que no solo documenta cada celebración, sino que transmite su esencia y las emociones de cada
-          momento con un estilo natural, elegante y cinematográfico.</p>
-        <p class="sube">Ofrecemos cobertura completa de fotografía y vídeo para bodas, incluyendo sesiones
-          de pareja, preparativos, ceremonia, celebración, contenido para redes sociales, grabación con
-          dron, vídeos cinematográficos y todo el material necesario para que cada pareja conserve un
-          recuerdo único de su día.</p>
+      <div class="acto__texto">
+        <p class="etiqueta sube">Antes</p>
+        <h2 class="reveal-palabras">Antes de que llegue el primer invitado, ya habéis empezado a contar vuestra historia.</h2>
+        <p class="acto__reflexion sube">La invitación es el primer gesto: la primera cita con lo que vendrá.</p>
+        <ul class="acto__lista sube" id="lista-antes"><!-- Generado por script.js a partir de SERVICIOS_DIGITALES.invitacion --></ul>
+        <a href="#contacto" class="acto__enlace sube">Hablemos de vuestra invitación<span aria-hidden="true"> →</span></a>
       </div>
     </div>
   </section>
 
-  <!-- ============ 03 · PORTFOLIO (selección) ============ -->
-  <section class="seccion" id="portfolio">
-    <div class="seccion__cab sube">
-      <p class="etiqueta">Portfolio</p>
-      <h2>Bodas que hemos contado</h2>
+  <!-- ============ DURANTE · Foto, film, vídeo, dron ============ -->
+  <section class="acto acto--oscuro" id="durante">
+    <div class="envoltura acto__cab">
+      <p class="etiqueta sube">Durante</p>
+      <h2 class="reveal-palabras">Mientras vosotros vivís el día, hay cientos de momentos sucediendo alrededor.</h2>
+      <p class="acto__reflexion sube">Documentamos bodas con una mirada natural, elegante y cinematográfica: preparativos, ceremonia,
+        celebración, dron y todo lo que ocurre entre medias, para que no se os escape nada.</p>
     </div>
-    <div class="portfolio__bento" id="portfolio-destacado">
-      <!-- Generado por script.js a partir de PORTFOLIO_DESTACADO, con tarjeta "ver más" -->
-    </div>
-  </section>
 
-  <!-- ============ 05 · VÍDEO ============ -->
-  <section class="video-especial" id="video">
+    <div class="galeria-editorial" id="galeria-editorial">
+      <!-- Generado por script.js a partir de PORTFOLIO_DESTACADO -->
+    </div>
+
+    <p class="acto__cita reveal-palabras">Hay momentos que recordaréis y otros que ni siquiera llegaréis a ver.</p>
+
     <div class="envoltura video-especial__grid">
       <div class="sube">
         <p class="etiqueta">Vídeo</p>
-        <h2>Creamos el vídeo de vuestra boda</h2>
-        <p>Creamos una película de vuestro día para que podáis volver a sentir cada momento, desde los
-          preparativos hasta la última canción de la fiesta. No solo grabamos la ceremonia: buscamos la
-          esencia, las emociones y los momentos espontáneos que hacen único vuestro día.</p>
-        <a href="#contacto" class="btn btn--solido">Hablemos de vuestro vídeo</a>
+        <h2>Creamos la película de vuestra boda</h2>
+        <p>Desde los preparativos hasta la última canción de la fiesta: la esencia, las emociones y los momentos
+          espontáneos que hacen único vuestro día.</p>
+        <a href="#contacto" class="btn btn--linea">Hablemos de vuestro vídeo</a>
       </div>
-      <div class="video-especial__marco sube" id="video-marco">
+      <div class="video-especial__marco sube" id="video-marco" data-parallax="0.03">
         <!-- Generado por script.js -->
       </div>
     </div>
@@ -142,20 +128,27 @@
     </p>
   </section>
 
-  <!-- ============ 06 · SERVICIOS DIGITALES DE BODA ============ -->
-  <section class="seccion seccion--compacta" id="servicios-extra">
-    <div class="seccion__cab sube">
-      <p class="etiqueta">Antes y después del gran día</p>
-      <h2>Más servicios</h2>
-      <p class="seccion__cab__intro">Dos webs pensadas para acompañar la boda: una para vosotros, con vuestras fotos, y otra para
-        que vuestros invitados tengan toda la información en un solo sitio.</p>
+  <!-- ============ DESPUÉS · Álbum digital / recuerdo ============ -->
+  <section class="acto" id="despues">
+    <div class="envoltura acto__grid acto__grid--invertida">
+      <div class="acto__texto">
+        <p class="etiqueta sube">Después</p>
+        <h2 class="reveal-palabras">Vuestros recuerdos merecen algo más que una carpeta.</h2>
+        <p class="acto__reflexion sube">Habéis dedicado meses a crear un día que dura unas horas. Nosotros creamos la forma de que
+          empiece antes y permanezca después.</p>
+        <ul class="acto__lista sube" id="lista-despues"><!-- Generado por script.js a partir de SERVICIOS_DIGITALES.portfolio --></ul>
+        <a href="#contacto" class="acto__enlace sube">Hablemos de vuestro álbum<span aria-hidden="true"> →</span></a>
+      </div>
+      <figure class="acto__foto sube" data-parallax="0.05">
+        <img src="media/fotos/boda-53.jpg" alt="Detalle de manos con anillo y copa" loading="lazy">
+        <div class="hueco" hidden>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="11" width="36" height="26" rx="3"/><circle cx="18" cy="21" r="3.5"/><path d="m6 32 10-8 8 6 6-5 12 9"/></svg>
+          <p>Foto pendiente</p>
+        </div>
+      </figure>
     </div>
-    <div class="servicios-digitales__fila" id="servicios-digitales-fila">
-      <!-- Generado por script.js a partir de SERVICIOS_DIGITALES -->
-    </div>
-    <p class="servicios-digitales__cta">
-      <a href="#contacto" class="btn btn--solido">Hablemos de vuestra web</a>
-    </p>
+
+    <p class="acto__cierre reveal-palabras">El día termina. La historia no.</p>
   </section>
 
   <!-- ============ OPINIONES ============ -->
@@ -167,19 +160,16 @@
     <div class="envoltura">
       <div class="opiniones__carrusel" id="opiniones-carrusel">
         <figure class="opinion-slide activa">
-          <div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote>Vimos las fotos y volvimos a llorar como el día de la boda. Capturaron
             momentos que ni nosotros vimos en directo.</blockquote>
           <figcaption>Laura &amp; Marcos</figcaption>
         </figure>
         <figure class="opinion-slide">
-          <div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote>El vídeo quedó espectacular. Se nota que conocen bien el sitio antes de llegar
             y que se mueven sin molestar a nadie.</blockquote>
           <figcaption>Andrea &amp; Diego</figcaption>
         </figure>
         <figure class="opinion-slide">
-          <div class="estrellas" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote>La foto de grupo la organizaron en diez minutos sin que nadie se agobiara.
             Profesionales de verdad, y muy cercanos.</blockquote>
           <figcaption>Sara &amp; Pablo</figcaption>
@@ -189,13 +179,14 @@
     </div>
   </section>
 
-  <!-- ============ 07 · CONTACTO ============ -->
+  <!-- ============ CONTACTO ============ -->
   <section class="contacto" id="contacto">
     <div class="envoltura contacto__grid">
       <div class="contacto__info sube">
         <p class="etiqueta">Contacto y presupuesto</p>
         <h2>Cuéntanos vuestra boda</h2>
-        <p>Rellena vuestros datos, marcad los servicios que os interesan y os preparamos un presupuesto a medida por WhatsApp.</p>
+        <p>Rellenad vuestros datos y os preparamos un presupuesto a medida por WhatsApp — invitación, cobertura del
+          día y álbum posterior, todo junto o por partes.</p>
         <dl>
           <dt>Correo</dt><dd><a href="mailto:projectmanager@differentissgood.com">projectmanager@differentissgood.com</a></dd>
         </dl>
@@ -262,10 +253,10 @@
       </div>
       <p class="pie__lema">Fotografía y vídeo de boda.</p>
       <nav class="pie__menu" aria-label="Pie">
-        <a href="#quienes-somos">Quiénes somos</a>
+        <a href="#antes">Antes</a>
+        <a href="#durante">Durante</a>
         <a href="portfolio.html">Portfolio</a>
-        <a href="#video">Vídeo</a>
-        <a href="#servicios-extra">Más servicios</a>
+        <a href="#despues">Después</a>
         <a href="historia.html">Plantilla Historias</a>
         <a href="#contacto">Contacto y presupuesto</a>
       </nav>

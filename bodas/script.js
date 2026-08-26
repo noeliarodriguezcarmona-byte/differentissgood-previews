@@ -38,13 +38,120 @@ function animarEntradas() {
 }
 
 /* ---------------------------------------------------------
+   Revelado de texto: los titulares reflexivos entran palabra
+   a palabra al asomar, en vez de aparecer de golpe.
+   --------------------------------------------------------- */
+
+function revelarPalabras() {
+  const bloques = $$('.reveal-palabras');
+  if (!bloques.length) return;
+
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  bloques.forEach((bloque) => {
+    const texto = bloque.textContent.trim();
+    bloque.setAttribute('aria-label', texto);
+    bloque.innerHTML = texto.split(/\s+/).map((palabra, i) =>
+      `<span class="palabra" style="--i:${i}" aria-hidden="true"><span class="palabra__interior">${palabra}</span></span>`
+    ).join(' ');
+  });
+
+  if (reducido || !('IntersectionObserver' in window)) {
+    bloques.forEach((b) => b.classList.add('visible'));
+    return;
+  }
+
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach((entrada) => {
+      if (!entrada.isIntersecting) return;
+      entrada.target.classList.add('visible');
+      observador.unobserve(entrada.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: .3 });
+
+  bloques.forEach((b) => observador.observe(b));
+}
+
+/* ---------------------------------------------------------
+   Parallax muy fino al hacer scroll, sólo en pantallas grandes
+   y sin "reducir movimiento". Cada [data-parallax] se desplaza
+   una fracción de lo que se desplaza la página.
+   --------------------------------------------------------- */
+
+function parallaxScroll() {
+  const capas = $$('[data-parallax]');
+  if (!capas.length || matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      matchMedia('(max-width: 700px)').matches) return;
+
+  let pendiente = false;
+
+  function actualizar() {
+    const vh = innerHeight;
+    capas.forEach((capa) => {
+      const r = capa.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      const centro = r.top + r.height / 2 - vh / 2;
+      const fuerza = parseFloat(capa.dataset.parallax) || .04;
+      capa.style.setProperty('--parallax-y', `${(-centro * fuerza).toFixed(1)}px`);
+    });
+    pendiente = false;
+  }
+
+  addEventListener('scroll', () => {
+    if (pendiente) return;
+    pendiente = true;
+    requestAnimationFrame(actualizar);
+  }, { passive: true });
+
+  actualizar();
+}
+
+/* ---------------------------------------------------------
+   Movimiento muy sutil de la portada según la posición del
+   cursor — sólo con ratón, nunca en táctil ni con "reducir
+   movimiento" activado.
+   --------------------------------------------------------- */
+
+function parallaxCursor() {
+  const hero = $('.hero');
+  const capa = $('[data-cursor-capa]');
+  if (!hero || !capa || matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  let metaX = 0, metaY = 0, x = 0, y = 0;
+
+  hero.addEventListener('mousemove', (e) => {
+    const r = hero.getBoundingClientRect();
+    metaX = ((e.clientX - r.left) / r.width - .5) * 2;
+    metaY = ((e.clientY - r.top) / r.height - .5) * 2;
+  });
+  hero.addEventListener('mouseleave', () => { metaX = 0; metaY = 0; });
+
+  function anima() {
+    x += (metaX - x) * .045;
+    y += (metaY - y) * .045;
+    capa.style.setProperty('--cursor-x', (x * 12).toFixed(2) + 'px');
+    capa.style.setProperty('--cursor-y', (y * 8).toFixed(2) + 'px');
+    requestAnimationFrame(anima);
+  }
+  requestAnimationFrame(anima);
+}
+
+/* ---------------------------------------------------------
    Cabecera y menú
    --------------------------------------------------------- */
 
 function cabecera() {
   const cab = $('#cabecera');
+  const logo = $('#logo-cabecera');
   if (!cab) return;
-  const marcar = () => cab.dataset.fija = String(window.scrollY > 8);
+  const marcar = () => {
+    const fija = window.scrollY > 8;
+    cab.dataset.fija = String(fija);
+    // Sobre la fotografía de portada el logo va en tinta clara; en cuanto la
+    // cabecera pasa a fondo claro (al hacer scroll), cambia solo a tinta oscura.
+    logo?.classList.toggle('dig-logo--claro', !fija);
+  };
   marcar();
   addEventListener('scroll', marcar, { passive: true });
 }
@@ -116,7 +223,6 @@ function protegerImagenes(raiz) {
 
 function heroSlideshow() {
   const contenedor = $('#hero-diapositivas');
-  const puntos = $('#hero-puntos');
   if (!contenedor || typeof FOTOS_HERO === 'undefined') return;
 
   contenedor.innerHTML = FOTOS_HERO.map((archivo, i) => `
@@ -126,19 +232,14 @@ function heroSlideshow() {
     </figure>`).join('');
   protegerImagenes(contenedor);
 
-  puntos.innerHTML = FOTOS_HERO.map((_, i) => `<button type="button" aria-current="${i === 0}" aria-label="Foto ${i + 1}"></button>`).join('');
-
   const diapositivas = $$('.hero__diapositiva', contenedor);
-  const botones = $$('button', puntos);
   let actual = 0;
   let temporizador;
 
   function mostrar(i) {
     diapositivas[actual].classList.remove('activa');
-    botones[actual].setAttribute('aria-current', 'false');
     actual = i;
     diapositivas[actual].classList.add('activa');
-    botones[actual].setAttribute('aria-current', 'true');
   }
 
   function siguiente() { mostrar((actual + 1) % diapositivas.length); }
@@ -146,35 +247,31 @@ function heroSlideshow() {
   function reiniciar() {
     clearInterval(temporizador);
     if (diapositivas.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      temporizador = setInterval(siguiente, 3000);
+      temporizador = setInterval(siguiente, 6500);
     }
   }
 
-  botones.forEach((b, i) => b.addEventListener('click', () => { mostrar(i); reiniciar(); }));
   reiniciar();
 }
 
 /* ---------------------------------------------------------
-   Portfolio: selección destacada en la portada (bento)
+   Galería editorial de "Durante": composición asimétrica que
+   mezcla fotos de distintas bodas, sin álbumes separados.
    --------------------------------------------------------- */
 
-function pintarPortfolioDestacado() {
-  const cont = $('#portfolio-destacado');
+function pintarGaleriaEditorial() {
+  const cont = $('#galeria-editorial');
   if (!cont || typeof PORTFOLIO_DESTACADO === 'undefined') return;
 
-  const piezas = PORTFOLIO_DESTACADO.map((archivo) => `
-    <figure class="portfolio__pieza sube">
+  const piezas = PORTFOLIO_DESTACADO.map((archivo, i) => `
+    <figure class="galeria-editorial__pieza sube" data-parallax="${(i % 3 === 0) ? .05 : .025}">
       <img src="media/fotos/${archivo}" alt="Foto de boda" loading="lazy">
       ${huecoSvg(archivo)}
     </figure>`).join('');
 
   const cta = `
-    <a class="portfolio__cta sube" href="portfolio.html">
-      <img src="media/fotos/${PORTFOLIO_DESTACADO[PORTFOLIO_DESTACADO.length - 1]}" alt="" loading="lazy">
-      <span class="portfolio__cta__texto">
-        <p>Todas las bodas</p>
-        <span>Ver portfolio completo →</span>
-      </span>
+    <a class="galeria-editorial__cta sube" href="portfolio.html">
+      <span>Ver todas las bodas<span aria-hidden="true"> →</span></span>
     </a>`;
 
   cont.innerHTML = piezas + cta;
@@ -200,19 +297,24 @@ function pintarServicios() {
 }
 
 /* ---------------------------------------------------------
-   Servicios digitales de boda: dos tarjetas fijas (portfolio
-   posterior a la boda, y página de invitación para invitados)
+   Antes / Después: listas tipográficas a partir de
+   SERVICIOS_DIGITALES (invitación en "antes", álbum en
+   "después") — sin tarjetas, sólo texto y espacio.
    --------------------------------------------------------- */
 
-function pintarServiciosDigitales() {
-  const fila = $('#servicios-digitales-fila');
-  if (!fila || typeof SERVICIOS_DIGITALES === 'undefined') return;
+function pintarListasServiciosDigitales() {
+  if (typeof SERVICIOS_DIGITALES === 'undefined') return;
+  const porId = Object.fromEntries(SERVICIOS_DIGITALES.map((s) => [s.id, s]));
 
-  fila.innerHTML = SERVICIOS_DIGITALES.map(({ id, nombre, detalles }) => `
-    <div class="servicio-digital sube" data-servicio="${id}">
-      <h3>${nombre}</h3>
-      <ul>${detalles.map((d) => `<li>${d}</li>`).join('')}</ul>
-    </div>`).join('');
+  const listaAntes = $('#lista-antes');
+  if (listaAntes && porId.invitacion) {
+    listaAntes.innerHTML = porId.invitacion.detalles.map((d) => `<li>${d}</li>`).join('');
+  }
+
+  const listaDespues = $('#lista-despues');
+  if (listaDespues && porId.portfolio) {
+    listaDespues.innerHTML = porId.portfolio.detalles.map((d) => `<li>${d}</li>`).join('');
+  }
 }
 
 /* ---------------------------------------------------------
@@ -347,10 +449,10 @@ function formularioWhatsApp() {
    --------------------------------------------------------- */
 
 heroSlideshow();
-pintarPortfolioDestacado();
+pintarGaleriaEditorial();
 pintarServicios();
 pintarVideo();
-pintarServiciosDigitales();
+pintarListasServiciosDigitales();
 opinionesCarrusel();
 avisoProvisional();
 cabecera();
@@ -359,3 +461,6 @@ menuActivo();
 volverArriba();
 formularioWhatsApp();
 animarEntradas();
+revelarPalabras();
+parallaxScroll();
+parallaxCursor();
