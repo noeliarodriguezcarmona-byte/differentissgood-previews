@@ -17,7 +17,7 @@ La última letra es obligatoria y es la que abre el cuestionario correcto:
 Ejemplos: `DIG-2026-001-I` · `DIG-2026-002-C` · `DIG-2026-003-E`
 
 Este código se le da al cliente para que lo introduzca al abrir su
-cuestionario (`cuestionario.html`) y para referenciarlo en su contrato y en
+cuestionario (`/cuestionario/`) y para referenciarlo en su contrato y en
 cualquier documento o archivo relacionado con su proyecto.
 
 **Importante:** el plan sale de esa letra. Un código sin letra válida no abre
