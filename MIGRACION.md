@@ -111,7 +111,7 @@ grep -rn "repo-para-github_1" planes/ bodas/ assets/
 ```
 
 Y comprobar que la barra apunta a las direcciones definitivas
-(`/planes/`, `/bodas/`, `/planes/cuestionario.html`).
+(`/planesweb/`, `/bodas/`, `/cuestionario/`).
 
 ### 5. Enganchar la navegación de la web oficial
 

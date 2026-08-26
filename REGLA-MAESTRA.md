@@ -11,14 +11,14 @@ differentissgood.com          ← REFERENCIA MAESTRA de identidad visual
 ├── /                          (home) — nunca se toca para resolver algo de
 │                               bodas, planes o cuestionario
 ├── /bodas/                    — todo lo de bodas, exclusivamente aquí
-├── /planes/                   — todo lo de los planes, exclusivamente aquí
+├── /planesweb/                — todo lo de los planes, exclusivamente aquí
 └── /cuestionario/             — página propia, nueva; no está en el menú
                                  (se envía el enlace en privado a cada
                                  cliente, igual que se decidió antes)
 ```
 
 **Regla de enrutado**: "cambia algo de bodas" → `/bodas/`. "Cambia los
-planes" → `/planes/`. "Cambia el cuestionario" → `/cuestionario/`. "Cambia
+planes" → `/planesweb/`. "Cambia el cuestionario" → `/cuestionario/`. "Cambia
 la web principal" → `/`. Nunca se traslada un cambio de una URL a otra sin
 que se pida explícitamente.
 
