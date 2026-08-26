@@ -260,24 +260,19 @@
     </div>
 
     <h2><span class="num">0.</span> Código de proyecto del cliente</h2>
-    <p>A cada proyecto se le asigna un código único con el formato <b>DIG-AAAA-NNN-X</b>, donde <b>AAAA</b> es el año, <b>NNN</b> el número de proyecto y <b>X</b> la letra del plan contratado: <b>I</b> para Impulso, <b>C</b> para Crecimiento y <b>E</b> para Élite (por ejemplo, <span id="cEjemploCodigo">DIG-2026-001-I</span>). Con ese código:</p>
-    <ul class="limpia">
-      <li>El cliente entra al cuestionario de su proyecto. Es la única forma de entrar.</li>
-      <li>Queda fijado el plan contratado, que es el que indica la letra final: desde el cuestionario no se puede elegir ni cambiar de plan.</li>
-      <li>Se identifica el proyecto en el cuestionario, en los archivos y en cualquier mensaje.</li>
-    </ul>
-    <p>El código se crea después de firmar y se envía al cliente por email o WhatsApp. No contiene datos personales.</p>
+    <p>El código de proyecto es la llave del cliente para entrar a su cuestionario, y solo abre el del plan contratado en este documento: desde el cuestionario no se puede elegir ni cambiar de plan. También identifica el proyecto en los archivos y en cualquier mensaje.</p>
+    <p>Se crea después de firmar y se envía al cliente por email o WhatsApp. No contiene datos personales.</p>
 
     <h2><span class="num">1.</span> Partes</h2>
     <div class="partes-grid">
       <div class="parte-caja proveedor">
         <div class="etiqueta-parte">Prestador del servicio</div>
         <div class="campo-etq">Razón social</div>
-        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaProveedor"></span>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaProveedor">EVENTS BRANCH S.L.</span>
         <div class="campo-etq">NIF/CIF</div>
-        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <span class="blank" contenteditable="true" data-placeholder="[·]">B67515783</span>
         <div class="campo-etq">Domicilio</div>
-        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <span class="blank" contenteditable="true" data-placeholder="[·]">Calle Bolivia 239, 1ª planta · 08020 Barcelona (España)</span>
         <div class="campo-etq">Email de contacto</div>
         <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
         <p class="nota">En adelante, «Differentissgood» o «el prestador».</p>
@@ -369,7 +364,7 @@
     <p>Si ese retraso pasa de 15 días naturales y el cliente prefiere no seguir, Differentissgood le devuelve el 30% inicial.</p>
 
     <h2><span class="num">11.</span> Fotos y vídeos</h2>
-    <p>Los textos de la web los escribe Differentissgood y van incluidos en todos los planes.</p>
+    <p>Los textos de la web los crea Differentissgood y van incluidos en todos los planes.</p>
     <p>Las fotos y los vídeos no están incluidos en ningún plan. Si el cliente quiere que se los hagamos, se presupuesta aparte y se firma un anexo.</p>
 
     <h2><span class="num">12.</span> Propiedad, contenido y derechos de autor</h2>
@@ -387,14 +382,16 @@
     <p>Differentissgood no responde de sus caídas, cierres, subidas de precio ni cambios de condiciones. Sus costes no están incluidos en el precio del plan salvo que se diga expresamente (véase la cláusula 3.4).</p>
 
     <h2><span class="num">15.</span> Inteligencia artificial</h2>
-    <p>Las funciones con inteligencia artificial dependen de proveedores externos y están sujetas a su disponibilidad, límites de uso, precios y condiciones, que Differentissgood no controla.</p>
+    <p>Las funciones con inteligencia artificial que lleve la web (por ejemplo el chat con IA o el blog asistido) funcionan con herramientas de otras empresas.</p>
+    <p>Differentissgood no controla esas herramientas: la empresa que las ofrece puede subir sus precios, poner límites de uso, cambiarlas o dejar de ofrecerlas. Si eso pasa, no es responsabilidad de Differentissgood.</p>
 
     <h2><span class="num">16.</span> Textos legales de la web</h2>
     <p>Differentissgood prepara los textos legales base (aviso legal, privacidad, cookies) con la información que le da el cliente, pero eso no es asesoramiento jurídico.</p>
     <p>El cliente debe comprobar con un abogado que esos textos encajan con su actividad, sobre todo si vende online.</p>
 
     <h2><span class="num">17.</span> Fuerza mayor</h2>
-    <p>Ninguna de las dos partes responde de lo que no pueda cumplir por causas fuera de su control razonable. En ese caso, los plazos se ajustan lo necesario.</p>
+    <p>Solo se consideran causas de fuerza mayor estas: enfermedad o accidente grave, fallecimiento, incendio, inundación, catástrofe natural, corte general de luz o de internet, huelga, y caída de más de 48 horas de los servicios de terceros que la web necesita.</p>
+    <p>Si se da alguna, los plazos se paran mientras dure y se reanudan cuando termine. No cuenta como incumplimiento y no da lugar a penalización, descuento ni devolución para ninguna de las dos partes. Quien se vea afectado avisa al otro dentro de los 5 días naturales siguientes.</p>
 
     <h2><span class="num">18.</span> Cancelación del contrato</h2>
     <p>En los casos previstos en las cláusulas 4 y 5, Differentissgood puede cancelar el contrato y quedarse el 30% inicial como compensación por el trabajo y la agenda ya reservados.</p>
@@ -435,7 +432,7 @@
     <div class="firmas">
       <div class="firma proveedor">
         <div class="rol">Por Differentissgood</div>
-        <div class="nombre" id="firmaProveedor"></div>
+        <div class="nombre" id="firmaProveedor">EVENTS BRANCH S.L.</div>
         <div class="linea"></div>
         <div class="rol">Firma y sello</div>
       </div>
@@ -531,9 +528,7 @@
     var d = PLANES[clave];
     [].forEach.call(tabsEl.children, function(b){ b.classList.toggle('activa', b.dataset.plan === clave); });
     document.getElementById('etiquetaPlan').textContent = d.nombre;
-    var ejemplo = 'DIG-2026-001-' + d.letra;
-    document.getElementById('cEjemploCodigo').textContent = ejemplo;
-    document.getElementById('refCodigo').setAttribute('data-placeholder', ejemplo);
+    document.getElementById('refCodigo').setAttribute('data-placeholder', 'DIG-2026-001-' + d.letra);
     document.getElementById('txtNombrePlan').textContent = d.nombre;
     document.getElementById('cPrecio').textContent = d.precio;
     document.getElementById('cDias').textContent = d.dias + ' días laborables';

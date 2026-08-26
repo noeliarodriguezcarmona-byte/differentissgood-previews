@@ -26,9 +26,9 @@ información válida a `docs/PLANES-PAGINA-WEB.md` y se usa solo este último.
 Reglas al trabajar con planes:
 
 - El orden de los cambios es siempre: **Noelia decide → se actualiza
-  `docs/PLANES-PAGINA-WEB.md` → después `/planes/`, el cuestionario y el
+  `docs/PLANES-PAGINA-WEB.md` → después `/planesweb/`, el cuestionario y el
   contrato.** Nunca al revés.
-- Al tocar `/planes/` (`plan-impulso.html`, `plan-crecimiento.html`,
+- Al tocar `/planesweb/` (`plan-impulso.html`, `plan-crecimiento.html`,
   `plan-elite.html`) o cualquier parte del cuestionario o del contrato que use
   datos de los planes, la referencia oficial es `docs/PLANES-PAGINA-WEB.md`.
 - Si la web, el cuestionario, el contrato o cualquier otro archivo **contradicen**
@@ -47,7 +47,8 @@ Reglas al trabajar con planes:
   pesadas carga mal en móvil de todas formas.
 - **Vídeos largos van a YouTube (no listado) o Vimeo**, nunca como archivo
   suelto en el repositorio — se incrustan con iframe.
-- **Despliegue**: cada carpeta de proyecto (`repo-para-github_1/`, `bodas/`...)
+- **Despliegue**: cada carpeta de proyecto (`planesweb/`, `cuestionario/`,
+  `contrato/`, `bodas/`...)
   es una web estática independiente. Si lleva su propio flujo de GitHub
   Actions para GitHub Pages, la primera vez hay que activar
   Settings → Pages → Source: GitHub Actions a mano (no se puede automatizar,
@@ -71,7 +72,7 @@ Reglas al trabajar con planes:
   expresamente editarla de verdad (19/08). Regla vigente desde entonces, ver
   `REGLA-MAESTRA.md`: `differentissgood.com` es la fuente de identidad visual
   (tipografía, colores, logo real, cabecera, pie, animaciones); bodas, planes
-  y cuestionario son URLs propias (`/bodas/`, `/planes/`, `/cuestionario/`)
+  y cuestionario son URLs propias (`/bodas/`, `/planesweb/`, `/cuestionario/`)
   que se editan cada una por separado y nunca tocan la portada. Este
   repositorio de previews sigue sirviendo como borrador/campo de pruebas, pero
   el destino final de los cambios es siempre DIG (`differentissgood/DIG`), no

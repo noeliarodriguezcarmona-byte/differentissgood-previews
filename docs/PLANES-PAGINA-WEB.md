@@ -14,7 +14,7 @@ El orden es siempre el mismo, y nunca al revés:
 
 1. Noelia decide el cambio.
 2. Se actualiza **este archivo**.
-3. Después se actualiza donde corresponda: `/planes/` (las tres páginas web),
+3. Después se actualiza donde corresponda: `/planesweb/` (las tres páginas web),
    el cuestionario y el contrato.
 
 Si lo que dice la web, el cuestionario o el contrato **no coincide** con este
