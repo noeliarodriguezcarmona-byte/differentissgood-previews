@@ -67,6 +67,11 @@ Reglas al trabajar con planes:
   oscuro se cambia solo; en páginas que son oscuras siempre se fuerza con la
   clase `.dig-logo--claro`. Nunca se enlaza el logotipo desde otra web ni se
   vuelve a dibujar con CSS.
+- **Las direcciones oficiales son las de `differentissgood.com`** y ninguna otra:
+  `/planesweb/`, `/cuestionario/` y `/bodas/`. A un cliente no se le manda nunca
+  una dirección de `github.io` ni ninguna que lleve el nombre de Noelia. Este
+  repositorio de previews es un borrador interno y su web no se enseña a nadie.
+  Ver `REGLA-MAESTRA.md`.
 - **Traspaso a differentissgood.com**: los pasos están en `MIGRACION.md`. IMPORTANTE:
   esto ha dejado de ser "no tocar la web oficial" — Noelia ha autorizado
   expresamente editarla de verdad (19/08). Regla vigente desde entonces, ver

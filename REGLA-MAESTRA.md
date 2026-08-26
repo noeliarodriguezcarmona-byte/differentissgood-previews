@@ -1,5 +1,31 @@
 # Regla maestra del proyecto Differentissgood
 
+## Las páginas oficiales (26/08) — leer esto antes que nada
+
+**`differentissgood.com` es el único sitio oficial.** Es donde se trabaja y es
+lo único que se le enseña o se le manda a un cliente:
+
+| Qué | Dirección oficial |
+|---|---|
+| Planes | `https://differentissgood.com/planesweb/` |
+| Cuestionario | `https://differentissgood.com/cuestionario/` |
+| Bodas | `https://differentissgood.com/bodas/` |
+
+`/planes/` pasa a llamarse **`/planesweb/`**. Nunca estuvo publicada de cara al
+público, así que no hace falta redirección.
+
+**A un cliente no se le manda jamás una dirección de `github.io`, ni que lleve
+el nombre de Noelia, ni ninguna otra.** Si aparece una dirección así en un
+documento, una guía o un correo, está mal y se corrige.
+
+**Este repositorio (`differentissgood-previews`) es un borrador interno.** Sirve
+para preparar y probar, y su web de GitHub Pages no se enseña a nadie. El
+destino de todo cambio es `differentissgood/DIG`.
+
+El cuestionario puede ser una dirección pública sin problema: **está protegido
+por el código de proyecto**, que se entrega al cliente después de firmar. Sin
+código no se entra, y un código ya usado tampoco vuelve a entrar.
+
 Fijada por Noelia el 19/08. Rige para todo trabajo futuro sobre
 `differentissgood.com`, en cualquier sesión que tenga acceso al repositorio
 real (`differentissgood/DIG`) — no a este repo de previews.
