@@ -12,9 +12,11 @@ differentissgood.com          ← REFERENCIA MAESTRA de identidad visual
 │                               bodas, planes o cuestionario
 ├── /bodas/                    — todo lo de bodas, exclusivamente aquí
 ├── /planesweb/                — todo lo de los planes, exclusivamente aquí
-└── /cuestionario/             — página propia, nueva; no está en el menú
+├── /cuestionario/             — página propia, nueva; no está en el menú
                                  (se envía el enlace en privado a cada
                                  cliente, igual que se decidió antes)
+└── /contrato/                 — el contrato; tampoco está en el menú
+                                 y no se indexa
 ```
 
 **Regla de enrutado**: "cambia algo de bodas" → `/bodas/`. "Cambia los

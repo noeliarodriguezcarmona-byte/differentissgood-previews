@@ -74,6 +74,7 @@ que dependen las rutas relativas (`../assets/marca.css`):
 |------------------------|-----------------|
 | `planesweb/`           | `planesweb/`    |
 | `cuestionario/`        | `cuestionario/` |
+| `contrato/`            | `contrato/` (no enlazado en menús) |
 | `bodas/`               | `bodas/`        |
 | `assets/marca.css`     | `assets/marca.css` |
 | `assets/logo.png`      | `assets/logo.png` (¡ojo, ver abajo!) |
