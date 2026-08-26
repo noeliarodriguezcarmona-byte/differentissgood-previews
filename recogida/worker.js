@@ -45,8 +45,11 @@ export default {
       }
       return json({ error: 'Ruta no encontrada' }, 404, origen);
     } catch (e) {
+      const motivo = (e && e.message) ? String(e.message) : String(e);
       console.error('Fallo:', e && e.stack ? e.stack : e);
-      return json({ error: 'Error interno' }, 500, origen);
+      // El motivo se devuelve a propósito: este endpoint es privado y sin él
+      // no hay forma de saber por qué falla. Nunca incluye el token.
+      return json({ error: 'Error interno', motivo }, 500, origen);
     }
   },
 };
@@ -134,9 +137,10 @@ function cabecerasGitHub(entorno) {
 }
 
 function exigirConfiguracion(entorno) {
-  if (!entorno.GITHUB_TOKEN || !entorno.GITHUB_REPO) {
-    throw new Error('Falta configurar GITHUB_TOKEN o GITHUB_REPO');
-  }
+  const faltan = [];
+  if (!entorno.GITHUB_TOKEN) faltan.push('GITHUB_TOKEN');
+  if (!entorno.GITHUB_REPO) faltan.push('GITHUB_REPO');
+  if (faltan.length) throw new Error('Falta configurar: ' + faltan.join(' y '));
 }
 
 /** ¿Existe ya ese archivo en el repositorio? */
