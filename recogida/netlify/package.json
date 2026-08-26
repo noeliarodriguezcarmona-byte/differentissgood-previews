@@ -1,0 +1,9 @@
+{
+  "name": "differentissgood-recogida",
+  "private": true,
+  "type": "module",
+  "description": "Recogida del cuestionario de Differentissgood: deja cada envío en el repositorio privado clientes.",
+  "devDependencies": {
+    "@netlify/functions": "^4.2.11"
+  }
+}
