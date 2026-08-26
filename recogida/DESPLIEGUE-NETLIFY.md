@@ -1,5 +1,18 @@
 # Desplegar la recogida en Netlify
 
+> **Estado: descartado de momento (26/08/2026).** El sitio quedó creado y
+> enlazado al repositorio, pero Netlify se niega a desplegar: *«Production
+> deploys are paused because your team has used all of its available credits
+> for this billing cycle»*. El despliegue aparece como **Skipped** y el botón
+> «Trigger deploy» está deshabilitado.
+>
+> **La recogida va por Cloudflare** — ver `DESPLIEGUE.md`. El plan gratuito de
+> Workers no pide tarjeta ni tiene créditos que agotar.
+>
+> Lo de aquí sigue montado por si algún día interesa: cuando se renueven los
+> créditos, se despliega solo con el siguiente push. `GITHUB_REPO` y
+> `ORIGENES` ya están puestas; faltaría el `GITHUB_TOKEN`.
+
 Alternativa a Cloudflare (`DESPLIEGUE.md`). Hace exactamente lo mismo: recoge
 los envíos del cuestionario y los deja en el repositorio **privado** `clientes`.
 
