@@ -73,6 +73,7 @@ que dependen las rutas relativas (`../assets/marca.css`):
 | De (previews)          | A (DIG)         |
 |------------------------|-----------------|
 | `planesweb/`           | `planesweb/`    |
+| `cuestionario/`        | `cuestionario/` |
 | `bodas/`               | `bodas/`        |
 | `assets/marca.css`     | `assets/marca.css` |
 | `assets/logo.png`      | `assets/logo.png` (¡ojo, ver abajo!) |

@@ -47,7 +47,8 @@ Reglas al trabajar con planes:
   pesadas carga mal en móvil de todas formas.
 - **Vídeos largos van a YouTube (no listado) o Vimeo**, nunca como archivo
   suelto en el repositorio — se incrustan con iframe.
-- **Despliegue**: cada carpeta de proyecto (`planesweb/`, `bodas/`...)
+- **Despliegue**: cada carpeta de proyecto (`planesweb/`, `cuestionario/`,
+  `bodas/`...)
   es una web estática independiente. Si lleva su propio flujo de GitHub
   Actions para GitHub Pages, la primera vez hay que activar
   Settings → Pages → Source: GitHub Actions a mano (no se puede automatizar,
