@@ -72,7 +72,7 @@ que dependen las rutas relativas (`../assets/marca.css`):
 
 | De (previews)          | A (DIG)         |
 |------------------------|-----------------|
-| `repo-para-github_1/`  | `planes/`       |
+| `planesweb/`           | `planesweb/`    |
 | `bodas/`               | `bodas/`        |
 | `assets/marca.css`     | `assets/marca.css` |
 | `assets/logo.png`      | `assets/logo.png` (¡ojo, ver abajo!) |
@@ -103,14 +103,14 @@ principal y los claros en el de `data-tema="claro"`: la estructura ya está.
 
 ### 4. Repasar las rutas
 
-Al pasar `repo-para-github_1/` a `planes/`, hay que actualizar los `href` que
-nombran la carpeta vieja:
+La carpeta se llama `planesweb/` en los dos sitios, así que los `href` internos
+no hay que tocarlos. Basta comprobar que no queda ninguna ruta rota:
 
 ```bash
-grep -rn "repo-para-github_1" planes/ bodas/ assets/
+grep -rn "repo-para-github_1" planesweb/ bodas/ assets/
 ```
 
-Y comprobar que la barra apunta a las direcciones definitivas
+Y que la barra superior apunta a las direcciones definitivas
 (`/planesweb/`, `/bodas/`, `/cuestionario/`).
 
 ### 5. Enganchar la navegación de la web oficial
