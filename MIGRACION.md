@@ -1,5 +1,39 @@
 # Llevar estas webs a differentissgood.com
 
+## Estado a 26/08/2026 — leer esto primero
+
+Todo lo de abajo sigue valiendo, pero este es el resumen al día para quien
+llegue desde una sesión de `differentissgood/DIG`.
+
+**Qué hay listo en este repositorio (público, se puede leer sin adjuntarlo):**
+
+| Carpeta | Qué es | A dónde va en DIG |
+|---|---|---|
+| `planesweb/` | las tres páginas de planes + su portada | `/planesweb/` |
+| `cuestionario/` | cuestionario con acceso por código | `/cuestionario/` |
+| `contrato/` | contrato interactivo de 27 cláusulas | `/contrato/` (sin enlazar, con noindex) |
+| `bodas/` | bodas | `/bodas/` (ya existe en DIG) |
+| `assets/` | `marca.css`, logotipos | `assets/` |
+| `docs/PLANES-PAGINA-WEB.md` | **fuente de verdad de los planes** | se queda aquí |
+
+**Ojo con `/planes/` en DIG.** Noelia ha estado trabajando ahí y confirma que
+**su contenido es el bueno y está actualizado**. Lo que hay que hacer es
+**renombrar la carpeta a `planesweb/`**, no sustituirla por la de este
+repositorio. Antes de tocar datos comerciales, comparar con
+`docs/PLANES-PAGINA-WEB.md` y avisar de cualquier diferencia.
+
+**La recogida del cuestionario ya funciona.** Hay un Worker de Cloudflare
+desplegado que guarda cada envío en el repositorio privado `clientes`. El
+cuestionario lo llama mediante el atributo `data-recogida` de su `<form>`, y
+`differentissgood.com` **ya está autorizada** en la variable `ORIGENES` del
+Worker: al mover el cuestionario a DIG seguirá guardando sin tocar nada.
+
+**Las direcciones oficiales son las de `differentissgood.com` y ninguna otra**
+— ver `REGLA-MAESTRA.md`. La web de GitHub Pages de este repositorio es un
+borrador interno y no se le enseña a ningún cliente.
+
+---
+
 Objetivo: que los planes, el cuestionario y bodas dejen de vivir en una
 dirección aparte (`…workers.dev`) y pasen a servirse desde el mismo sitio y el
 mismo dominio que la web oficial, con su misma tipografía y sus mismos colores.
