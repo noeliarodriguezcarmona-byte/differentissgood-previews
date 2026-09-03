@@ -193,6 +193,13 @@
       </div>
     </div>
     <div class="toolbar-group">
+      <span class="toolbar-label">Alojamiento</span>
+      <div class="servicios" id="alojamiento">
+        <button type="button" class="servicio activa" data-aloj="permanente">Permanente</button>
+        <button type="button" class="servicio" data-aloj="temporal">Por tiempo limitado</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
       <span class="toolbar-label">Opciones</span>
       <div class="servicios" id="opciones">
         <button type="button" class="servicio activa" data-op="descarga">Descarga permitida</button>
@@ -260,10 +267,10 @@
 
     <h2><span class="num">2.</span> Objeto del contrato</h2>
     <p>Differentissgood crea para el cliente un álbum digital: una <b>galería privada online</b> con sus fotografías y vídeos, ordenada y presentada, accesible desde cualquier dispositivo mediante un enlace propio.</p>
-    <p>El contenido concreto, el número de piezas y la duración del alojamiento son los que figuran en el anexo.</p>
+    <p>El contenido concreto, el número de piezas y las condiciones de alojamiento son los que figuran en el anexo.</p>
 
     <h2><span class="num">3.</span> Alcance</h2>
-    <p>Queda incluido: la preparación y el orden del material, el montaje del álbum, la portada y los textos que se acuerden, la publicación en una dirección privada y el alojamiento durante el periodo pactado.</p>
+    <p>Queda incluido: la preparación y el orden del material, el montaje del álbum, la portada y los textos que se acuerden, la publicación en una dirección privada y el alojamiento en las condiciones de la cláusula <span data-ref="tiempo">11</span>.</p>
     <p>No queda incluido, salvo que se recoja en el anexo: la <b>producción de fotografía o vídeo</b>, que se contrata aparte; la edición o el retoque de material que no haya realizado Differentissgood; la impresión o el álbum físico; y la recuperación de archivos dañados o perdidos por el cliente.</p>
 
     <h2 data-clausula="material"><span class="num">4.</span> El material del álbum</h2>
@@ -318,13 +325,22 @@
     </div>
 
     <h2 data-clausula="tiempo"><span class="num">11.</span> Tiempo que permanece online</h2>
-    <p><b>El álbum permanece disponible <span class="blank" contenteditable="true" data-placeholder="[·]"></span></b> desde su entrega, según lo pactado en el anexo.</p>
-    <p>Antes de que termine ese plazo, Differentissgood avisa al cliente con antelación razonable para que descargue lo que quiera conservar. <b>Transcurrido el plazo, el álbum se retira y su contenido se elimina.</b></p>
-    <p>La prórroga del alojamiento es posible y se presupuesta aparte. Volver a montar un álbum ya eliminado se considera un trabajo nuevo.</p>
+    <div id="alojPermanente">
+      <p><b>El álbum es permanente.</b> No tiene fecha de caducidad: se mantiene online, sin coste adicional para el cliente, mientras Differentissgood preste este servicio.</p>
+      <p>Differentissgood se compromete a conservarlo y a mantenerlo accesible, y a no retirarlo por decisión propia.</p>
+      <p>Solo podría dejar de estar disponible si Differentissgood cesara en su actividad o tuviera que discontinuar este servicio. En ese supuesto, <b>Differentissgood avisará al cliente con al menos <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> meses de antelación</b> y le facilitará la descarga completa de todo su contenido en la máxima calidad disponible, sin coste.</p>
+      <p>El cliente puede pedir en cualquier momento que su álbum se retire y su contenido se elimine.</p>
+    </div>
+    <div id="alojTemporal" hidden>
+      <p><b>El álbum permanece disponible <span class="blank" contenteditable="true" data-placeholder="[·]"></span></b> desde su entrega, según lo pactado en el anexo.</p>
+      <p>Antes de que termine ese plazo, Differentissgood avisa al cliente con antelación razonable para que descargue lo que quiera conservar. <b>Transcurrido el plazo, el álbum se retira y su contenido se elimina.</b></p>
+      <p>La prórroga del alojamiento es posible y se presupuesta aparte. Volver a montar un álbum ya eliminado se considera un trabajo nuevo.</p>
+    </div>
 
     <h2><span class="num">12.</span> Copias de seguridad</h2>
-    <p><b>El álbum no es un sistema de copia de seguridad.</b> El cliente es el único responsable de guardar su propio material.</p>
-    <p>Differentissgood conserva los archivos del álbum mientras dure el alojamiento contratado. Pasado ese plazo puede eliminarlos sin previo aviso y sin responsabilidad alguna.</p>
+    <p><b>El álbum no es un sistema de copia de seguridad.</b> Aunque el alojamiento sea permanente, ninguna plataforma está libre de incidencias: el cliente es el responsable de guardar su propio material.</p>
+    <p id="conservaPermanente">Differentissgood conserva los archivos del álbum mientras preste este servicio, con las medidas de seguridad y las copias de respaldo razonables.</p>
+    <p id="conservaTemporal" hidden>Differentissgood conserva los archivos del álbum mientras dure el alojamiento contratado. Pasado ese plazo puede eliminarlos sin previo aviso y sin responsabilidad alguna.</p>
     <p>Se recomienda al cliente descargar el álbum y hacer una copia propia en cuanto lo reciba.</p>
 
     <h2><span class="num">13.</span> Propiedad intelectual y uso</h2>
@@ -445,7 +461,7 @@
         <tr><td>Reserva (30%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
         <tr><td>Pago final (70%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
         <tr><td>Plazo de entrega</td><td><span class="blank" contenteditable="true" data-placeholder="[·] días"></span></td></tr>
-        <tr><td>El álbum permanece online</td><td><span class="blank" contenteditable="true" data-placeholder="[·] meses"></span></td></tr>
+        <tr><td>Alojamiento</td><td><span class="blank" contenteditable="true" data-placeholder="permanente / [·] meses"></span></td></tr>
       </tbody>
     </table>
 
@@ -458,6 +474,7 @@
 (function(){
   'use strict';
   var origen = 'dig';
+  var aloj = 'permanente';
   var op = { descarga:true, clave:true };
 
   function pintar(){
@@ -474,6 +491,12 @@
     document.getElementById('sinDescarga').hidden = !!op.descarga;
     document.getElementById('conClave').hidden = !op.clave;
     document.getElementById('sinClave').hidden = !!op.clave;
+
+    var perm = aloj === 'permanente';
+    document.getElementById('alojPermanente').hidden = !perm;
+    document.getElementById('alojTemporal').hidden = perm;
+    document.getElementById('conservaPermanente').hidden = !perm;
+    document.getElementById('conservaTemporal').hidden = perm;
     renumerar();
   }
 
@@ -498,6 +521,10 @@
       b.classList.toggle('activa', b.dataset.orig === origen);
       b.setAttribute('aria-pressed', String(b.dataset.orig === origen));
     });
+    [].forEach.call(document.querySelectorAll('#alojamiento .servicio'), function(b){
+      b.classList.toggle('activa', b.dataset.aloj === aloj);
+      b.setAttribute('aria-pressed', String(b.dataset.aloj === aloj));
+    });
     [].forEach.call(document.querySelectorAll('#opciones .servicio'), function(b){
       b.classList.toggle('activa', !!op[b.dataset.op]);
       b.setAttribute('aria-pressed', String(!!op[b.dataset.op]));
@@ -508,6 +535,13 @@
     var b = e.target.closest('.servicio');
     if(!b) return;
     origen = b.dataset.orig;   // es una elección entre dos, no un interruptor
+    sincronizar(); pintar();
+  });
+
+  document.getElementById('alojamiento').addEventListener('click', function(e){
+    var b = e.target.closest('.servicio');
+    if(!b) return;
+    aloj = b.dataset.aloj;   // elección entre dos, no un interruptor
     sincronizar(); pintar();
   });
 
