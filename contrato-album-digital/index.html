@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Contrato álbum digital Differentissgood</title>
+<style>
+  :root{
+    --paper:#FBF7EF; --ink:#221D17; --muted:#6b6255; --muted2:#8a8071;
+    --accent:#C1571F; --accent-ink:#7a3712; --accent-soft:#F1DDCB;
+    --secundario:#3B5568; --secundario-ink:#26404F; --secundario-soft:#DEE7EA;
+    --line:#E4D9C6; --card:#FFFFFF; --toolbar:#F4EEE1;
+    --shadow: 0 18px 50px -20px rgba(34,29,23,.35);
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171310; --ink:#F3ECE2; --muted:#B8AC9B; --muted2:#9c9081;
+      --accent:#E28349; --accent-ink:#F6C9A0; --accent-soft:#3A2A1E;
+      --secundario:#7CA0B5; --secundario-ink:#BFDAE8; --secundario-soft:#20313B;
+      --line:#3A2F24; --card:#1F1A15; --toolbar:#1B1611;
+      --shadow: 0 18px 50px -20px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171310; --ink:#F3ECE2; --muted:#B8AC9B; --muted2:#9c9081;
+    --accent:#E28349; --accent-ink:#F6C9A0; --accent-soft:#3A2A1E;
+    --secundario:#7CA0B5; --secundario-ink:#BFDAE8; --secundario-soft:#20313B;
+    --line:#3A2F24; --card:#1F1A15; --toolbar:#1B1611;
+    --shadow: 0 18px 50px -20px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:15.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-soft); }
+
+  /* ---------- Barra de control ---------- */
+  .toolbar{
+    position:sticky; top:0; z-index:20;
+    background:var(--toolbar); border-bottom:1px solid var(--line);
+    padding:14px 20px; backdrop-filter: blur(10px);
+  }
+  .toolbar-inner{
+    max-width:900px; margin:0 auto;
+    display:flex; align-items:flex-start; gap:18px; flex-wrap:wrap;
+  }
+  .toolbar-group{ display:flex; flex-direction:column; gap:6px; }
+  .toolbar-label{
+    font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--muted2); font-weight:600;
+  }
+  .servicios{ display:flex; gap:6px; flex-wrap:wrap; }
+  .servicio{
+    appearance:none; border:1px solid var(--line); background:var(--card); cursor:pointer;
+    padding:7px 14px; border-radius:20px; font-family:var(--sans); font-size:13.5px;
+    font-weight:600; color:var(--muted); transition:background .18s ease, color .18s ease;
+    white-space:nowrap;
+  }
+  .servicio:hover{ color:var(--ink); }
+  .servicio.activa{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .servicio:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  input[type="date"], select{
+    font-family:var(--mono); font-size:13.5px; color:var(--ink);
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    padding:7px 10px;
+  }
+  select{ font-family:var(--sans); }
+  .btn-imprimir{
+    margin-left:auto; margin-top:19px; appearance:none; cursor:pointer;
+    background:var(--accent); color:#fff; border:none; border-radius:9px;
+    padding:10px 18px; font-family:var(--sans); font-size:13.5px; font-weight:700;
+    display:flex; align-items:center; gap:8px;
+  }
+  .btn-imprimir:hover{ background:var(--accent-ink); }
+  .btn-imprimir svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; }
+
+  /* ---------- Documento ---------- */
+  .escenario{ padding:40px 20px 80px; }
+  .doc{
+    max-width:760px; margin:0 auto; background:var(--card);
+    border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow);
+    padding:64px 68px;
+  }
+  @media (max-width:640px){ .doc{ padding:36px 24px; } .escenario{ padding:20px 10px 60px; } }
+
+  .marca{
+    font-family:var(--serif); font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--accent); text-align:center; margin:0 0 6px;
+  }
+  .titulo{
+    font-family:var(--serif); font-size:27px; text-align:center; margin:0 0 6px;
+    text-wrap:balance; font-weight:400;
+  }
+  .subtitulo{ text-align:center; color:var(--muted); font-size:13.5px; margin:0 0 40px; }
+
+  .ref-caja{
+    display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:12px 0; margin-bottom:40px; flex-wrap:wrap;
+  }
+  .ref-caja .etiqueta{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted2); }
+  .ref-caja .valor{ font-family:var(--mono); font-size:14px; color:var(--accent); font-weight:600; }
+
+  h2{
+    font-family:var(--serif); font-weight:400; font-size:17px; margin:34px 0 12px;
+    display:flex; align-items:baseline; gap:9px;
+  }
+  h2 .num{ color:var(--accent); font-variant-numeric:tabular-nums; }
+  h3{ font-family:var(--sans); font-weight:700; font-size:13.5px; margin:18px 0 8px; }
+  p{ margin:0 0 12px; }
+  .nota{ color:var(--muted); font-style:italic; font-size:13.5px; }
+
+  ul.limpia{ margin:0 0 14px; padding-left:20px; }
+  ul.limpia li{ margin-bottom:5px; }
+  ul.limpia li::marker{ color:var(--accent); }
+
+  hr.sep{ border:none; border-top:1px solid var(--line); margin:38px 0; }
+
+  .blank{
+    display:inline-block; min-width:70px; padding:0 3px; margin:0 1px;
+    border-bottom:1.5px dashed var(--accent); color:var(--ink);
+    font-family:var(--mono); font-size:14px; outline:none; cursor:text;
+  }
+  .blank:empty:before{ content:attr(data-placeholder); color:var(--muted2); font-family:var(--sans); font-style:italic; font-size:13.5px; }
+  .blank:focus{ background:var(--accent-soft); border-bottom-style:solid; }
+  .blank.ancho{ min-width:220px; }
+  .blank.corto{ min-width:40px; }
+
+  .calc{ font-weight:700; color:var(--accent-ink); font-variant-numeric:tabular-nums; }
+
+  .caja-servicio{
+    background:var(--accent-soft); border:1px solid var(--line); border-radius:10px;
+    padding:20px 22px; margin:14px 0 22px;
+  }
+  .caja-servicio h3:first-child{ margin-top:0; }
+
+  .partes-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:14px 0 20px; }
+  @media (max-width:640px){ .partes-grid{ grid-template-columns:1fr; } }
+  .parte-caja{
+    border:1px solid var(--line); border-radius:10px; padding:18px 20px 6px;
+    border-top-width:4px; background:var(--card);
+  }
+  .parte-caja.proveedor{ border-top-color:var(--accent); }
+  .parte-caja.cliente{ border-top-color:var(--secundario); }
+  .parte-caja .etiqueta-parte{
+    font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; font-weight:700;
+    margin-bottom:12px;
+  }
+  .parte-caja.proveedor .etiqueta-parte{ color:var(--accent-ink); }
+  .parte-caja.cliente .etiqueta-parte{ color:var(--secundario-ink); }
+  .parte-caja p{ font-size:14px; }
+  .campo-etq{ font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted2); margin-top:9px; }
+
+  table.presu{ width:100%; border-collapse:collapse; font-size:14px; margin:6px 0 14px; }
+  table.presu th{ text-align:left; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase;
+                  color:var(--muted2); font-weight:700; padding:0 8px 7px 0; border-bottom:1px solid var(--line); }
+  table.presu td{ padding:8px 8px 8px 0; border-bottom:1px solid var(--line); }
+  table.presu td:last-child{ text-align:right; font-variant-numeric:tabular-nums; }
+
+  .firmas{ display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:28px; }
+  @media (max-width:640px){ .firmas{ grid-template-columns:1fr; } }
+  .firma .rol{ font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted2); font-weight:700; }
+  .firma .nombre{ font-family:var(--mono); font-size:14px; min-height:1.5em; margin:6px 0 34px; }
+  .firma .linea{ border-bottom:1px solid var(--ink); margin-bottom:6px; }
+
+  [hidden]{ display:none !important; }
+
+  @media print{
+    .toolbar{ display:none; }
+    .escenario{ padding:0; }
+    .doc{ box-shadow:none; border:none; max-width:none; padding:0; }
+    body{ background:#fff; color:#000; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="toolbar-group">
+      <span class="toolbar-label">Origen del material</span>
+      <div class="servicios" id="origen">
+        <button type="button" class="servicio activa" data-orig="dig">Fotografía de Differentissgood</button>
+        <button type="button" class="servicio" data-orig="cliente">Aportado por el cliente</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Opciones</span>
+      <div class="servicios" id="opciones">
+        <button type="button" class="servicio activa" data-op="descarga">Descarga permitida</button>
+        <button type="button" class="servicio activa" data-op="clave">Acceso con contraseña</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Fecha de firma</span>
+      <input type="date" id="fechaFirma">
+    </div>
+    <button class="btn-imprimir" onclick="window.print()">
+      <svg viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+      Imprimir / exportar
+    </button>
+  </div>
+</div>
+
+<div class="escenario">
+  <div class="doc">
+
+    <p class="marca">Differentissgood</p>
+    <h1 class="titulo">Contrato de álbum digital</h1>
+    <p class="subtitulo">Galería privada online de fotografías y vídeos</p>
+
+    <div class="ref-caja">
+      <div>
+        <div class="etiqueta">Código de proyecto</div>
+        <div class="valor"><span class="blank" contenteditable="true" data-placeholder="DIG-2026-001-D"></span></div>
+      </div>
+      <div>
+        <div class="etiqueta">Fecha del evento</div>
+        <div class="valor"><span class="blank" contenteditable="true" data-placeholder="[·]"></span></div>
+      </div>
+    </div>
+
+    <h2><span class="num">1.</span> Partes</h2>
+    <div class="partes-grid">
+      <div class="parte-caja proveedor">
+        <div class="etiqueta-parte">Prestador del servicio</div>
+        <div class="campo-etq">Nombre / razón social</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaProveedor"></span>
+        <div class="campo-etq">NIF/CIF</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Domicilio</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Email de contacto</div>
+        <span class="blank ancho" contenteditable="true">projectmanager@differentissgood.com</span>
+        <p class="nota">En adelante, «Differentissgood». Es el nombre comercial con el que se presta el servicio.</p>
+      </div>
+      <div class="parte-caja cliente">
+        <div class="etiqueta-parte">El cliente</div>
+        <div class="campo-etq">Nombre y apellidos / razón social</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaCliente"></span>
+        <div class="campo-etq">DNI/NIE/CIF</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Domicilio</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Email de contacto</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <p class="nota">En adelante, «el cliente». Si contrata como particular se le aplica la normativa de consumidores — véase la cláusula <span data-ref="desistimiento">15</span>.</p>
+      </div>
+    </div>
+
+    <p>Fecha de firma: <span class="calc" id="txtFechaFirma">[·]</span></p>
+
+    <h2><span class="num">2.</span> Objeto del contrato</h2>
+    <p>Differentissgood crea para el cliente un álbum digital: una <b>galería privada online</b> con sus fotografías y vídeos, ordenada y presentada, accesible desde cualquier dispositivo mediante un enlace propio.</p>
+    <p>El contenido concreto, el número de piezas y la duración del alojamiento son los que figuran en el anexo.</p>
+
+    <h2><span class="num">3.</span> Alcance</h2>
+    <p>Queda incluido: la preparación y el orden del material, el montaje del álbum, la portada y los textos que se acuerden, la publicación en una dirección privada y el alojamiento durante el periodo pactado.</p>
+    <p>No queda incluido, salvo que se recoja en el anexo: la <b>producción de fotografía o vídeo</b>, que se contrata aparte; la edición o el retoque de material que no haya realizado Differentissgood; la impresión o el álbum físico; y la recuperación de archivos dañados o perdidos por el cliente.</p>
+
+    <h2 data-clausula="material"><span class="num">4.</span> El material del álbum</h2>
+    <div id="materialDIG">
+      <p>El álbum se monta con fotografías y vídeos realizados por Differentissgood en el marco del servicio audiovisual contratado.</p>
+      <p>La selección de las piezas que se incluyen se acuerda entre las partes conforme al anexo. Differentissgood no está obligada a incluir tomas descartadas ni a entregar los archivos en bruto.</p>
+    </div>
+    <div id="materialCliente" hidden>
+      <p>El álbum se monta con fotografías y vídeos que <b>aporta el cliente</b>. El cliente los entrega en la calidad y el formato que se acuerden, dentro del plazo de la cláusula <span data-ref="plazos">6</span>.</p>
+      <p><b>El cliente garantiza que dispone de los derechos sobre ese material</b> y del consentimiento de las personas que aparezcan en él. Responde frente a cualquier reclamación de terceros derivada de ese contenido.</p>
+      <p>Differentissgood puede ajustar tamaños y encuadres para que el álbum se vea bien, pero no edita ni retoca el material salvo que se pacte en el anexo.</p>
+    </div>
+
+    <h2><span class="num">5.</span> Precio y forma de pago</h2>
+    <p>El precio es el que figura en el anexo, con el IVA indicado aparte.</p>
+    <h3>5.1 Reserva (30%)</h3>
+    <p>Para iniciar el trabajo, el cliente abona el <b>30%</b> del precio total. Se descuenta del precio final: no se suma.</p>
+    <h3>5.2 Pago final (70%)</h3>
+    <p>El 70% restante se abona antes de la entrega del álbum. Differentissgood no da acceso al álbum hasta que el pago está completo.</p>
+    <h3>5.3 Forma de pago</h3>
+    <p>Transferencia bancaria o efectivo. Cuenta bancaria: <span class="blank ancho" contenteditable="true" data-placeholder="[IBAN]"></span></p>
+    <h3>5.4 Facturación</h3>
+    <p>La factura la emite <span class="blank ancho" contenteditable="true" data-placeholder="[entidad que factura]"></span>, que es quien consta como emisora a efectos fiscales.</p>
+
+    <h2 data-clausula="plazos"><span class="num">6.</span> Plazos</h2>
+    <p>El álbum se entrega en el plazo indicado en el anexo, contado desde que Differentissgood dispone de <b>todo</b> el material y de la información necesaria.</p>
+    <p>Cuando el material lo aporte el cliente, este dispone de <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> días naturales desde la firma para entregarlo completo.</p>
+
+    <h2><span class="num">7.</span> Orden, portada y textos</h2>
+    <p>El álbum sigue el orden de los momentos que se acuerde en el anexo. A falta de indicación, se ordena cronológicamente.</p>
+    <p>La portada y los textos que acompañen al álbum se acuerdan con el cliente. El estilo visual del montaje es el propio de Differentissgood, que el cliente declara conocer y aceptar.</p>
+
+    <h2 data-clausula="rondas"><span class="num">8.</span> Rondas de cambios</h2>
+    <p>Están incluidas <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> rondas de cambios sobre el álbum montado. Una ronda es una tanda de correcciones: varias peticiones dentro del mismo periodo de revisión cuentan como una sola.</p>
+    <p>Corregir un error (una foto mal colocada, un nombre mal escrito) no consume ronda. Cambiar la selección de piezas, el orden completo o el estilo una vez aprobado se presupuesta aparte.</p>
+
+    <h2><span class="num">9.</span> Acceso y privacidad</h2>
+    <p><b>El álbum es privado.</b> No aparece en buscadores y solo se llega a él con su enlace.</p>
+    <p id="conClave">Además, el acceso está protegido con <b>contraseña</b>. Differentissgood la entrega al cliente junto con el enlace.</p>
+    <p id="sinClave" hidden>El acceso no lleva contraseña: cualquiera que disponga del enlace puede ver el álbum. El cliente declara conocerlo y aceptarlo.</p>
+    <p>Las personas autorizadas para acceder son las que el cliente decida. <b>Differentissgood no controla con quién comparte el cliente el enlace</b> ni, en su caso, la contraseña, y no responde de la difusión que se derive de ello.</p>
+    <p>El cliente puede pedir en cualquier momento que se cambie la contraseña o que se cierre el acceso.</p>
+
+    <h2 id="tituloDescarga" data-clausula="descarga"><span class="num">10.</span> Descargas</h2>
+    <div id="bloqueDescarga">
+      <p>El álbum permite <b>descargar</b> las fotografías y los vídeos que contiene, en la calidad que se indique en el anexo.</p>
+      <p>La descarga está pensada para las personas autorizadas por el cliente. Cada descarga queda fuera del control de Differentissgood una vez realizada.</p>
+    </div>
+    <div id="sinDescarga" hidden>
+      <p>El álbum es solo de <b>visualización</b>: no permite descargar las fotografías ni los vídeos.</p>
+      <p>Si el cliente desea habilitar la descarga más adelante, se acuerda como servicio adicional.</p>
+    </div>
+
+    <h2 data-clausula="tiempo"><span class="num">11.</span> Tiempo que permanece online</h2>
+    <p><b>El álbum permanece disponible <span class="blank" contenteditable="true" data-placeholder="[·]"></span></b> desde su entrega, según lo pactado en el anexo.</p>
+    <p>Antes de que termine ese plazo, Differentissgood avisa al cliente con antelación razonable para que descargue lo que quiera conservar. <b>Transcurrido el plazo, el álbum se retira y su contenido se elimina.</b></p>
+    <p>La prórroga del alojamiento es posible y se presupuesta aparte. Volver a montar un álbum ya eliminado se considera un trabajo nuevo.</p>
+
+    <h2><span class="num">12.</span> Copias de seguridad</h2>
+    <p><b>El álbum no es un sistema de copia de seguridad.</b> El cliente es el único responsable de guardar su propio material.</p>
+    <p>Differentissgood conserva los archivos del álbum mientras dure el alojamiento contratado. Pasado ese plazo puede eliminarlos sin previo aviso y sin responsabilidad alguna.</p>
+    <p>Se recomienda al cliente descargar el álbum y hacer una copia propia en cuanto lo reciba.</p>
+
+    <h2><span class="num">13.</span> Propiedad intelectual y uso</h2>
+    <div id="propiedadDIG">
+      <p>Differentissgood conserva la autoría de las fotografías y los vídeos, que es irrenunciable, así como del diseño del álbum.</p>
+      <p>Una vez pagado el 100%, el cliente puede usar y compartir el contenido del álbum <b>para fines personales</b>. <b>Si hace un uso publicitario o comercial, debe acreditar la autoría de Differentissgood</b> de forma visible.</p>
+      <p>El cliente no puede revender el material ni cederlo a terceros para su explotación comercial sin autorización escrita.</p>
+    </div>
+    <div id="propiedadCliente" hidden>
+      <p>El material del álbum es del cliente, que conserva todos sus derechos sobre él.</p>
+      <p>Differentissgood conserva la autoría del <b>diseño y el montaje</b> del álbum, y no adquiere derecho alguno sobre las fotografías y los vídeos aportados más allá de lo necesario para prestar el servicio.</p>
+    </div>
+
+    <h2 id="tituloPortfolio"><span class="num">14.</span> Uso del álbum en el portfolio de Differentissgood</h2>
+    <div id="bloquePortfolio">
+      <p>El cliente autoriza o no el uso de una selección del álbum en el portfolio, la web y las redes sociales de Differentissgood como muestra de su trabajo:</p>
+      <div style="display:flex;align-items:center;gap:9px;margin:8px 0 6px;">
+        <input type="radio" id="chkPortfolioSi" name="portfolio" style="width:16px;height:16px;accent-color:var(--accent);">
+        <label for="chkPortfolioSi">Sí autorizo el uso de una selección en el portfolio de Differentissgood.</label>
+      </div>
+      <div style="display:flex;align-items:center;gap:9px;margin:0 0 12px;">
+        <input type="radio" id="chkPortfolioNo" name="portfolio" style="width:16px;height:16px;accent-color:var(--accent);">
+        <label for="chkPortfolioNo">No autorizo el uso de este material en el portfolio de Differentissgood.</label>
+      </div>
+      <p class="nota">Differentissgood solo mostrará material en el que aparezcan personas que hayan dado su consentimiento expreso.</p>
+    </div>
+
+    <h2><span class="num">15.</span> Derechos de imagen y personas que aparecen</h2>
+    <p>El cliente garantiza que las personas que aparecen en el álbum conocen su existencia y que dispone de su consentimiento para incluirlas y para compartir con ellas el acceso.</p>
+    <p>Cualquier persona que aparezca en el álbum puede solicitar que se retire su imagen. Recibida esa solicitud, Differentissgood lo comunicará al cliente y retirará el contenido afectado.</p>
+
+    <h2><span class="num">16.</span> Protección de datos</h2>
+    <p>Los datos del cliente se tratan únicamente para gestionar este contrato y prestar el servicio, no se ceden a terceros salvo obligación legal, y se conservan durante el tiempo legalmente exigible.</p>
+    <p>El álbum puede contener imágenes de terceros. Differentissgood las trata por cuenta del cliente y solo para alojar y mostrar el álbum, con las medidas de seguridad adecuadas, y las suprime cuando el álbum se retira.</p>
+    <p>El cliente puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo al email de contacto de la cláusula 1.</p>
+
+    <h2 data-clausula="desistimiento"><span class="num">17.</span> Derecho de desistimiento</h2>
+    <p>Cuando el cliente contrate como <b>particular</b>, por tratarse de un contrato a distancia dispone de <b>14 días naturales</b> desde la firma para desistir sin necesidad de justificación, comunicándolo por escrito al email de contacto.</p>
+    <p>Si desiste dentro de ese plazo y el trabajo aún no ha comenzado, se le devuelve íntegramente lo abonado.</p>
+    <p><b>El cliente puede pedir que el trabajo empiece antes de que terminen esos 14 días.</b> En ese caso, si después desiste, abonará la parte del servicio ya prestada, en proporción al total contratado. Marcando la casilla siguiente lo solicita y declara conocer esa consecuencia:</p>
+    <div style="display:flex;align-items:flex-start;gap:9px;margin:8px 0 18px;">
+      <input type="checkbox" id="chkDesistimiento" style="width:16px;height:16px;accent-color:var(--accent);margin-top:4px;">
+      <label for="chkDesistimiento">Solicito que Differentissgood empiece el trabajo antes de que finalicen los 14 días de desistimiento, y entiendo que si desisto después tendré que abonar la parte ya realizada.</label>
+    </div>
+    <p class="nota">Si el cliente contrata en el ejercicio de una actividad profesional o empresarial, esta cláusula no le resulta de aplicación.</p>
+
+    <h2><span class="num">18.</span> Responsabilidad</h2>
+    <p>Differentissgood presta el servicio con la diligencia propia de un profesional y responde de que el álbum funcione conforme a lo acordado.</p>
+    <p>En caso de <b>pérdida o destrucción del álbum</b> por causa imputable a Differentissgood, su responsabilidad se limita a volver a montarlo si el material sigue disponible o, si no fuera posible, a devolver las cantidades abonadas.</p>
+    <p>No responde de las caídas o incidencias de los servicios de terceros necesarios para el alojamiento, aunque se compromete a hacer lo razonable para restablecer el acceso cuanto antes.</p>
+
+    <h2><span class="num">19.</span> Fuerza mayor</h2>
+    <p>Solo se consideran causas de fuerza mayor estas: enfermedad o accidente grave, fallecimiento, incendio, inundación, catástrofe natural, corte general de luz o de internet, y huelga.</p>
+    <p>Si se da alguna, los plazos se paran mientras dure y se reanudan cuando termine. No cuenta como incumplimiento y no da lugar a penalización para ninguna de las dos partes. Quien se vea afectado avisa al otro dentro de las 24 horas siguientes.</p>
+
+    <h2><span class="num">20.</span> Comunicaciones</h2>
+    <p>Lo que se hable por los canales acordados (email, WhatsApp u otros) sirve como prueba de aprobaciones, peticiones, decisiones, cambios y aceptación de entregas.</p>
+
+    <h2><span class="num">21.</span> Firma electrónica</h2>
+    <p>Este contrato se puede firmar electrónicamente y guardarse en digital, con plena validez entre las partes.</p>
+
+    <h2><span class="num">22.</span> Ley aplicable y reclamaciones</h2>
+    <p>Este contrato se rige por la legislación española.</p>
+    <p>Si el cliente contrata como particular, serán competentes los juzgados que correspondan conforme a la ley, sin que pierda el derecho a acudir a los de su propio domicilio, y podrá dirigir su reclamación a los organismos de consumo de su comunidad autónoma.</p>
+    <p>Si contrata como empresa o profesional, ambas partes se someten a los juzgados de <span class="blank" contenteditable="true">Barcelona</span>, con renuncia a cualquier otro fuero.</p>
+
+    <hr class="sep">
+
+    <h2><span class="num">23.</span> Firmas</h2>
+    <p>Lugar y fecha: <span class="blank ancho" contenteditable="true" data-placeholder="[·]"></span></p>
+    <div class="firmas">
+      <div class="firma">
+        <div class="rol">Por Differentissgood</div>
+        <div class="nombre" id="firmaProveedor"></div>
+        <div class="linea"></div>
+        <div class="rol">Firma</div>
+      </div>
+      <div class="firma">
+        <div class="rol">El cliente</div>
+        <div class="nombre" id="firmaCliente"></div>
+        <div class="linea"></div>
+        <div class="rol">Firma</div>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <h2>Anexo · Presupuesto y detalles del álbum</h2>
+    <p class="nota">Este anexo forma parte del contrato. Aquí va lo concreto de cada álbum; el resto del documento no cambia.</p>
+
+    <h3>Contenido</h3>
+    <table class="presu">
+      <thead><tr><th>Concepto</th><th style="text-align:right">Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td><span class="blank ancho" contenteditable="true" data-placeholder="Fotografías"></span></td>
+            <td><span class="blank corto" contenteditable="true" data-placeholder="[·]"></span></td></tr>
+        <tr><td><span class="blank ancho" contenteditable="true" data-placeholder="Vídeos"></span></td>
+            <td><span class="blank corto" contenteditable="true" data-placeholder="[·]"></span></td></tr>
+        <tr><td><span class="blank ancho" contenteditable="true" data-placeholder="[concepto]"></span></td>
+            <td><span class="blank corto" contenteditable="true" data-placeholder="[·]"></span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Orden de los momentos</h3>
+    <p><span class="blank ancho" contenteditable="true" data-placeholder="[preparativos, ceremonia, celebración… o cronológico]"></span></p>
+
+    <h3>Portada y textos</h3>
+    <p><span class="blank ancho" contenteditable="true" data-placeholder="[foto de portada, título, dedicatoria…]"></span></p>
+
+    <h3>Acceso</h3>
+    <p>Personas autorizadas: <span class="blank ancho" contenteditable="true" data-placeholder="[solo el cliente / familia / invitados…]"></span><br>
+    Calidad de descarga: <span class="blank" contenteditable="true" data-placeholder="[web / alta resolución]"></span></p>
+
+    <h3>Precio y plazos</h3>
+    <table class="presu">
+      <tbody>
+        <tr><td>Precio total</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        <tr><td>Reserva (30%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        <tr><td>Pago final (70%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        <tr><td>Plazo de entrega</td><td><span class="blank" contenteditable="true" data-placeholder="[·] días"></span></td></tr>
+        <tr><td>El álbum permanece online</td><td><span class="blank" contenteditable="true" data-placeholder="[·] meses"></span></td></tr>
+      </tbody>
+    </table>
+
+    <p class="nota" style="margin-top:32px;">Plantilla de trabajo de Differentissgood. Antes de usarla con clientes conviene que la revise un profesional jurídico.</p>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var origen = 'dig';
+  var op = { descarga:true, clave:true };
+
+  function pintar(){
+    var esDIG = origen === 'dig';
+    document.getElementById('materialDIG').hidden = !esDIG;
+    document.getElementById('materialCliente').hidden = esDIG;
+    document.getElementById('propiedadDIG').hidden = !esDIG;
+    document.getElementById('propiedadCliente').hidden = esDIG;
+    // El portfolio solo tiene sentido si el material es de Differentissgood
+    document.getElementById('bloquePortfolio').hidden = !esDIG;
+    document.getElementById('tituloPortfolio').hidden = !esDIG;
+
+    document.getElementById('bloqueDescarga').hidden = !op.descarga;
+    document.getElementById('sinDescarga').hidden = !!op.descarga;
+    document.getElementById('conClave').hidden = !op.clave;
+    document.getElementById('sinClave').hidden = !!op.clave;
+    renumerar();
+  }
+
+  /* Al ocultar una cláusula, las demás se renumeran y las referencias del
+     texto siguen a la suya, para que no apunten a un número equivocado. */
+  function renumerar(){
+    var vistos = 0, mapa = {};
+    [].forEach.call(document.querySelectorAll('h2 .num'), function(el){
+      var h2 = el.parentNode;
+      if(h2.hidden) return;
+      vistos++;
+      el.textContent = vistos + '.';
+      if(h2.dataset.clausula) mapa[h2.dataset.clausula] = vistos;
+    });
+    [].forEach.call(document.querySelectorAll('[data-ref]'), function(r){
+      if(mapa[r.dataset.ref]) r.textContent = mapa[r.dataset.ref];
+    });
+  }
+
+  function sincronizar(){
+    [].forEach.call(document.querySelectorAll('#origen .servicio'), function(b){
+      b.classList.toggle('activa', b.dataset.orig === origen);
+      b.setAttribute('aria-pressed', String(b.dataset.orig === origen));
+    });
+    [].forEach.call(document.querySelectorAll('#opciones .servicio'), function(b){
+      b.classList.toggle('activa', !!op[b.dataset.op]);
+      b.setAttribute('aria-pressed', String(!!op[b.dataset.op]));
+    });
+  }
+
+  document.getElementById('origen').addEventListener('click', function(e){
+    var b = e.target.closest('.servicio');
+    if(!b) return;
+    origen = b.dataset.orig;   // es una elección entre dos, no un interruptor
+    sincronizar(); pintar();
+  });
+
+  document.getElementById('opciones').addEventListener('click', function(e){
+    var b = e.target.closest('.servicio');
+    if(!b) return;
+    op[b.dataset.op] = !op[b.dataset.op];
+    sincronizar(); pintar();
+  });
+
+  var MESES_FMT = new Intl.DateTimeFormat('es-ES', { day:'numeric', month:'long', year:'numeric' });
+  var inputFecha = document.getElementById('fechaFirma');
+  inputFecha.addEventListener('change', function(){
+    var t = document.getElementById('txtFechaFirma');
+    if(!inputFecha.value){ t.textContent = '[·]'; return; }
+    var p = inputFecha.value.split('-').map(Number);
+    t.textContent = MESES_FMT.format(new Date(p[0], p[1]-1, p[2]));
+  });
+
+  document.querySelectorAll('[data-espejo]').forEach(function(origenEl){
+    var destino = document.getElementById(origenEl.dataset.espejo);
+    origenEl.addEventListener('input', function(){ destino.textContent = origenEl.textContent; });
+  });
+
+  sincronizar();
+  pintar();
+})();
+</script>
+
+</body>
+</html>
