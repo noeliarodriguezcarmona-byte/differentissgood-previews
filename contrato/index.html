@@ -234,6 +234,13 @@
       </select>
       <p class="rondas-ayuda" id="rondasAyuda"></p>
     </div>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Tipo de cliente</span>
+      <div class="tabs" id="tipoCliente">
+        <button type="button" class="tab activa" data-cli="empresa">Empresa o profesional</button>
+        <button type="button" class="tab" data-cli="particular">Particular</button>
+      </div>
+    </div>
     <button class="btn-imprimir" id="btnImprimir" type="button">
       <svg viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg>
       Imprimir / exportar
@@ -287,7 +294,8 @@
         <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
         <div class="campo-etq">Email de contacto</div>
         <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
-        <p class="nota">En adelante, «el cliente». Declara actuar en el ejercicio de su actividad profesional o empresarial (autónomo o empresa) — véase la cláusula 21.</p>
+        <p class="nota" id="notaEmpresa">En adelante, «el cliente». Declara actuar en el ejercicio de su actividad profesional o empresarial (autónomo o empresa) — véase la cláusula <span data-ref="profesional">21</span>.</p>
+        <p class="nota" id="notaParticular" hidden>En adelante, «el cliente». Contrata como particular, por lo que se le aplica la normativa de consumidores — véase la cláusula <span data-ref="desistimiento">21</span>.</p>
       </div>
     </div>
 
@@ -310,7 +318,8 @@
     </div>
 
     <h2><span class="num">3.</span> Precio y forma de pago</h2>
-    <p>El precio es el indicado arriba para el plan contratado, sin IVA. El IVA se suma aparte en la factura.</p>
+    <p id="precioEmpresa">El precio es el indicado arriba para el plan contratado, sin IVA. El IVA se suma aparte en la factura.</p>
+    <p id="precioParticular" hidden>El precio es el indicado arriba para el plan contratado, <b>con el IVA ya incluido</b>. No hay cargos adicionales salvo los que se recojan expresamente en este contrato.</p>
     <h3>3.1 Pago inicial (30%)</h3>
     <p>El cliente paga el 30% antes de que empiece el proyecto. Ese dinero se descuenta del precio del plan: no se suma.</p>
     <h3>3.2 Pago final (70%)</h3>
@@ -406,28 +415,40 @@
     <h2><span class="num">20.</span> Mantenimiento posterior</h2>
     <p>El mantenimiento después de la entrega no está incluido. Se puede contratar aparte, con un coste mensual a acordar.</p>
 
-    <h2><span class="num">21.</span> Cliente profesional</h2>
+    <h2 id="tituloDesistimiento" data-clausula="desistimiento" hidden><span class="num">21.</span> Derecho de desistimiento</h2>
+    <div id="bloqueDesistimiento" hidden>
+      <p>Por tratarse de un contrato a distancia con consumidores, el cliente dispone de <b>14 días naturales</b> desde la firma para desistir sin necesidad de justificación, comunicándolo por escrito al email de contacto.</p>
+      <p>Si desiste dentro de ese plazo y el trabajo aún no ha comenzado, se le devuelve íntegramente lo abonado, incluida la reserva del 30%.</p>
+      <p><b>El cliente puede pedir que el trabajo empiece antes de que terminen esos 14 días.</b> En ese caso, si después desiste, abonará la parte del servicio ya prestada en proporción al total contratado. Marcando la casilla siguiente lo solicita y declara conocer esa consecuencia:</p>
+      <div class="checkline"><input type="checkbox" id="chkDesistimiento"><label for="chkDesistimiento">Solicito que Differentissgood empiece el trabajo antes de que finalicen los 14 días de desistimiento, y entiendo que si desisto después tendré que abonar la parte ya realizada.</label></div>
+    </div>
+
+    <h2 id="tituloProfesional" data-clausula="profesional"><span class="num">22.</span> Cliente profesional</h2>
+    <div id="bloqueProfesional">
     <p>El cliente declara que contrata este servicio para su actividad profesional o empresarial, no como consumidor particular.</p>
     <p>Por eso no se aplica la normativa de consumidores, incluido el derecho de desistimiento.</p>
-    <p class="nota">Este contrato es para autónomos y empresas. No se usa para bodas ni para clientes particulares, que tienen sus propias condiciones.</p>
+    <p class="nota">Esta cláusula solo se aplica cuando el cliente contrata como empresa o profesional.</p>
+    </div>
 
-    <h2><span class="num">22.</span> Uso del proyecto en el portfolio</h2>
+    <h2><span class="num">23.</span> Uso del proyecto en el portfolio</h2>
     <p>El cliente autoriza o no que Differentissgood enseñe este proyecto en su portfolio, su web y sus redes sociales:</p>
     <div class="checkline"><input type="radio" id="chkPortfolioSi" name="portfolio"><label for="chkPortfolioSi">Sí autorizo el uso de este proyecto en el portfolio de Differentissgood.</label></div>
     <div class="checkline"><input type="radio" id="chkPortfolioNo" name="portfolio"><label for="chkPortfolioNo">No autorizo el uso de este proyecto en el portfolio de Differentissgood.</label></div>
 
-    <h2><span class="num">23.</span> Comunicaciones</h2>
+    <h2><span class="num">24.</span> Comunicaciones</h2>
     <p>Lo que se hable por los canales acordados (email, WhatsApp u otros) sirve como prueba de aprobaciones, peticiones, decisiones, cambios y aceptación de entregas.</p>
 
-    <h2><span class="num">24.</span> Firma electrónica</h2>
+    <h2><span class="num">25.</span> Firma electrónica</h2>
     <p>Este contrato se puede firmar electrónicamente y guardarse en digital, con plena validez entre las partes.</p>
 
-    <h2><span class="num">25.</span> Ley aplicable y jurisdicción</h2>
-    <p>Este contrato se rige por la ley española. Para cualquier discrepancia, ambas partes se someten a los juzgados de <span class="blank" contenteditable="true" data-placeholder="[ciudad]"></span>, renunciando a cualquier otro fuero.</p>
+    <h2><span class="num">26.</span> Ley aplicable y jurisdicción</h2>
+    <p>Este contrato se rige por la legislación española.</p>
+    <p id="fueroEmpresa">Para cualquier discrepancia, ambas partes se someten a los juzgados de <span class="blank" contenteditable="true" data-placeholder="[ciudad]"></span>, renunciando a cualquier otro fuero.</p>
+    <p id="fueroParticular" hidden>Para cualquier discrepancia serán competentes los juzgados que correspondan conforme a la ley, sin que el cliente pierda el derecho a acudir a los de su propio domicilio. El cliente puede además dirigir su reclamación a los organismos de consumo de su comunidad autónoma.</p>
 
     <hr class="sep">
 
-    <h2><span class="num">26.</span> Firmas</h2>
+    <h2><span class="num">27.</span> Firmas</h2>
     <p>Lugar y fecha: <span class="blank ancho" contenteditable="true" data-placeholder="[·]"></span></p>
     <div class="firmas">
       <div class="firma proveedor">
@@ -523,6 +544,51 @@
 
   function li(texto){ var l = document.createElement('li'); l.textContent = texto; return l; }
 
+  var cliente = 'empresa';
+
+  function aplicarCliente(){
+    var esEmpresa = cliente === 'empresa';
+    document.getElementById('notaEmpresa').hidden = !esEmpresa;
+    document.getElementById('notaParticular').hidden = esEmpresa;
+    document.getElementById('precioEmpresa').hidden = !esEmpresa;
+    document.getElementById('precioParticular').hidden = esEmpresa;
+    document.getElementById('tituloDesistimiento').hidden = esEmpresa;
+    document.getElementById('bloqueDesistimiento').hidden = esEmpresa;
+    document.getElementById('tituloProfesional').hidden = !esEmpresa;
+    document.getElementById('bloqueProfesional').hidden = !esEmpresa;
+    document.getElementById('fueroEmpresa').hidden = !esEmpresa;
+    document.getElementById('fueroParticular').hidden = esEmpresa;
+    [].forEach.call(document.querySelectorAll('#tipoCliente .tab'), function(b){
+      b.classList.toggle('activa', b.dataset.cli === cliente);
+      b.setAttribute('aria-pressed', String(b.dataset.cli === cliente));
+    });
+    renumerar();
+  }
+
+  /* Al aparecer o desaparecer una cláusula, las demás se renumeran y las
+     referencias del texto siguen a la suya. */
+  function renumerar(){
+    // Este contrato empieza en la cláusula 0 (el código de proyecto), no en la 1
+    var vistos = -1, mapa = {};
+    [].forEach.call(document.querySelectorAll('h2 .num'), function(el){
+      var h2 = el.parentNode;
+      if(h2.hidden) return;
+      vistos++;
+      el.textContent = vistos + '.';
+      if(h2.dataset.clausula) mapa[h2.dataset.clausula] = vistos;
+    });
+    [].forEach.call(document.querySelectorAll('[data-ref]'), function(r){
+      if(mapa[r.dataset.ref]) r.textContent = mapa[r.dataset.ref];
+    });
+  }
+
+  document.getElementById('tipoCliente').addEventListener('click', function(e){
+    var b = e.target.closest('.tab');
+    if(!b) return;
+    cliente = b.dataset.cli;
+    aplicarCliente();
+  });
+
   function seleccionarPlan(clave){
     actual = clave;
     var d = PLANES[clave];
@@ -593,6 +659,7 @@
   actualizarAyudaRondas();
 
   seleccionarPlan('impulso');
+  aplicarCliente();
 })();
 </script>
 </body>
