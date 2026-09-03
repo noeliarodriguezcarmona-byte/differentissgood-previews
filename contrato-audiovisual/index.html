@@ -194,10 +194,18 @@
       </div>
     </div>
     <div class="toolbar-group">
+      <span class="toolbar-label">Tipo de cliente</span>
+      <div class="servicios" id="tipoCliente">
+        <button type="button" class="servicio activa" data-cli="empresa">Empresa o profesional</button>
+        <button type="button" class="servicio" data-cli="particular">Particular</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
       <span class="toolbar-label">Tipo de encargo</span>
       <select id="tipoEncargo">
         <option value="sesion">Sesión de estudio o localización</option>
         <option value="evento">Evento</option>
+        <option value="boda">Boda</option>
         <option value="producto">Producto o catálogo</option>
         <option value="corporativo">Corporativo / marca</option>
       </select>
@@ -255,7 +263,8 @@
         <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
         <div class="campo-etq">Email de contacto</div>
         <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
-        <p class="nota">En adelante, «el cliente». Declara actuar en el ejercicio de su actividad profesional o empresarial — véase la cláusula <span data-ref="profesional">18</span>.</p>
+        <p class="nota" id="notaEmpresa">En adelante, «el cliente». Declara actuar en el ejercicio de su actividad profesional o empresarial — véase la cláusula <span data-ref="profesional">18</span>.</p>
+        <p class="nota" id="notaParticular" hidden>En adelante, «el cliente». Contrata como particular, por lo que se le aplica la normativa de consumidores — véase la cláusula <span data-ref="desistimiento">18</span>.</p>
       </div>
     </div>
 
@@ -280,7 +289,8 @@
     <p>No queda incluido, salvo que se recoja expresamente en el anexo: desplazamientos fuera de <span class="blank" contenteditable="true" data-placeholder="[zona]"></span>, dietas y alojamiento, alquiler de localizaciones o permisos de rodaje, maquillaje y peluquería, atrezo, modelos, música con licencia, impresión, álbumes físicos, y cualquier servicio no listado.</p>
 
     <h2><span class="num">4.</span> Precio y forma de pago</h2>
-    <p>El precio es el que figura en el anexo, sin IVA. El IVA se suma aparte en la factura.</p>
+    <p id="precioEmpresa">El precio es el que figura en el anexo, sin IVA. El IVA se suma aparte en la factura.</p>
+    <p id="precioParticular" hidden>El precio es el que figura en el anexo, <b>con el IVA ya incluido</b>. No hay cargos adicionales salvo los que se recojan expresamente en el anexo.</p>
     <h3>4.1 Reserva (30%)</h3>
     <p>Para reservar la fecha, el cliente abona el <b>30%</b> del precio total. La fecha no queda bloqueada hasta que ese importe está pagado. Ese 30% se descuenta del precio final: no se suma.</p>
     <h3>4.2 Pago final (70%)</h3>
@@ -367,10 +377,23 @@
     <p>Si se da alguna, los plazos se paran mientras dure y se reanudan cuando termine. No cuenta como incumplimiento y no da lugar a penalización para ninguna de las dos partes. Quien se vea afectado avisa al otro dentro de las 24 horas siguientes.</p>
     <p>Cuando la causa impida atender un servicio con fecha fija, Differentissgood puede <b>designar a otro profesional de nivel equivalente</b> para cubrirlo, manteniendo el precio y el alcance pactados. Si no fuera posible, se devuelven íntegras las cantidades abonadas.</p>
 
-    <h2 data-clausula="profesional"><span class="num">18.</span> Cliente profesional</h2>
+    <h2 id="tituloDesistimiento" data-clausula="desistimiento" hidden><span class="num">18.</span> Derecho de desistimiento</h2>
+    <div id="bloqueDesistimiento" hidden>
+      <p>Por tratarse de un contrato a distancia con consumidores, el cliente dispone de <b>14 días naturales</b> desde la firma para desistir sin necesidad de justificación, comunicándolo por escrito al email de contacto.</p>
+      <p>Si desiste dentro de ese plazo y el servicio aún no se ha prestado, se le devuelve íntegramente lo abonado.</p>
+      <p><b>El cliente puede pedir que el servicio se preste antes de que terminen esos 14 días</b> — algo habitual cuando la fecha del encargo cae dentro de ese plazo. En ese caso, si después desiste, abonará la parte ya prestada en proporción al total contratado. Marcando la casilla siguiente lo solicita y declara conocer esa consecuencia:</p>
+      <div style="display:flex;align-items:flex-start;gap:9px;margin:8px 0 18px;">
+        <input type="checkbox" id="chkDesistimiento" style="width:16px;height:16px;accent-color:var(--accent);margin-top:4px;">
+        <label for="chkDesistimiento">Solicito que Differentissgood preste el servicio antes de que finalicen los 14 días de desistimiento, y entiendo que si desisto después tendré que abonar la parte ya realizada.</label>
+      </div>
+    </div>
+
+    <h2 id="tituloProfesional" data-clausula="profesional"><span class="num">19.</span> Cliente profesional</h2>
+    <div id="bloqueProfesional">
     <p>El cliente declara que contrata este servicio para su actividad profesional o empresarial, no como consumidor particular.</p>
     <p>Por eso no se aplica la normativa de consumidores, incluido el derecho de desistimiento.</p>
-    <p class="nota">Este contrato es para autónomos y empresas. Para encargos contratados por particulares se utilizan sus propias condiciones.</p>
+    <p class="nota">Esta cláusula solo se aplica cuando el cliente contrata como empresa o profesional.</p>
+    </div>
 
     <h2><span class="num">19.</span> Comunicaciones</h2>
     <p>Lo que se hable por los canales acordados (email, WhatsApp u otros) sirve como prueba de aprobaciones, peticiones, decisiones, cambios y aceptación de entregas.</p>
@@ -379,7 +402,9 @@
     <p>Este contrato se puede firmar electrónicamente y guardarse en digital, con plena validez entre las partes.</p>
 
     <h2><span class="num">21.</span> Ley aplicable y jurisdicción</h2>
-    <p>Este contrato se rige por la ley española. Para cualquier discrepancia, ambas partes se someten a los juzgados de <span class="blank" contenteditable="true">Barcelona</span>, renunciando a cualquier otro fuero.</p>
+    <p>Este contrato se rige por la legislación española.</p>
+    <p id="fueroEmpresa">Para cualquier discrepancia, ambas partes se someten a los juzgados de <span class="blank" contenteditable="true">Barcelona</span>, renunciando a cualquier otro fuero.</p>
+    <p id="fueroParticular" hidden>Para cualquier discrepancia serán competentes los juzgados que correspondan conforme a la ley, sin que el cliente pierda el derecho a acudir a los de su propio domicilio. El cliente puede además dirigir su reclamación a los organismos de consumo de su comunidad autónoma.</p>
 
     <hr class="sep">
 
@@ -421,7 +446,7 @@
     <h3>Precio y plazos</h3>
     <table class="presu">
       <tbody>
-        <tr><td>Precio total (IVA no incluido)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        <tr><td><span id="etqPrecio">Precio total (IVA no incluido)</span></td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
         <tr><td>Reserva (30%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
         <tr><td>Pago final (70%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
         <tr><td>Plazo de entrega desde el servicio</td><td><span class="blank" contenteditable="true" data-placeholder="[·] días"></span></td></tr>
@@ -453,11 +478,13 @@
   var TIPOS = {
     sesion:'Sesión de estudio o localización',
     evento:'Evento',
+    boda:'Boda',
     producto:'Producto o catálogo',
     corporativo:'Corporativo / marca'
   };
 
   var activos = { foto:true, video:false, dron:false };
+  var cliente = 'empresa';
 
   function pintar(){
     var elegidos = Object.keys(activos).filter(function(k){ return activos[k]; });
@@ -481,6 +508,21 @@
     var hayDron = !!activos.dron;
     document.getElementById('bloqueDron').hidden = !hayDron;
     document.getElementById('tituloDron').hidden = !hayDron;
+
+    // Con particulares entran las cláusulas de consumo y sale la de profesional
+    var esEmpresa = cliente === 'empresa';
+    document.getElementById('notaEmpresa').hidden = !esEmpresa;
+    document.getElementById('notaParticular').hidden = esEmpresa;
+    document.getElementById('precioEmpresa').hidden = !esEmpresa;
+    document.getElementById('precioParticular').hidden = esEmpresa;
+    document.getElementById('etqPrecio').textContent = esEmpresa
+      ? 'Precio total (IVA no incluido)' : 'Precio total (IVA incluido)';
+    document.getElementById('tituloDesistimiento').hidden = esEmpresa;
+    document.getElementById('bloqueDesistimiento').hidden = esEmpresa;
+    document.getElementById('tituloProfesional').hidden = !esEmpresa;
+    document.getElementById('bloqueProfesional').hidden = !esEmpresa;
+    document.getElementById('fueroEmpresa').hidden = !esEmpresa;
+    document.getElementById('fueroParticular').hidden = esEmpresa;
     renumerar();
   }
 
@@ -502,9 +544,13 @@
   }
 
   function sincronizarBotones(){
-    [].forEach.call(document.querySelectorAll('.servicio'), function(b){
+    [].forEach.call(document.querySelectorAll('#servicios .servicio'), function(b){
       b.classList.toggle('activa', !!activos[b.dataset.serv]);
       b.setAttribute('aria-pressed', String(!!activos[b.dataset.serv]));
+    });
+    [].forEach.call(document.querySelectorAll('#tipoCliente .servicio'), function(b){
+      b.classList.toggle('activa', b.dataset.cli === cliente);
+      b.setAttribute('aria-pressed', String(b.dataset.cli === cliente));
     });
   }
 
@@ -512,6 +558,14 @@
     var b = e.target.closest('.servicio');
     if(!b) return;
     activos[b.dataset.serv] = !activos[b.dataset.serv];
+    sincronizarBotones();
+    pintar();
+  });
+
+  document.getElementById('tipoCliente').addEventListener('click', function(e){
+    var b = e.target.closest('.servicio');
+    if(!b) return;
+    cliente = b.dataset.cli;   // elección entre dos, no un interruptor
     sincronizarBotones();
     pintar();
   });
