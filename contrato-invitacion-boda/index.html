@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Contrato invitación de boda Differentissgood</title>
+<style>
+  :root{
+    --paper:#FBF7EF; --ink:#221D17; --muted:#6b6255; --muted2:#8a8071;
+    --accent:#C1571F; --accent-ink:#7a3712; --accent-soft:#F1DDCB;
+    --secundario:#3B5568; --secundario-ink:#26404F; --secundario-soft:#DEE7EA;
+    --line:#E4D9C6; --card:#FFFFFF; --toolbar:#F4EEE1;
+    --shadow: 0 18px 50px -20px rgba(34,29,23,.35);
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171310; --ink:#F3ECE2; --muted:#B8AC9B; --muted2:#9c9081;
+      --accent:#E28349; --accent-ink:#F6C9A0; --accent-soft:#3A2A1E;
+      --secundario:#7CA0B5; --secundario-ink:#BFDAE8; --secundario-soft:#20313B;
+      --line:#3A2F24; --card:#1F1A15; --toolbar:#1B1611;
+      --shadow: 0 18px 50px -20px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171310; --ink:#F3ECE2; --muted:#B8AC9B; --muted2:#9c9081;
+    --accent:#E28349; --accent-ink:#F6C9A0; --accent-soft:#3A2A1E;
+    --secundario:#7CA0B5; --secundario-ink:#BFDAE8; --secundario-soft:#20313B;
+    --line:#3A2F24; --card:#1F1A15; --toolbar:#1B1611;
+    --shadow: 0 18px 50px -20px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:15.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-soft); }
+
+  /* ---------- Barra de control ---------- */
+  .toolbar{
+    position:sticky; top:0; z-index:20;
+    background:var(--toolbar); border-bottom:1px solid var(--line);
+    padding:14px 20px; backdrop-filter: blur(10px);
+  }
+  .toolbar-inner{
+    max-width:900px; margin:0 auto;
+    display:flex; align-items:flex-start; gap:18px; flex-wrap:wrap;
+  }
+  .toolbar-group{ display:flex; flex-direction:column; gap:6px; }
+  .toolbar-label{
+    font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--muted2); font-weight:600;
+  }
+  .servicios{ display:flex; gap:6px; flex-wrap:wrap; }
+  .servicio{
+    appearance:none; border:1px solid var(--line); background:var(--card); cursor:pointer;
+    padding:7px 14px; border-radius:20px; font-family:var(--sans); font-size:13.5px;
+    font-weight:600; color:var(--muted); transition:background .18s ease, color .18s ease;
+    white-space:nowrap;
+  }
+  .servicio:hover{ color:var(--ink); }
+  .servicio.activa{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .servicio:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  input[type="date"], select{
+    font-family:var(--mono); font-size:13.5px; color:var(--ink);
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    padding:7px 10px;
+  }
+  select{ font-family:var(--sans); }
+  .btn-imprimir{
+    margin-left:auto; margin-top:19px; appearance:none; cursor:pointer;
+    background:var(--accent); color:#fff; border:none; border-radius:9px;
+    padding:10px 18px; font-family:var(--sans); font-size:13.5px; font-weight:700;
+    display:flex; align-items:center; gap:8px;
+  }
+  .btn-imprimir:hover{ background:var(--accent-ink); }
+  .btn-imprimir svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; }
+
+  /* ---------- Documento ---------- */
+  .escenario{ padding:40px 20px 80px; }
+  .doc{
+    max-width:760px; margin:0 auto; background:var(--card);
+    border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow);
+    padding:64px 68px;
+  }
+  @media (max-width:640px){ .doc{ padding:36px 24px; } .escenario{ padding:20px 10px 60px; } }
+
+  .marca{
+    font-family:var(--serif); font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--accent); text-align:center; margin:0 0 6px;
+  }
+  .titulo{
+    font-family:var(--serif); font-size:27px; text-align:center; margin:0 0 6px;
+    text-wrap:balance; font-weight:400;
+  }
+  .subtitulo{ text-align:center; color:var(--muted); font-size:13.5px; margin:0 0 40px; }
+
+  .ref-caja{
+    display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:12px 0; margin-bottom:40px; flex-wrap:wrap;
+  }
+  .ref-caja .etiqueta{ font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted2); }
+  .ref-caja .valor{ font-family:var(--mono); font-size:14px; color:var(--accent); font-weight:600; }
+
+  h2{
+    font-family:var(--serif); font-weight:400; font-size:17px; margin:34px 0 12px;
+    display:flex; align-items:baseline; gap:9px;
+  }
+  h2 .num{ color:var(--accent); font-variant-numeric:tabular-nums; }
+  h3{ font-family:var(--sans); font-weight:700; font-size:13.5px; margin:18px 0 8px; }
+  p{ margin:0 0 12px; }
+  .nota{ color:var(--muted); font-style:italic; font-size:13.5px; }
+
+  ul.limpia{ margin:0 0 14px; padding-left:20px; }
+  ul.limpia li{ margin-bottom:5px; }
+  ul.limpia li::marker{ color:var(--accent); }
+
+  hr.sep{ border:none; border-top:1px solid var(--line); margin:38px 0; }
+
+  .blank{
+    display:inline-block; min-width:70px; padding:0 3px; margin:0 1px;
+    border-bottom:1.5px dashed var(--accent); color:var(--ink);
+    font-family:var(--mono); font-size:14px; outline:none; cursor:text;
+  }
+  .blank:empty:before{ content:attr(data-placeholder); color:var(--muted2); font-family:var(--sans); font-style:italic; font-size:13.5px; }
+  .blank:focus{ background:var(--accent-soft); border-bottom-style:solid; }
+  .blank.ancho{ min-width:220px; }
+  .blank.corto{ min-width:40px; }
+
+  .calc{ font-weight:700; color:var(--accent-ink); font-variant-numeric:tabular-nums; }
+
+  .caja-servicio{
+    background:var(--accent-soft); border:1px solid var(--line); border-radius:10px;
+    padding:20px 22px; margin:14px 0 22px;
+  }
+  .caja-servicio h3:first-child{ margin-top:0; }
+
+  .partes-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:14px 0 20px; }
+  @media (max-width:640px){ .partes-grid{ grid-template-columns:1fr; } }
+  .parte-caja{
+    border:1px solid var(--line); border-radius:10px; padding:18px 20px 6px;
+    border-top-width:4px; background:var(--card);
+  }
+  .parte-caja.proveedor{ border-top-color:var(--accent); }
+  .parte-caja.cliente{ border-top-color:var(--secundario); }
+  .parte-caja .etiqueta-parte{
+    font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; font-weight:700;
+    margin-bottom:12px;
+  }
+  .parte-caja.proveedor .etiqueta-parte{ color:var(--accent-ink); }
+  .parte-caja.cliente .etiqueta-parte{ color:var(--secundario-ink); }
+  .parte-caja p{ font-size:14px; }
+  .campo-etq{ font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted2); margin-top:9px; }
+
+  table.presu{ width:100%; border-collapse:collapse; font-size:14px; margin:6px 0 14px; }
+  table.presu th{ text-align:left; font-size:10.5px; letter-spacing:.07em; text-transform:uppercase;
+                  color:var(--muted2); font-weight:700; padding:0 8px 7px 0; border-bottom:1px solid var(--line); }
+  table.presu td{ padding:8px 8px 8px 0; border-bottom:1px solid var(--line); }
+  table.presu td:last-child{ text-align:right; font-variant-numeric:tabular-nums; }
+
+  .firmas{ display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:28px; }
+  @media (max-width:640px){ .firmas{ grid-template-columns:1fr; } }
+  .firma .rol{ font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted2); font-weight:700; }
+  .firma .nombre{ font-family:var(--mono); font-size:14px; min-height:1.5em; margin:6px 0 34px; }
+  .firma .linea{ border-bottom:1px solid var(--ink); margin-bottom:6px; }
+
+  [hidden]{ display:none !important; }
+
+  @media print{
+    .toolbar{ display:none; }
+    .escenario{ padding:0; }
+    .doc{ box-shadow:none; border:none; max-width:none; padding:0; }
+    body{ background:#fff; color:#000; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="toolbar-group">
+      <span class="toolbar-label">Incluye</span>
+      <div class="servicios" id="servicios">
+        <button type="button" class="servicio activa" data-serv="rsvp">Confirmación de asistencia</button>
+        <button type="button" class="servicio" data-serv="propio">Dominio propio</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Fecha de firma</span>
+      <input type="date" id="fechaFirma">
+    </div>
+    <button class="btn-imprimir" onclick="window.print()">
+      <svg viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+      Imprimir / exportar
+    </button>
+  </div>
+</div>
+
+<div class="escenario">
+  <div class="doc">
+
+    <p class="marca">Differentissgood</p>
+    <h1 class="titulo">Contrato de invitación web de boda</h1>
+    <p class="subtitulo">Diseño y desarrollo de la invitación digital</p>
+
+    <div class="ref-caja">
+      <div>
+        <div class="etiqueta">Código de proyecto</div>
+        <div class="valor"><span class="blank" contenteditable="true" data-placeholder="DIG-2026-001-B"></span></div>
+      </div>
+      <div>
+        <div class="etiqueta">Fecha de la boda</div>
+        <div class="valor"><span class="blank" contenteditable="true" data-placeholder="[·]"></span></div>
+      </div>
+    </div>
+
+    <h2><span class="num">1.</span> Partes</h2>
+    <div class="partes-grid">
+      <div class="parte-caja proveedor">
+        <div class="etiqueta-parte">Prestador del servicio</div>
+        <div class="campo-etq">Nombre / razón social</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaProveedor"></span>
+        <div class="campo-etq">NIF/CIF</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Domicilio</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Email de contacto</div>
+        <span class="blank ancho" contenteditable="true">projectmanager@differentissgood.com</span>
+        <p class="nota">En adelante, «Differentissgood». Es el nombre comercial con el que se presta el servicio.</p>
+      </div>
+      <div class="parte-caja cliente">
+        <div class="etiqueta-parte">La pareja</div>
+        <div class="campo-etq">Nombre y apellidos</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaCliente"></span>
+        <div class="campo-etq">DNI/NIE</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Nombre y apellidos</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]" data-espejo="firmaCliente2"></span>
+        <div class="campo-etq">DNI/NIE</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Domicilio</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <div class="campo-etq">Email de contacto</div>
+        <span class="blank" contenteditable="true" data-placeholder="[·]"></span>
+        <p class="nota">En adelante, «la pareja» o «el cliente». Contratan como particulares, por lo que se les aplica la normativa de consumidores.</p>
+      </div>
+    </div>
+
+    <p>Fecha de firma: <span class="calc" id="txtFechaFirma">[·]</span></p>
+
+    <h2><span class="num">2.</span> Objeto del contrato</h2>
+    <p>Differentissgood diseña y desarrolla la invitación web de la boda de la pareja: una página propia con la información del enlace, publicada en internet y accesible desde el móvil de los invitados.</p>
+    <p>El contenido concreto (secciones, textos, fotografías y funcionalidades) es el que figura en el anexo y el que la pareja facilite conforme a la cláusula <span data-ref="contenido">6</span>.</p>
+
+    <h2><span class="num">3.</span> Alcance</h2>
+    <p>Queda incluido: el diseño a medida de la invitación, su adaptación a móvil, la maquetación del contenido que aporte la pareja, la publicación en internet y las rondas de cambios de la cláusula <span data-ref="rondas">7</span>.</p>
+    <p>No queda incluido, salvo que se recoja en el anexo: la <b>producción de fotografía o vídeo</b>, que se contrata aparte; la redacción de los textos desde cero; la impresión de invitaciones en papel; el diseño de otros elementos de papelería; y la gestión de la lista de invitados más allá de recoger sus confirmaciones.</p>
+
+    <h2><span class="num">4.</span> Precio y forma de pago</h2>
+    <p>El precio es el que figura en el anexo, con el IVA indicado aparte.</p>
+    <h3>4.1 Reserva (30%)</h3>
+    <p>Para reservar la fecha de trabajo, la pareja abona el <b>30%</b> del precio total. El proyecto no empieza hasta que ese importe está pagado. Se descuenta del precio final: no se suma.</p>
+    <h3>4.2 Pago final (70%)</h3>
+    <p>El 70% restante se abona antes de la publicación definitiva de la invitación.</p>
+    <h3>4.3 Forma de pago</h3>
+    <p>Transferencia bancaria o efectivo. Cuenta bancaria: <span class="blank ancho" contenteditable="true" data-placeholder="[IBAN]"></span></p>
+    <h3>4.4 Facturación</h3>
+    <p>La factura la emite <span class="blank ancho" contenteditable="true" data-placeholder="[entidad que factura]"></span>, que es quien consta como emisora a efectos fiscales.</p>
+
+    <h2><span class="num">5.</span> Plazos</h2>
+    <p>La invitación se entrega en el plazo indicado en el anexo, contado desde que la pareja ha enviado <b>todo</b> el contenido necesario.</p>
+    <p>La pareja dispone de <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> días naturales desde la firma para enviar ese contenido.</p>
+    <p><b>La fecha de la boda manda.</b> Differentissgood se compromete a tener la invitación publicada con la antelación acordada en el anexo. Si el contenido llega tarde y esa antelación deja de ser posible, la invitación se publicará en cuanto esté lista, sin que ello se considere incumplimiento.</p>
+
+    <h2 data-clausula="contenido"><span class="num">6.</span> Contenido que aporta la pareja</h2>
+    <p>La pareja facilita los textos, las fotografías, los datos del enlace y cualquier otro material que deba aparecer en la invitación.</p>
+    <p>La pareja garantiza que dispone de los derechos sobre ese material y del consentimiento de las personas que aparezcan en las fotografías. Responde frente a cualquier reclamación de terceros derivada de ese contenido.</p>
+    <p>Las fotografías se entregan en calidad suficiente para web. Differentissgood puede ajustar su tamaño y su encuadre para que se vean bien en móvil.</p>
+
+    <h2 data-clausula="rondas"><span class="num">7.</span> Rondas de cambios</h2>
+    <p>Están incluidas <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> rondas de cambios sobre la invitación ya montada. Una ronda es una tanda de correcciones: si la pareja envía sus peticiones en varios mensajes dentro del mismo periodo de revisión, todas cuentan como una sola.</p>
+    <p>Las rondas adicionales, los cambios de diseño una vez aprobado y las secciones nuevas se presupuestan aparte.</p>
+    <p>Corregir un dato equivocado (una hora, una dirección, un nombre) no consume ronda: se arregla sin coste.</p>
+
+    <h2><span class="num">8.</span> Publicación y tiempo online</h2>
+    <p id="dominioDIG">La invitación se publica en una dirección propia dentro del dominio de Differentissgood, del tipo <span class="blank ancho" contenteditable="true" data-placeholder="[dirección]"></span>. El coste de mantenerla online durante el periodo acordado está incluido en el precio.</p>
+    <p id="dominioPropio" hidden>La invitación se publica en un dominio propio de la pareja: <span class="blank ancho" contenteditable="true" data-placeholder="[dominio]"></span>. Differentissgood se encarga de la configuración técnica; <b>el coste del dominio y del alojamiento lo abona la pareja</b> directamente al proveedor.</p>
+    <p><b>La invitación permanece online hasta <span class="blank" contenteditable="true" data-placeholder="[fecha o plazo]"></span></b>, que es como mínimo hasta la celebración de la boda. Pasado ese plazo se retira, salvo que se acuerde una prórroga.</p>
+    <p>Antes de retirarla, Differentissgood avisa a la pareja con antelación razonable para que pueda descargar lo que quiera conservar.</p>
+
+    <h2 id="tituloRsvp" data-clausula="rsvp"><span class="num">9.</span> Confirmaciones de asistencia y datos de los invitados</h2>
+    <div id="bloqueRsvp">
+      <p>La invitación incluye un formulario para que los invitados confirmen su asistencia y faciliten los datos que la pareja necesite (acompañantes, alergias, transporte y similares).</p>
+      <p><b>Esos datos son de la pareja, no de Differentissgood.</b> La pareja es quien decide qué se pregunta y para qué se usa; Differentissgood los trata únicamente por cuenta de la pareja y siguiendo sus instrucciones, en condición de encargada del tratamiento.</p>
+      <p>En concreto, Differentissgood se compromete a: tratar esos datos solo para el funcionamiento de la invitación, no cederlos a nadie, mantenerlos con las medidas de seguridad adecuadas, ponerlos a disposición de la pareja cuando los pida, y <b>suprimirlos cuando la invitación se retire</b> o antes si la pareja lo solicita.</p>
+      <p>La pareja se compromete a informar a sus invitados de que sus datos se recogen para organizar la boda, y a no pedirles más información de la necesaria.</p>
+      <p class="nota">Si la pareja recoge datos de salud (por ejemplo alergias o intolerancias), esos datos son especialmente protegidos: se usan solo para el catering y se eliminan tras la boda.</p>
+    </div>
+
+    <h2><span class="num">10.</span> Entrega y aceptación</h2>
+    <p>Cuando la invitación esté lista, Differentissgood se la enseña a la pareja antes de publicarla. La pareja dispone de <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> días para revisarla y comunicar por escrito cualquier fallo. Si no dice nada en ese plazo, se da por aprobada y se publica.</p>
+    <p>Un fallo es que la invitación no funcione o no diga lo acordado, y se corrige sin coste. Querer algo distinto o algo nuevo no es un fallo, y entra en las rondas de cambios.</p>
+
+    <h2><span class="num">11.</span> Cambio de fecha o cancelación de la boda</h2>
+    <p><b>Si la boda se aplaza</b>, la invitación se actualiza con la fecha nueva sin coste adicional, siempre que el trabajo ya realizado siga sirviendo. Si el aplazamiento obliga a rehacer el diseño o a prolongar el tiempo online, se presupuesta esa diferencia.</p>
+    <p><b>Si la boda se cancela</b>, la pareja lo comunica cuanto antes. Se liquida el trabajo realizado hasta ese momento: si la invitación aún no estaba montada, se retiene el 30% de la reserva; si ya estaba entregada, se abona el precio completo.</p>
+    <p>Esta cláusula se aplica sin perjuicio del derecho de desistimiento de la cláusula <span data-ref="desistimiento">14</span>.</p>
+
+    <h2><span class="num">12.</span> Propiedad intelectual y créditos</h2>
+    <p>Differentissgood conserva la autoría del diseño de la invitación, que es irrenunciable, así como sus componentes y plantillas reutilizables.</p>
+    <p>Una vez pagado el 100%, la pareja puede usar y compartir libremente su invitación con quien quiera.</p>
+    <p>La invitación muestra de forma discreta el crédito «Designed by Differentissgood».</p>
+    <p>La pareja autoriza o no que Differentissgood muestre la invitación en su portfolio, su web y sus redes sociales:</p>
+    <div style="display:flex;align-items:center;gap:9px;margin:8px 0 6px;">
+      <input type="radio" id="chkPortfolioSi" name="portfolio" style="width:16px;height:16px;accent-color:var(--accent);">
+      <label for="chkPortfolioSi">Sí autorizamos el uso de nuestra invitación en el portfolio de Differentissgood.</label>
+    </div>
+    <div style="display:flex;align-items:center;gap:9px;margin:0 0 18px;">
+      <input type="radio" id="chkPortfolioNo" name="portfolio" style="width:16px;height:16px;accent-color:var(--accent);">
+      <label for="chkPortfolioNo">No autorizamos el uso de nuestra invitación en el portfolio de Differentissgood.</label>
+    </div>
+
+    <h2><span class="num">13.</span> Protección de datos de la pareja</h2>
+    <p>Los datos de la pareja se tratan únicamente para gestionar este contrato y prestar el servicio, no se ceden a terceros salvo obligación legal, y se conservan durante el tiempo legalmente exigible.</p>
+    <p>La pareja puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo al email de contacto de la cláusula 1.</p>
+
+    <h2 data-clausula="desistimiento"><span class="num">14.</span> Derecho de desistimiento</h2>
+    <p>Por tratarse de un contrato a distancia con consumidores, la pareja dispone de <b>14 días naturales</b> desde la firma para desistir del contrato sin necesidad de justificación, comunicándolo por escrito al email de contacto.</p>
+    <p>Si la pareja desiste dentro de ese plazo y el trabajo aún no ha comenzado, se le devuelve íntegramente lo abonado.</p>
+    <p><b>La pareja puede pedir que el trabajo empiece antes de que terminen esos 14 días.</b> En ese caso, si después desiste, abonará la parte del servicio ya prestada hasta el momento de la comunicación, en proporción al total contratado. Marcando la casilla siguiente, la pareja solicita ese inicio anticipado y declara conocer esa consecuencia:</p>
+    <div style="display:flex;align-items:flex-start;gap:9px;margin:8px 0 18px;">
+      <input type="checkbox" id="chkDesistimiento" style="width:16px;height:16px;accent-color:var(--accent);margin-top:4px;">
+      <label for="chkDesistimiento">Solicitamos que Differentissgood empiece el trabajo antes de que finalicen los 14 días de desistimiento, y entendemos que si desistimos después tendremos que abonar la parte del servicio ya realizada.</label>
+    </div>
+
+    <h2><span class="num">15.</span> Responsabilidad</h2>
+    <p>Differentissgood presta el servicio con la diligencia propia de un profesional y responde de que la invitación funcione conforme a lo acordado.</p>
+    <p>No responde de las caídas o incidencias de los servicios de terceros necesarios para que la invitación esté online (dominio, alojamiento, servicios de correo o de formularios), aunque se compromete a hacer lo razonable para restablecer el servicio cuanto antes.</p>
+    <p>No responde del contenido que aporte la pareja ni de los errores en los datos que esta facilite, sin perjuicio de corregirlos en cuanto se detecten.</p>
+
+    <h2><span class="num">16.</span> Fuerza mayor</h2>
+    <p>Solo se consideran causas de fuerza mayor estas: enfermedad o accidente grave, fallecimiento, incendio, inundación, catástrofe natural, corte general de luz o de internet, y huelga.</p>
+    <p>Si se da alguna, los plazos se paran mientras dure y se reanudan cuando termine. No cuenta como incumplimiento y no da lugar a penalización para ninguna de las dos partes. Quien se vea afectado avisa al otro dentro de las 24 horas siguientes.</p>
+    <p>Cuando la causa impida terminar la invitación antes de la boda, Differentissgood devolverá las cantidades correspondientes a la parte no realizada.</p>
+
+    <h2><span class="num">17.</span> Comunicaciones</h2>
+    <p>Lo que se hable por los canales acordados (email, WhatsApp u otros) sirve como prueba de aprobaciones, peticiones, decisiones, cambios y aceptación de entregas.</p>
+
+    <h2><span class="num">18.</span> Firma electrónica</h2>
+    <p>Este contrato se puede firmar electrónicamente y guardarse en digital, con plena validez entre las partes.</p>
+
+    <h2><span class="num">19.</span> Ley aplicable y reclamaciones</h2>
+    <p>Este contrato se rige por la legislación española, incluida la normativa de defensa de consumidores y usuarios.</p>
+    <p>Para cualquier discrepancia serán competentes los juzgados que correspondan conforme a la ley, sin que la pareja pierda el derecho a acudir a los de su propio domicilio.</p>
+    <p>La pareja puede además dirigir su reclamación a los organismos de consumo de su comunidad autónoma.</p>
+
+    <hr class="sep">
+
+    <h2><span class="num">20.</span> Firmas</h2>
+    <p>Lugar y fecha: <span class="blank ancho" contenteditable="true" data-placeholder="[·]"></span></p>
+    <div class="firmas">
+      <div class="firma">
+        <div class="rol">Por Differentissgood</div>
+        <div class="nombre" id="firmaProveedor"></div>
+        <div class="linea"></div>
+        <div class="rol">Firma</div>
+      </div>
+      <div class="firma">
+        <div class="rol">La pareja</div>
+        <div class="nombre" id="firmaCliente"></div>
+        <div class="linea"></div>
+        <div class="nombre" id="firmaCliente2"></div>
+        <div class="linea"></div>
+        <div class="rol">Firmas</div>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <h2>Anexo · Presupuesto y detalles de la invitación</h2>
+    <p class="nota">Este anexo forma parte del contrato. Aquí va lo concreto de cada boda; el resto del documento no cambia.</p>
+
+    <h3>Secciones de la invitación</h3>
+    <p><span class="blank ancho" contenteditable="true" data-placeholder="[portada, nuestra historia, programa, localizaciones, alojamiento, confirmación, preguntas frecuentes…]"></span></p>
+
+    <h3>Precio y plazos</h3>
+    <table class="presu">
+      <tbody>
+        <tr><td>Precio total (IVA incluido)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        <tr><td>Reserva (30%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        <tr><td>Pago final (70%)</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        <tr><td>Plazo de entrega desde que llega todo el contenido</td><td><span class="blank" contenteditable="true" data-placeholder="[·] días"></span></td></tr>
+        <tr><td>Antelación de publicación respecto a la boda</td><td><span class="blank" contenteditable="true" data-placeholder="[·]"></span></td></tr>
+        <tr><td>La invitación permanece online hasta</td><td><span class="blank" contenteditable="true" data-placeholder="[·]"></span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Otras condiciones pactadas</h3>
+    <p><span class="blank ancho" contenteditable="true" data-placeholder="[idiomas, música, cuenta atrás, galería, lista de regalos…]"></span></p>
+
+    <p class="nota" style="margin-top:32px;">Plantilla de trabajo de Differentissgood. Antes de usarla con clientes conviene que la revise un profesional jurídico.</p>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var activos = { rsvp:true, propio:false };
+
+  function pintar(){
+    document.getElementById('bloqueRsvp').hidden = !activos.rsvp;
+    document.getElementById('tituloRsvp').hidden = !activos.rsvp;
+    document.getElementById('dominioDIG').hidden = !!activos.propio;
+    document.getElementById('dominioPropio').hidden = !activos.propio;
+    renumerar();
+  }
+
+  /* Al ocultar una cláusula, las demás se renumeran y las referencias del
+     texto siguen a la suya, para que no apunten a un número equivocado. */
+  function renumerar(){
+    var vistos = 0, mapa = {};
+    [].forEach.call(document.querySelectorAll('h2 .num'), function(el){
+      var h2 = el.parentNode;
+      if(h2.hidden) return;
+      vistos++;
+      el.textContent = vistos + '.';
+      if(h2.dataset.clausula) mapa[h2.dataset.clausula] = vistos;
+    });
+    [].forEach.call(document.querySelectorAll('[data-ref]'), function(r){
+      if(mapa[r.dataset.ref]) r.textContent = mapa[r.dataset.ref];
+    });
+  }
+
+  function sincronizarBotones(){
+    [].forEach.call(document.querySelectorAll('.servicio'), function(b){
+      b.classList.toggle('activa', !!activos[b.dataset.serv]);
+      b.setAttribute('aria-pressed', String(!!activos[b.dataset.serv]));
+    });
+  }
+
+  document.getElementById('servicios').addEventListener('click', function(e){
+    var b = e.target.closest('.servicio');
+    if(!b) return;
+    activos[b.dataset.serv] = !activos[b.dataset.serv];
+    sincronizarBotones();
+    pintar();
+  });
+
+  var MESES_FMT = new Intl.DateTimeFormat('es-ES', { day:'numeric', month:'long', year:'numeric' });
+  var inputFecha = document.getElementById('fechaFirma');
+  inputFecha.addEventListener('change', function(){
+    var t = document.getElementById('txtFechaFirma');
+    if(!inputFecha.value){ t.textContent = '[·]'; return; }
+    var p = inputFecha.value.split('-').map(Number);
+    t.textContent = MESES_FMT.format(new Date(p[0], p[1]-1, p[2]));
+  });
+
+  document.querySelectorAll('[data-espejo]').forEach(function(origen){
+    var destino = document.getElementById(origen.dataset.espejo);
+    origen.addEventListener('input', function(){ destino.textContent = origen.textContent; });
+  });
+
+  sincronizarBotones();
+  pintar();
+})();
+</script>
+
+</body>
+</html>
