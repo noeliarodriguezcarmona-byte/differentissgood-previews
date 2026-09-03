@@ -235,6 +235,15 @@
       <p class="rondas-ayuda" id="rondasAyuda"></p>
     </div>
     <div class="toolbar-group">
+      <span class="toolbar-label">Packs adicionales</span>
+      <div class="tabs" id="packs">
+        <button type="button" class="tab" data-pack="foto">Fotografía y vídeo</button>
+        <button type="button" class="tab" data-pack="dron">Dron</button>
+        <button type="button" class="tab" data-pack="boda">Invitación de boda</button>
+        <button type="button" class="tab" data-pack="album">Álbum digital</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
       <span class="toolbar-label">Tipo de cliente</span>
       <div class="tabs" id="tipoCliente">
         <button type="button" class="tab activa" data-cli="empresa">Empresa o profesional</button>
@@ -317,7 +326,21 @@
       <ul class="limpia" id="cExtras"></ul>
     </div>
 
-    <h2><span class="num">3.</span> Precio y forma de pago</h2>
+    <h2 id="tituloPacks" data-clausula="packs" hidden><span class="num">3.</span> Servicios adicionales contratados</h2>
+    <div id="bloquePacks" hidden>
+      <p>Además de la página web, el cliente contrata los siguientes servicios. Cada uno se rige por sus condiciones propias, recogidas más adelante en este mismo contrato.</p>
+      <div class="caja-plan">
+        <table class="precios">
+          <tr id="filaFoto" hidden><td>Pack de fotografía y vídeo</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+          <tr id="filaDron" hidden><td>Pack de vuelo con dron</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+          <tr id="filaBoda" hidden><td>Invitación web de boda</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+          <tr id="filaAlbum" hidden><td>Álbum digital</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+        </table>
+        <p class="nota" style="margin-top:10px;">Estos importes se suman al precio del plan y siguen la misma forma de pago: 30% de reserva y 70% antes de la entrega.</p>
+      </div>
+    </div>
+
+    <h2><span class="num">4.</span> Precio y forma de pago</h2>
     <p id="precioEmpresa">El precio es el indicado arriba para el plan contratado, sin IVA. El IVA se suma aparte en la factura.</p>
     <p id="precioParticular" hidden>El precio es el indicado arriba para el plan contratado, <b>con el IVA ya incluido</b>. No hay cargos adicionales salvo los que se recojan expresamente en este contrato.</p>
     <h3>3.1 Pago inicial (30%)</h3>
@@ -372,11 +395,46 @@
     <p>Si el retraso es culpa de Differentissgood, el cliente tiene un <b>15%</b> de descuento sobre el precio del plan.</p>
     <p>Si ese retraso pasa de 15 días naturales y el cliente prefiere no seguir, Differentissgood le devuelve el 30% inicial.</p>
 
-    <h2><span class="num">11.</span> Fotos y vídeos</h2>
+    <h2><span class="num">11.</span> Textos, fotos y vídeos</h2>
     <p>Los textos de la web los crea Differentissgood y van incluidos en todos los planes.</p>
-    <p>Las fotos y los vídeos no están incluidos en ningún plan. Si el cliente quiere que se los hagamos, se presupuesta aparte y se firma un anexo.</p>
+    <p id="fotosNo">Las fotos y los vídeos <b>no</b> están incluidos en el precio de ningún plan. Si el cliente quiere que se los hagamos, se contratan como pack adicional.</p>
+    <p id="fotosSi" hidden>Las fotos y los vídeos <b>no</b> van incluidos en el precio del plan, pero el cliente ha contratado el pack correspondiente: se rigen por las condiciones de la cláusula <span data-ref="packFoto">12</span>.</p>
 
-    <h2><span class="num">12.</span> Propiedad, contenido y derechos de autor</h2>
+    <h2 id="tituloPackFoto" data-clausula="packFoto" hidden><span class="num">12.</span> Pack de fotografía y vídeo</h2>
+    <div id="bloquePackFoto" hidden>
+      <p>Differentissgood realiza la sesión o cobertura en la fecha, el lugar y la duración que se acuerden por escrito, y entrega el material ya editado.</p>
+      <p>La selección de las tomas que se editan y entregan la hace Differentissgood con criterio profesional. <b>No se entregan los archivos en bruto</b> ni las tomas descartadas.</p>
+      <p>El material se entrega en <b>galería online</b>, disponible <b>5 meses</b> desde la entrega. Pasado ese plazo se cierra: es responsabilidad del cliente descargar su material antes.</p>
+      <p>Differentissgood conserva los archivos originales <b>5 meses</b> desde la entrega y después puede eliminarlos sin previo aviso.</p>
+      <p>Si el cliente cancela o cambia la fecha de la sesión con <b>menos de 48 horas</b> de antelación, pierde el 30% de la reserva correspondiente a este pack.</p>
+      <p><b>Si el cliente hace un uso publicitario del material, debe acreditar la autoría de Differentissgood</b> de forma visible.</p>
+    </div>
+
+    <h2 id="tituloPackDron" data-clausula="packDron" hidden><span class="num">13.</span> Pack de vuelo con dron</h2>
+    <div id="bloquePackDron" hidden>
+      <p>Differentissgood cuenta con <b>seguro de responsabilidad civil</b> para el vuelo con dron y se responsabiliza de cumplir la normativa aplicable en cada vuelo.</p>
+      <p>El vuelo queda condicionado a la meteorología, a las restricciones del espacio aéreo de la zona y a los permisos del recinto o de la autoridad competente.</p>
+      <p>Si el día del servicio el vuelo no puede realizarse por alguna de esas causas, <b>no se considera incumplimiento</b>: se repite en otra fecha o se descuenta del precio la parte correspondiente a este pack.</p>
+      <p>El cliente informa a Differentissgood de cualquier limitación de vuelo conocida en el lugar.</p>
+    </div>
+
+    <h2 id="tituloPackBoda" data-clausula="packBoda" hidden><span class="num">14.</span> Pack de invitación web de boda</h2>
+    <div id="bloquePackBoda" hidden>
+      <p>Differentissgood diseña y publica la invitación digital de la boda, con el contenido que aporte el cliente y las secciones que se acuerden por escrito.</p>
+      <p>La invitación permanece online hasta <span class="blank" contenteditable="true" data-placeholder="[fecha o plazo]"></span>, como mínimo hasta la celebración de la boda. Antes de retirarla se avisa al cliente con antelación razonable.</p>
+      <p>Si la invitación incluye <b>formulario de confirmación de asistencia</b>, los datos que faciliten los invitados <b>son del cliente, no de Differentissgood</b>, que los trata únicamente por cuenta suya, no los cede a nadie y los suprime al retirar la invitación. El cliente se compromete a informar a sus invitados de para qué se recogen.</p>
+      <p>Si la boda se aplaza, la invitación se actualiza sin coste siempre que el trabajo hecho siga sirviendo.</p>
+    </div>
+
+    <h2 id="tituloPackAlbum" data-clausula="packAlbum" hidden><span class="num">15.</span> Pack de álbum digital</h2>
+    <div id="bloquePackAlbum" hidden>
+      <p>Differentissgood monta y publica un álbum digital: una <b>galería privada online</b> con las fotografías y vídeos acordados, que no aparece en buscadores y a la que solo se llega con su enlace.</p>
+      <p><b>El álbum es permanente</b>: no tiene fecha de caducidad y se mantiene online sin coste adicional mientras Differentissgood preste este servicio, que no puede retirarlo por decisión propia. Si tuviera que discontinuarlo, avisará con antelación y facilitará la descarga completa del contenido sin coste.</p>
+      <p>Las personas que acceden son las que el cliente decida. <b>Differentissgood no controla con quién comparte el cliente el enlace</b> ni responde de la difusión que se derive de ello.</p>
+      <p><b>El álbum no es un sistema de copia de seguridad.</b> Se recomienda al cliente descargar su material y guardar una copia propia.</p>
+    </div>
+
+    <h2><span class="num">16.</span> Propiedad, contenido y derechos de autor</h2>
     <p>El cliente garantiza que todo el material que entrega (textos, imágenes, logotipos, vídeos) es suyo o tiene permiso para usarlo, y autoriza a Differentissgood a ponerlo en la web. También garantiza que las personas que salgan en ese material han dado su permiso. Si alguien reclama por este material, responde el cliente.</p>
     <p>Hay que distinguir tres cosas: lo creado en exclusiva para este proyecto; el código, componentes y herramientas propias que Differentissgood ya tenía y usa para trabajar; y el software de terceros que se integre en la web (pasarelas de pago, herramientas de IA, plantillas), que se rige por sus propias licencias.</p>
     <p>Una vez pagado el 100%, la web es del cliente: puede usarla y llevársela al hosting que quiera. Differentissgood conserva sus propios sistemas y componentes reutilizables.</p>
@@ -582,6 +640,47 @@
     });
   }
 
+  /* ---------- Packs adicionales ----------
+     La web es el servicio base; cada pack añade su propia cláusula y su fila
+     en el cuadro de precios. Si no se contrata ninguno, no aparece nada. */
+  var packs = { foto:false, dron:false, boda:false, album:false };
+  var CAJAS = {
+    foto:  { titulo:'tituloPackFoto',  bloque:'bloquePackFoto',  fila:'filaFoto'  },
+    dron:  { titulo:'tituloPackDron',  bloque:'bloquePackDron',  fila:'filaDron'  },
+    boda:  { titulo:'tituloPackBoda',  bloque:'bloquePackBoda',  fila:'filaBoda'  },
+    album: { titulo:'tituloPackAlbum', bloque:'bloquePackAlbum', fila:'filaAlbum' },
+  };
+
+  function aplicarPacks(){
+    var alguno = false;
+    Object.keys(CAJAS).forEach(function(k){
+      var on = !!packs[k], c = CAJAS[k];
+      document.getElementById(c.titulo).hidden = !on;
+      document.getElementById(c.bloque).hidden = !on;
+      document.getElementById(c.fila).hidden = !on;
+      if(on) alguno = true;
+    });
+    document.getElementById('tituloPacks').hidden = !alguno;
+    document.getElementById('bloquePacks').hidden = !alguno;
+
+    // Si se contrata fotografía, la cláusula de fotos deja de decir que no entra
+    document.getElementById('fotosNo').hidden = !!packs.foto;
+    document.getElementById('fotosSi').hidden = !packs.foto;
+
+    [].forEach.call(document.querySelectorAll('#packs .tab'), function(b){
+      b.classList.toggle('activa', !!packs[b.dataset.pack]);
+      b.setAttribute('aria-pressed', String(!!packs[b.dataset.pack]));
+    });
+    renumerar();
+  }
+
+  document.getElementById('packs').addEventListener('click', function(e){
+    var b = e.target.closest('.tab');
+    if(!b) return;
+    packs[b.dataset.pack] = !packs[b.dataset.pack];
+    aplicarPacks();
+  });
+
   document.getElementById('tipoCliente').addEventListener('click', function(e){
     var b = e.target.closest('.tab');
     if(!b) return;
@@ -659,6 +758,7 @@
   actualizarAyudaRondas();
 
   seleccionarPlan('impulso');
+  aplicarPacks();
   aplicarCliente();
 })();
 </script>
