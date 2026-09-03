@@ -344,13 +344,13 @@
     <h2><span class="num">4.</span> Precio y forma de pago</h2>
     <p id="precioEmpresa">El precio es el indicado arriba para el plan contratado, sin IVA. El IVA se suma aparte en la factura.</p>
     <p id="precioParticular" hidden>El precio es el indicado arriba para el plan contratado, <b>con el IVA ya incluido</b>. No hay cargos adicionales salvo los que se recojan expresamente en este contrato.</p>
-    <h3>3.1 Pago inicial (30%)</h3>
+    <h3><span class="sub">3.1</span> Pago inicial (30%)</h3>
     <p>El cliente paga el 30% antes de que empiece el proyecto. Ese dinero se descuenta del precio del plan: no se suma.</p>
-    <h3>3.2 Pago final (70%)</h3>
+    <h3><span class="sub">3.2</span> Pago final (70%)</h3>
     <p>El 70% restante se paga un día antes de la fecha de entrega. Si ese día no está pagado, la web no se entrega y Differentissgood se queda el 30% inicial.</p>
-    <h3>3.3 Forma de pago</h3>
+    <h3><span class="sub">3.3</span> Forma de pago</h3>
     <p>Transferencia bancaria o efectivo. Cuenta bancaria: <span class="blank ancho" contenteditable="true" data-placeholder="[IBAN]"></span></p>
-    <h3>3.4 Dominio y hosting</h3>
+    <h3><span class="sub">3.4</span> Dominio y hosting</h3>
     <p>Differentissgood los configura. El cliente los paga directamente, poniendo su propia tarjeta en la plataforma correspondiente.</p>
 
     <h2><span class="num">4.</span> Plazos</h2>
@@ -611,7 +611,7 @@
 
     <h2><span class="num">14.</span> Servicios de terceros</h2>
     <p>La web necesita servicios que no son de Differentissgood: dominio, hosting, Google, WhatsApp, correo, newsletter, calendarios, pasarelas de pago, herramientas de IA, analítica y similares.</p>
-    <p>Differentissgood no responde de sus caídas, cierres, subidas de precio ni cambios de condiciones. Sus costes no están incluidos en el precio del plan salvo que se diga expresamente (véase la cláusula 3.4).</p>
+    <p>Differentissgood no responde de sus caídas, cierres, subidas de precio ni cambios de condiciones. Sus costes no están incluidos en el precio del plan salvo que se diga expresamente (véase el apartado de dominio y hosting de la cláusula de precio).</p>
 
     <h2><span class="num">15.</span> Inteligencia artificial</h2>
     <p>Las funciones con inteligencia artificial que lleve la web (por ejemplo el chat con IA o el blog asistido) funcionan con herramientas de otras empresas.</p>
@@ -800,14 +800,22 @@
       el.textContent = vistos + '.';
       if(h2.dataset.clausula) mapa[h2.dataset.clausula] = vistos;
     });
-    // Subapartados de los packs: 12.1, 12.2... siguen al número de su cláusula
+    // Subapartados (12.1, 12.2...): siguen al número de la cláusula que los contiene,
+    // estén sueltos debajo del h2 o dentro de la caja de un pack.
     [].forEach.call(document.querySelectorAll('h2 .num'), function(el){
       var h2 = el.parentNode;
       if(h2.hidden) return;
-      var caja = h2.nextElementSibling;
-      if(!caja || caja.tagName !== 'DIV') return;
-      var subs = caja.querySelectorAll('h3 .sub'), i;
-      for(i = 0; i < subs.length; i++) subs[i].textContent = el.textContent + (i + 1);
+      var subs = [], nodo = h2.nextElementSibling;
+      while(nodo && nodo.tagName !== 'H2'){
+        if(nodo.tagName === 'H3'){
+          var propio = nodo.querySelector('.sub');
+          if(propio) subs.push(propio);
+        } else {
+          [].push.apply(subs, nodo.querySelectorAll('h3 .sub'));
+        }
+        nodo = nodo.nextElementSibling;
+      }
+      subs.forEach(function(s, i){ s.textContent = el.textContent + (i + 1); });
     });
     [].forEach.call(document.querySelectorAll('[data-ref]'), function(r){
       if(mapa[r.dataset.ref]) r.textContent = mapa[r.dataset.ref];
