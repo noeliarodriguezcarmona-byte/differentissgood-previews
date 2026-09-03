@@ -39,6 +39,33 @@ Reglas al trabajar con planes:
 - No eliminar funcionalidades incluidas sin su autorización.
 - No cambiar precios, plazos, rondas ni extras si ella no lo ha pedido.
 
+## Contratos — el de web lleva los packs
+
+`contrato/` (diseño y desarrollo web) es el contrato base. Dentro lleva
+**packs opcionales** con las cláusulas completas de los demás servicios:
+
+| Pack dentro de `contrato/` | Contrato suelto equivalente |
+|---|---|
+| Pack de fotografía y vídeo | `contrato-audiovisual/` |
+| Pack de vuelo con dron | `contrato-audiovisual/` (cláusula de dron) |
+| Pack de invitación web de boda | `contrato-invitacion-boda/` |
+| Pack de álbum digital | `contrato-album-digital/` |
+
+**Regla de sincronización:** el texto de cada pack es el mismo que el del
+contrato suelto correspondiente. Si se cambia una condición en uno, se cambia
+en el otro en el mismo commit. Nunca se deja una versión más nueva que la otra.
+
+Diferencia buscada, no un descuido: los contratos sueltos tienen interruptores
+(álbum con o sin contraseña, con o sin descarga, alojamiento permanente o
+temporal; invitación en dominio de Differentissgood o propio). Dentro de los
+packs esas opciones van fijadas en su valor por defecto —álbum permanente, con
+contraseña y con descarga— y lo que cambie se anota en el anexo. Las partes,
+el precio, la fuerza mayor, la protección de datos, el desistimiento, la firma
+y la jurisdicción salen una sola vez, del cuerpo del contrato de web.
+
+Los subapartados de cada pack (12.1, 12.2…) se numeran solos en
+`renumerar()`: no se escriben a mano.
+
 ## Convenciones al trabajar aquí
 
 - **Fotos y vídeos para webs siempre a tamaño web antes de subir** (no
