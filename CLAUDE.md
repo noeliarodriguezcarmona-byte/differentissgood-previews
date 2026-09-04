@@ -46,6 +46,29 @@ Reglas al trabajar con planes:
 - No eliminar funcionalidades incluidas sin su autorización.
 - No cambiar precios, plazos, rondas ni packs si ella no lo ha pedido.
 
+## El cuestionario y los packs
+
+`cuestionario/` es uno solo para todos los clientes. Funciona así:
+
+- La **Web Esencial** la ve siempre todo el mundo: sus preguntas llevan
+  `data-pack="esencial"`.
+- Cada pack de ampliación tiene sus propios bloques, con `data-pack="expansion"`,
+  `"visual"`, `"reservas"`, `"tienda"`, `"ia"` o `"idioma"`, y va precedido de una
+  pantalla de sección «Pack · …».
+- **Los packs no los elige el cliente:** viajan en la dirección del enlace
+  (`?packs=expansion,tienda`). Noelia lo prepara abriendo el cuestionario con
+  `#preparar` al final de la dirección: marca los packs, copia el enlace y ese es
+  el que le manda al cliente. Un pack que no exista en la lista se ignora.
+- El **código de proyecto** sigue con el formato de siempre
+  (`DIG-2026-001-I`) porque el Worker de la bóveda espera ese formato. **La letra
+  final ya no significa nada**: era el plan del sistema viejo. Cambiarla obliga a
+  redesplegar el Worker, así que no se toca sin decidirlo antes.
+
+Al añadir preguntas, la referencia es `docs/PLANES-PAGINA-WEB.md`: no se
+pregunta por algo que no esté incluido en lo que el cliente ha contratado.
+Cada paso nuevo necesita su entrada en el objeto `CATEGORIAS` del script, o
+aparecerá en la categoría «Otros».
+
 ## Contratos — el de web lleva los packs
 
 `contrato/` (diseño y desarrollo web) es el contrato base. Dentro lleva

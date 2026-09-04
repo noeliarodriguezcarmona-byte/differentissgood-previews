@@ -528,6 +528,9 @@ input[type="file"]::file-selector-button{
   background:rgba(20,16,12,.86);backdrop-filter:blur(8px);
 }
 .velo.abierto{display:flex;}
+/* El panel interno se pone por encima de la puerta del cliente */
+#panel{z-index:70;}
+.chip--fijo{cursor:default;border-style:solid;}
 .velo__caja{
   background:var(--card);border:1px solid var(--line);border-radius:20px;
   padding:34px 30px;max-width:420px;width:100%;text-align:center;
@@ -624,6 +627,29 @@ input[type="file"]::file-selector-button{
 <div class="fondo" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="grano" aria-hidden="true"></div>
 
+<!-- Panel interno de Differentissgood: se abre con #preparar y no lo ve el
+     cliente. Sirve para marcar los packs y copiar el enlace que se le manda. -->
+<div class="velo" id="panel">
+  <div class="velo__caja">
+    <h3>Preparar el enlace del cliente</h3>
+    <p>Marca los packs que ha contratado y copia el enlace. El cliente verá siempre la Web Esencial, más lo que marques aquí.</p>
+    <div class="chip-grid" id="panel-packs" style="margin-top:14px;">
+      <label class="chip"><input type="checkbox" value="expansion"><span>Expansión</span></label>
+      <label class="chip"><input type="checkbox" value="visual"><span>Producción Visual</span></label>
+      <label class="chip"><input type="checkbox" value="reservas"><span>Reservas</span></label>
+      <label class="chip"><input type="checkbox" value="tienda"><span>Tienda Online</span></label>
+      <label class="chip"><input type="checkbox" value="ia"><span>Automatización IA</span></label>
+      <label class="chip"><input type="checkbox" value="idioma"><span>Versión Internacional</span></label>
+    </div>
+    <input type="text" id="panel-enlace" readonly style="width:100%;margin-top:16px;font-size:13px;">
+    <p class="velo__detalle" id="panel-aviso" style="margin-top:10px;"></p>
+    <div class="velo__acciones">
+      <button type="button" class="principal" id="panel-copiar">Copiar enlace</button>
+      <button type="button" id="panel-cerrar">Cerrar</button>
+    </div>
+  </div>
+</div>
+
 <div class="velo abierto" id="puerta">
   <div class="velo__caja">
     <div id="puerta-formulario">
@@ -674,30 +700,33 @@ input[type="file"]::file-selector-button{
           data-correo="info.differentissgood@gmail.com"
           data-recogida="https://recogida-cuestionario.noeliarodriguezcarmona-a7e.workers.dev">
 
-    <!-- ================= 1 · PLAN CONTRATADO (solo lectura) =================
-         El plan NO se elige aquí: viene determinado por el código de proyecto
-         vinculado al contrato firmado. Este bloque solo lo confirma. -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <!-- ================= 1 · LO CONTRATADO (solo lectura) =================
+         La Web Esencial la tiene todo el mundo. Los packs los fija
+         Differentissgood en el enlace antes de mandárselo al cliente.
+         Aquí solo se confirma; no se elige nada. -->
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">1</span>
         <div>
-          <h2>Tu plan contratado</h2>
+          <h2>Lo que has contratado</h2>
           <span class="plan-badge">Viene de tu contrato — no se puede cambiar aquí</span>
         </div>
       </div>
       <div class="step-cuerpo">
-        <input type="hidden" name="Plan" id="plan-contratado-input">
+        <input type="hidden" name="Servicio contratado" id="plan-contratado-input">
         <div class="plan-fijado" id="plan-fijado">
-          <p class="plan-fijado__nombre" id="plan-fijado-nombre">—</p>
+          <p class="plan-fijado__nombre" id="plan-fijado-nombre">Web Esencial</p>
           <p class="plan-fijado__desc" id="plan-fijado-desc"></p>
           <p class="plan-fijado__codigo">Código de proyecto: <b id="plan-fijado-codigo">—</b></p>
         </div>
-        <div class="note-box" style="margin-top:16px;">A partir de aquí solo verás las preguntas de tu plan. Si crees que el plan que aparece no es el que firmaste, escríbenos antes de seguir.</div>
+        <label class="field-label" style="margin-top:18px;">Packs de ampliación</label>
+        <div class="chip-grid" id="packs-contratados"></div>
+        <div class="note-box" style="margin-top:16px;">A partir de aquí solo verás las preguntas de lo que has contratado. Si algo de lo que aparece no es lo que firmaste, escríbenos antes de seguir.</div>
       </div>
     </div>
 
     <!-- ================= SECCIÓN · QUIÉNES SOIS ================= -->
-    <div class="step step--seccion" data-planes="impulso crecimiento elite">
+    <div class="step step--seccion" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">§</span>
         <div><h2>Sección · Quiénes sois</h2></div>
@@ -708,7 +737,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 2 · NEGOCIO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">2</span>
         <div><h2>Sobre tu negocio</h2></div>
@@ -731,7 +760,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 3 · OBJETIVO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">3</span>
         <div><h2>Qué quieres conseguir</h2></div>
@@ -754,7 +783,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 4 · EQUIPO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">4</span>
         <div><h2>Quién forma el equipo</h2></div>
@@ -788,7 +817,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 5 · SERVICIOS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">5</span>
         <div><h2>Qué ofreces</h2></div>
@@ -821,371 +850,66 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
-    <!-- ================= SECCIÓN · EXTRAS ================= -->
-    <div class="step step--seccion" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
-        <span class="step-num">§</span>
-        <div><h2>Sección · Extras</h2></div>
+        <span class="step-num">·</span>
+        <div><h2>Los apartados de tu página</h2></div>
       </div>
       <div class="step-cuerpo">
-        <p class="seccion-intro">Por último, elige los extras de tu plan. Tienes un mínimo y un máximo incluidos — si quieres más, también se puede.</p>
-      </div>
-    </div>
-
-    <!-- ================= 17 · EXTRAS ================= -->
-    <div class="step" data-planes="impulso">
-      <div class="step-head">
-        <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge">Elige de 2 a 4</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="step-sub">El Plan Impulso incluye entre 2 y 4 extras a elegir. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" id="extras-inc-impulso" data-min="2" data-max="4">
-          <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Valoraciones de Google integradas en la web"><span>Valoraciones de Google integradas en la web</span></label>
+        <p class="step-sub">Tu Web Esencial es una página de una sola sección con <b>hasta 5 apartados</b>, uno debajo de otro. Marca los que quieres y en qué orden.</p>
+        <div class="chip-grid" data-max="5">
+          <label class="chip"><input type="checkbox" name="Apartados" value="Portada"><span>Portada</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Sobre el negocio"><span>Sobre el negocio</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Servicios o productos"><span>Servicios o productos</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Equipo"><span>Equipo</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Galería de fotos"><span>Galería de fotos</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Valoraciones"><span>Valoraciones</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Preguntas frecuentes"><span>Preguntas frecuentes</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Contacto"><span>Contacto</span></label>
+          <label class="chip"><input type="checkbox" name="Apartados" value="Otro"><span>Otro</span></label>
         </div>
-
-        <div data-requiere-extra="QR personalizado">
-          <label class="field-label" style="margin-top:16px;">¿A dónde debe llevar el código QR?</label>
-          <input type="text" name="Destino del QR" placeholder="Ej: a la carta, a WhatsApp, a la ficha de Google...">
-        </div>
-        <div data-requiere-extra="Botón de compartir en redes">
-          <label class="field-label" style="margin-top:16px;">¿En qué redes sociales quieres que se pueda compartir la web?</label>
-          <input type="text" name="Redes para compartir" placeholder="Ej: WhatsApp, Facebook, Instagram, X...">
-        </div>
-        <div data-requiere-extra="Mapa de Google integrado">
-          <label class="field-label" style="margin-top:16px;">¿Qué dirección o ubicación debe mostrar el mapa?</label>
-          <input type="text" name="Ubicación del mapa" placeholder="Dirección exacta, o pega el enlace de Google Maps">
-        </div>
-        <div data-requiere-extra="Integración con redes sociales">
-          <label class="field-label" style="margin-top:16px;">¿Qué redes sociales quieres que aparezcan en tu web? Pon el nombre y el enlace de cada una</label>
-          <textarea name="Redes sociales a integrar" rows="3" placeholder="Ej: Instagram — https://instagram.com/tunegocio&#10;Facebook — https://facebook.com/tunegocio"></textarea>
-        </div>
+        <label class="field-label">Si has marcado «Otro», ¿cuál?</label>
+        <input type="text" name="Otro apartado" placeholder="Déjalo en blanco si no lo has marcado">
+        <label class="field-label">¿En qué orden los quieres, de arriba abajo?</label>
+        <textarea name="Orden de los apartados" rows="2" placeholder="Ej: portada, servicios, valoraciones, preguntas frecuentes, contacto"></textarea>
+        <label class="field-label">¿Qué es lo primero que quieres que vea alguien al entrar?</label>
+        <textarea name="Lo primero que se ve" rows="2" placeholder="Ej: una foto del local con el nombre grande y un botón de WhatsApp"></textarea>
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
-    <div class="step" data-planes="crecimiento">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
-        <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge" data-nivel="medio">Elige de 2 a 4</span></div>
+        <span class="step-num">·</span>
+        <div><h2>Cómo quieres que te contacten</h2></div>
       </div>
       <div class="step-cuerpo">
-        <div class="note-box">Vuestro plan ya incluye, sin elegir nada, el botón de reserva/cita con calendario integrado y el botón flotante de WhatsApp inteligente.</div>
-        <label class="field-label">¿Qué mensaje predefinido quieres que lleve el botón de WhatsApp?</label>
-        <input type="text" name="Mensaje del botón de WhatsApp" placeholder="Ej: Hola, quiero pedir información sobre...">
-
-        <p class="step-sub" style="margin-top:18px;">El Plan Crecimiento incluye entre 2 y 4 extras a elegir, además de todo lo anterior. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" id="extras-inc-crecimiento" data-min="2" data-max="4">
-          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business"><span>Integración con Google Business</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
-        </div>
-
-        <div data-requiere-extra="Integración con Google Business">
-          <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
-          <input type="url" name="Enlace de Google Business" placeholder="Pega el enlace si ya la tenéis">
-        </div>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <div class="step" data-planes="elite">
-      <div class="step-head">
-        <span class="step-num">17</span>
-        <div><h2>Extras</h2><span class="plan-badge" data-nivel="elite">Todos incluidos</span></div>
-      </div>
-      <div class="step-cuerpo">
-        <p class="step-sub"><b>El Plan Élite incluye todos los extras, sin coste adicional.</b> Marca los que quieras implementar en tu web — a continuación solo te preguntaremos por los que hayas marcado. <span class="chip-grid__contador" data-contador></span></p>
-        <div class="chip-grid" id="extras-inc-elite" data-min="1" data-max="18" data-sin-tope>
-          <label class="chip"><input type="checkbox" name="Extras" value="Modo oscuro"><span>Modo oscuro</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="QR personalizado"><span>QR personalizado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Página de agradecimiento personalizada"><span>Página de agradecimiento personalizada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Botón de compartir en redes"><span>Botón de compartir en redes</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Mapa de Google integrado"><span>Mapa de Google integrado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Formulario de testimonios"><span>Formulario de testimonios</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Newsletter con bienvenida automática"><span>Newsletter con bienvenida automática</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Integración con Google Business Profile"><span>Integración con Google Business Profile</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Integración con redes sociales"><span>Integración con redes sociales</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Testimonios en vídeo"><span>Testimonios en vídeo</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Blog asistido con IA"><span>Blog asistido con IA</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Galería animada"><span>Galería animada</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Sección de FAQ desplegable"><span>Sección de FAQ desplegable</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Chat con IA / chatbot"><span>Chat con IA / chatbot</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Carrito de compra avanzado / pasarela de pago"><span>Carrito de compra avanzado / pasarela de pago</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Dashboard de analítica personalizado"><span>Dashboard de analítica personalizado</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Multi-idioma"><span>Multi-idioma</span></label>
-          <label class="chip"><input type="checkbox" name="Extras" value="Panel de administración para el cliente"><span>Panel de administración para el cliente</span></label>
-        </div>
-
-        <div data-requiere-extra="QR personalizado">
-          <label class="field-label" style="margin-top:16px;">¿A dónde debe llevar el código QR?</label>
-          <input type="text" name="Destino del QR" placeholder="Ej: a la carta, a WhatsApp, a la ficha de Google...">
-        </div>
-        <div data-requiere-extra="Página de agradecimiento personalizada">
-          <label class="field-label" style="margin-top:16px;">¿Qué quieres que diga la página de agradecimiento?</label>
-          <textarea name="Texto de la página de agradecimiento" rows="2" placeholder="Lo que ve quien acaba de escribiros o comprar"></textarea>
-        </div>
-        <div data-requiere-extra="Botón de compartir en redes">
-          <label class="field-label" style="margin-top:16px;">¿En qué redes sociales quieres que se pueda compartir la web?</label>
-          <input type="text" name="Redes para compartir" placeholder="Ej: WhatsApp, Facebook, Instagram, X...">
-        </div>
-        <div data-requiere-extra="Mapa de Google integrado">
-          <label class="field-label" style="margin-top:16px;">¿Qué dirección o ubicación debe mostrar el mapa?</label>
-          <input type="text" name="Ubicación del mapa" placeholder="Dirección exacta, o pega el enlace de Google Maps">
-        </div>
-        <div data-requiere-extra="Formulario de testimonios">
-          <label class="field-label" style="margin-top:16px;">Cada cliente podrá dejar su propia valoración directamente en la web. ¿A qué correo queréis que os avisemos cuando llegue una nueva?</label>
-          <input type="email" name="Correo para avisos de testimonios" placeholder="Si es distinto del de contacto">
-        </div>
-        <div data-requiere-extra="Integración con redes sociales">
-          <label class="field-label" style="margin-top:16px;">¿Qué redes sociales quieres que aparezcan en tu web? Pon el nombre y el enlace de cada una</label>
-          <textarea name="Redes sociales a integrar" rows="3" placeholder="Ej: Instagram — https://instagram.com/tunegocio&#10;Facebook — https://facebook.com/tunegocio"></textarea>
-        </div>
-        <div data-requiere-extra="Integración con Google Business Profile">
-          <label class="field-label" style="margin-top:16px;">¿Tenéis ya una ficha de Google Business creada?</label>
-          <input type="url" name="Enlace de Google Business" placeholder="Pega el enlace si ya la tenéis">
-        </div>
-
-        <div class="note-box" style="margin-top:16px;">Vuestro plan ya incluye, sin elegir nada, el botón de reserva/cita con calendario integrado y el botón flotante de WhatsApp inteligente.</div>
-        <label class="field-label">¿Qué mensaje predefinido quieres que lleve el botón de WhatsApp?</label>
-        <input type="text" name="Mensaje del botón de WhatsApp" placeholder="Ej: Hola, quiero pedir información sobre...">
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 7B · IDIOMAS ================= -->
-    <div class="step" data-planes="elite" data-extra="Multi-idioma">
-      <div class="step-head">
-        <span class="step-num">7</span>
-        <div><h2>Idiomas de la web</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <label class="field-label">Además del español, ¿a qué idioma queréis traducir la web?</label>
-        <div class="hint">Elige uno — si necesitáis más de uno, decídnoslo en las notas de más abajo.</div>
-        <div class="radio-row">
-          <label><input type="radio" name="Idioma adicional" value="Inglés"><span><b>Inglés</b></span></label>
-          <label><input type="radio" name="Idioma adicional" value="Francés"><span><b>Francés</b></span></label>
-          <label><input type="radio" name="Idioma adicional" value="Alemán"><span><b>Alemán</b></span></label>
-          <label><input type="radio" name="Idioma adicional" value="Portugués"><span><b>Portugués</b></span></label>
-          <label><input type="radio" name="Idioma adicional" value="Italiano"><span><b>Italiano</b></span></label>
-          <label><input type="radio" name="Idioma adicional" value="Otro"><span><b>Otro</b><span class="d">Nos lo cuentas abajo</span></span></label>
-        </div>
-        <label class="field-label">¿Algo más sobre los idiomas?</label>
-        <textarea name="Notas de idiomas" rows="2" placeholder="Otro idioma, traducción automática vs. revisada a mano..."></textarea>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 8 · BLOG ================= -->
-    <div class="step" data-planes="crecimiento elite" data-extra="Blog asistido con IA|Galería animada">
-      <div class="step-head">
-        <span class="step-num">8</span>
-        <div><h2>Blog o galería</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <label class="field-label">¿Queréis publicar noticias o artículos?</label>
-        <select name="Blog" id="sel-blog" onchange="alternarBlog()">
-          <option value="" selected></option>
-          <option value="Sí">Sí</option>
-          <option value="No">No</option>
-        </select>
-
-        <div class="depende" id="blog-extra"><div>
-          <label class="field-label">¿Cada cuánto pensáis publicar?</label>
-          <input type="text" name="Frecuencia del blog" placeholder="Ej: una vez al mes">
-          <label class="field-label">¿Sobre qué temas?</label>
-          <textarea name="Temas del blog" rows="2" placeholder="Ej: novedades, consejos del sector, casos de clientes, detrás de las cámaras..."></textarea>
-          <label class="field-label">¿Queréis que la redacción se apoye en inteligencia artificial?</label>
-          <select name="Blog con IA">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-        </div></div>
-
-        <label class="field-label" style="margin-top:18px;">¿Tenéis ya fotografías para la galería?</label>
-        <select name="Fotos de galería" id="sel-fotos-galeria" onchange="alternarFotosGaleria()">
-          <option value="" selected></option>
-          <option value="Sí">Sí</option>
-          <option value="No">No</option>
-        </select>
-
-        <div class="depende" id="fotos-galeria-si"><div>
-          <label class="field-label">Sube las fotos y pon el pie de foto de cada una</label>
-          <div class="subida" id="subida-galeria-blog">
-            <input type="file" accept="image/*" multiple>
-            <p class="subida__texto"><b>Toca o arrastra</b> las fotos aquí</p>
-          </div>
-          <div class="subida-lista" id="subida-galeria-blog-lista"></div>
-        </div></div>
-
-        <div class="depende" id="fotos-galeria-no"><div>
-          <label class="field-label">¿Queréis que os hagamos un plan extra personalizado de fotografía y vídeo?</label>
-          <select name="Plan de fotografía y vídeo para galería" id="sel-plan-fotovideo-galeria" onchange="alternarPlanFotoVideoGaleria()">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-          <div class="depende" id="plan-fotovideo-galeria-si"><div>
-            <div class="note-box">Perfecto — ese contenido no está incluido en el plan, así que os pasamos un presupuesto aparte al terminar de revisar el cuestionario.</div>
-          </div></div>
-          <div class="depende" id="plan-fotovideo-galeria-no"><div>
-            <div class="note-box">Para crear esta sección necesitamos contenido audiovisual — si no queréis que os lo grabemos nosotros, tendréis que proporcionárnoslo vosotros.</div>
-          </div></div>
-        </div></div>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 9 · RESERVAS ================= -->
-    <div class="step" data-planes="crecimiento elite">
-      <div class="step-head">
-        <span class="step-num">9</span>
-        <div><h2>Reservas y citas</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <label class="field-label">¿Ofrecéis un solo servicio o varios?</label>
-        <select name="Cuántos servicios reservables" id="sel-reservas" onchange="alternarReservas()">
-          <option value="" selected></option>
-          <option value="Uno solo">Uno solo</option>
-          <option value="Más de uno">Más de uno</option>
-        </select>
-
-        <div class="depende" id="reserva-uno"><div>
-          <label class="field-label">Días y horas en que atendéis</label>
-          <input type="text" name="Horario del servicio" placeholder="Ej: lunes a viernes, de 9:00 a 14:00">
-          <label class="field-label">¿Cuánto dura la cita?</label>
-          <input type="text" name="Duración del servicio" placeholder="Ej: 45 minutos">
-        </div></div>
-
-        <div class="depende" id="reserva-varios"><div>
-          <p class="step-sub">Añade una ficha por servicio, con su horario y su duración. Sin límite.</p>
-          <div id="lista-reservas"></div>
-          <button type="button" class="add-btn" onclick="añadirReserva()">+ Añadir otro servicio y horario</button>
-        </div></div>
-
-        <label class="field-label">¿Cómo lleváis las citas ahora mismo?</label>
-        <textarea name="Cómo funcionan las citas ahora" rows="2" placeholder="Ej: por WhatsApp, por teléfono, con una agenda de papel..."></textarea>
-        <label class="field-label">¿Queréis que se confirme la cita automáticamente?</label>
-        <select name="Confirmación automática">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
-        <label class="field-label">¿Y que os llegue un aviso con cada reserva?</label>
+        <p class="step-sub">La Web Esencial lleva formulario de contacto y botón de WhatsApp.</p>
+        <label class="field-label">¿A qué correo quieres que lleguen los mensajes del formulario?</label>
+        <input type="email" name="Correo del formulario" placeholder="Ej: hola@tunegocio.com">
+        <label class="field-label">¿Qué datos quieres pedir en el formulario?</label>
         <div class="chip-grid">
-          <label class="chip"><input type="checkbox" name="Aviso de reserva" value="Sí, por correo"><span>Sí, por correo</span></label>
-          <label class="chip"><input type="checkbox" name="Aviso de reserva" value="Sí, por WhatsApp"><span>Sí, por WhatsApp</span></label>
+          <label class="chip"><input type="checkbox" name="Campos del formulario" value="Nombre"><span>Nombre</span></label>
+          <label class="chip"><input type="checkbox" name="Campos del formulario" value="Correo"><span>Correo</span></label>
+          <label class="chip"><input type="checkbox" name="Campos del formulario" value="Teléfono"><span>Teléfono</span></label>
+          <label class="chip"><input type="checkbox" name="Campos del formulario" value="Motivo de la consulta"><span>Motivo de la consulta</span></label>
+          <label class="chip"><input type="checkbox" name="Campos del formulario" value="Mensaje"><span>Mensaje</span></label>
+          <label class="chip"><input type="checkbox" name="Campos del formulario" value="Otro"><span>Otro</span></label>
         </div>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 10 · TIENDA ================= -->
-    <div class="step" data-planes="elite" data-extra="Carrito de compra avanzado / pasarela de pago">
-      <div class="step-head">
-        <span class="step-num">10</span>
-        <div><h2>Tienda online y pagos</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <label class="field-label">¿Cuántos productos vais a vender, más o menos?</label>
-        <input type="text" name="Número de productos" placeholder="Ej: unos 40">
-        <label class="field-label">¿Tenéis los productos en algún catálogo o archivo?</label>
-        <select name="Catálogo de productos">
-          <option value="" selected></option>
-          <option>Sí, lo adjunto</option>
-          <option>Lo tengo pero sin ordenar</option>
-          <option>No, hay que crearlo</option>
-        </select>
-        <label class="field-label">¿Cómo queréis cobrar?</label>
-        <div class="chip-grid">
-          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Tarjeta"><span>Tarjeta</span></label>
-          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Bizum"><span>Bizum</span></label>
-          <label class="chip"><input type="checkbox" name="Formas de cobro" value="PayPal"><span>PayPal</span></label>
-          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Transferencia"><span>Transferencia</span></label>
-          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Contra reembolso"><span>Contra reembolso</span></label>
-        </div>
-        <label class="field-label">¿Hacéis envíos? ¿Con qué condiciones?</label>
-        <textarea name="Envíos" rows="2" placeholder="Zonas, precios, plazos, envío gratis a partir de..."></textarea>
-        <label class="field-label">¿Y las devoluciones?</label>
-        <textarea name="Devoluciones" rows="2" placeholder="Ej: 14 días para devolver, el cliente paga el envío de vuelta..."></textarea>
-        <label class="field-label">¿Facturación automática a cada compra?</label>
-        <select name="Facturación automática">
-          <option value="" selected></option>
-          <option>Sí</option>
-          <option>No</option>
-        </select>
-        <label class="field-label">¿Usáis ya algún sistema de stock, ERP o TPV que debamos conectar?</label>
-        <input type="text" name="Sistema de stock a conectar" placeholder="Déjalo en blanco si no usáis ninguno">
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
-    <!-- ================= 11 · IA Y PANEL ================= -->
-    <div class="step" data-planes="elite" data-extra="Chat con IA / chatbot|Panel de administración para el cliente">
-      <div class="step-head">
-        <span class="step-num">11</span>
-        <div><h2>Inteligencia artificial y panel</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <div data-requiere-extra="Chat con IA / chatbot">
-          <label class="field-label">¿Qué queréis que haga el chat con IA de vuestra web?</label>
-          <div class="chip-grid">
-            <label class="chip"><input type="checkbox" name="Chat IA" value="Resolver dudas frecuentes"><span>Resolver dudas frecuentes</span></label>
-            <label class="chip"><input type="checkbox" name="Chat IA" value="Recomendar productos"><span>Recomendar productos</span></label>
-            <label class="chip"><input type="checkbox" name="Chat IA" value="Ayudar con la compra"><span>Ayudar con la compra</span></label>
-            <label class="chip"><input type="checkbox" name="Chat IA" value="Recoger datos de contacto"><span>Recoger datos de contacto</span></label>
-            <label class="chip"><input type="checkbox" name="Chat IA" value="Concertar citas"><span>Concertar citas</span></label>
-          </div>
-          <div class="note-box">Importante: todo lo que marques aquí arriba (dudas frecuentes, recomendar productos, ayudar con la compra, recoger datos, concertar citas...) tiene que llevar su información correspondiente en las preguntas y respuestas de más abajo — si no, el chat no sabrá qué contestar.</div>
-          <label class="field-label">¿Con qué tono debe hablar el chat?</label>
-          <input type="text" name="Tono del chat IA" placeholder="Ej: cercano y directo, formal, divertido...">
-          <label class="field-label">Si no sabe responder, ¿lo derivamos a WhatsApp o a un correo?</label>
-          <input type="text" name="Derivación del chat IA" placeholder="Ej: a vuestro WhatsApp, a este mismo correo...">
-
-          <label class="field-label" style="margin-top:16px;">Preguntas y respuestas que debe saber contestar</label>
-          <div class="hint">Escribe cada pregunta tal y como te la haría un cliente, y justo debajo la respuesta exacta que quieres que dé el chat. Añade las que hagan falta.</div>
-          <div id="lista-preguntas-chat"></div>
-          <button type="button" class="add-btn" onclick="añadirPreguntaChat()">+ Añadir otra pregunta para el chat</button>
-        </div>
-
-        <div data-requiere-extra="Panel de administración para el cliente">
-          <label class="field-label" style="margin-top:16px;">¿Quién va a gestionar la web una vez esté hecha?</label>
-          <input type="text" name="Quién gestiona la web" placeholder="Ej: yo misma, mi equipo, nadie por ahora">
-          <label class="field-label">¿Qué querríais poder cambiar por vuestra cuenta desde el panel?</label>
-          <textarea name="Qué gestionar desde el panel" rows="2" placeholder="Productos, precios, fotos, entradas del blog, horarios..."></textarea>
-          <label class="field-label">¿Queréis una sesión de formación para manejarlo?</label>
-          <select name="Formación">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-        </div>
-
-        <div data-requiere-extra="Dashboard de analítica personalizado">
-          <label class="field-label" style="margin-top:16px;">¿Qué te interesa ver en el dashboard de analítica?</label>
-          <div class="chip-grid">
-            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Visitas y origen del tráfico"><span>Visitas y origen del tráfico</span></label>
-            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Ventas y facturación"><span>Ventas y facturación</span></label>
-            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Productos más vistos o vendidos"><span>Productos más vistos o vendidos</span></label>
-            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Tasa de conversión"><span>Tasa de conversión</span></label>
-            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Reservas o citas"><span>Reservas o citas</span></label>
-          </div>
-        </div>
+        <label class="field-label">Si has marcado «Otro», ¿qué dato más?</label>
+        <input type="text" name="Otro campo del formulario" placeholder="Déjalo en blanco si no lo has marcado">
+        <label class="field-label">Número de WhatsApp al que quieres que escriban</label>
+        <input type="text" name="WhatsApp" placeholder="Ej: +34 600 00 00 00">
+        <label class="field-label">¿Quieres que el mensaje de WhatsApp salga ya escrito?</label>
+        <input type="text" name="Mensaje previo de WhatsApp" placeholder="Ej: Hola, os escribo desde la web y quería preguntar por...">
+        <label class="field-label">Horario de atención, si quieres que aparezca</label>
+        <input type="text" name="Horario de atención" placeholder="Déjalo en blanco si prefieres no ponerlo">
       </div>
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
     <!-- ================= 13 · FAQ ================= -->
-    <div class="step" data-planes="impulso crecimiento elite" data-extra="Sección de FAQ desplegable">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">13</span>
         <div><h2>Preguntas frecuentes</h2></div>
@@ -1198,48 +922,8 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
-    <!-- ================= 16 · NEWSLETTER ================= -->
-    <div class="step" data-planes="crecimiento elite" data-extra="Newsletter con bienvenida automática">
-      <div class="step-head">
-        <span class="step-num">16</span>
-        <div><h2>Newsletter</h2></div>
-      </div>
-      <div class="step-cuerpo">
-        <label class="field-label">¿Queréis una newsletter en la web?</label>
-        <select name="Newsletter" id="sel-news" onchange="alternarNewsletter()">
-          <option value="" selected></option>
-          <option value="Sí">Sí</option>
-          <option value="No">No</option>
-        </select>
-        <div class="depende" id="news-extra"><div>
-          <label class="field-label">¿Tenéis ya una lista de contactos?</label>
-          <select name="Lista de contactos">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-          <label class="field-label">¿Qué pensáis enviar?</label>
-          <textarea name="Qué enviar por newsletter" rows="2" placeholder="Novedades, promociones, consejos..."></textarea>
-          <label class="field-label">¿Queréis un correo de bienvenida automático?</label>
-          <select name="Correo de bienvenida">
-            <option value="" selected></option>
-            <option>Sí</option>
-            <option>No</option>
-          </select>
-          <label class="field-label" style="margin-top:16px;">¿Qué automatizaciones os interesan? <span style="font-weight:400;color:var(--tenue)">— opcional</span></label>
-          <div class="chip-grid">
-            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Carrito abandonado"><span>Carrito abandonado</span></label>
-            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Recordatorio de cita o reserva"><span>Recordatorio de cita o reserva</span></label>
-            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Felicitación de cumpleaños"><span>Felicitación de cumpleaños</span></label>
-            <label class="chip"><input type="checkbox" name="Automatizaciones de newsletter" value="Serie de bienvenida en varios correos"><span>Serie de bienvenida en varios correos</span></label>
-          </div>
-        </div></div>
-      </div>
-      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
-    </div>
-
     <!-- ================= SECCIÓN · VUESTRA WEB ================= -->
-    <div class="step step--seccion" data-planes="impulso crecimiento elite">
+    <div class="step step--seccion" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">§</span>
         <div><h2>Sección · Tu web personalizada</h2></div>
@@ -1250,7 +934,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 6 · DISEÑO ================= -->
-    <div class="step step--compacto" data-planes="impulso crecimiento elite">
+    <div class="step step--compacto" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">6</span>
         <div><h2>Tu web personalizada</h2></div>
@@ -1341,8 +1025,51 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
+    <div class="step" data-pack="esencial">
+      <div class="step-head">
+        <span class="step-num">·</span>
+        <div><h2>Detalles que ya van incluidos</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">Todo esto entra en la Web Esencial. Solo necesitamos saber cómo lo quieres.</p>
+        <label class="field-label">¿Quieres que la web tenga modo oscuro?</label>
+        <div class="hint">Se hace si encaja con el diseño que salga; si no encaja, te lo diremos.</div>
+        <select name="Modo oscuro">
+          <option value="" selected></option>
+          <option>Sí, me gusta</option>
+          <option>No, prefiero solo el modo claro</option>
+          <option>Me da igual, decidid vosotros</option>
+        </select>
+        <label class="field-label">¿Cuánto movimiento quieres en la web?</label>
+        <select name="Animaciones">
+          <option value="" selected></option>
+          <option>Suave, casi imperceptible</option>
+          <option>Normal, que se note al bajar</option>
+          <option>Ninguno, todo quieto</option>
+        </select>
+        <label class="field-label">El favicon es el iconito que sale en la pestaña del navegador. ¿Qué prefieres?</label>
+        <select name="Favicon">
+          <option value="" selected></option>
+          <option>Mi logotipo</option>
+          <option>La inicial de mi marca</option>
+          <option>Decidid vosotros</option>
+        </select>
+        <label class="field-label">¿Para qué vas a usar el código QR?</label>
+        <div class="hint">Te lo entregamos como imagen para que lo pongas donde quieras.</div>
+        <textarea name="Uso del código QR" rows="2" placeholder="Ej: en la carta del bar, en tarjetas de visita, en el escaparate..."></textarea>
+        <label class="field-label">El botón de compartir, ¿dónde te viene mejor?</label>
+        <select name="Botón de compartir">
+          <option value="" selected></option>
+          <option>Al final de la página</option>
+          <option>Flotante, siempre visible</option>
+          <option>Decidid vosotros</option>
+        </select>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
     <!-- ================= 7 · TEXTOS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">7</span>
         <div><h2>Textos</h2></div>
@@ -1363,7 +1090,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 12 · TESTIMONIOS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite" data-extra-impulso="Valoraciones de Google integradas en la web">
+    <div class="step" data-pack="esencial" >
       <div class="step-head">
         <span class="step-num">12</span>
         <div><h2>Lo que dicen de vosotros</h2></div>
@@ -1375,7 +1102,7 @@ input[type="file"]::file-selector-button{
         <label class="field-label">Opiniones sueltas que quieras destacar</label>
         <textarea name="Testimonios escritos" rows="3" placeholder="Pega aquí las que más te gusten, con el nombre de quien las dijo."></textarea>
 
-        <div data-requiere-extra="Testimonios en vídeo">
+        <div>
           <label class="field-label" style="margin-top:16px;">¿Tenéis los vídeos de testimonios?</label>
           <select name="Tiene vídeos de testimonios" id="sel-audiovisual" onchange="alternarAudiovisual()">
             <option value="" selected></option>
@@ -1400,7 +1127,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 14 · SEO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite" data-extra-impulso="Mapa de Google integrado">
+    <div class="step" data-pack="esencial" >
       <div class="step-head">
         <span class="step-num">14</span>
         <div><h2>Posicionamiento y geolocalización</h2></div>
@@ -1419,7 +1146,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 15 · REDES ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">15</span>
         <div><h2>Redes sociales y Google</h2></div>
@@ -1451,8 +1178,411 @@ input[type="file"]::file-selector-button{
       <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
     </div>
 
+    <div class="step step--seccion" data-pack="expansion">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Pack · Expansión</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Has contratado el pack Expansión: tu web pasa a tener hasta 5 páginas con navegación completa y SEO avanzado. Estas preguntas son solo de este pack.</p>
+      </div>
+    </div>
+
+    <div class="step" data-pack="expansion">
+      <div class="step-head">
+        <span class="step-num">·</span>
+        <div><h2>Las páginas de tu web</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">El pack Expansión incluye <b>hasta 5 páginas</b>. Marca las que quieres.</p>
+        <div class="chip-grid" data-max="5">
+          <label class="chip"><input type="checkbox" name="Páginas" value="Inicio"><span>Inicio</span></label>
+          <label class="chip"><input type="checkbox" name="Páginas" value="Sobre el negocio"><span>Sobre el negocio</span></label>
+          <label class="chip"><input type="checkbox" name="Páginas" value="Servicios"><span>Servicios</span></label>
+          <label class="chip"><input type="checkbox" name="Páginas" value="Galería"><span>Galería</span></label>
+          <label class="chip"><input type="checkbox" name="Páginas" value="Contacto"><span>Contacto</span></label>
+          <label class="chip"><input type="checkbox" name="Páginas" value="Otra"><span>Otra</span></label>
+        </div>
+        <label class="field-label">Si has marcado «Otra», ¿cuál y para qué?</label>
+        <input type="text" name="Otra página" placeholder="Déjalo en blanco si no lo has marcado">
+        <label class="field-label">¿Cómo quieres que se llamen en el menú?</label>
+        <div class="hint">Escríbelo tal cual quieres leerlo arriba. Si no lo tienes claro, lo proponemos nosotros.</div>
+        <textarea name="Nombres del menú" rows="2" placeholder="Ej: Inicio · Quiénes somos · Qué hacemos · Trabajos · Hablamos"></textarea>
+        <label class="field-label">¿Qué página quieres que sea la principal, la que se abre primero?</label>
+        <input type="text" name="Página principal" placeholder="Ej: Inicio">
+        <label class="field-label">Sobre el SEO avanzado: ¿por qué búsquedas te gustaría que te encontraran?</label>
+        <div class="hint">Escribe las frases que tú buscarías en Google para llegar a un negocio como el tuyo.</div>
+        <textarea name="Búsquedas para SEO avanzado" rows="3" placeholder="Ej: peluquería con niños en Gracia, cortar el pelo sin cita Barcelona..."></textarea>
+        <label class="field-label">¿Hay algún competidor que salga bien posicionado y te sirva de referencia?</label>
+        <input type="text" name="Competidor de referencia en buscadores" placeholder="Déjalo en blanco si no se te ocurre ninguno">
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <!-- ================= 8 · BLOG ================= -->
+    <div class="step" data-pack="expansion">
+      <div class="step-head">
+        <span class="step-num">8</span>
+        <div><h2>Blog o galería</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Queréis publicar noticias o artículos?</label>
+        <select name="Blog" id="sel-blog" onchange="alternarBlog()">
+          <option value="" selected></option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+
+        <div class="depende" id="blog-extra"><div>
+          <label class="field-label">¿Cada cuánto pensáis publicar?</label>
+          <input type="text" name="Frecuencia del blog" placeholder="Ej: una vez al mes">
+          <label class="field-label">¿Sobre qué temas?</label>
+          <textarea name="Temas del blog" rows="2" placeholder="Ej: novedades, consejos del sector, casos de clientes, detrás de las cámaras..."></textarea>
+          <label class="field-label">¿Queréis que la redacción se apoye en inteligencia artificial?</label>
+          <select name="Blog con IA">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div></div>
+
+        <label class="field-label" style="margin-top:18px;">¿Tenéis ya fotografías para la galería?</label>
+        <select name="Fotos de galería" id="sel-fotos-galeria" onchange="alternarFotosGaleria()">
+          <option value="" selected></option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+
+        <div class="depende" id="fotos-galeria-si"><div>
+          <label class="field-label">Sube las fotos y pon el pie de foto de cada una</label>
+          <div class="subida" id="subida-galeria-blog">
+            <input type="file" accept="image/*" multiple>
+            <p class="subida__texto"><b>Toca o arrastra</b> las fotos aquí</p>
+          </div>
+          <div class="subida-lista" id="subida-galeria-blog-lista"></div>
+        </div></div>
+
+        <div class="depende" id="fotos-galeria-no"><div>
+          <label class="field-label">¿Queréis que os hagamos un plan extra personalizado de fotografía y vídeo?</label>
+          <select name="Plan de fotografía y vídeo para galería" id="sel-plan-fotovideo-galeria" onchange="alternarPlanFotoVideoGaleria()">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+          <div class="depende" id="plan-fotovideo-galeria-si"><div>
+            <div class="note-box">Perfecto — ese contenido no está incluido en el plan, así que os pasamos un presupuesto aparte al terminar de revisar el cuestionario.</div>
+          </div></div>
+          <div class="depende" id="plan-fotovideo-galeria-no"><div>
+            <div class="note-box">Para crear esta sección necesitamos contenido audiovisual — si no queréis que os lo grabemos nosotros, tendréis que proporcionárnoslo vosotros.</div>
+          </div></div>
+        </div></div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step step--seccion" data-pack="visual">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Pack · Producción Visual</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Has contratado el pack Producción Visual: una sesión de foto y vídeo en tu negocio, con dirección creativa, de la que salen de 7 a 10 fotografías y 2 vídeos verticales de hasta 15 segundos.</p>
+      </div>
+    </div>
+
+    <div class="step" data-pack="visual">
+      <div class="step-head">
+        <span class="step-num">·</span>
+        <div><h2>La sesión de foto y vídeo</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Dónde hacemos la sesión?</label>
+        <input type="text" name="Lugar de la sesión" placeholder="Ej: nuestro local en calle X, y si hace bueno también la terraza">
+        <label class="field-label">¿Qué días y a qué horas os viene bien?</label>
+        <div class="hint">Dinos dos o tres opciones y cerramos una.</div>
+        <textarea name="Disponibilidad para la sesión" rows="2" placeholder="Ej: martes o jueves por la mañana, mejor antes de abrir"></textarea>
+        <label class="field-label">¿Qué tiene que salir sí o sí en las fotos?</label>
+        <textarea name="Imprescindibles de la sesión" rows="2" placeholder="Ej: el horno de leña, la barra, el escaparate con el rótulo..."></textarea>
+        <label class="field-label">¿Va a salir gente en las fotos?</label>
+        <select name="Personas en la sesión">
+          <option value="" selected></option>
+          <option>Sí, el equipo</option>
+          <option>Sí, equipo y clientes</option>
+          <option>No, solo el sitio y los productos</option>
+        </select>
+        <label class="field-label">¿De qué quieres los 2 vídeos verticales?</label>
+        <div class="hint">Son de hasta 15 segundos cada uno, pensados para móvil y redes.</div>
+        <textarea name="Idea de los vídeos verticales" rows="2" placeholder="Ej: uno del proceso de amasar y otro de un paseo por el local"></textarea>
+        <label class="field-label">¿Hay algo que prefieras que NO salga?</label>
+        <textarea name="Qué no debe salir en la sesión" rows="2" placeholder="Ej: el almacén, la cocina sin ordenar, la cara de ningún cliente"></textarea>
+        <label class="field-label">¿Alguna referencia visual que te guste?</label>
+        <input type="text" name="Referencias visuales de la sesión" placeholder="Una cuenta de Instagram, una web, un estilo... o déjalo en blanco">
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step step--seccion" data-pack="reservas">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Pack · Reservas</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Has contratado el pack Reservas: calendario integrado, elección de servicio, fecha y hora, confirmaciones automáticas y conexión con tu calendario.</p>
+      </div>
+    </div>
+
+    <!-- ================= 9 · RESERVAS ================= -->
+    <div class="step" data-pack="reservas">
+      <div class="step-head">
+        <span class="step-num">9</span>
+        <div><h2>Reservas y citas</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Ofrecéis un solo servicio o varios?</label>
+        <select name="Cuántos servicios reservables" id="sel-reservas" onchange="alternarReservas()">
+          <option value="" selected></option>
+          <option value="Uno solo">Uno solo</option>
+          <option value="Más de uno">Más de uno</option>
+        </select>
+
+        <div class="depende" id="reserva-uno"><div>
+          <label class="field-label">Días y horas en que atendéis</label>
+          <input type="text" name="Horario del servicio" placeholder="Ej: lunes a viernes, de 9:00 a 14:00">
+          <label class="field-label">¿Cuánto dura la cita?</label>
+          <input type="text" name="Duración del servicio" placeholder="Ej: 45 minutos">
+        </div></div>
+
+        <div class="depende" id="reserva-varios"><div>
+          <p class="step-sub">Añade una ficha por servicio, con su horario y su duración. Sin límite.</p>
+          <div id="lista-reservas"></div>
+          <button type="button" class="add-btn" onclick="añadirReserva()">+ Añadir otro servicio y horario</button>
+        </div></div>
+
+        <label class="field-label">¿Cómo lleváis las citas ahora mismo?</label>
+        <textarea name="Cómo funcionan las citas ahora" rows="2" placeholder="Ej: por WhatsApp, por teléfono, con una agenda de papel..."></textarea>
+        <label class="field-label">¿Queréis que se confirme la cita automáticamente?</label>
+        <select name="Confirmación automática">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+        <label class="field-label">¿Y que os llegue un aviso con cada reserva?</label>
+        <div class="chip-grid">
+          <label class="chip"><input type="checkbox" name="Aviso de reserva" value="Sí, por correo"><span>Sí, por correo</span></label>
+          <label class="chip"><input type="checkbox" name="Aviso de reserva" value="Sí, por WhatsApp"><span>Sí, por WhatsApp</span></label>
+        </div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step" data-pack="reservas">
+      <div class="step-head">
+        <span class="step-num">·</span>
+        <div><h2>Tu calendario</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Con qué calendario quieres que se conecte?</label>
+        <select name="Calendario a conectar">
+          <option value="" selected></option>
+          <option>Google Calendar</option>
+          <option>Outlook</option>
+          <option>Apple Calendar</option>
+          <option>Ninguno, lo llevo solo desde la web</option>
+          <option>Otro</option>
+        </select>
+        <label class="field-label">Si has marcado «Otro», ¿cuál?</label>
+        <input type="text" name="Otro calendario" placeholder="Déjalo en blanco si no lo has marcado">
+        <label class="field-label">¿Con cuánta antelación como mínimo se puede reservar?</label>
+        <input type="text" name="Antelación mínima de reserva" placeholder="Ej: 2 horas antes">
+        <label class="field-label">¿Y hasta cuándo se puede reservar por adelantado?</label>
+        <input type="text" name="Antelación máxima de reserva" placeholder="Ej: hasta un mes vista">
+        <label class="field-label">¿Se pueden cancelar o cambiar las citas desde la web?</label>
+        <select name="Cancelación desde la web">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No, que nos escriban</option>
+        </select>
+        <label class="field-label">¿Qué quieres que ponga la página de confirmación?</label>
+        <textarea name="Texto de la confirmación" rows="2" placeholder="Ej: ¡Nos vemos el día X! Si no puedes venir, avísanos por WhatsApp."></textarea>
+        <label class="field-label">¿Días en los que nunca hay citas?</label>
+        <input type="text" name="Días sin citas" placeholder="Ej: domingos y festivos, agosto entero">
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step step--seccion" data-pack="tienda">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Pack · Tienda Online</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Has contratado el pack Tienda Online: catálogo, carrito, pasarela de pago, stock, pedidos y envíos, panel de gestión y formación.</p>
+      </div>
+    </div>
+
+    <!-- ================= 10 · TIENDA ================= -->
+    <div class="step" data-pack="tienda">
+      <div class="step-head">
+        <span class="step-num">10</span>
+        <div><h2>Tienda online y pagos</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Cuántos productos vais a vender, más o menos?</label>
+        <input type="text" name="Número de productos" placeholder="Ej: unos 40">
+        <label class="field-label">¿Tenéis los productos en algún catálogo o archivo?</label>
+        <select name="Catálogo de productos">
+          <option value="" selected></option>
+          <option>Sí, lo adjunto</option>
+          <option>Lo tengo pero sin ordenar</option>
+          <option>No, hay que crearlo</option>
+        </select>
+        <label class="field-label">¿Cómo queréis cobrar?</label>
+        <div class="chip-grid">
+          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Tarjeta"><span>Tarjeta</span></label>
+          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Bizum"><span>Bizum</span></label>
+          <label class="chip"><input type="checkbox" name="Formas de cobro" value="PayPal"><span>PayPal</span></label>
+          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Transferencia"><span>Transferencia</span></label>
+          <label class="chip"><input type="checkbox" name="Formas de cobro" value="Contra reembolso"><span>Contra reembolso</span></label>
+        </div>
+        <label class="field-label">¿Hacéis envíos? ¿Con qué condiciones?</label>
+        <textarea name="Envíos" rows="2" placeholder="Zonas, precios, plazos, envío gratis a partir de..."></textarea>
+        <label class="field-label">¿Y las devoluciones?</label>
+        <textarea name="Devoluciones" rows="2" placeholder="Ej: 14 días para devolver, el cliente paga el envío de vuelta..."></textarea>
+        <label class="field-label">¿Facturación automática a cada compra?</label>
+        <select name="Facturación automática">
+          <option value="" selected></option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+        <label class="field-label">¿Usáis ya algún sistema de stock, ERP o TPV que debamos conectar?</label>
+        <input type="text" name="Sistema de stock a conectar" placeholder="Déjalo en blanco si no usáis ninguno">
+          <label class="field-label" style="margin-top:16px;">¿Quién va a gestionar la web una vez esté hecha?</label>
+          <input type="text" name="Quién gestiona la web" placeholder="Ej: yo misma, mi equipo, nadie por ahora">
+          <label class="field-label">¿Qué querríais poder cambiar por vuestra cuenta desde el panel?</label>
+          <textarea name="Qué gestionar desde el panel" rows="2" placeholder="Productos, precios, fotos, entradas del blog, horarios..."></textarea>
+          <label class="field-label">¿Queréis una sesión de formación para manejarlo?</label>
+          <select name="Formación">
+            <option value="" selected></option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step" data-pack="tienda">
+      <div class="step-head">
+        <span class="step-num">·</span>
+        <div><h2>La formación de la tienda</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="step-sub">La formación va incluida en el pack: te enseñamos a manejar la tienda.</p>
+        <label class="field-label">¿Quién va a recibir la formación?</label>
+        <input type="text" name="Quién recibe la formación" placeholder="Ej: yo y la persona que lleva el almacén">
+        <label class="field-label">¿Qué te preocupa más de gestionarla tú?</label>
+        <textarea name="Dudas sobre gestionar la tienda" rows="2" placeholder="Ej: subir productos nuevos, cambiar precios, ver los pedidos..."></textarea>
+        <label class="field-label">¿Prefieres la formación en persona o por videollamada?</label>
+        <select name="Formato de la formación">
+          <option value="" selected></option>
+          <option>En persona</option>
+          <option>Por videollamada</option>
+          <option>Me da igual</option>
+        </select>
+        <div class="note-box">Recuerda que los cobros, los pedidos, la facturación y las devoluciones los gestionas tú, y que las condiciones legales de la tienda las aportas tú. Nosotros montamos la herramienta.</div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step step--seccion" data-pack="ia">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Pack · Automatización IA</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Has contratado el pack Automatización IA: chat con inteligencia artificial, FAQ automatizadas, formularios inteligentes y analítica básica.</p>
+      </div>
+    </div>
+
+    <!-- ================= 11 · IA Y PANEL ================= -->
+    <div class="step" data-pack="ia">
+      <div class="step-head">
+        <span class="step-num">11</span>
+        <div><h2>El chat con inteligencia artificial</h2></div>
+      </div>
+      <div class="step-cuerpo">
+          <label class="field-label">¿Qué queréis que haga el chat con IA de vuestra web?</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Resolver dudas frecuentes"><span>Resolver dudas frecuentes</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Recomendar productos"><span>Recomendar productos</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Ayudar con la compra"><span>Ayudar con la compra</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Recoger datos de contacto"><span>Recoger datos de contacto</span></label>
+            <label class="chip"><input type="checkbox" name="Chat IA" value="Concertar citas"><span>Concertar citas</span></label>
+          </div>
+          <div class="note-box">Importante: todo lo que marques aquí arriba (dudas frecuentes, recomendar productos, ayudar con la compra, recoger datos, concertar citas...) tiene que llevar su información correspondiente en las preguntas y respuestas de más abajo — si no, el chat no sabrá qué contestar.</div>
+          <label class="field-label">¿Con qué tono debe hablar el chat?</label>
+          <input type="text" name="Tono del chat IA" placeholder="Ej: cercano y directo, formal, divertido...">
+          <label class="field-label">Si no sabe responder, ¿lo derivamos a WhatsApp o a un correo?</label>
+          <input type="text" name="Derivación del chat IA" placeholder="Ej: a vuestro WhatsApp, a este mismo correo...">
+
+          <label class="field-label" style="margin-top:16px;">Preguntas y respuestas que debe saber contestar</label>
+          <div class="hint">Escribe cada pregunta tal y como te la haría un cliente, y justo debajo la respuesta exacta que quieres que dé el chat. Añade las que hagan falta.</div>
+          <div id="lista-preguntas-chat"></div>
+          <button type="button" class="add-btn" onclick="añadirPreguntaChat()">+ Añadir otra pregunta para el chat</button>
+
+          <label class="field-label" style="margin-top:16px;">¿Qué te interesa ver en el dashboard de analítica?</label>
+          <div class="chip-grid">
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Visitas y origen del tráfico"><span>Visitas y origen del tráfico</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Ventas y facturación"><span>Ventas y facturación</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Productos más vistos o vendidos"><span>Productos más vistos o vendidos</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Tasa de conversión"><span>Tasa de conversión</span></label>
+            <label class="chip"><input type="checkbox" name="Métricas del dashboard" value="Reservas o citas"><span>Reservas o citas</span></label>
+          </div>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
+    <div class="step step--seccion" data-pack="idioma">
+      <div class="step-head">
+        <span class="step-num">§</span>
+        <div><h2>Pack · Versión Internacional (inglés)</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <p class="seccion-intro">Has contratado el pack Versión Internacional: tu web tendrá también versión en inglés, con selector de idioma y navegación bilingüe.</p>
+      </div>
+    </div>
+
+    <div class="step" data-pack="idioma">
+      <div class="step-head">
+        <span class="step-num">·</span>
+        <div><h2>La versión en inglés</h2></div>
+      </div>
+      <div class="step-cuerpo">
+        <label class="field-label">¿Quién escribe los textos en inglés?</label>
+        <select name="Quién traduce al inglés">
+          <option value="" selected></option>
+          <option>Los traducís vosotros a partir de los míos</option>
+          <option>Yo os paso los textos ya en inglés</option>
+        </select>
+        <label class="field-label">¿Hay nombres que NO se deben traducir?</label>
+        <div class="hint">Nombres de productos, del negocio, de platos, lemas... Los dejamos tal cual.</div>
+        <textarea name="Palabras que no se traducen" rows="2" placeholder="Ej: el nombre del bar, «pa amb tomàquet», el lema de la marca"></textarea>
+        <label class="field-label">¿En qué idioma se abre la web por defecto?</label>
+        <select name="Idioma por defecto">
+          <option value="" selected></option>
+          <option>Español</option>
+          <option>Inglés</option>
+          <option>El del navegador de quien entra</option>
+        </select>
+        <label class="field-label">¿A qué público en inglés te diriges?</label>
+        <input type="text" name="Público en inglés" placeholder="Ej: turistas, clientes internacionales, gente que se muda aquí">
+        <label class="field-label">Sobre el SEO en inglés: ¿qué buscarían en Google para encontrarte?</label>
+        <textarea name="Búsquedas en inglés" rows="2" placeholder="Ej: gluten free bakery Barcelona, english speaking hairdresser"></textarea>
+      </div>
+      <label class="ocultar"><input type="checkbox" data-ocultar> No lo quiero en mi web — no enviéis este bloque</label>
+    </div>
+
     <!-- ================= 18 · LEGAL ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">18</span>
         <div><h2>Datos legales</h2></div>
@@ -1476,7 +1606,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 19 · DOMINIO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">19</span>
         <div><h2>Dominio y hosting</h2></div>
@@ -1506,7 +1636,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 20 · PREFERENCIAS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">20</span>
         <div><h2>Preferencias y líneas rojas</h2></div>
@@ -1523,7 +1653,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 21 · ARCHIVOS ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">21</span>
         <div><h2>Archivos</h2></div>
@@ -1580,7 +1710,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 22 · CONTACTO ================= -->
-    <div class="step" data-planes="impulso crecimiento elite">
+    <div class="step" data-pack="esencial">
       <div class="step-head">
         <span class="step-num">22</span>
         <div><h2>Tus datos</h2><span class="plan-badge">Para poder responderte</span></div>
@@ -1606,7 +1736,7 @@ input[type="file"]::file-selector-button{
     </div>
 
     <!-- ================= 23 · CONFIRMACIÓN FINAL (obligatoria) ================= -->
-    <div class="step" data-planes="impulso crecimiento elite" id="paso-confirmacion">
+    <div class="step" data-pack="esencial" id="paso-confirmacion">
       <div class="step-head">
         <span class="step-num">23</span>
         <div><h2>Confirma y envía</h2><span class="plan-badge">Último paso</span></div>
@@ -1619,7 +1749,7 @@ input[type="file"]::file-selector-button{
         </div>
         <label class="confirmacion" id="confirmacion-caja">
           <input type="checkbox" name="Confirmación de envío definitivo" id="chk-confirmacion" value="Confirmado" required>
-          <span>Confirmo que he revisado mis respuestas y la selección de extras y funcionalidades. Entiendo que, una vez enviado el cuestionario, esta selección será definitiva y determinará el alcance de mi proyecto conforme al contrato firmado.</span>
+          <span>Confirmo que he revisado mis respuestas. Entiendo que, una vez enviado el cuestionario, serán definitivas y determinarán el alcance de mi proyecto conforme al contrato firmado.</span>
         </label>
       </div>
     </div>
@@ -1652,7 +1782,31 @@ input[type="file"]::file-selector-button{
      ================================================================== */
   var LLAVE_COMPLETADOS = 'cuestionario-differentissgood-completados';
   var codigoCliente = '';
-  var planContratado = null;   // 'impulso' | 'crecimiento' | 'elite' — sale del código, nunca del cliente
+  var entrado = false;   // true cuando el código es válido y ya se ven las preguntas
+
+  /* Todo cliente tiene la Web Esencial. Los packs los decide Differentissgood
+     antes de mandar el enlace, y viajan en la dirección (?packs=…). El cliente
+     no puede añadirlos ni quitarlos desde aquí. */
+  var PACKS = {
+    expansion: 'Expansión',
+    visual:    'Producción Visual',
+    reservas:  'Reservas',
+    tienda:    'Tienda Online',
+    ia:        'Automatización IA',
+    idioma:    'Versión Internacional (inglés)',
+  };
+  function packsDelEnlace(){
+    var crudo = '';
+    try{
+      crudo = new URLSearchParams(location.search).get('packs') || '';
+    }catch(e){
+      var m = location.search.match(/[?&]packs=([^&]*)/);
+      crudo = m ? decodeURIComponent(m[1]) : '';
+    }
+    return crudo.split(',').map(function(v){ return v.trim(); })
+                .filter(function(v){ return Object.prototype.hasOwnProperty.call(PACKS, v); });
+  }
+  var packsContratados = packsDelEnlace();
   var puerta = document.getElementById('puerta');
   var puertaInput = document.getElementById('puerta-input');
   var puertaError = document.getElementById('puerta-error');
@@ -1702,13 +1856,11 @@ input[type="file"]::file-selector-button{
   /* El plan va dentro del propio código de proyecto: la última letra.
      DIG-2026-001-I → Impulso · -C → Crecimiento · -E → Élite
      Así el plan viaja con el código que se entrega al firmar y el cliente
-     no puede elegirlo ni cambiarlo desde el cuestionario. */
-  var PLANES_POR_LETRA = {
-    I: {clave:'impulso',     etiqueta:'Plan Impulso',     desc:'Página única a medida, 100% adaptada a móvil, con SEO básico y contacto por WhatsApp. Incluye de 2 a 4 extras a elegir.'},
-    C: {clave:'crecimiento', etiqueta:'Plan Crecimiento', desc:'Web multipágina con blog o galería, reservas, redes sociales y SEO avanzado. Incluye de 2 a 4 extras a elegir.'},
-    E: {clave:'elite',       etiqueta:'Plan Élite',       desc:'Todo lo anterior, más tienda online, chat con IA y panel de administración. Todos los extras incluidos en el precio.'},
-  };
-  var RE_CODIGO = /^DIG-\d{4}-\d{3}-([ICE])$/;
+     no puede elegirlo ni cambiarlo desde el cuestionario.
+     La letra final del código es herencia del sistema de tres planes: ya no
+     significa nada, pero se sigue aceptando para no romper los códigos que
+     ya se han dado ni la bóveda, que espera ese mismo formato. */
+  var RE_CODIGO = /^DIG-\d{4}-\d{3}-[ICE]$/;
 
   /** Estado de envíos guardado en este navegador.
    *  Formato nuevo: { "DIG-2026-001-I": {estado, plan, extras, enviadoEn, referencia} }
@@ -1770,26 +1922,86 @@ input[type="file"]::file-selector-button{
         mostrarBloqueado(envioDe(valor));
         return;
       }
-      entrarConPlan(valor, m[1]);
+      entrar(valor);
     });
   }
 
-  function entrarConPlan(valor, letra){
+  function entrar(valor){
     codigoCliente = valor;
-    planContratado = PLANES_POR_LETRA[letra].clave;
-    pintarPlanContratado(PLANES_POR_LETRA[letra]);
+    entrado = true;
+    pintarContratado();
     aplicarPlan();
     puerta.classList.remove('abierto');
   }
 
-  function pintarPlanContratado(info){
-    document.getElementById('plan-contratado-input').value = info.etiqueta.replace('Plan ', '');
-    document.getElementById('plan-fijado-nombre').textContent = info.etiqueta;
-    document.getElementById('plan-fijado-desc').textContent = info.desc;
+  function listaPacks(){
+    return packsContratados.map(function(k){ return PACKS[k]; });
+  }
+  function pintarContratado(){
+    var nombres = listaPacks();
+    var resumen = nombres.length
+      ? 'Web Esencial + ' + nombres.join(' + ')
+      : 'Web Esencial';
+    document.getElementById('plan-contratado-input').value = resumen;
+    document.getElementById('plan-fijado-nombre').textContent = 'Web Esencial';
+    document.getElementById('plan-fijado-desc').textContent = nombres.length
+      ? 'Con estos packs de ampliación: ' + nombres.join(', ') + '.'
+      : 'Sin packs de ampliación.';
     document.getElementById('plan-fijado-codigo').textContent = codigoCliente;
     document.getElementById('resumen-final-codigo').textContent = codigoCliente;
-    document.getElementById('resumen-final-plan').textContent = info.etiqueta;
+    document.getElementById('resumen-final-plan').textContent = resumen;
+    var caja = document.getElementById('packs-contratados');
+    if(caja){
+      caja.innerHTML = nombres.length
+        ? nombres.map(function(n){ return '<span class="chip chip--fijo">' + n + '</span>'; }).join('')
+        : '<p class="step-sub" style="margin:0;">No has contratado ningún pack de ampliación.</p>';
+    }
   }
+
+  /* ---------- Panel interno: preparar el enlace del cliente ----------
+     Se abre con la dirección terminada en #preparar. No es un secreto: es una
+     comodidad para no tener que escribir la dirección a mano. */
+  (function(){
+    var panel = document.getElementById('panel');
+    if(!panel) return;
+    var campo = document.getElementById('panel-enlace');
+    var aviso = document.getElementById('panel-aviso');
+    function marcados(){
+      return Array.prototype.slice.call(panel.querySelectorAll('input:checked'))
+        .map(function(c){ return c.value; });
+    }
+    function pintar(){
+      var base = location.origin + location.pathname;
+      var lista = marcados();
+      campo.value = lista.length ? base + '?packs=' + lista.join(',') : base;
+      aviso.textContent = lista.length
+        ? 'Con ' + lista.length + ' pack' + (lista.length === 1 ? '' : 's') + ': ' + lista.map(function(k){ return PACKS[k]; }).join(', ') + '.'
+        : 'Solo Web Esencial, sin packs.';
+    }
+    panel.addEventListener('change', pintar);
+    document.getElementById('panel-copiar').addEventListener('click', function(){
+      campo.select();
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(e){}
+      if(!ok && navigator.clipboard){ navigator.clipboard.writeText(campo.value); ok = true; }
+      aviso.textContent = ok ? 'Enlace copiado. Ya se le puede mandar al cliente.' : 'Cópialo a mano desde el campo de arriba.';
+    });
+    document.getElementById('panel-cerrar').addEventListener('click', function(){
+      panel.classList.remove('abierto');
+      try{ history.replaceState(null, '', location.pathname + location.search); }catch(e){}
+    });
+    function mirarHash(){
+      if(location.hash !== '#preparar') return;
+      packsContratados.forEach(function(k){
+        var c = panel.querySelector('input[value="' + k + '"]');
+        if(c) c.checked = true;
+      });
+      pintar();
+      panel.classList.add('abierto');
+    }
+    window.addEventListener('hashchange', mirarHash);
+    mirarHash();
+  })();
 
   document.getElementById('puerta-continuar').addEventListener('click', function(){
     var valor = puertaInput.value.trim().toUpperCase();
@@ -2074,9 +2286,6 @@ input[type="file"]::file-selector-button{
   window.alternarBlog = function(){
     abrir('blog-extra', document.getElementById('sel-blog').value === 'Sí');
   };
-  window.alternarNewsletter = function(){
-    abrir('news-extra', document.getElementById('sel-news').value === 'Sí');
-  };
   window.alternarReservas = function(){
     var v = document.getElementById('sel-reservas').value;
     abrir('reserva-uno', v === 'Uno solo');
@@ -2120,26 +2329,8 @@ input[type="file"]::file-selector-button{
     abrir('plan-fotovideo-galeria-si', v === 'Sí');
     abrir('plan-fotovideo-galeria-no', v === 'No');
   };
-  alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
+  alternarBlog(); alternarReservas(); alternarHosting(); alternarAudiovisual();
   alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto(); alternarContenidoPropio('sel-contenido-equipo','contenido-equipo-si'); alternarContenidoPropio('sel-contenido-servicios','contenido-servicios-si');
-
-  /* ---------- Extras de pago: se apagan solos los que ya van incluidos ---------- */
-  var sincronizarExtrasPago = [];
-  document.querySelectorAll('.chip-grid[data-espejo]').forEach(function(gridPago){
-    var gridIncluidos = document.getElementById(gridPago.dataset.espejo);
-    if(!gridIncluidos) return;
-    function sincronizar(){
-      var marcados = Array.prototype.slice.call(gridIncluidos.querySelectorAll('input:checked')).map(function(c){ return c.value; });
-      gridPago.querySelectorAll('input[type=checkbox]').forEach(function(c){
-        var yaIncluido = marcados.indexOf(c.value) > -1;
-        c.disabled = yaIncluido;
-        if(yaIncluido) c.checked = false;
-      });
-    }
-    gridIncluidos.addEventListener('change', sincronizar);
-    sincronizarExtrasPago.push(sincronizar);
-    sincronizar();
-  });
 
   /* ---------- Ocultar un bloque entero ---------- */
   document.querySelectorAll('[data-ocultar]').forEach(function(casilla){
@@ -2187,7 +2378,7 @@ input[type="file"]::file-selector-button{
     seccion:   svg('<path d="M6 3.5h12v17l-6-4-6 4z"/>')
   };
   var CATEGORIAS = {
-    'Tu plan contratado':              {cat:'Plan',       icono:ICONOS.plan},
+    'Lo que has contratado':           {cat:'Tu proyecto', icono:ICONOS.plan},
     'Seccion · Quienes sois':          {cat:'Negocio',    icono:ICONOS.seccion},
     'Sobre tu negocio':                {cat:'Negocio',    icono:ICONOS.negocio},
     'Que quieres conseguir':           {cat:'Negocio',    icono:ICONOS.objetivo},
@@ -2197,17 +2388,29 @@ input[type="file"]::file-selector-button{
     'Tu web personalizada':            {cat:'Diseño',     icono:ICONOS.diseno},
     'Textos':                          {cat:'Diseño',     icono:ICONOS.textos},
     'Idiomas de la web':               {cat:'Diseño',     icono:ICONOS.idiomas},
-    'Blog o galeria':                  {cat:'Funciones',  icono:ICONOS.blog},
-    'Reservas y citas':                {cat:'Funciones',  icono:ICONOS.reservas},
-    'Tienda online y pagos':           {cat:'Funciones',  icono:ICONOS.tienda},
-    'Inteligencia artificial y panel': {cat:'Funciones',  icono:ICONOS.ia},
+    'Blog o galeria':                  {cat:'Packs',      icono:ICONOS.blog},
+    'Reservas y citas':                {cat:'Packs',      icono:ICONOS.reservas},
+    'Tienda online y pagos':           {cat:'Packs',      icono:ICONOS.tienda},
+    'El chat con inteligencia artificial': {cat:'Packs',  icono:ICONOS.ia},
     'Lo que dicen de vosotros':        {cat:'Confianza',  icono:ICONOS.confianza},
     'Preguntas frecuentes':            {cat:'Confianza',  icono:ICONOS.faq},
     'Posicionamiento y geolocalizacion': {cat:'Difusion', icono:ICONOS.geo},
     'Redes sociales y Google':         {cat:'Difusion',   icono:ICONOS.redes},
     'Newsletter':                      {cat:'Difusion',   icono:ICONOS.correo},
-    'Seccion · Extras':                {cat:'Extras',     icono:ICONOS.seccion},
-    'Extras':                          {cat:'Extras',     icono:ICONOS.extras},
+    'Los apartados de tu pagina':      {cat:'Tu web',     icono:ICONOS.extras},
+    'Como quieres que te contacten':   {cat:'Tu web',      icono:ICONOS.contacto},
+    'Detalles que ya van incluidos':   {cat:'Tu web',      icono:ICONOS.extras},
+    'Pack · Expansion':                {cat:'Packs',      icono:ICONOS.seccion},
+    'Las paginas de tu web':           {cat:'Packs',      icono:ICONOS.extras},
+    'Pack · Produccion Visual':        {cat:'Packs',      icono:ICONOS.seccion},
+    'La sesion de foto y video':       {cat:'Packs',      icono:ICONOS.extras},
+    'Pack · Reservas':                 {cat:'Packs',      icono:ICONOS.seccion},
+    'Tu calendario':                   {cat:'Packs',      icono:ICONOS.reservas},
+    'Pack · Tienda Online':            {cat:'Packs',      icono:ICONOS.seccion},
+    'La formacion de la tienda':       {cat:'Packs',      icono:ICONOS.tienda},
+    'Pack · Automatizacion IA':        {cat:'Packs',      icono:ICONOS.seccion},
+    'Pack · Version Internacional (ingles)': {cat:'Packs', icono:ICONOS.seccion},
+    'La version en ingles':            {cat:'Packs',      icono:ICONOS.extras},
     'Datos legales':                   {cat:'Legal',      icono:ICONOS.legal},
     'Dominio y hosting':               {cat:'Legal',      icono:ICONOS.hosting},
     'Preferencias y lineas rojas':     {cat:'Legal',      icono:ICONOS.preferencias},
@@ -2223,19 +2426,8 @@ input[type="file"]::file-selector-button{
     return CATEGORIAS[titulo] || {cat:'Otros', icono:ICONOS.extras};
   }
 
-  /* ---------- Cada extra elegido tiene su propio apartado, bien marcado ---------- */
-  document.querySelectorAll('[data-requiere-extra]').forEach(function(bloque){
-    if(bloque.classList.contains('extra-pregunta')) return;
-    bloque.classList.add('extra-pregunta');
-    var nombre = bloque.dataset.requiereExtra.split('|')[0];
-    var rotulo = document.createElement('p');
-    rotulo.className = 'extra-pregunta__rotulo';
-    rotulo.textContent = 'Sobre el extra: ' + nombre;
-    bloque.insertBefore(rotulo, bloque.firstChild);
-  });
-
-  /* ---------- Solo las preguntas del plan elegido ---------- */
-  var bloques = Array.prototype.slice.call(document.querySelectorAll('.step[data-planes]'));
+  /* ---------- Solo las preguntas de lo contratado ---------- */
+  var bloques = Array.prototype.slice.call(document.querySelectorAll('.step[data-pack]'));
   var indice = 0;
   /** Borra lo escrito dentro de un bloque que deja de aplicar. */
   function limpiarCampos(el){
@@ -2244,37 +2436,25 @@ input[type="file"]::file-selector-button{
       else { try{ c.value = ''; }catch(e){} }
     });
   }
-  /** Extras realmente activos: marcados, visibles y no descartados. */
-  function extrasActivos(){
-    return Array.prototype.slice.call(document.querySelectorAll('input[name="Extras"]:checked'))
-      .filter(function(c){ return !c.closest('.step[hidden]') && !c.closest('.step.apagado'); })
-      .map(function(c){ return c.value; });
-  }
   function actualizarResumenFinal(){
     var el = document.getElementById('resumen-final-extras');
     if(!el) return;
-    var ex = extrasActivos();
-    el.textContent = ex.length
-      ? ex.length + ' extra' + (ex.length === 1 ? '' : 's') + ' seleccionado' + (ex.length === 1 ? '' : 's') + ': ' + ex.join(', ') + '.'
-      : 'Todavía no has marcado ningún extra.';
+    var nombres = listaPacks();
+    el.textContent = nombres.length
+      ? 'Packs de ampliación: ' + nombres.join(', ') + '.'
+      : 'Sin packs de ampliación.';
   }
 
   function recalcularVisibilidad(){
-    // El plan NO se elige en el cuestionario: viene del código de proyecto.
-    // Mientras no haya código validado, no se muestra ninguna pregunta.
-    var plan = planContratado;
-    var todos = false;   // sin plan validado no se muestra ninguna pregunta
-    var extrasElegidos = Array.prototype.slice.call(document.querySelectorAll('input[name="Extras"]:checked')).map(function(c){ return c.value; });
-
+    // Ni la Web Esencial ni los packs se eligen aquí: la Web Esencial la tiene
+    // todo el mundo y los packs vienen en el enlace. Mientras no haya código
+    // validado, no se muestra ninguna pregunta.
     bloques.forEach(function(b){
-      var encajaPlan = todos || b.dataset.planes.split(' ').indexOf(plan) > -1;
-      // data-extra-<plan> exige el extra solo para ese plan; si no existe, se usa data-extra (o ninguno)
-      var extraAttr = (!todos && b.getAttribute('data-extra-' + plan)) || b.dataset.extra;
-      var encajaExtra = todos || !extraAttr || extraAttr.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
-      var sirve = encajaPlan && encajaExtra;
+      var pack = b.dataset.pack;
+      var sirve = entrado && (pack === 'esencial' || packsContratados.indexOf(pack) > -1);
       // Si el bloque estaba visible y deja de estarlo (extra desmarcado),
       // se borra lo escrito dentro para no dejar respuestas residuales.
-      if(!sirve && b.dataset.visible === '1' && planContratado) limpiarCampos(b);
+      if(!sirve && b.dataset.visible === '1' && entrado) limpiarCampos(b);
       b.dataset.visible = sirve ? '1' : '0';
       b.hidden = !sirve;
       // Un bloque escondido tampoco debe enviarse ni exigir respuesta
@@ -2290,28 +2470,9 @@ input[type="file"]::file-selector-button{
       // El interruptor de "no lo quiero" solo se apaga si el bloque entero no aplica
       b.querySelectorAll('label.ocultar input[data-ocultar]').forEach(function(c){ c.disabled = !sirve; });
     });
-    if(typeof gruposExtras !== 'undefined'){
-      gruposExtras.forEach(function(grid){ actualizarGrupoExtras(grid); });
+    if(typeof gruposTope !== 'undefined'){
+      gruposTope.forEach(function(grid){ actualizarGrupoTope(grid); });
     }
-    if(typeof sincronizarExtrasPago !== 'undefined'){
-      sincronizarExtrasPago.forEach(function(fn){ fn(); });
-    }
-    // Preguntas sueltas dentro de un paso, atadas a un extra concreto
-    document.querySelectorAll('[data-requiere-extra]').forEach(function(bloque){
-      var aplica = bloque.dataset.requiereExtra.split('|').some(function(v){ return extrasElegidos.indexOf(v) > -1; });
-      if(!aplica && bloque.dataset.visible === '1' && planContratado) limpiarCampos(bloque);
-      bloque.dataset.visible = aplica ? '1' : '0';
-      bloque.hidden = !aplica;
-      bloque.querySelectorAll('input,select,textarea').forEach(function(c){
-        if(!aplica){
-          if(c.required){ c.dataset.eraObligatorio = '1'; c.required = false; }
-          c.disabled = true;
-        } else {
-          c.disabled = false;
-          if(c.dataset.eraObligatorio) c.required = true;
-        }
-      });
-    });
     actualizarResumenFinal();
     renumerar();
   }
@@ -2319,11 +2480,6 @@ input[type="file"]::file-selector-button{
     recalcularVisibilidad();
     mostrarPaso(indice);
   }
-  // Elegir o quitar un extra puede abrir o cerrar preguntas más adelante,
-  // pero sin saltar de pantalla ni robar el foco mientras se sigue marcando
-  document.querySelectorAll('input[name="Extras"]').forEach(function(c){
-    c.addEventListener('change', recalcularVisibilidad);
-  });
   function renumerar(){
     bloques.forEach(function(b){
       if(b.hidden) return;
@@ -2448,8 +2604,8 @@ input[type="file"]::file-selector-button{
 
   aplicarPlan();
 
-  /* ---------- Extras: mínimo y máximo por plan ---------- */
-  var gruposExtras = Array.prototype.slice.call(document.querySelectorAll('.chip-grid[data-min]'));
+  /* ---------- Rejillas con tope: no se pueden marcar más de la cuenta ---------- */
+  var gruposTope = Array.prototype.slice.call(document.querySelectorAll('.chip-grid[data-min],.chip-grid[data-max]'));
   function topeDe(grid){
     var sinTope = grid.hasAttribute('data-sin-tope');
     return {
@@ -2458,7 +2614,7 @@ input[type="file"]::file-selector-button{
       sinTope: sinTope,
     };
   }
-  function actualizarGrupoExtras(grid){
+  function actualizarGrupoTope(grid){
     var t = topeDe(grid);
     var casillas = Array.prototype.slice.call(grid.querySelectorAll('input[type=checkbox]'));
     var marcadas = casillas.filter(function(c){ return c.checked; }).length;
@@ -2476,14 +2632,14 @@ input[type="file"]::file-selector-button{
       contador.setAttribute('data-corto', '');
     } else {
       contador.textContent = t.sinTope
-        ? 'Llevas ' + marcadas + ' marcado' + (marcadas === 1 ? '' : 's') + ' — todos están incluidos en tu plan.'
+        ? 'Llevas ' + marcadas + ' marcado' + (marcadas === 1 ? '' : 's') + '.'
         : 'Llevas ' + marcadas + ' de ' + t.max + ' como máximo.';
       contador.removeAttribute('data-corto');
     }
   }
-  gruposExtras.forEach(function(grid){
-    grid.addEventListener('change', function(){ actualizarGrupoExtras(grid); });
-    actualizarGrupoExtras(grid);
+  gruposTope.forEach(function(grid){
+    grid.addEventListener('change', function(){ actualizarGrupoTope(grid); });
+    actualizarGrupoTope(grid);
   });
 
   /* ==================================================================
@@ -2540,7 +2696,7 @@ input[type="file"]::file-selector-button{
   formulario.addEventListener('change', guardarBorrador);
 
   if(recuperarBorrador()){
-    aplicarPlan(); alternarBlog(); alternarNewsletter(); alternarReservas(); alternarHosting(); alternarAudiovisual();
+    aplicarPlan(); alternarBlog(); alternarReservas(); alternarHosting(); alternarAudiovisual();
     alternarFotografiaProfesional(); alternarFotosGaleria(); alternarPlanFotoVideoGaleria(); alternarPlanFotoPersonalizado(); alternarIncluirVideoFoto(); alternarContenidoPropio('sel-contenido-equipo','contenido-equipo-si'); alternarContenidoPropio('sel-contenido-servicios','contenido-servicios-si');
     var nota = document.createElement('p');
     nota.className = 'borrador';
@@ -2642,17 +2798,15 @@ input[type="file"]::file-selector-button{
       if(vacio) fallo = {campo:c, mensaje:'Te falta rellenar «' + (c.name || 'un campo') + '» para poder enviar.'};
     });
 
-    // 2 · Límites de extras del plan contratado
+    // 2 · Topes de las rejillas con máximo
     if(!fallo){
-      gruposExtras.forEach(function(grid){
+      gruposTope.forEach(function(grid){
         if(fallo || grid.closest('.step[hidden]') || grid.closest('.step.apagado')) return;
         var t = topeDe(grid);
         var casillas = Array.prototype.slice.call(grid.querySelectorAll('input[type=checkbox]'));
         var marcadas = casillas.filter(function(c){ return c.checked; }).length;
         if(marcadas < t.min){
-          fallo = {campo:casillas[0], mensaje: t.sinTope
-            ? 'Marca al menos un extra: en tu plan están todos incluidos, pero necesitamos saber cuáles quieres implementar.'
-            : 'Tu plan incluye entre ' + t.min + ' y ' + t.max + ' extras. Llevas ' + marcadas + ' — te falta' + (t.min - marcadas === 1 ? '' : 'n') + ' ' + (t.min - marcadas) + '.'};
+          fallo = {campo:casillas[0], mensaje: 'Te falta marcar ' + (t.min - marcadas) + ' opción' + (t.min - marcadas === 1 ? '' : 'es') + ' en «' + (casillas[0].name || 'esta pregunta') + '».'};
         } else if(marcadas > t.max){
           fallo = {campo:casillas[0], mensaje:'Tu plan admite como máximo ' + t.max + ' extras. Llevas ' + marcadas + ' — quita ' + (marcadas - t.max) + '.'};
         }
@@ -2802,10 +2956,10 @@ input[type="file"]::file-selector-button{
       listaHtml = '<p style="font-size:12.5px;color:var(--tenue);margin-top:14px;">No adjuntaste ningún archivo — con esto ya está todo.</p>';
     }
     var plan = (document.getElementById('plan-contratado-input') || {}).value || 'sin especificar';
-    var extras = extrasActivos().length;
+    var nPacks = packsContratados.length;
     var resumen = '<div class="resumen-envio">' +
-      '<span>Plan ' + plan + '</span>' +
-      '<span>' + extras + ' extra' + (extras === 1 ? '' : 's') + ' elegido' + (extras === 1 ? '' : 's') + '</span>' +
+      '<span>' + plan + '</span>' +
+      '<span>' + (nPacks ? nPacks + ' pack' + (nPacks === 1 ? '' : 's') + ' de ampliación' : 'sin packs') + '</span>' +
       '<span>' + archivos.length + ' archivo' + (archivos.length === 1 ? '' : 's') + ' adjunto' + (archivos.length === 1 ? '' : 's') + '</span>' +
       '</div>';
     veloCaja.innerHTML =
@@ -2869,7 +3023,7 @@ input[type="file"]::file-selector-button{
                 '';
 
     var planEtiqueta = (document.getElementById('plan-contratado-input') || {}).value || '';
-    var extrasElegidos = extrasActivos();
+    var packsElegidos = listaPacks();
     var enviadoEn = new Date().toISOString();
 
     var respuestas = recogerRespuestas();
@@ -2885,8 +3039,8 @@ input[type="file"]::file-selector-button{
         var datos = new FormData();
         datos.append('_subject', 'Cuestionario · ' + (codigoCliente ? codigoCliente + ' · ' : '') + negocio);
         datos.append('Código de proyecto', codigoCliente);
-        datos.append('Plan contratado', planEtiqueta);
-        datos.append('Extras seleccionados', extrasElegidos.length ? extrasElegidos.join(', ') : '(ninguno)');
+        datos.append('Servicio contratado', planEtiqueta);
+        datos.append('Packs de ampliación', packsElegidos.length ? packsElegidos.join(', ') : '(ninguno)');
         datos.append('Enviado el', enviadoEn);
         datos.append('Referencia', envio);
         datos.append('Respuestas completas', texto);
@@ -2932,12 +3086,12 @@ input[type="file"]::file-selector-button{
     }).then(function(hecho){
       if(hecho === null) return;
       progreso(100, 'Listo');
-      // 3-7 · Se registra el envío: código, plan, extras, fecha y estado completado
+      // 3-7 · Se registra el envío: código, servicio, packs, fecha y estado completado
       marcarCompletado(codigoCliente, {
         estado: 'completado',
         codigo: codigoCliente,
         plan: planEtiqueta,
-        extras: extrasElegidos,
+        packs: packsElegidos,
         enviadoEn: enviadoEn,
         referencia: envio,
       });
