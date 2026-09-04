@@ -15,10 +15,14 @@ Todo lo relacionado con los planes de creación de páginas web se llama
 
 **`docs/PLANES-PAGINA-WEB.md`**
 
-Ese archivo es la fuente oficial de Plan Impulso, Plan Crecimiento y Plan Élite:
-precios, plazos de entrega, características, funcionalidades, extras, rondas de
-cambios, información legal incluida, diferencias entre planes y cualquier cambio
+Ese archivo es la fuente oficial de la **Web Esencial** y de los **packs de
+ampliación**: precios, plazos de entrega, características, funcionalidades,
+rondas de cambios, mantenimiento, información legal incluida y cualquier cambio
 futuro.
+
+**Desde el 04/09/2026 ya no hay tres planes.** Impulso, Crecimiento y Élite
+están retirados. Hay una sola web base (Web Esencial, 650 €) y seis packs que se
+suman a ella. Los packs no se venden sueltos.
 
 **No usar `docs/PLANES.md`.** Si existiera o llegara a crearse, se traslada la
 información válida a `docs/PLANES-PAGINA-WEB.md` y se usa solo este último.
@@ -28,16 +32,19 @@ Reglas al trabajar con planes:
 - El orden de los cambios es siempre: **Noelia decide → se actualiza
   `docs/PLANES-PAGINA-WEB.md` → después `/planesweb/`, el cuestionario y el
   contrato.** Nunca al revés.
-- Al tocar `/planesweb/` (`plan-impulso.html`, `plan-crecimiento.html`,
-  `plan-elite.html`) o cualquier parte del cuestionario o del contrato que use
-  datos de los planes, la referencia oficial es `docs/PLANES-PAGINA-WEB.md`.
+- `/planesweb/` de verdad vive en el repositorio `differentissgood/DIG`, no aquí.
+  Desde una sesión de este repositorio **no se puede leer** (`differentissgood.com`
+  está bloqueado y no se puede añadir ese repo). Si hay que consultarla, se le
+  pide el contenido a Noelia o se abre un chat con `differentissgood/DIG`.
+- Las páginas `planesweb/plan-impulso.html`, `plan-crecimiento.html` y
+  `plan-elite.html` de este repositorio son del sistema viejo y ya no valen.
 - Si la web, el cuestionario, el contrato o cualquier otro archivo **contradicen**
   ese documento: **no inventar ni decidir por cuenta propia.** Se avisa a Noelia
   de la contradicción antes de cambiar nada de información comercial.
-- No mezclar características entre planes.
-- No atribuir a un plan una funcionalidad que no figure en su información oficial.
+- No mezclar características entre packs.
+- No atribuir a un pack una funcionalidad que no figure en su información oficial.
 - No eliminar funcionalidades incluidas sin su autorización.
-- No cambiar precios, plazos, rondas ni extras si ella no lo ha pedido.
+- No cambiar precios, plazos, rondas ni packs si ella no lo ha pedido.
 
 ## Contratos — el de web lleva los packs
 

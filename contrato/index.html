@@ -219,10 +219,6 @@
 <div class="toolbar">
   <div class="toolbar-inner">
     <div class="toolbar-group">
-      <span class="toolbar-label">Plan contratado</span>
-      <div class="tabs" id="tabs" role="tablist"></div>
-    </div>
-    <div class="toolbar-group">
       <span class="toolbar-label">Fecha de firma</span>
       <input type="date" id="fechaFirma">
     </div>
@@ -236,12 +232,31 @@
       <p class="rondas-ayuda" id="rondasAyuda"></p>
     </div>
     <div class="toolbar-group">
-      <span class="toolbar-label">Packs adicionales</span>
+      <span class="toolbar-label">Packs de ampliación de la web</span>
       <div class="tabs" id="packs">
+        <button type="button" class="tab" data-pack="expansion">Expansión</button>
+        <button type="button" class="tab" data-pack="visual">Producción Visual</button>
+        <button type="button" class="tab" data-pack="reservas">Reservas</button>
+        <button type="button" class="tab" data-pack="tienda">Tienda Online</button>
+        <button type="button" class="tab" data-pack="ia">Automatización IA</button>
+        <button type="button" class="tab" data-pack="idioma">Versión Internacional</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Otros servicios de Differentissgood</span>
+      <div class="tabs" id="packsOtros">
         <button type="button" class="tab" data-pack="foto">Fotografía y vídeo</button>
         <button type="button" class="tab" data-pack="dron">Dron</button>
         <button type="button" class="tab" data-pack="boda">Invitación de boda</button>
         <button type="button" class="tab" data-pack="album">Álbum digital</button>
+      </div>
+    </div>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Mantenimiento mensual</span>
+      <div class="tabs" id="mantenimiento">
+        <button type="button" class="tab" data-mant="web">Web 90 €/mes</button>
+        <button type="button" class="tab" data-mant="tienda">Tienda 290 €/mes</button>
+        <button type="button" class="tab" data-mant="ia">IA desde 160 €/mes</button>
       </div>
     </div>
     <div class="toolbar-group">
@@ -268,16 +283,16 @@
     <div class="ref-caja">
       <div>
         <div class="etiqueta">Código de cliente</div>
-        <div class="valor"><span class="blank" id="refCodigo" contenteditable="true" data-placeholder="DIG-2026-001-I"></span></div>
+        <div class="valor"><span class="blank" id="refCodigo" contenteditable="true" data-placeholder="DIG-2026-001"></span></div>
       </div>
       <div>
-        <div class="etiqueta">Plan contratado</div>
-        <div class="valor" id="etiquetaPlan">Plan Impulso</div>
+        <div class="etiqueta">Servicio contratado</div>
+        <div class="valor" id="etiquetaPlan">Web Esencial</div>
       </div>
     </div>
 
     <h2><span class="num">0.</span> Código de proyecto del cliente</h2>
-    <p>El código de proyecto es la llave del cliente para entrar a su cuestionario, y solo abre el del plan contratado en este documento: desde el cuestionario no se puede elegir ni cambiar de plan. También identifica el proyecto en los archivos y en cualquier mensaje.</p>
+    <p>El código de proyecto es la llave del cliente para entrar a su cuestionario, y solo abre el que corresponde a lo contratado en este documento: desde el cuestionario no se puede añadir ni quitar packs. También identifica el proyecto en los archivos y en cualquier mensaje.</p>
     <p>Se crea después de firmar y se envía al cliente por email o WhatsApp. No contiene datos personales.</p>
 
     <h2><span class="num">1.</span> Partes</h2>
@@ -312,40 +327,75 @@
     <p>Fecha de firma: <span class="calc" id="txtFechaFirma">[·]</span></p>
 
     <h2><span class="num">2.</span> Objeto del contrato</h2>
-    <p>Differentissgood diseña y desarrolla una página web para el cliente según el <b id="txtNombrePlan">Plan Impulso</b>, con lo que se detalla debajo, y configura el dominio y el hosting.</p>
-    <p>El plan contratado es el que figura en este documento y no cambia.</p>
+    <p>Differentissgood diseña y desarrolla para el cliente la <b>Web Esencial</b>, con lo que se detalla debajo, y configura el dominio y el hosting.</p>
+    <p>La Web Esencial es el servicio base. Sobre ella el cliente puede añadir <b>packs de ampliación</b>, que no se venden por separado y cuyo precio se suma al de la Web Esencial. Lo contratado es lo que figura en este documento.</p>
 
     <div class="caja-plan">
       <table class="precios">
-        <tr><td>Precio del plan (IVA no incluido)</td><td id="cPrecio">560 €</td></tr>
-        <tr><td>Plazo de entrega</td><td id="cDias">7 días laborables</td></tr>
+        <tr><td>Precio de la Web Esencial</td><td>650 €</td></tr>
+        <tr><td>Plazo de entrega</td><td>7-10 días laborables</td></tr>
         <tr><td>Rondas de cambios incluidas</td><td id="cRondas">2</td></tr>
       </table>
       <h3>Qué incluye</h3>
-      <ul class="limpia" id="cIncluye"></ul>
-      <h3 id="cExtrasTitulo">Extras opcionales</h3>
-      <ul class="limpia" id="cExtras"></ul>
+      <p style="margin:12px 0 4px;"><b>Diseño y presencia</b></p>
+      <ul class="limpia">
+        <li>Página de una sola sección con hasta 5 apartados.</li>
+        <li>Diseño personalizado.</li>
+        <li>Adaptada a móvil, tablet y ordenador.</li>
+        <li>Modo oscuro si encaja.</li>
+        <li>Animaciones suaves.</li>
+      </ul>
+      <p style="margin:12px 0 4px;"><b>Conexión con tus clientes</b></p>
+      <ul class="limpia">
+        <li>Formulario de contacto y WhatsApp.</li>
+        <li>Redes sociales.</li>
+        <li>Mapa y valoraciones de Google.</li>
+        <li>FAQ.</li>
+        <li>Botón de compartir.</li>
+      </ul>
+      <p style="margin:12px 0 4px;"><b>Que te encuentren, y confíen</b></p>
+      <ul class="limpia">
+        <li>SEO básico.</li>
+        <li>Favicon.</li>
+        <li>Certificado SSL.</li>
+        <li>Código QR.</li>
+      </ul>
+      <p style="margin:12px 0 4px;"><b>Legal y acompañamiento</b></p>
+      <ul class="limpia">
+        <li>Aviso legal, privacidad y cookies.</li>
+        <li>Dos rondas de cambios.</li>
+      </ul>
     </div>
 
     <h2 id="tituloPacks" data-clausula="packs" hidden><span class="num">3.</span> Servicios adicionales contratados</h2>
     <div id="bloquePacks" hidden>
-      <p>Además de la página web, el cliente contrata los siguientes servicios. Cada uno se rige por sus condiciones propias, recogidas más adelante en este mismo contrato.</p>
+      <p>Además de la Web Esencial, el cliente contrata lo siguiente. Cada pack se rige por sus condiciones propias, recogidas más adelante en este mismo contrato.</p>
       <div class="caja-plan">
         <table class="precios">
+          <tr><td><b>Web Esencial</b></td><td>650 €</td></tr>
+          <tr id="filaExpansion" hidden><td>Pack Expansión</td><td>340 €</td></tr>
+          <tr id="filaVisual" hidden><td>Pack Producción Visual</td><td>540 €</td></tr>
+          <tr id="filaReservas" hidden><td>Pack Reservas</td><td>250 €</td></tr>
+          <tr id="filaTienda" hidden><td>Pack Tienda Online <span class="nota">(desde 790 €)</span></td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+          <tr id="filaIa" hidden><td>Pack Automatización IA <span class="nota">(desde 850 €)</span></td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
+          <tr id="filaIdioma" hidden><td>Pack Versión Internacional (inglés)</td><td>190 €</td></tr>
+          <tr id="filaMantWeb" hidden><td>Mantenimiento mensual de la web</td><td>90 €/mes</td></tr>
+          <tr id="filaMantTienda" hidden><td>Mantenimiento mensual de la tienda</td><td>290 €/mes</td></tr>
+          <tr id="filaMantIa" hidden><td>Optimización mensual de la IA <span class="nota">(desde 160 €/mes)</span></td><td><span class="blank" contenteditable="true" data-placeholder="[·] €/mes"></span></td></tr>
           <tr id="filaFoto" hidden><td>Pack de fotografía y vídeo</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
           <tr id="filaDron" hidden><td>Pack de vuelo con dron</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
           <tr id="filaBoda" hidden><td>Invitación web de boda</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
           <tr id="filaAlbum" hidden><td>Álbum digital</td><td><span class="blank" contenteditable="true" data-placeholder="[·] €"></span></td></tr>
         </table>
-        <p class="nota" style="margin-top:10px;">Estos importes se suman al precio del plan y siguen la misma forma de pago: 30% de reserva y 70% antes de la entrega.</p>
+        <p class="nota" style="margin-top:10px;">Los packs se suman al precio de la Web Esencial y siguen la misma forma de pago: 30% de reserva y 70% antes de la entrega. Las cuotas de mantenimiento son mensuales y van aparte de ese pago.</p>
       </div>
     </div>
 
     <h2><span class="num">4.</span> Precio y forma de pago</h2>
-    <p id="precioEmpresa">El precio es el indicado arriba para el plan contratado, sin IVA. El IVA se suma aparte en la factura.</p>
-    <p id="precioParticular" hidden>El precio es el indicado arriba para el plan contratado, <b>con el IVA ya incluido</b>. No hay cargos adicionales salvo los que se recojan expresamente en este contrato.</p>
+    <p id="precioEmpresa">El precio es la suma de la Web Esencial y de los packs contratados, según el cuadro anterior, sin IVA. El IVA se suma aparte en la factura.</p>
+    <p id="precioParticular" hidden>El precio es la suma de la Web Esencial y de los packs contratados, según el cuadro anterior, <b>con el IVA ya incluido</b>. No hay cargos adicionales salvo los que se recojan expresamente en este contrato.</p>
     <h3><span class="sub">3.1</span> Pago inicial (30%)</h3>
-    <p>El cliente paga el 30% antes de que empiece el proyecto. Ese dinero se descuenta del precio del plan: no se suma.</p>
+    <p>El cliente paga el 30% antes de que empiece el proyecto. Ese dinero se descuenta del precio total: no se suma.</p>
     <h3><span class="sub">3.2</span> Pago final (70%)</h3>
     <p>El 70% restante se paga un día antes de la fecha de entrega. Si ese día no está pagado, la web no se entrega y Differentissgood se queda el 30% inicial.</p>
     <h3><span class="sub">3.3</span> Forma de pago</h3>
@@ -358,9 +408,11 @@
     <p><b>Si no lo envía dentro de esos 7 días, el proyecto queda cancelado y Differentissgood se queda el 30% abonado inicialmente.</b></p>
     <p>El plazo de entrega empieza a contar cuando llega el cuestionario completo.</p>
     <p>Fecha límite para enviar el cuestionario y el contenido: <span class="calc" id="fContenido">—</span></p>
+    <p>El plazo de entrega de la Web Esencial es de <b>7 a 10 días laborables</b>.</p>
     <p>Fecha de entrega estimada de la web: <span class="calc" id="fEntrega">—</span></p>
     <p>Fecha límite de pago del 70% (un día antes de la entrega): <span class="calc" id="fPago">—</span></p>
     <p class="nota">Las dos últimas fechas son una estimación calculada suponiendo que el cuestionario llega dentro del plazo. Si llega antes, se adelantan.</p>
+    <p id="plazoPacks" hidden>El cliente ha contratado packs de ampliación. El plazo de entrega de la parte ampliada se acuerda por escrito con el cliente: <span class="blank ancho" contenteditable="true" data-placeholder="[plazo acordado]"></span></p>
 
     <h2><span class="num">5.</span> Reunión de ronda de cambios</h2>
     <p>Fecha y hora acordadas para la reunión: <span class="blank" contenteditable="true" data-placeholder="[·]"></span></p>
@@ -368,24 +420,25 @@
 
     <h2><span class="num">6.</span> Rondas de cambios</h2>
     <p>Una ronda de cambios es una tanda de correcciones sobre lo que ya está hecho. Si el cliente manda sus peticiones en varios mensajes dentro del mismo periodo de revisión, todas cuentan como una sola ronda.</p>
-    <p>Cada plan incluye las rondas indicadas en la cláusula 2.</p>
+    <p>La Web Esencial incluye <b>2 rondas de cambios</b>.</p>
+    <p id="rondaExpansion" hidden>El pack Expansión añade <b>una ronda adicional</b>, con lo que el proyecto cuenta con <b>3 rondas</b> en total.</p>
 
     <div class="clausula-opcional" id="clausulaA" hidden>
       <div class="etq">Cláusula opcional A — pactada en la firma</div>
-      <p>Además de las rondas incluidas en su plan, el cliente contrata <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> rondas de cambios adicionales, a 40 € cada una. Este importe se suma al precio del plan y se paga junto con el 70% final.</p>
+      <p>Además de las rondas incluidas, el cliente contrata <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> rondas de cambios adicionales, a 40 € cada una. Este importe se suma al precio total y se paga junto con el 70% final.</p>
     </div>
 
     <div class="clausula-opcional" id="clausulaB" hidden>
       <div class="etq">Cláusula opcional B — solicitada durante el proyecto</div>
-      <p>Si durante el proyecto el cliente pide rondas de cambios por encima de las incluidas en su plan, cada ronda extra cuesta 40 €, que se abonan antes de aplicar los cambios.</p>
+      <p>Si durante el proyecto el cliente pide rondas de cambios por encima de las incluidas, cada ronda extra cuesta 40 €, que se abonan antes de aplicar los cambios.</p>
     </div>
 
     <h2><span class="num">7.</span> Lo que no está incluido</h2>
-    <p>Cualquier página, funcionalidad o servicio que no esté en el plan contratado ni en los extras elegidos es trabajo aparte. Differentissgood no está obligada a hacerlo sin un presupuesto aceptado por escrito, y ese trabajo puede cambiar el precio y la fecha de entrega.</p>
+    <p>Cualquier página, funcionalidad o servicio que no esté en la Web Esencial ni en los packs contratados es trabajo aparte. Differentissgood no está obligada a hacerlo sin un presupuesto aceptado por escrito, y ese trabajo puede cambiar el precio y la fecha de entrega.</p>
 
     <h2><span class="num">8.</span> El cuestionario</h2>
-    <p>Los extras y las funcionalidades del proyecto se eligen en el cuestionario, al que se entra con el código de proyecto de la cláusula 0.</p>
-    <p>Antes de enviarlo, el cliente confirma que ha repasado sus respuestas y su selección de extras, y que entiende que después <b>no se podrán modificar</b>.</p>
+    <p>El contenido y las funcionalidades del proyecto se concretan en el cuestionario, al que se entra con el código de proyecto de la cláusula 0. Los packs contratados son los de este contrato: el cuestionario no sirve para añadirlos ni quitarlos.</p>
+    <p>Antes de enviarlo, el cliente confirma que ha repasado sus respuestas, y que entiende que después <b>no se podrán modificar</b>.</p>
     <p>Una vez enviado, el cuestionario forma parte de este contrato y define lo que se va a construir. Si el contrato y el cuestionario dijeran cosas distintas, manda el contrato. Si más adelante el cliente pide algo distinto, se trata como trabajo aparte según la cláusula 7.</p>
 
     <h2><span class="num">9.</span> Entrega y aceptación</h2>
@@ -393,13 +446,59 @@
     <p>Un <b>fallo</b> es que la web no hace lo que se acordó: eso se corrige sin coste. Querer <b>algo distinto o algo nuevo</b> no es un fallo, y entra en las rondas de cambios de la cláusula 6.</p>
 
     <h2><span class="num">10.</span> Retrasos en la entrega</h2>
-    <p>Si el retraso es culpa de Differentissgood, el cliente tiene un <b>15%</b> de descuento sobre el precio del plan.</p>
+    <p>Si el retraso es culpa de Differentissgood, el cliente tiene un <b>15%</b> de descuento sobre el precio total contratado.</p>
     <p>Si ese retraso pasa de 15 días naturales y el cliente prefiere no seguir, Differentissgood le devuelve el 30% inicial.</p>
 
     <h2><span class="num">11.</span> Textos, fotos y vídeos</h2>
-    <p>Los textos de la web los crea Differentissgood y van incluidos en todos los planes.</p>
-    <p id="fotosNo">Las fotos y los vídeos <b>no</b> están incluidos en el precio de ningún plan. Si el cliente quiere que se los hagamos, se contratan como pack adicional.</p>
-    <p id="fotosSi" hidden>Las fotos y los vídeos <b>no</b> van incluidos en el precio del plan, pero el cliente ha contratado el pack correspondiente: se rigen por las condiciones de la cláusula <span data-ref="packFoto">12</span>.</p>
+    <p>Los textos de la web los crea Differentissgood y van incluidos en la Web Esencial.</p>
+    <p id="fotosNo">Las fotos y los vídeos <b>no</b> están incluidos en la Web Esencial. Si el cliente quiere que se los hagamos, se contratan como pack.</p>
+    <p id="fotosSiVisual" hidden>Las fotos y los vídeos <b>no</b> van incluidos en la Web Esencial, pero el cliente ha contratado el <b>pack Producción Visual</b>: se rigen por las condiciones de la cláusula <span data-ref="packVisual">·</span>.</p>
+    <p id="fotosSi" hidden>Las fotos y los vídeos <b>no</b> van incluidos en la Web Esencial, pero el cliente ha contratado el <b>pack de fotografía y vídeo</b>: se rigen por las condiciones de la cláusula <span data-ref="packFoto">·</span>.</p>
+
+    <h2 id="tituloPackExpansion" data-clausula="packExpansion" hidden><span class="num">·</span> Pack Expansión</h2>
+    <div id="bloquePackExpansion" hidden>
+      <p>La web pasa de una sola sección a <b>hasta 5 páginas</b>: inicio, sobre el negocio, servicios, galería y contacto, con navegación completa entre ellas.</p>
+      <p>Incluye además <b>SEO avanzado</b> y <b>una ronda adicional de cambios</b> sobre las de la Web Esencial.</p>
+    </div>
+
+    <h2 id="tituloPackVisual" data-clausula="packVisual" hidden><span class="num">·</span> Pack Producción Visual</h2>
+    <div id="bloquePackVisual" hidden>
+      <p>Differentissgood realiza una <b>sesión de foto y vídeo en el negocio</b> del cliente, con dirección creativa, en la fecha y el lugar que se acuerden por escrito: <span class="blank ancho" contenteditable="true" data-placeholder="[fecha y lugar]"></span></p>
+      <p>Lo que se entrega, en formato digital, es:</p>
+      <ul class="limpia">
+        <li>De <b>7 a 10 fotografías profesionales</b>.</li>
+        <li><b>2 vídeos verticales</b> de hasta 15 segundos cada uno.</li>
+      </ul>
+      <p>El material se destina a la web y a la presencia digital del cliente objeto de este contrato.</p>
+    </div>
+
+    <h2 id="tituloPackReservas" data-clausula="packReservas" hidden><span class="num">·</span> Pack Reservas</h2>
+    <div id="bloquePackReservas" hidden>
+      <p>La web incorpora un <b>sistema de reservas</b> con calendario integrado, en el que el cliente final elige servicio, fecha y hora.</p>
+      <p>Incluye <b>confirmaciones automáticas</b>, <b>conexión con el calendario del negocio</b>, botón de reserva y página de confirmación.</p>
+    </div>
+
+    <h2 id="tituloPackTienda" data-clausula="packTienda" hidden><span class="num">·</span> Pack Tienda Online</h2>
+    <div id="bloquePackTienda" hidden>
+      <p>La web incorpora una <b>tienda online</b> con catálogo, carrito, pasarela de pago, control de stock, gestión de pedidos y envíos, correos automáticos, panel de gestión y página de agradecimiento.</p>
+      <p>Se incluye la <b>formación</b> del cliente para que pueda gestionarla, y la incorporación a la web de los <b>textos legales</b> de la tienda.</p>
+      <p><b>Lo que aporta y gestiona el cliente:</b> las condiciones legales de la tienda, y los cobros, los pedidos, la facturación y las devoluciones. Differentissgood monta la herramienta; no interviene en la venta ni responde de ella.</p>
+      <p>El precio de este pack parte de <b>790 €</b> y el importe concreto es el que figura en el cuadro de la cláusula <span data-ref="packs">·</span>.</p>
+    </div>
+
+    <h2 id="tituloPackIa" data-clausula="packIa" hidden><span class="num">·</span> Pack Automatización IA</h2>
+    <div id="bloquePackIa" hidden>
+      <p>La web incorpora un <b>chat con inteligencia artificial personalizado</b>, con respuestas basadas en la información de la empresa que facilite el cliente, y FAQ automatizadas.</p>
+      <p>Incluye captación y clasificación de clientes, formularios inteligentes, derivación a WhatsApp, contacto o reservas, personalización y pruebas, y analítica básica.</p>
+      <p>El precio de este pack parte de <b>850 €</b> y el importe concreto es el que figura en el cuadro de la cláusula <span data-ref="packs">·</span>.</p>
+      <p class="nota">Sobre las herramientas de terceros en las que se apoya esta funcionalidad, se aplica lo dicho en la cláusula de inteligencia artificial de este contrato.</p>
+    </div>
+
+    <h2 id="tituloPackIdioma" data-clausula="packIdioma" hidden><span class="num">·</span> Pack Versión Internacional (inglés)</h2>
+    <div id="bloquePackIdioma" hidden>
+      <p>La web se publica también <b>en inglés</b>: traducción y adaptación del contenido, selector de idioma y navegación bilingüe.</p>
+      <p>Se adaptan los botones, los formularios y los mensajes, se hace <b>SEO básico en inglés</b> y se configuran ambas versiones.</p>
+    </div>
 
     <h2 id="tituloPackFoto" data-clausula="packFoto" hidden><span class="num">12.</span> Pack de fotografía y vídeo</h2>
     <div id="bloquePackFoto" hidden>
@@ -611,7 +710,7 @@
 
     <h2><span class="num">14.</span> Servicios de terceros</h2>
     <p>La web necesita servicios que no son de Differentissgood: dominio, hosting, Google, WhatsApp, correo, newsletter, calendarios, pasarelas de pago, herramientas de IA, analítica y similares.</p>
-    <p>Differentissgood no responde de sus caídas, cierres, subidas de precio ni cambios de condiciones. Sus costes no están incluidos en el precio del plan salvo que se diga expresamente (véase el apartado de dominio y hosting de la cláusula de precio).</p>
+    <p>Differentissgood no responde de sus caídas, cierres, subidas de precio ni cambios de condiciones. Sus costes no están incluidos en el precio contratado salvo que se diga expresamente (véase el apartado de dominio y hosting de la cláusula de precio).</p>
 
     <h2><span class="num">15.</span> Inteligencia artificial</h2>
     <p>Las funciones con inteligencia artificial que lleve la web (por ejemplo el chat con IA o el blog asistido) funcionan con herramientas de otras empresas.</p>
@@ -636,7 +735,17 @@
     <p>Distinto es el caso de los datos de terceros que se gestionen dentro de la web del cliente (formularios, reservas, clientes de su tienda): si Differentissgood accede a ellos por cuenta del cliente y la ley lo exige, se firmará el anexo de encargado de tratamiento correspondiente.</p>
 
     <h2><span class="num">20.</span> Mantenimiento posterior</h2>
-    <p>El mantenimiento después de la entrega no está incluido. Se puede contratar aparte, con un coste mensual a acordar.</p>
+    <p>El mantenimiento después de la entrega <b>no está incluido</b> en el precio de la Web Esencial ni en el de los packs. Se contrata aparte, en cuotas mensuales.</p>
+    <p id="mantNinguno">En este contrato no se ha contratado mantenimiento.</p>
+    <div id="mantBloque" hidden>
+      <p>El cliente contrata el mantenimiento marcado a continuación:</p>
+      <ul class="limpia">
+        <li id="mantWeb" hidden><b>Mantenimiento de la web — 90 €/mes.</b> Incluye <b>una ronda de cambios o actualizaciones al mes</b>.</li>
+        <li id="mantTienda" hidden><b>Mantenimiento de la tienda online — 290 €/mes.</b></li>
+        <li id="mantIa" hidden><b>Optimización de la automatización con IA — desde 160 €/mes</b>, según el importe del cuadro de la cláusula <span data-ref="packs">·</span>.</li>
+      </ul>
+      <p>Las cuotas de mantenimiento son mensuales, van aparte del pago del proyecto y se abonan mientras el servicio esté activo. Cualquiera de las dos partes puede darlo por terminado avisando por escrito con <span class="blank corto" contenteditable="true" data-placeholder="[·]"></span> días de antelación.</p>
+    </div>
 
     <h2 id="tituloDesistimiento" data-clausula="desistimiento" hidden><span class="num">21.</span> Derecho de desistimiento</h2>
     <div id="bloqueDesistimiento" hidden>
@@ -696,76 +805,6 @@
 (function(){
   'use strict';
 
-  var PLANES = {
-    impulso: {
-      letra: 'I',
-      nombre: 'Plan Impulso', precio: '560 €', dias: 7, rondas: '2',
-      incluye: [
-        'Página única (one-page) con hasta 5 secciones (ej: marca, servicios, valoraciones…).',
-        'Diseño a medida, 100% adaptado a móvil.',
-        'Formulario de contacto vía WhatsApp.',
-        'SEO básico.',
-        'Animaciones con IA básicas.',
-        'Certificado SSL gestionado.',
-        'Aviso Legal.',
-        'Favicon e identidad visual.',
-        'Integración con redes sociales.',
-        'Configuración de dominio y hosting (coste del servicio no incluido en el precio del plan).',
-        'Crédito «Designed by Differentissgood» incluido.',
-      ],
-      extras: ['Modo oscuro', 'QR personalizado', 'Botón de compartir en redes', 'Mapa de Google integrado', 'Sección de FAQ desplegable', 'Valoraciones de Google en la web'],
-      extrasTitulo: 'Extras opcionales — el cliente elegirá de 2 a 4, incluidos en el precio del plan. La selección definitiva se realizará en el cuestionario de inicio del proyecto, dentro del plazo establecido para su cumplimentación.',
-    },
-    crecimiento: {
-      letra: 'C',
-      nombre: 'Plan Crecimiento', precio: '780 €', dias: 14, rondas: '3',
-      incluye: [
-        'Todo lo incluido en el Plan Impulso.',
-        'Web multipágina (3-5 páginas): ej: inicio, sobre mí/nosotros, servicios/productos, blog o galería, contacto.',
-        'Animaciones con IA: transiciones suaves y microinteracciones al hacer scroll.',
-        'Blog o galería actualizable.',
-        'Integración con redes sociales.',
-        'SEO avanzado.',
-        'Botón de reserva/cita (calendario de reservas integrado).',
-        'Botón de WhatsApp flotante inteligente.',
-        'Formulario de testimonios.',
-        'Valoraciones de Google en la web.',
-        'Aviso Legal + Política de Privacidad + Política de Cookies.',
-      ],
-      extras: ['Newsletter con bienvenida automática', 'Integración con Google Business', 'Testimonios en vídeo', 'Blog asistido con IA', 'Galería animada', 'Sección de FAQ desplegable'],
-      extrasTitulo: 'Extras opcionales — el cliente elegirá de 2 a 4, incluidos en el precio del plan. La selección definitiva se realizará en el cuestionario de inicio del proyecto, dentro del plazo establecido para su cumplimentación.',
-    },
-    elite: {
-      letra: 'E',
-      nombre: 'Plan Élite', precio: '1.460 €', dias: 25, rondas: '4',
-      incluye: [
-        'Todo lo incluido en el Plan Crecimiento.',
-        'Carrito de compra / tienda online (catálogo + pasarela de pago).',
-        'Interacción avanzada con el cliente: chat con IA, formularios inteligentes, zona de reseñas interactiva.',
-        'Animaciones con IA avanzadas (efectos 3D/parallax, personalización según comportamiento).',
-        'Panel de administración para que el cliente edite contenido, precios o stock.',
-        'Analítica avanzada (dashboard de rendimiento).',
-        'Optimización de velocidad y rendimiento.',
-        'Sesión de formación 1:1 para el cliente.',
-        'Paquete legal completo: Aviso Legal + Privacidad + Cookies + Términos y Condiciones de venta + Devoluciones/cancelaciones.',
-      ],
-      extras: ['Modo oscuro', 'QR personalizado', 'Página de agradecimiento personalizada', 'Mapa de Google integrado', 'Formulario de testimonios', 'Newsletter con bienvenida automática', 'Integración con Google Business Profile', 'Testimonios en vídeo', 'Blog asistido con IA', 'Galería animada', 'Sección de FAQ desplegable', 'Chat con IA / chatbot', 'Carrito de compra avanzado / pasarela de pago', 'Dashboard de analítica personalizado', 'Multi-idioma', 'Panel de administración para el cliente', 'Valoraciones de Google en la web'],
-      extrasTitulo: 'Todos los extras indicados para el Plan Élite están disponibles e incluidos en el precio del plan. El cliente indicará en el cuestionario de inicio cuáles desea implementar. La selección enviada en dicho cuestionario será definitiva y determinará los extras que formarán parte del proyecto.',
-    },
-  };
-  var ORDEN = ['impulso', 'crecimiento', 'elite'];
-  var actual = 'impulso';
-
-  var tabsEl = document.getElementById('tabs');
-  ORDEN.forEach(function(clave){
-    var b = document.createElement('button');
-    b.type = 'button'; b.className = 'tab'; b.dataset.plan = clave;
-    b.innerHTML = PLANES[clave].nombre + '<span class="precio">' + PLANES[clave].precio + '</span>';
-    b.addEventListener('click', function(){ seleccionarPlan(clave); });
-    tabsEl.appendChild(b);
-  });
-
-  function li(texto){ var l = document.createElement('li'); l.textContent = texto; return l; }
 
   var cliente = 'empresa';
 
@@ -822,16 +861,30 @@
     });
   }
 
-  /* ---------- Packs adicionales ----------
-     La web es el servicio base; cada pack añade su propia cláusula y su fila
-     en el cuadro de precios. Si no se contrata ninguno, no aparece nada. */
-  var packs = { foto:false, dron:false, boda:false, album:false };
+  /* ---------- Packs ----------
+     La Web Esencial es el servicio base. Cada pack añade su propia cláusula y
+     su fila en el cuadro de precios. Si no se contrata ninguno, no aparece nada.
+     Los seis primeros amplían la web; los cuatro últimos son otros servicios
+     de Differentissgood que se pueden firmar en este mismo documento. */
   var CAJAS = {
-    foto:  { titulo:'tituloPackFoto',  bloque:'bloquePackFoto',  fila:'filaFoto'  },
-    dron:  { titulo:'tituloPackDron',  bloque:'bloquePackDron',  fila:'filaDron'  },
-    boda:  { titulo:'tituloPackBoda',  bloque:'bloquePackBoda',  fila:'filaBoda'  },
-    album: { titulo:'tituloPackAlbum', bloque:'bloquePackAlbum', fila:'filaAlbum' },
+    expansion: { titulo:'tituloPackExpansion', bloque:'bloquePackExpansion', fila:'filaExpansion' },
+    visual:    { titulo:'tituloPackVisual',    bloque:'bloquePackVisual',    fila:'filaVisual'    },
+    reservas:  { titulo:'tituloPackReservas',  bloque:'bloquePackReservas',  fila:'filaReservas'  },
+    tienda:    { titulo:'tituloPackTienda',    bloque:'bloquePackTienda',    fila:'filaTienda'    },
+    ia:        { titulo:'tituloPackIa',        bloque:'bloquePackIa',        fila:'filaIa'        },
+    idioma:    { titulo:'tituloPackIdioma',    bloque:'bloquePackIdioma',    fila:'filaIdioma'    },
+    foto:      { titulo:'tituloPackFoto',      bloque:'bloquePackFoto',      fila:'filaFoto'      },
+    dron:      { titulo:'tituloPackDron',      bloque:'bloquePackDron',      fila:'filaDron'      },
+    boda:      { titulo:'tituloPackBoda',      bloque:'bloquePackBoda',      fila:'filaBoda'      },
+    album:     { titulo:'tituloPackAlbum',     bloque:'bloquePackAlbum',     fila:'filaAlbum'     },
   };
+  var packs = {};
+  Object.keys(CAJAS).forEach(function(k){ packs[k] = false; });
+
+  /* Mantenimiento mensual: web 90 €, tienda 290 €, IA desde 160 €. */
+  var mant = { web:false, tienda:false, ia:false };
+  var FILAS_MANT = { web:'filaMantWeb', tienda:'filaMantTienda', ia:'filaMantIa' };
+  var LINEAS_MANT = { web:'mantWeb', tienda:'mantTienda', ia:'mantIa' };
 
   function aplicarPacks(){
     var alguno = false;
@@ -842,24 +895,56 @@
       document.getElementById(c.fila).hidden = !on;
       if(on) alguno = true;
     });
-    document.getElementById('tituloPacks').hidden = !alguno;
-    document.getElementById('bloquePacks').hidden = !alguno;
 
-    // Si se contrata fotografía, la cláusula de fotos deja de decir que no entra
-    document.getElementById('fotosNo').hidden = !!packs.foto;
+    var algunMant = false;
+    Object.keys(mant).forEach(function(k){
+      var on = !!mant[k];
+      document.getElementById(FILAS_MANT[k]).hidden = !on;
+      document.getElementById(LINEAS_MANT[k]).hidden = !on;
+      if(on) algunMant = true;
+    });
+    document.getElementById('mantBloque').hidden = !algunMant;
+    document.getElementById('mantNinguno').hidden = algunMant;
+
+    document.getElementById('tituloPacks').hidden = !(alguno || algunMant);
+    document.getElementById('bloquePacks').hidden = !(alguno || algunMant);
+
+    // Las fotos entran si se ha contratado Producción Visual o el pack audiovisual
+    document.getElementById('fotosNo').hidden = !!(packs.visual || packs.foto);
+    document.getElementById('fotosSiVisual').hidden = !packs.visual;
     document.getElementById('fotosSi').hidden = !packs.foto;
 
-    [].forEach.call(document.querySelectorAll('#packs .tab'), function(b){
+    // Expansión añade una ronda a las dos de la Web Esencial
+    document.getElementById('rondaExpansion').hidden = !packs.expansion;
+    document.getElementById('cRondas').textContent = packs.expansion ? '2 + 1 del pack Expansión' : '2';
+
+    // Los packs pueden mover la fecha de entrega: se acuerda por escrito
+    document.getElementById('plazoPacks').hidden = !alguno;
+
+    [].forEach.call(document.querySelectorAll('#packs .tab, #packsOtros .tab'), function(b){
       b.classList.toggle('activa', !!packs[b.dataset.pack]);
       b.setAttribute('aria-pressed', String(!!packs[b.dataset.pack]));
+    });
+    [].forEach.call(document.querySelectorAll('#mantenimiento .tab'), function(b){
+      b.classList.toggle('activa', !!mant[b.dataset.mant]);
+      b.setAttribute('aria-pressed', String(!!mant[b.dataset.mant]));
     });
     renumerar();
   }
 
-  document.getElementById('packs').addEventListener('click', function(e){
+  ['packs', 'packsOtros'].forEach(function(id){
+    document.getElementById(id).addEventListener('click', function(e){
+      var b = e.target.closest('.tab');
+      if(!b) return;
+      packs[b.dataset.pack] = !packs[b.dataset.pack];
+      aplicarPacks();
+    });
+  });
+
+  document.getElementById('mantenimiento').addEventListener('click', function(e){
     var b = e.target.closest('.tab');
     if(!b) return;
-    packs[b.dataset.pack] = !packs[b.dataset.pack];
+    mant[b.dataset.mant] = !mant[b.dataset.mant];
     aplicarPacks();
   });
 
@@ -870,27 +955,20 @@
     aplicarCliente();
   });
 
-  function seleccionarPlan(clave){
-    actual = clave;
-    var d = PLANES[clave];
-    [].forEach.call(tabsEl.children, function(b){ b.classList.toggle('activa', b.dataset.plan === clave); });
-    document.getElementById('etiquetaPlan').textContent = d.nombre;
-    document.getElementById('refCodigo').setAttribute('data-placeholder', 'DIG-2026-001-' + d.letra);
-    document.getElementById('txtNombrePlan').textContent = d.nombre;
-    document.getElementById('cPrecio').textContent = d.precio;
-    document.getElementById('cDias').textContent = d.dias + ' días laborables';
-    document.getElementById('cRondas').textContent = d.rondas;
-    var incluye = document.getElementById('cIncluye'); incluye.innerHTML = '';
-    d.incluye.forEach(function(t){ incluye.appendChild(li(t)); });
-    document.getElementById('cExtrasTitulo').textContent = d.extrasTitulo;
-    var extras = document.getElementById('cExtras'); extras.innerHTML = '';
-    d.extras.forEach(function(t){ extras.appendChild(li(t)); });
-    calcularFechas();
-  }
-
   var MESES_FMT = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
   function formatear(fecha){ return MESES_FMT.format(fecha); }
   function sumarDias(fecha, n){ var f = new Date(fecha); f.setDate(f.getDate() + n); return f; }
+  /* Días laborables: se saltan sábados y domingos (los festivos no, que cambian
+     según la provincia y aquí solo se da una estimación). */
+  function sumarLaborables(fecha, n){
+    var f = new Date(fecha), quedan = n;
+    while(quedan > 0){
+      f.setDate(f.getDate() + 1);
+      var d = f.getDay();
+      if(d !== 0 && d !== 6) quedan--;
+    }
+    return f;
+  }
 
   var inputFecha = document.getElementById('fechaFirma');
   function calcularFechas(){
@@ -902,13 +980,14 @@
     var partes = inputFecha.value.split('-').map(Number);
     var firma = new Date(partes[0], partes[1] - 1, partes[2]);
     var contenido = sumarDias(firma, 7);
-    var entrega = sumarDias(contenido, PLANES[actual].dias);
-    var pago = sumarDias(entrega, -1);
+    var pronto = sumarLaborables(contenido, 7);   // 7 días laborables
+    var tarde  = sumarLaborables(contenido, 10);  // 10 días laborables
+    var pago = sumarDias(pronto, -1);
     var txtFirma = formatear(firma);
     document.getElementById('txtFechaFirma').textContent = txtFirma;
     document.getElementById('txtFechaFirma2').textContent = txtFirma;
     document.getElementById('fContenido').textContent = formatear(contenido);
-    document.getElementById('fEntrega').textContent = formatear(entrega);
+    document.getElementById('fEntrega').textContent = 'entre el ' + formatear(pronto) + ' y el ' + formatear(tarde);
     document.getElementById('fPago').textContent = formatear(pago);
   }
   inputFecha.addEventListener('change', calcularFechas);
@@ -927,7 +1006,7 @@
   var clausulaB = document.getElementById('clausulaB');
   var rondasAyuda = document.getElementById('rondasAyuda');
   var AYUDA_RONDAS = {
-    ninguna: 'El contrato se queda solo con las rondas incluidas en el plan — sin cláusula extra.',
+    ninguna: 'El contrato se queda solo con las rondas ya incluidas — sin cláusula extra.',
     A: 'Para cuando el cliente ya sabe, al firmar, que quiere más rondas de las incluidas. Se pacta el número ahora mismo y su coste (40 €/ronda) se suma al precio total, pagadero con el 70% final.',
     B: 'Para cuando no se sabe si pedirá más rondas. Deja constancia de que, si lo hace durante el proyecto, cada ronda extra cuesta 40 € y se paga antes de aplicarla — sin comprometer un número.',
   };
@@ -939,7 +1018,7 @@
   selectRondas.addEventListener('change', actualizarAyudaRondas);
   actualizarAyudaRondas();
 
-  seleccionarPlan('impulso');
+  calcularFechas();
   aplicarPacks();
   aplicarCliente();
 })();
