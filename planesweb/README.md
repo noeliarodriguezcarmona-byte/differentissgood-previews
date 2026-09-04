@@ -3,7 +3,8 @@
 Repositorio para previsualizar webs de clientes antes de entregarlas.
 
 ## Estructura
-- `index.html` — portada con enlaces a cada plan/proyecto
+- `index.html` — portada; desde el 04/09/2026 solo remite a
+  `differentissgood.com/planesweb/`, que es donde vive la información de verdad
 - `assets/` — imágenes y vídeos (nunca en base64 dentro del código)
 - cada proyecto de cliente = un archivo .html propio (o una carpeta si tiene varias páginas)
 

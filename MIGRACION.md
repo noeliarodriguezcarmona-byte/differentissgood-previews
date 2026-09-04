@@ -9,7 +9,7 @@ llegue desde una sesión de `differentissgood/DIG`.
 
 | Carpeta | Qué es | A dónde va en DIG |
 |---|---|---|
-| `planesweb/` | las tres páginas de planes + su portada | `/planesweb/` |
+| `planesweb/` | solo una portada que remite a la web oficial; las tres páginas de planes se borraron el 04/09/2026 | `/planesweb/` |
 | `cuestionario/` | cuestionario con acceso por código | `/cuestionario/` |
 | `contrato/` | contrato interactivo de 27 cláusulas | `/contrato/` (sin enlazar, con noindex) |
 | `bodas/` | bodas | `/bodas/` (ya existe en DIG) |
@@ -73,8 +73,8 @@ tocarlas una a una:
 podía abrir `differentissgood.com` (el proxy de red la bloquea) ni leer el
 repositorio `differentissgood/DIG` (sólo admitía repositorios de
 `noeliarodriguezcarmona-byte`). Así que los valores de color que hay ahora son
-los que ya usaba `plan-impulso.html`, que era la página más parecida a la web
-oficial — no están copiados de ella.
+los que ya usaba `plan-impulso.html` (borrada el 04/09/2026), que era la
+página más parecida a la web oficial — no están copiados de ella.
 
 Cambiarlos es **una sola edición**: el bloque `TOKENS DE MARCA` al principio de
 `assets/marca.css`. Nada más. Todo lo demás lo hereda.

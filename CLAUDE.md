@@ -37,7 +37,10 @@ Reglas al trabajar con planes:
   está bloqueado y no se puede añadir ese repo). Si hay que consultarla, se le
   pide el contenido a Noelia o se abre un chat con `differentissgood/DIG`.
 - Las páginas `planesweb/plan-impulso.html`, `plan-crecimiento.html` y
-  `plan-elite.html` de este repositorio son del sistema viejo y ya no valen.
+  `plan-elite.html` **se borraron el 04/09/2026**: eran del sistema viejo.
+  `planesweb/index.html` ya no vende nada; solo remite a
+  `differentissgood.com/planesweb/`. Las imágenes de esas tres páginas siguen
+  en `planesweb/assets/` por si se reaprovechan.
 - Si la web, el cuestionario, el contrato o cualquier otro archivo **contradicen**
   ese documento: **no inventar ni decidir por cuenta propia.** Se avisa a Noelia
   de la contradicción antes de cambiar nada de información comercial.
