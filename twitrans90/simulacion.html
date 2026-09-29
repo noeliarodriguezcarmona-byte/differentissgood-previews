@@ -560,6 +560,12 @@ footer .credit a:hover { color: var(--accent-on-deep); }
 .for-lbl { font-family: var(--font-display); font-weight: 800; font-size: clamp(19px, 2.2vw, 24px); letter-spacing: .04em; margin-right: 8px; }
 @media (max-width: 520px) { .eyebrow::before { width: 34px; } }
 
+
+/* Antes y después: el título va encima de la foto */
+.ba-wrap { grid-template-columns: 1fr; gap: 24px; }
+.ba-copy { order: -1; max-width: 640px; }
+.ba-wrap > div:first-child { max-width: 720px; width: 100%; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
