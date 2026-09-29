@@ -7,14 +7,15 @@
    cotas en mono, engranajes y tuercas que giran con el scroll, un camión que
    nunca para en el hero. Marca del cliente: azul marino, gris piedra, rojo terracota. */
 :root {
-  --bg: #E7E3DA;
+  --bg: #898987;
   --surface: #FFFFFF;
   --fg: #0F1D30;
-  --muted: #566073;
-  --line: #D2CCBF;
+  --muted: #232D3D;
+  --line: #6B6B69;
   --brand: #1F3A5F;
   --accent: #A33B3B;
   --accent-fg: #FFFFFF;
+  --accent-text: #4E1010;
   --stone: #8A8A8A;
   --deep: #0E1D32;
   --deep-2: #152A46;
@@ -32,13 +33,13 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0B1626; --surface: #12233A; --fg: #E7ECF3; --muted: #9AA9BD; --line: #22374F;
-    --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --deep: #08111F; --deep-2: #0F2038;
+    --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --accent-text: #E0706F; --deep: #08111F; --deep-2: #0F2038;
     --grid: rgba(159,176,198,.07); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0B1626; --surface: #12233A; --fg: #E7ECF3; --muted: #9AA9BD; --line: #22374F;
-  --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --deep: #08111F; --deep-2: #0F2038;
+  --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --accent-text: #E0706F; --deep: #08111F; --deep-2: #0F2038;
   --grid: rgba(159,176,198,.07); color-scheme: dark;
 }
 
@@ -543,6 +544,15 @@ footer .credit { justify-content: flex-start; }
 footer .credit a { color: var(--on-deep); text-decoration: none; border-bottom: 1px solid var(--accent-on-deep); }
 footer .credit a:hover { color: var(--accent-on-deep); }
 
+
+/* Fondo gris: contraste de textos sueltos */
+.eyebrow { color: var(--accent-text); }
+.readtext b, .for-lbl { color: var(--accent-text); }
+.bolt .rod { background: repeating-linear-gradient(105deg, var(--muted) 0 3px, transparent 3px 9px); border-block-color: var(--muted); opacity: .9; }
+.ring { color: var(--muted); }
+.nav ul a { color: var(--fg); }
+.card .eyebrow, .item .eyebrow { color: var(--accent); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -852,7 +862,7 @@ footer .credit a:hover { color: var(--accent-on-deep); }
         <p class="eyebrow">Horarios</p>
         <h2 style="font-size:34px;margin-top:14px">Cuándo estamos.</h2>
         <p class="days">Lunes a viernes</p>
-        <p class="times"><span>8:00–14:00</span><span>15:00–17:00</span></p>
+        <p class="times"><span>8:00–14:00</span><span>15:00–19:00</span></p>
         <p class="hnote">Sábados, domingos y festivos cerrado. En agosto cerramos la segunda quincena por vacaciones.</p>
       </div>
       <div class="card">
@@ -1028,8 +1038,8 @@ footer .credit a:hover { color: var(--accent-on-deep); }
   }
   var t = madrid(), status = document.getElementById("status"), txt = document.getElementById("statusTxt");
   var weekday = t.d >= 1 && t.d <= 5;
-  if (weekday && ((t.m >= 480 && t.m < 840) || (t.m >= 900 && t.m < 1020))) {
-    txt.textContent = "Abierto ahora · hasta las " + (t.m < 840 ? "14:00" : "17:00");
+  if (weekday && ((t.m >= 480 && t.m < 840) || (t.m >= 900 && t.m < 1140))) {
+    txt.textContent = "Abierto ahora · hasta las " + (t.m < 840 ? "14:00" : "19:00");
   } else {
     status.classList.add("closed");
     var when;
