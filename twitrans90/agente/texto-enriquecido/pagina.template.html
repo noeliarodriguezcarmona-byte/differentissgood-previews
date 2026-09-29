@@ -1,0 +1,99 @@
+<title>Texto enriquecido de Javier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: una estantería de fichas. Cada tema de la base de conocimiento es una ficha con su botón de copiar, pensada para pegar en el editor de texto enriquecido. */
+:root { --bg: #D6D6D3; --surface: #FFFFFF; --fg: #0F1D30; --muted: #3A4557; --line: #ABABA7; --brand: #1F3A5F; --accent: #A33B3B; --accent-fg: #fff; --ok: #2E7D52;
+  --font-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif; --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0B1626; --surface: #12233A; --fg: #E7ECF3; --muted: #9AA9BD; --line: #22374F; --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --ok: #6FCF97; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #0B1626; --surface: #12233A; --fg: #E7ECF3; --muted: #9AA9BD; --line: #22374F; --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --ok: #6FCF97; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin-inline: auto; padding: 28px 16px 48px; display: grid; gap: 22px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.05; letter-spacing: -.02em; margin: 0; }
+.sub { color: var(--muted); max-width: 62ch; margin: 10px 0 0; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; counter-reset: p; }
+.steps li { counter-increment: p; background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; font-size: 15px; }
+.steps li::before { content: "Paso " counter(p); display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+@media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }
+.bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn { font: inherit; font-weight: 600; border: 1.5px solid var(--accent); background: var(--accent); color: var(--accent-fg); padding: 10px 18px; border-radius: 4px; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--fg); }
+.btn:hover { filter: brightness(1.08); }
+.btn.done { background: var(--ok); border-color: var(--ok); color: #fff; }
+.count { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+@media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--line); min-width: 0; }
+.card-h { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; }
+.card-h h2 { font-family: var(--font-display); font-size: 20px; line-height: 1.15; margin: 0; letter-spacing: -.01em; }
+.card-h small { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+.card details { border-top: 1px dashed var(--line); }
+.card summary { cursor: pointer; padding: 10px 16px; font-size: 14px; color: var(--muted); }
+.preview { padding: 0 16px 16px; font-size: 15px; max-height: 340px; overflow: auto; }
+.preview h2 { display: none; }
+.preview h3 { font-size: 15.5px; margin: 14px 0 2px; }
+.preview p { margin: 2px 0; } .preview table { border-collapse: collapse; width: 100%; font-size: 14px; } .preview td, .preview th { border: 1px solid var(--line); padding: 4px 6px; text-align: left; }
+.note { font-size: 14px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">TWITRANS 90 SL · Agente de IA</p>
+    <h1>Texto enriquecido de la base de conocimiento</h1>
+    <p class="sub">Cada ficha es un tema de la base de conocimiento de Javier, con títulos, negritas y listas. Copia la ficha y pégala tal cual en el editor de texto enriquecido de la plataforma.</p>
+  </header>
+  <ol class="steps">
+    <li>Pulsa «Copiar» en una ficha, o «Copiar todo» si tu plataforma acepta un solo texto.</li>
+    <li>En la base de conocimiento del agente, crea una entrada de texto enriquecido.</li>
+    <li>Pega con Ctrl+V (o Cmd+V). Se mantienen los títulos y las negritas.</li>
+  </ol>
+  <div class="bar"><button class="btn" id="all" type="button">Copiar todo</button><span class="count" id="count"></span></div>
+  <div class="cards" id="cards"></div>
+  <p class="note">Las notas internas de «pendiente de confirmar con el cliente» no están aquí, para que el agente no las use. Si algo cambia, se actualiza primero la base de conocimiento y luego estas fichas.</p>
+</div>
+
+<script>
+(function () {
+  var SEC = __SECCIONES__;
+  var cards = document.getElementById("cards"), total = 0;
+  function plainOf(html) { var d = document.createElement("div"); d.innerHTML = html; return d.innerText || d.textContent; }
+  async function copyRich(html, btn, label) {
+    var plain = plainOf(html), ok = false;
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        await navigator.clipboard.write([new ClipboardItem({ "text/html": new Blob([html], { type: "text/html" }), "text/plain": new Blob([plain], { type: "text/plain" }) })]);
+        ok = true;
+      }
+    } catch (e) { ok = false; }
+    if (!ok) {
+      var box = document.createElement("div"); box.innerHTML = html; box.style.cssText = "position:fixed;left:-9999px;top:0;background:#fff;color:#000";
+      document.body.appendChild(box);
+      var r = document.createRange(); r.selectNodeContents(box); var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      s.removeAllRanges(); document.body.removeChild(box);
+    }
+    btn.textContent = ok ? "Copiado" : "Selecciona y copia a mano";
+    btn.classList.toggle("done", ok);
+    setTimeout(function () { btn.textContent = label; btn.classList.remove("done"); }, 1800);
+  }
+  SEC.forEach(function (s) {
+    var n = (s.h.match(/<h3>/g) || []).length; total += n;
+    var c = document.createElement("article"); c.className = "card";
+    var head = document.createElement("div"); head.className = "card-h";
+    var t = document.createElement("div"); var h2 = document.createElement("h2"); h2.textContent = s.t; var sm = document.createElement("small"); sm.textContent = n ? n + (n === 1 ? " pregunta" : " preguntas") : "Información fija"; t.appendChild(h2); t.appendChild(sm);
+    var b = document.createElement("button"); b.className = "btn"; b.type = "button"; b.textContent = "Copiar"; b.setAttribute("aria-label", "Copiar " + s.t);
+    b.addEventListener("click", function () { copyRich("<h2>" + s.t.replace(/&/g, "&amp;") + "</h2>" + s.h.replace(/^<h2>.*?<\/h2>\n?/, ""), b, "Copiar"); });
+    head.appendChild(t); head.appendChild(b);
+    var d = document.createElement("details"); var sum = document.createElement("summary"); sum.textContent = "Ver el texto"; var pv = document.createElement("div"); pv.className = "preview"; pv.innerHTML = s.h; d.appendChild(sum); d.appendChild(pv);
+    c.appendChild(head); c.appendChild(d); cards.appendChild(c);
+  });
+  document.getElementById("count").textContent = SEC.length + " fichas · " + total + " preguntas y respuestas";
+  var all = document.getElementById("all");
+  all.addEventListener("click", function () { copyRich(SEC.map(function (s) { return s.h; }).join("\n"), all, "Copiar todo"); });
+})();
+</script>
