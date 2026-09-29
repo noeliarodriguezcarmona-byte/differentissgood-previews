@@ -444,6 +444,79 @@ footer .brand { color: var(--on-deep); }
 .big-wa { margin-top: 28px; font-size: 18px; padding: 18px 28px; }
 .js .rv.big-wa { display: inline-flex; }
 
+
+/* ===== Ajustes: página más corta ===== */
+section { padding-block: clamp(44px, 6vw, 80px); }
+.head { gap: 12px; margin-bottom: clamp(20px, 3.5vw, 36px); }
+h2 { font-size: clamp(30px, 4.2vw, 46px); }
+.lead { font-size: 17px; }
+.hero { padding-block: clamp(28px, 4vw, 48px); }
+.hero .sub { font-size: 18px; margin-top: 16px; }
+.hero .ctas { margin-top: 24px; }
+.hero .status { margin-bottom: 18px; }
+.photo { aspect-ratio: 1 / 1.05; }
+.readtext { font-size: clamp(20px, 2.2vw, 27px); margin-top: 16px; }
+.since-row { margin-top: 24px; } .ring { width: 108px; height: 108px; } .ring strong { font-size: 44px; }
+.pillars { margin-top: 22px; } .pillars i.pi { width: 48px; height: 48px; margin-bottom: 8px; } .pillars b { font-size: 19px; } .pillars span { font-size: 14px; }
+.for { margin-top: 22px; }
+footer { padding-block: 28px 84px; }
+
+.nav .btn { white-space: nowrap; }
+@media (max-width: 520px) { .nav .btn { padding: 9px 12px; font-size: 13px; } .nav .wrap { min-height: 56px; } }
+.bolt { height: 56px; }
+
+/* Rueda */
+.for-lbl { margin-right: 4px; }
+.drum { position: relative; height: 40px; perspective: 500px; flex: none; }
+.reel { position: relative; height: 40px; transform-style: preserve-3d; transition: transform 1s cubic-bezier(.7, 0, .2, 1); }
+.dw { position: absolute; left: 0; top: 0; height: 40px; display: flex; align-items: center; padding: 0 16px; white-space: nowrap; border: 1px solid var(--accent); color: var(--accent); background: var(--surface); border-radius: 100px; font-family: var(--font-display); font-weight: 700; font-size: 17px; backface-visibility: hidden; opacity: 0; transition: opacity .5s; }
+.dw.cur { opacity: 1; }
+
+/* Servicios compactos + panel de detalle */
+.svc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.svc, .svc:nth-child(1), .svc:nth-child(2) { grid-column: auto; }
+.svc { min-height: 0; padding: 20px; gap: 10px; }
+.svc .ic { width: 40px; height: 40px; }
+.svc h3 { font-size: 19px; line-height: 1.12; padding-right: 8px; }
+.svc .idx { right: 18px; top: 16px; }
+.svc .spec { min-height: 44px; padding: 8px 52px 0 0; margin-top: auto; }
+.plus { right: 16px; bottom: 16px; width: 38px; height: 38px; }
+.svc.open, .svc.open:hover { transform: none; }
+.svc-detail { position: fixed; z-index: 90; inset: auto; left: 50%; top: 50%; width: min(600px, calc(100vw - 32px)); max-height: calc(100vh - 40px); padding: 30px 28px 26px; clip-path: none; opacity: 0; transform: translate(-50%, -46%) scale(.94); transition: opacity .35s ease, transform .5s cubic-bezier(.2,.7,.2,1), visibility 0s linear .5s; box-shadow: 0 40px 80px -20px rgba(0,0,0,.6); border: 1px solid rgba(159,176,198,.25); }
+.svc.open .svc-detail { clip-path: none; opacity: 1; transform: translate(-50%, -50%) scale(1); transition-delay: 0s; }
+.scrim { position: fixed; inset: 0; z-index: 85; background: rgba(6,12,22,.62); backdrop-filter: blur(3px); opacity: 0; visibility: hidden; transition: opacity .35s, visibility 0s linear .35s; }
+.svc-open .scrim { opacity: 1; visibility: visible; transition-delay: 0s; }
+.svc-detail .plus.x { top: 16px; right: 16px; }
+@media (max-width: 980px) { .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .svc-grid { gap: 10px; } .svc { padding: 16px; } .svc h3 { font-size: 17px; } .svc .spec { font-size: 10.5px; } }
+
+/* Productos más corto */
+#productos { padding-block: clamp(40px, 5vw, 64px); }
+.prod { gap: clamp(20px, 4vw, 48px); }
+.hose { padding: 12px 14px 18px; }
+.hose svg { max-height: 150px; }
+.ptiles { margin-top: clamp(22px, 3vw, 32px); gap: 14px; }
+.pt { padding: 16px 18px; gap: 6px; }
+.pt svg { height: 84px; }
+.pt h3 { font-size: 19px; } .pt p { font-size: 14px; }
+
+/* Cómo trabajamos: todo en una pantalla */
+#como { padding-block: clamp(36px, 5vw, 60px); }
+#como .head { margin-bottom: 8px; }
+.track { height: 64px; margin-bottom: 4px; }
+.track .rig { width: min(150px, 42%); left: calc(var(--p, 0) * (100% - min(150px, 42%))); }
+.steps li { padding-top: 16px; }
+.steps h3 { font-size: 18px; margin: 4px 0 4px; }
+.steps p { font-size: 14px; line-height: 1.42; }
+@media (max-width: 900px) { .steps li { padding: 9px 0 10px 20px; } .steps li::after { top: 14px; } .steps p { font-size: 13.5px; } .steps h3 { display: inline; font-size: 17px; margin: 0 8px 0 0; } .steps li::before { display: inline; margin-right: 8px; } }
+
+/* Galería y tienda más bajas */
+.gal { grid-auto-rows: 120px; }
+.item .pic { aspect-ratio: 16 / 7; }
+.item .body { padding: 18px; gap: 8px; }
+@media (max-width: 700px) { .gal div:nth-child(1) { grid-row: span 1; } .gal { grid-auto-rows: 110px; } }
+.hnote { margin-top: 16px; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -487,7 +560,7 @@ footer .brand { color: var(--on-deep); }
       <div>
         <div class="status" id="status"><i></i><span id="statusTxt">Taller en Ripollet, Barcelona</span></div>
         <h1>Tu taller de confianza para <em>vehículos industriales</em></h1>
-        <p class="sub">Hidráulica y plancha en Barcelona y Cataluña. Un vehículo parado cuesta dinero, así que resolvemos rápido y sin complicaciones.</p>
+        <p class="sub">Hidráulica y plancha en Barcelona y Cataluña. Un vehículo parado cuesta dinero: resolvemos rápido.</p>
         <div class="ctas">
           <a class="btn btn-accent" href="https://wa.me/34654545653" target="_blank" rel="noopener"><svg><use href="#wa-ic"/></svg>Escríbenos por WhatsApp</a>
           <a class="btn btn-ghost" href="#contacto">Pedir presupuesto</a>
@@ -505,9 +578,6 @@ footer .brand { color: var(--on-deep); }
       </div>
     </div>
   </section>
-  <div class="strip" aria-hidden="true">
-    <div class="strip-track" id="strip"></div>
-  </div>
 
   <section id="quienes">
     <div class="wrap about">
@@ -528,7 +598,7 @@ footer .brand { color: var(--on-deep); }
           <div><i class="pi"><span class="pgear" data-gear="9,100,80,30"></span><svg viewBox="0 0 64 64" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path class="chk" pathLength="1" d="M20 33l9 9 16-19"/></svg></i><b>Profesionalidad</b><span>Personal cualificado, solución integral y máxima garantía.</span></div>
           <div><i class="pi"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><g class="tag-sw"><path d="M32 2v16"/><path d="M18 20h28v34a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4z"/><circle cx="32" cy="27" r="2.4"/><text x="32" y="50" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="20" fill="var(--accent)" stroke="none">€</text></g></svg></i><b>Precio ajustado</b><span>Tarifas competitivas y transparentes.</span></div>
         </div>
-        <div class="for"><span class="for-lbl mono">Trabajamos con</span><span>Empresas de transporte</span><span>Autónomos</span><span>Flotistas</span><span>Logística</span><span>Particulares</span></div>
+        <div class="for"><span class="for-lbl mono">Trabajamos con</span><div class="drum" id="drum" aria-label="Empresas de transporte, autónomos, flotistas, logística y particulares"><div class="reel" id="reel"></div></div></div>
       </div>
     </div>
   </section>
@@ -544,7 +614,7 @@ footer .brand { color: var(--on-deep); }
 
   <section id="servicios">
     <div class="wrap">
-      <div class="head"><p class="eyebrow">Servicios</p><h2>Todo lo que necesita un vehículo industrial.</h2><p class="lead">Desde la diagnosis hasta la pintura. Cada trabajo con presupuesto personalizado y sin compromiso.</p></div>
+      <div class="head"><p class="eyebrow">Servicios</p><h2>Todo lo que necesita un vehículo industrial.</h2><p class="lead">Presupuesto personalizado y sin compromiso.</p></div>
       <div class="svc-grid">
         <article class="svc"><span class="idx">S1</span>
           <div class="ic"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><g class="i-gear"><circle cx="24" cy="30" r="8"/><path d="M24 15v4M24 41v4M9 30h4M35 30h4M13.4 19.4l2.8 2.8M31.8 37.8l2.8 2.8M13.4 40.6l2.8-2.8M31.8 22.2l2.8-2.8"/></g><g class="i-wrench"><path d="M40 8a7 7 0 0 0-6 9L21 30l5 5 13-13a7 7 0 0 0 9-6l-5 3-3-3 3-5c-1-.2-2-.2-3-.1Z" stroke="var(--accent)"/></g></svg></div>
@@ -640,12 +710,7 @@ footer .brand { color: var(--on-deep); }
         <div>
           <p class="eyebrow">Productos</p>
           <h2 style="margin-top:16px">Hidráulica y neumática, sin esperas.</h2>
-          <p class="lead" style="margin-top:20px">Si se te rompe una manguera trabajando, ven al taller y te la fabricamos al momento. Si no puedes mover la máquina, avísanos y va el taller móvil.</p>
-          <ul>
-            <li><svg viewBox="0 0 44 44"><use href="#nut"/></svg><span><b>Latiguillos y mangueras hidráulicas</b> fabricados y reparados a medida.</span></li>
-            <li><svg viewBox="0 0 44 44"><use href="#nut"/></svg><span><b>Racorería y accesorios</b> para maquinaria industrial, camiones y grúas.</span></li>
-            <li><svg viewBox="0 0 44 44"><use href="#nut"/></svg><span><b>Neumática variada</b> con montaje e instalación en el taller.</span></li>
-          </ul>
+          <p class="lead" style="margin-top:20px">Latiguillos y mangueras hidráulicas fabricados al momento en el taller. Si no puedes mover la máquina, va el taller móvil.</p>
         </div>
         <div class="hose" id="hose">
           <div class="hose-top"><span class="tag">Se fabrica delante de ti</span><div class="gauge" data-gauge></div></div>
@@ -660,7 +725,6 @@ footer .brand { color: var(--on-deep); }
         </div>
       </div>
     </div>
-    <div class="mq" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
     <div class="wrap">
       <div class="ptiles">
         <article class="pt">
@@ -711,15 +775,14 @@ footer .brand { color: var(--on-deep); }
       <div class="ba-copy">
         <p class="eyebrow">Antes y después</p>
         <h2 style="margin-top:16px">Golpes fuera. Tu imagen, intacta.</h2>
-        <p class="lead" style="margin-top:20px">Cabina de pintura industrial para camiones y furgonetas. Desde una abolladura hasta la pintura completa con los colores de tu empresa.</p>
-        <ul><li>Eliminación de abolladuras y reparación de golpes.</li><li>Pintura completa e imagen corporativa para flotas.</li><li>Gestionamos el parte con tu aseguradora.</li></ul>
+        <p class="lead" style="margin-top:20px">Desde una abolladura hasta la pintura completa con los colores de tu empresa. Gestionamos el parte con tu aseguradora.</p>
       </div>
     </div>
   </section>
 
   <section id="tienda">
     <div class="wrap">
-      <div class="head"><p class="eyebrow">Tienda</p><h2>Lo que necesitas, listo para llevar.</h2><p class="lead">Consulta disponibilidad y pide presupuesto personalizado. Aceptamos tarjeta, transferencia y efectivo.</p></div>
+      <div class="head"><p class="eyebrow">Tienda</p><h2>Lo que necesitas, listo para llevar.</h2><p class="lead">Consulta disponibilidad y pide presupuesto.</p></div>
       <div class="shop">
         <article class="item"><div class="pic"><svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 60V22h56v38M62 34h26l22 22v4"/><circle cx="26" cy="62" r="8"/><circle cx="92" cy="62" r="8"/></svg><span class="mono">Foto pendiente</span></div>
           <div class="body"><h3>Vehículos industriales de ocasión</h3><p>Camiones y maquinaria revisados en nuestro taller. Revisión mecánica pre-entrega completa incluida. Venta a toda España.</p><div class="foot"><span class="price mono">Según vehículo</span><a class="link" href="#contacto">Consultar</a></div></div></article>
@@ -746,15 +809,13 @@ footer .brand { color: var(--on-deep); }
         <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4"><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="20"/></svg><span class="mono">Foto: neumáticos</span></div>
         <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M10 70V30h50v40M60 42h20l14 16v12"/><circle cx="26" cy="72" r="8"/><circle cx="78" cy="72" r="8"/></svg><span class="mono">Foto: taller móvil</span></div>
         <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M10 50c20 0 20-30 40-30s20 60 40 60"/></svg><span class="mono">Foto: hidráulica</span></div>
-        <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 70V35l10-15h40l10 15v35z"/></svg><span class="mono">Foto: plancha y pintura</span></div>
-        <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M50 15v20M50 65v20M15 50h20M65 50h20"/><circle cx="50" cy="50" r="12"/></svg><span class="mono">Foto: mecánica</span></div>
       </div>
     </div>
   </section>
 
   <section id="faq">
     <div class="wrap faq">
-      <div class="head" style="margin:0"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan.</h2><p class="lead">¿No ves la tuya? Escríbenos por WhatsApp y te respondemos el mismo día laborable.</p></div>
+      <div class="head" style="margin:0"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan.</h2></div>
       <div class="faq-list">
         <details open><summary>¿Qué tipo de vehículos reparáis?</summary><p>Todo tipo de vehículos industriales y pesados: camiones, furgonetas, autobuses y remolques.</p></details>
         <details><summary>¿Tenéis suministros hidráulicos y neumáticos al momento?</summary><p>Sí. Tenemos un amplio catálogo de suministros hidráulicos, componentes neumáticos y accesorios, con instalación o reparación directa en el taller.</p></details>
@@ -772,8 +833,6 @@ footer .brand { color: var(--on-deep); }
         <h2 style="font-size:34px;margin-top:14px">Cuándo estamos.</h2>
         <p class="days">Lunes a viernes</p>
         <p class="times"><span>8:00–14:00</span><span>15:00–17:00</span></p>
-        <div class="dayline" id="dayline" data-go><i style="left:14.286%;width:42.857%"></i><i style="left:64.286%;width:14.286%;transition-delay:.9s"></i><em class="now" id="now" hidden></em></div>
-        <div class="dscale mono"><span>6h</span><span>8h</span><span>10h</span><span>12h</span><span>14h</span><span>16h</span><span>18h</span><span>20h</span></div>
         <p class="hnote">Sábados, domingos y festivos cerrado. En agosto cerramos la segunda quincena por vacaciones.</p>
       </div>
       <div class="card">
@@ -789,7 +848,6 @@ footer .brand { color: var(--on-deep); }
           </svg>
         </div>
         <p class="addr">Avda. Río Ripoll, nave 73<br>Ripollet (Barcelona)</p>
-        <div class="zone"><span class="hl">Toda Cataluña</span><span>Principalmente Barcelona</span><span>Compraventa en toda España</span></div>
         <p style="margin-top:22px"><a class="link" href="https://maps.app.goo.gl/JANJiKN5tRn9K9n86" target="_blank" rel="noopener">Abrir en Google Maps</a></p>
       </div>
     </div>
@@ -800,7 +858,7 @@ footer .brand { color: var(--on-deep); }
       <div>
         <p class="eyebrow">Contacto</p>
         <h2 style="margin-top:16px">¿Se te ha parado el vehículo?</h2>
-        <p class="lead" style="margin-top:20px">Llámanos o escríbenos. Las urgencias en ruta pasan por delante. Si estamos cerrados, te llamamos a primera hora del siguiente día hábil.</p>
+        <p class="lead" style="margin-top:14px">Las urgencias en ruta pasan por delante. Si estamos cerrados, te llamamos a primera hora del siguiente día hábil.</p>
         <a class="btn btn-accent big-wa" href="https://wa.me/34654545653" target="_blank" rel="noopener"><svg><use href="#wa-ic"/></svg>Escríbenos por WhatsApp</a>
         <div class="direct">
           <span><b>Correo</b> · <span id="mail">twitrans90@gmail.com</span><button class="copy" type="button" id="copyMail">Copiar</button></span>
@@ -883,10 +941,6 @@ footer .brand { color: var(--on-deep); }
   }
   document.querySelectorAll("[data-truck]").forEach(function (el) { el.innerHTML = truck(); });
 
-  /* Marquesina */
-  var words = ["Reparación de vehículos industriales", "Taller móvil", "Neumáticos", "Plancha y pintura", "Suministros hidráulicos", "Compraventa"];
-  var unit = words.map(function (w) { return '<span><svg viewBox="0 0 44 44"><use href="#nut"/></svg>' + w + '</span>'; }).join("");
-  document.getElementById("strip").innerHTML = unit + unit;
 
   /* Tuercas que giran con el scroll */
   document.querySelectorAll("[data-nuts]").forEach(function (row) {
@@ -1021,7 +1075,7 @@ footer .brand { color: var(--on-deep); }
     [".about .photo", { dir: "l" }],
     [".since-row", { dir: "z" }],
     [".pillars > div", { step: 150 }],
-    [".for-lbl, .for span:not(.for-lbl)", { step: 80 }],
+    [".for", {}],
     [".svc", { step: 100 }],
     [".prod li", { step: 130 }],
     [".hose", { dir: "r" }],
@@ -1130,18 +1184,6 @@ footer .brand { color: var(--on-deep); }
     new IntersectionObserver(function (es) { boltOn = es[0].isIntersecting; if (boltOn && !running) { running = true; boltFrame(); } }).observe(bolt);
   }
 
-  /* Detalle de servicios: + abre, cruz cierra */
-  var svcs = $$(".svc");
-  function closeS(c) { c.classList.remove("open"); $(".plus", c).setAttribute("aria-expanded", "false"); }
-  function openS(c) { svcs.forEach(function (o) { if (o !== c) closeS(o); }); c.classList.add("open"); $(".plus", c).setAttribute("aria-expanded", "true"); setTimeout(function () { var x = $(".x", c); if (x && c.classList.contains("open")) x.focus({ preventScroll: true }); }, 400); }
-  svcs.forEach(function (c) {
-    $(".plus", c).addEventListener("click", function (e) { e.stopPropagation(); c.classList.contains("open") ? closeS(c) : openS(c); });
-    c.addEventListener("click", function () { if (!c.classList.contains("open")) openS(c); });
-    $(".x", c).addEventListener("click", function (e) { e.stopPropagation(); closeS(c); $(".plus", c).focus({ preventScroll: true }); });
-    $(".link", c).addEventListener("click", function (e) { e.stopPropagation(); closeS(c); });
-  });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") svcs.forEach(closeS); });
-
   /* Marcador de "ahora" en la barra de horario */
   (function () {
     var now = $("#now"); if (!now) return;
@@ -1177,5 +1219,46 @@ footer .brand { color: var(--on-deep); }
   window.addEventListener("scroll", req, { passive: true });
   window.addEventListener("resize", req);
   update();
+})();
+</script>
+
+<script>
+(function () {
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Rueda de "Trabajamos con": gira sola de una palabra a la siguiente */
+  var reel = $("#reel");
+  if (reel) {
+    var names = ["Empresas de transporte", "Autónomos", "Flotistas", "Logística", "Particulares"], n = names.length, H = 40;
+    var R = (H / 2) / Math.tan(Math.PI / n), step = 360 / n, cur = 0, widest = 0;
+    names.forEach(function (t, i) {
+      var d = document.createElement("span");
+      d.className = "dw" + (i === 0 ? " cur" : "");
+      d.textContent = t;
+      d.style.transform = "rotateX(" + (i * step) + "deg) translateZ(" + R.toFixed(1) + "px)";
+      reel.appendChild(d);
+    });
+    reel.parentNode.style.setProperty("--h", H + "px");
+    function spin() { reel.style.transform = "translateZ(-" + R.toFixed(1) + "px) rotateX(" + (-cur * step) + "deg)"; $$(".dw", reel).forEach(function (d, i) { d.classList.toggle("cur", i % n === cur % n); }); }
+    spin();
+    if (!reduce) setInterval(function () { cur++; spin(); }, 2200);
+    var ws = $$(".dw", reel).map(function (d) { return d.offsetWidth; }); reel.parentNode.style.minWidth = Math.max.apply(null, ws) + "px";
+  }
+
+  /* Servicios: el detalle se abre como panel sobre la pantalla */
+  var scrim = document.createElement("div"); scrim.className = "scrim"; document.body.appendChild(scrim);
+  var svcs = $$(".svc");
+  function closeAll() { svcs.forEach(function (c) { c.classList.remove("open"); $(".plus", c).setAttribute("aria-expanded", "false"); }); document.body.classList.remove("svc-open"); }
+  function openS(c) { closeAll(); c.classList.add("open"); $(".plus", c).setAttribute("aria-expanded", "true"); document.body.classList.add("svc-open"); setTimeout(function () { var x = $(".x", c); if (c.classList.contains("open") && x) x.focus({ preventScroll: true }); }, 350); }
+  svcs.forEach(function (c) {
+    $(".plus", c).addEventListener("click", function (e) { e.stopPropagation(); c.classList.contains("open") ? closeAll() : openS(c); });
+    c.addEventListener("click", function () { if (!c.classList.contains("open")) openS(c); });
+    $(".x", c).addEventListener("click", function (e) { e.stopPropagation(); closeAll(); $(".plus", c).focus({ preventScroll: true }); });
+    $(".link", c).addEventListener("click", function (e) { e.stopPropagation(); closeAll(); });
+  });
+  scrim.addEventListener("click", closeAll);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
 })();
 </script>
