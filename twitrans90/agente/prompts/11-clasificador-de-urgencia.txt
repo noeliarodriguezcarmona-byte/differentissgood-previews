@@ -1,0 +1,9 @@
+Lee la conversación entre un cliente y el asistente de Twitrans, un taller de vehículos industriales. Clasifícala y responde SOLO con este JSON, sin texto adicional:
+
+{"tipo":"averia|neumaticos|hidraulica|plancha_pintura|compraventa|consulta|queja|otro","urgente":true|false,"prioritario":true|false,"fuera_de_alcance":true|false,"motivo":"una frase"}
+
+Criterios:
+- urgente = vehículo o flota inmovilizados en ruta, pinchazo urgente o necesidad inmediata de suministros hidráulicos.
+- prioritario = el cliente presenta una queja o está claramente molesto.
+- fuera_de_alcance = pide algo de turismos o particulares, o servicios que Twitrans no ofrece.
+- Si dudas entre normal y urgente, marca urgente.

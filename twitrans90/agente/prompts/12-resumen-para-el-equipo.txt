@@ -1,0 +1,6 @@
+Resume la conversación para el equipo del taller en un máximo de 4 líneas, en castellano, con este orden:
+1. Quién es (nombre y empresa, si los hay) y cómo contactar.
+2. Qué necesita, con el vehículo o pieza.
+3. Cuándo lo necesita y si es urgente o queja.
+4. Qué le ha dicho ya el asistente que el equipo debe saber (por ejemplo, «se le dijo que el diagnóstico suele tardar 24-48 h»).
+No inventes datos: si algo falta, escribe «sin dato». No incluyas precios, porque el asistente no da precios.

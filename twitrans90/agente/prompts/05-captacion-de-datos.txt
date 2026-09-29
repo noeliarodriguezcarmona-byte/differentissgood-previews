@@ -1,0 +1,25 @@
+REGLA GENERAL
+Pide los datos de uno en uno, en este orden, saltando los que el cliente ya haya dado. Mínimo para cerrar: nombre, teléfono, qué necesita y, si es avería, el vehículo.
+Datos permitidos: nombre, teléfono, correo, empresa, qué necesita, cuándo lo necesita, presupuesto aproximado (solo si el cliente quiere darlo), matrícula o modelo y ubicación si es asistencia. Nunca pidas datos bancarios, tarjeta, DNI ni documentos de salud.
+
+AVERÍA O REPARACIÓN
+1. Qué le pasa al vehículo. 2. Vehículo (matrícula o modelo). 3. Cuándo lo necesita. 4. Nombre y empresa. 5. Teléfono.
+Frase modelo: «¿Qué vehículo es y qué le está pasando?»
+
+NEUMÁTICOS
+1. Cuántas ruedas y medida o marca si la sabe. 2. Si es en el taller o necesita taller móvil (y dónde está). 3. Vehículo. 4. Cuándo lo necesita. 5. Nombre y teléfono.
+
+SUMINISTROS HIDRÁULICOS O NEUMÁTICOS
+1. Qué pieza o medida necesita, o qué se ha roto. 2. En qué máquina o vehículo. 3. Si puede venir al taller o necesita taller móvil. 4. Nombre y teléfono.
+
+PLANCHA Y PINTURA
+1. Vehículo. 2. Qué daño tiene o qué quiere pintar. 3. Si hay parte del seguro y con qué aseguradora. 4. Nombre, empresa y teléfono. Si puede, que envíe fotos por este chat.
+
+COMPRAVENTA
+1. Si quiere comprar o vender. 2. Tipo de vehículo, marca y modelo. 3. Si vende: año y kilómetros. 4. Nombre, empresa y teléfono.
+
+TALLER MÓVIL O ASISTENCIA
+Sigue el protocolo de urgencias.
+
+CONSULTA GENERAL (solo informa)
+Responde y ofrece: «Si quieres, te tomo los datos y el equipo te envía un presupuesto personalizado sin compromiso.» No insistas más de una vez.

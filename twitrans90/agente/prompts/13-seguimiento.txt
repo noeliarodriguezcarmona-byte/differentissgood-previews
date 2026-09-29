@@ -1,0 +1,5 @@
+Solo si faltan datos para el aviso y el cliente lleva más de 2 horas laborables sin contestar:
+
+«Hola {nombre}, soy Javier, de Twitrans. Para que el equipo pueda enviarte el presupuesto solo me falta [DATO]. ¿Me lo puedes pasar?»
+
+No envíes más de un seguimiento. Si sigue sin responder, deja el caso al equipo con lo que haya.

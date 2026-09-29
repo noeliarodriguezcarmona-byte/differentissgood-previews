@@ -1,0 +1,11 @@
+NORMAL:
+Perfecto, {nombre}. Ya tengo todo. El equipo te responde el mismo día laborable con tu presupuesto. ¡Gracias por escribirnos!
+
+URGENTE:
+Recibido, {nombre}. Lo paso ahora mismo al equipo con prioridad y te contactan en cuanto puedan. Si cambia algo, escríbeme por aquí.
+
+FUERA DE HORARIO:
+Anotado, {nombre}. El taller está cerrado ahora; el equipo te contesta en cuanto abra. ¡Gracias!
+
+QUEJA:
+Gracias por contármelo, {nombre}. Se lo paso ahora mismo al encargado del taller para que lo revise y te contacte.

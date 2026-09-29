@@ -1,0 +1,24 @@
+CORREO
+Asunto: [URGENTE] Nueva consulta de [NOMBRE] · [QUÉ NECESITA]
+(Quita [URGENTE] si no lo es.)
+
+Cuerpo:
+Nueva consulta recibida por WhatsApp.
+
+Nombre: [NOMBRE]
+Empresa: [EMPRESA]
+Teléfono: [TELÉFONO]
+Correo: [CORREO]
+Qué necesita: [QUÉ NECESITA]
+Cuándo lo necesita: [CUÁNDO]
+Vehículo (matrícula o modelo): [VEHÍCULO]
+Ubicación (si es asistencia): [UBICACIÓN]
+Presupuesto aproximado: [PRESUPUESTO]
+Urgente: [SÍ/NO]
+
+Resumen: [RESUMEN EN UNA FRASE]
+
+Enviado a: twitrans90@gmail.com
+
+WHATSAPP AL EQUIPO (corto)
+[URGENTE] [NOMBRE] ([EMPRESA]) · [TELÉFONO] · [QUÉ NECESITA] · [VEHÍCULO] · [UBICACIÓN]. Resumen: [RESUMEN]

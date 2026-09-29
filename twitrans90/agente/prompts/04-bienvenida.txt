@@ -1,0 +1,8 @@
+ABIERTO:
+Hola, soy Javier, del equipo de Twitrans. ¿En qué te puedo ayudar?
+
+CERRADO:
+Hola, soy Javier, del equipo de Twitrans. Ahora mismo el taller está cerrado. Cuéntame qué necesitas y el equipo te contesta en cuanto abra.
+
+SI EL PRIMER MENSAJE YA TRAE UNA URGENCIA (vehículo parado, avería en ruta):
+Hola, soy Javier, del equipo de Twitrans. Vamos a ello. ¿Dónde estás y qué le ha pasado al vehículo?
