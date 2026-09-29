@@ -72,7 +72,7 @@ Otros datos: planes de mantenimiento preventivo para flotas adaptados al kilomet
 
 ## 6. Horarios
 
-- **Horario del taller:** lunes a viernes, 8:00-14:00 y 15:00-19:00. Sábados, domingos y festivos, cerrado. *(Ver contradicciones, punto 12.)*
+- **Horario del taller:** lunes a viernes, 8:00-14:00 y 15:00-17:00. Sábados, domingos y festivos, cerrado. *(Ver contradicciones, punto 12.)*
 - Festivos: cierran los oficiales de Barcelona y Cataluña. **Agosto: cierran la segunda quincena.**
 - Tiempo de respuesta humana: el mismo día laborable.
 - **Fuera de horario:** «En este momento el taller está cerrado. Déjanos tus datos de contacto y la consulta, y te llamamos a primera hora del siguiente día hábil.»
@@ -87,7 +87,7 @@ Otros datos: planes de mantenimiento preventivo para flotas adaptados al kilomet
 5. **¿Hasta dónde os desplazáis con el taller móvil?** Nuestra base principal está en Ripollet (Barcelona) y damos cobertura con el taller móvil en toda Cataluña.
 6. **¿Tenéis vehículo de sustitución?** No disponemos, pero priorizamos las reparaciones urgentes para evitar paradas en tu flota.
 7. **¿Hay que pedir cita previa?** Para reparaciones mecánicas y plancha/pintura recomendamos pedir cita. Para urgencias de suministros hidráulicos o neumáticos podéis acudir directamente.
-8. **¿Abrís los sábados?** Nuestro horario en taller es de lunes a viernes, 8:00-14:00 y 15:00-19:00. Sábados y festivos cerrado.
+8. **¿Abrís los sábados?** Nuestro horario en taller es de lunes a viernes, 8:00-14:00 y 15:00-17:00. Sábados y festivos cerrado.
 9. **¿El presupuesto tiene algún coste?** No, elaboramos presupuestos sin compromiso una vez evaluada la avería o las necesidades del vehículo.
 10. **¿Se puede pagar con tarjeta o transferencia?** Sí: tarjeta, transferencia bancaria y efectivo.
 11. **¿Lleváis los vehículos a pasar la ITV?** Sí, hacemos la revisión pre-ITV completa y nos encargamos de llevar el vehículo a la estación de ITV por ti.
@@ -132,7 +132,7 @@ Preguntas que la web ya responde además: tipos de vehículo (camiones, furgonet
 
 ## 12. Contradicciones y dudas a resolver con el cliente antes de construir el agente
 
-1. **Horario.** Tres versiones: «L-V 8:00-14:00» (campo horario del agente), «L-V 8-14 y 15-19» (reservas, FAQ y respuesta 8) y «9 a 19 h» (datos de contacto). Se ha tomado 8-14 y 15-19 por aparecer 3 veces. Confirmar.
+1. **Horario.** Tres versiones: «L-V 8:00-14:00» (campo horario del agente), «L-V 8-14 y 15-17» (reservas, FAQ y respuesta 8) y «9 a 19 h» (datos de contacto). El cuestionario dice tarde hasta las 19:00; Noelia indicó el 29/09 que la web lleve **8-14 y 15-17**, y así está en la simulación. Confirmar con el cliente antes de publicar.
 2. **Teléfono.** Público: `654545650-654545653`; contacto: `65454563` (8 cifras, incompleto). Agente y derivación: 654545653. Confirmar si 654545650 es un número real distinto.
 3. **Agosto.** «Segunda quincena»: confirmar fechas exactas.
 4. **Taller móvil.** Solo L-V: ¿dentro del mismo horario del taller?
