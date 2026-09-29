@@ -1,0 +1,786 @@
+<title>Twitrans 90</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: la web es un plano técnico de taller. Fondo de cuaderno de ingeniería,
+   cotas en mono, engranajes y tuercas que giran con el scroll, un camión que
+   nunca para en el hero. Marca del cliente: azul marino, gris piedra, rojo terracota. */
+:root {
+  --bg: #F1F3F6;
+  --surface: #FFFFFF;
+  --fg: #0F1D30;
+  --muted: #566073;
+  --line: #D3D9E2;
+  --brand: #1F3A5F;
+  --accent: #A33B3B;
+  --accent-fg: #FFFFFF;
+  --stone: #8A8A8A;
+  --deep: #0E1D32;
+  --deep-2: #152A46;
+  --on-deep: #EAF0F7;
+  --on-deep-muted: #9FB0C6;
+  --accent-on-deep: #E0706F;
+  --grid: rgba(31,58,95,.07);
+  --grid-deep: rgba(159,176,198,.12);
+  --font-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gutter: clamp(16px, 4vw, 40px);
+  --maxw: 1180px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1626; --surface: #12233A; --fg: #E7ECF3; --muted: #9AA9BD; --line: #22374F;
+    --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --deep: #08111F; --deep-2: #0F2038;
+    --grid: rgba(159,176,198,.07); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1626; --surface: #12233A; --fg: #E7ECF3; --muted: #9AA9BD; --line: #22374F;
+  --brand: #7FA3D3; --accent: #E0706F; --accent-fg: #1A0B0B; --deep: #08111F; --deep-2: #0F2038;
+  --grid: rgba(159,176,198,.07); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  overflow-x: hidden;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); display: flex; gap: 10px; align-items: center; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.on-deep .eyebrow { color: var(--accent-on-deep); }
+section { padding-block: clamp(64px, 9vw, 120px); position: relative; }
+h2 { font-size: clamp(34px, 5vw, 58px); font-weight: 700; }
+.lead { color: var(--muted); max-width: 60ch; font-size: 19px; }
+.head { display: grid; gap: 16px; margin-bottom: clamp(32px, 5vw, 56px); }
+.on-deep { background: var(--deep); color: var(--on-deep); }
+.on-deep .lead { color: var(--on-deep-muted); }
+
+/* Simulación */
+.simbar { background: var(--accent); color: var(--accent-fg); text-align: center; padding: 8px var(--gutter); font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Barra */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.brand { white-space: nowrap; display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: -.01em; }
+.brand svg { width: 30px; height: 30px; color: var(--accent); flex: none; }
+.brand small { font-family: var(--font-mono); font-weight: 500; font-size: 10px; letter-spacing: .14em; color: var(--muted); display: block; line-height: 1; margin-top: 3px; }
+.nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; font-size: 14.5px; font-weight: 500; }
+.nav ul a { text-decoration: none; color: var(--muted); padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav ul a:hover { color: var(--fg); border-color: var(--accent); }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 4px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; font-family: var(--font-body); transition: transform .2s, background .2s, border-color .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-accent { background: var(--accent); color: var(--accent-fg); }
+.btn-ghost { border-color: currentColor; background: transparent; }
+.btn svg { width: 18px; height: 18px; }
+@media (max-width: 900px) { .nav ul { display: none; } }
+@media (max-width: 520px) { .nav .btn { padding: 10px 14px; font-size: 14px; } .brand small { display: none; } }
+
+/* Hero */
+.hero { background: var(--deep); color: var(--on-deep); padding-block: clamp(40px, 6vw, 72px); overflow: hidden;
+  background-image: linear-gradient(var(--grid-deep) 1px, transparent 1px), linear-gradient(90deg, var(--grid-deep) 1px, transparent 1px);
+  background-size: 40px 40px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.hero h1 { font-size: clamp(40px, 5.6vw, 72px); font-weight: 800; letter-spacing: -0.035em; }
+.hero h1 em { font-style: normal; color: var(--accent-on-deep); }
+.hero .sub { margin-top: 20px; color: var(--on-deep-muted); font-size: 19px; max-width: 46ch; }
+.hero .ctas { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+.hero .btn-accent { background: var(--accent-on-deep); color: #1A0B0B; }
+.status { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 26px; padding: 7px 14px 7px 12px; border: 1px solid rgba(159,176,198,.3); border-radius: 100px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: #6FCF97; box-shadow: 0 0 0 0 rgba(111,207,151,.6); animation: ping 2s infinite; }
+.status.closed i { background: var(--stone); animation: none; }
+@keyframes ping { 70% { box-shadow: 0 0 0 9px rgba(111,207,151,0); } 100% { box-shadow: 0 0 0 0 rgba(111,207,151,0); } }
+
+.scene { position: relative; aspect-ratio: 5 / 4; border: 1px solid rgba(159,176,198,.25); background: linear-gradient(180deg, var(--deep-2), var(--deep)); overflow: hidden; min-width: 0; }
+.scene .gear { position: absolute; color: rgba(159,176,198,.16); }
+.scene .gear svg { width: 100%; height: 100%; display: block; }
+.g1 { width: 58%; right: -12%; top: -14%; }
+.g2 { width: 34%; left: 6%; top: 10%; color: rgba(224,112,111,.22) !important; }
+.g3 { width: 22%; left: 34%; top: 2%; }
+.scene .truck { position: absolute; left: 50%; bottom: 13%; width: 96%; transform: translateX(-50%); }
+.scene .truck svg { width: 100%; display: block; overflow: visible; }
+.road { position: absolute; left: 0; right: 0; bottom: 8%; height: 3px; background: repeating-linear-gradient(90deg, var(--on-deep-muted) 0 30px, transparent 30px 62px); animation: road .8s linear infinite; opacity: .7; }
+.roadline { position: absolute; left: 0; right: 0; bottom: calc(8% + 12px); height: 1px; background: rgba(159,176,198,.3); }
+@keyframes road { to { background-position: -62px 0; } }
+.tag { position: absolute; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--on-deep-muted); }
+.tag.tl { left: 14px; top: 12px; } .tag.br { right: 14px; bottom: 10px; }
+.dim { position: absolute; left: 6%; right: 6%; top: 38%; height: 1px; background: rgba(159,176,198,.35); }
+.dim::before, .dim::after { content: ""; position: absolute; top: -5px; width: 1px; height: 11px; background: rgba(159,176,198,.55); }
+.dim::before { left: 0; } .dim::after { right: 0; }
+.dim span { position: absolute; left: 50%; top: -9px; transform: translateX(-50%); background: var(--deep-2); padding: 0 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; color: var(--on-deep-muted); }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .scene { aspect-ratio: 4 / 3; } }
+
+/* Camión */
+.wheel { transform-box: fill-box; transform-origin: 50% 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.tbody { animation: bob .55s ease-in-out infinite alternate; }
+@keyframes bob { to { transform: translateY(-1.6px); } }
+.puff { transform-box: fill-box; transform-origin: 50% 50%; animation: puff 2.4s ease-out infinite; opacity: 0; }
+.puff:nth-child(2) { animation-delay: .8s; } .puff:nth-child(3) { animation-delay: 1.6s; }
+@keyframes puff { 0% { opacity: .55; transform: translate(0,0) scale(.5); } 100% { opacity: 0; transform: translate(-46px,-40px) scale(1.7); } }
+
+/* Marquesina */
+.strip { background: var(--accent); color: var(--accent-fg); overflow: hidden; border-block: 1px solid rgba(0,0,0,.2); }
+.strip-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+.strip-track span { display: flex; align-items: center; gap: 22px; padding: 14px 22px 14px 0; font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -.01em; white-space: nowrap; }
+.strip-track svg { width: 18px; height: 18px; flex: none; animation: spin 6s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Divisor de tuercas */
+.nuts { display: flex; justify-content: center; gap: clamp(20px, 6vw, 80px); padding-block: 8px; color: var(--stone); overflow: hidden; }
+.nuts svg { width: 34px; height: 34px; flex: none; will-change: transform; }
+.nuts svg:nth-child(even) { color: var(--accent); }
+
+/* Quiénes somos */
+.about { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.photo { position: relative; aspect-ratio: 4 / 5; background: repeating-linear-gradient(135deg, var(--surface) 0 14px, color-mix(in srgb, var(--line) 55%, var(--surface)) 14px 15px); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; min-width: 0; }
+.photo .gear { position: absolute; width: 70%; right: -22%; bottom: -14%; color: color-mix(in srgb, var(--brand) 14%, transparent); }
+.photo .gear svg { width: 100%; display: block; }
+.photo .cap { position: relative; text-align: center; padding: 18px; }
+.photo .cap b { display: block; font-family: var(--font-display); font-size: 22px; letter-spacing: -.01em; }
+.photo .cap span { color: var(--muted); font-size: 14px; }
+.about h2 { margin-bottom: 20px; }
+.about p + p { margin-top: 14px; }
+.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 34px; border-top: 1px solid var(--line); }
+.pillars div { padding: 18px 18px 0 0; }
+.pillars div + div { padding-left: 18px; border-left: 1px solid var(--line); }
+.pillars b { display: block; font-family: var(--font-display); font-size: 22px; letter-spacing: -.01em; }
+.pillars span { display: block; margin-top: 6px; color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+.since { display: flex; align-items: baseline; gap: 12px; margin-top: 30px; }
+.since strong { font-family: var(--font-display); font-size: 68px; line-height: 1; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+.since span { color: var(--muted); }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } .photo { aspect-ratio: 16 / 10; } .pillars { grid-template-columns: 1fr; } .pillars div, .pillars div + div { padding: 16px 0; border-left: 0; border-bottom: 1px solid var(--line); } }
+
+/* Servicios */
+.svc-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+.svc { grid-column: span 2; background: var(--surface); border: 1px solid var(--line); padding: 28px; display: flex; flex-direction: column; gap: 14px; position: relative; transition: transform .25s, border-color .25s, box-shadow .25s; min-width: 0; }
+.svc:nth-child(1), .svc:nth-child(2) { grid-column: span 3; }
+.svc:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 18px 40px -22px rgba(15,29,48,.45); }
+.svc .ic { width: 56px; height: 56px; color: var(--brand); }
+.svc .ic svg { width: 100%; height: 100%; overflow: visible; }
+.svc h3 { font-size: 24px; font-weight: 700; }
+.svc p { color: var(--muted); font-size: 15.5px; }
+.svc .spec { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--line); color: var(--accent); }
+.svc .idx { position: absolute; right: 22px; top: 22px; color: var(--stone); font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; }
+@media (max-width: 980px) { .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .svc, .svc:nth-child(1), .svc:nth-child(2) { grid-column: span 1; } }
+@media (max-width: 620px) { .svc-grid { grid-template-columns: 1fr; } }
+.svc:hover .i-gear { animation: spin 2.4s linear infinite; }
+.i-gear { transform-box: fill-box; transform-origin: 50% 50%; }
+.svc:hover .i-tyre { animation: spin 1.2s linear infinite; }
+.i-tyre { transform-box: fill-box; transform-origin: 50% 50%; }
+.svc:hover .i-wrench { animation: wrench 1s ease-in-out infinite alternate; }
+.i-wrench { transform-box: fill-box; transform-origin: 50% 50%; }
+@keyframes wrench { to { transform: rotate(-22deg); } }
+.svc:hover .i-van { animation: van 1.4s ease-in-out infinite alternate; }
+@keyframes van { to { transform: translateX(5px); } }
+.svc:hover .i-drop { animation: drip 1.2s ease-in infinite; }
+.i-drop { transform-box: fill-box; transform-origin: 50% 0; }
+@keyframes drip { 0% { transform: translateY(-4px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
+.svc:hover .i-flow { animation: flow .8s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -16; } }
+
+/* Productos */
+.prod { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
+.hose { position: relative; background: var(--deep-2); border: 1px solid rgba(159,176,198,.22); padding: 24px 16px 40px; min-width: 0; }
+.hose svg { width: 100%; display: block; overflow: visible; }
+.flow { animation: flow2 .9s linear infinite; }
+@keyframes flow2 { to { stroke-dashoffset: -24; } }
+.hose .tag { position: static; display: block; margin-top: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.chips span { border: 1px solid rgba(159,176,198,.35); padding: 7px 14px; font-size: 14px; border-radius: 100px; color: var(--on-deep); }
+.prod ul { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.prod li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; color: var(--on-deep-muted); }
+.prod li svg { width: 20px; height: 20px; color: var(--accent-on-deep); margin-top: 3px; animation: spin 8s linear infinite; }
+.prod li b { color: var(--on-deep); font-weight: 600; }
+@media (max-width: 860px) { .prod { grid-template-columns: 1fr; } }
+
+/* Proceso */
+.track { position: relative; height: 92px; margin-bottom: 8px; }
+.track .line { position: absolute; left: 0; right: 0; bottom: 14px; height: 2px; background: var(--line); }
+.track .done { position: absolute; left: 0; bottom: 14px; height: 2px; background: var(--accent); width: calc(var(--p, 0) * 100%); }
+.track .rig { position: absolute; bottom: 4px; width: min(230px, 56%); left: calc(var(--p, 0) * (100% - min(230px, 56%))); }
+.track .rig svg { width: 100%; display: block; overflow: visible; }
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: paso; }
+.steps li { padding: 24px 20px 0 0; border-top: 1px solid var(--line); position: relative; counter-increment: paso; }
+.steps li::before { content: counter(paso, decimal-leading-zero); font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; color: var(--accent); }
+.steps li::after { content: ""; position: absolute; left: 0; top: -5px; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; }
+.steps h3 { font-size: 21px; margin: 8px 0 8px; font-weight: 700; }
+.steps p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+@media (max-width: 900px) {
+  .steps { grid-template-columns: 1fr; }
+  .steps li { padding: 20px 0 22px 24px; border-top: 0; border-left: 1px solid var(--line); }
+  .steps li::after { left: -5px; top: 24px; }
+}
+
+/* Antes y después */
+.ba-wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.ba { position: relative; aspect-ratio: 400 / 260; background: var(--deep-2); overflow: hidden; border: 1px solid rgba(159,176,198,.25); user-select: none; min-width: 0; }
+.ba > .layer { position: absolute; inset: 0; }
+.ba svg { width: 100%; height: 100%; display: block; }
+.ba .after { clip-path: inset(0 0 0 var(--pos, 50%)); }
+.ba .knob { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; background: var(--on-deep); pointer-events: none; }
+.ba .knob::after { content: "↔"; position: absolute; top: 50%; left: 50%; width: 42px; height: 42px; margin: -21px; border-radius: 50%; background: var(--accent-on-deep); color: #1A0B0B; display: grid; place-items: center; font-size: 18px; font-weight: 700; }
+.ba input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: ew-resize; touch-action: pan-y; }
+.ba input:focus-visible ~ .knob::after { outline: 3px solid var(--on-deep); outline-offset: 3px; }
+.ba .lbl { position: absolute; top: 12px; padding: 4px 10px; background: rgba(8,17,31,.75); color: var(--on-deep); pointer-events: none; }
+.ba .lbl.l { left: 12px; } .ba .lbl.r { right: 12px; }
+.shine { animation: shine 3.6s ease-in-out infinite; }
+@keyframes shine { 0%, 15% { transform: translateX(-160px); } 60%, 100% { transform: translateX(560px); } }
+.ba-note { margin-top: 12px; color: var(--on-deep-muted); }
+.ba-copy ul { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; color: var(--on-deep-muted); }
+.ba-copy li { padding-left: 26px; position: relative; }
+.ba-copy li::before { content: ""; position: absolute; left: 0; top: .6em; width: 14px; height: 2px; background: var(--accent-on-deep); }
+@media (max-width: 860px) { .ba-wrap { grid-template-columns: 1fr; } }
+
+/* Tienda */
+.shop { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.item { background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; min-width: 0; }
+.item .pic { aspect-ratio: 16 / 10; display: grid; place-items: center; border-bottom: 1px solid var(--line); background: repeating-linear-gradient(135deg, transparent 0 12px, color-mix(in srgb, var(--line) 45%, transparent) 12px 13px); color: var(--brand); position: relative; overflow: hidden; }
+.item .pic svg { width: 46%; max-height: 74%; }
+.item .pic .mono { position: absolute; left: 12px; bottom: 8px; color: var(--stone); font-size: 10px; }
+.item .body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.item h3 { font-size: 23px; }
+.item p { color: var(--muted); font-size: 15px; }
+.item .foot { margin-top: auto; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.item .price { color: var(--muted); }
+.link { color: var(--accent); font-weight: 600; text-decoration: none; border-bottom: 1.5px solid currentColor; padding-bottom: 1px; }
+.cond { margin-top: 26px; border: 1px solid var(--line); background: var(--surface); }
+.cond summary { cursor: pointer; padding: 16px 20px; font-weight: 600; }
+.cond div { padding: 0 20px 20px; color: var(--muted); font-size: 15px; display: grid; gap: 8px; }
+@media (max-width: 900px) { .shop { grid-template-columns: 1fr; } }
+
+/* Galería */
+.gal { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 160px; gap: 12px; }
+.gal div { background: var(--deep-2); border: 1px solid rgba(159,176,198,.2); position: relative; display: grid; place-items: center; overflow: hidden; color: rgba(159,176,198,.5); }
+.gal div:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gal div:nth-child(4) { grid-column: span 2; }
+.gal svg { width: 34%; max-height: 60%; }
+.gal .mono { position: absolute; left: 12px; bottom: 8px; font-size: 10px; color: var(--on-deep-muted); }
+@media (max-width: 700px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 130px; } .gal div:nth-child(4) { grid-column: span 2; } }
+
+/* FAQ */
+.faq { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 72px); }
+.faq-list details { border-top: 1px solid var(--line); }
+.faq-list details:last-child { border-bottom: 1px solid var(--line); }
+.faq-list summary { cursor: pointer; padding: 20px 40px 20px 0; font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -.01em; list-style: none; position: relative; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 28px; color: var(--accent); transition: transform .3s; font-weight: 500; }
+.faq-list details[open] summary::after { transform: translateY(-50%) rotate(135deg); }
+.faq-list details p { padding: 0 40px 22px 0; color: var(--muted); }
+@media (max-width: 860px) { .faq { grid-template-columns: 1fr; } }
+
+/* Dónde estamos */
+.where { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); }
+.card { background: var(--surface); border: 1px solid var(--line); padding: clamp(22px, 3vw, 34px); min-width: 0; }
+.hours { width: 100%; border-collapse: collapse; margin-top: 18px; font-variant-numeric: tabular-nums; }
+.hours td { padding: 11px 0; border-bottom: 1px solid var(--line); }
+.hours td:last-child { text-align: right; font-family: var(--font-mono); font-size: 14px; }
+.hours tr.today td { color: var(--accent); font-weight: 600; }
+.hours tr.off td:last-child { color: var(--stone); }
+.hnote { margin-top: 16px; color: var(--muted); font-size: 14.5px; }
+.map { position: relative; aspect-ratio: 16 / 9; background: var(--deep-2); margin-bottom: 20px; overflow: hidden; border: 1px solid var(--line); }
+.map svg { width: 100%; height: 100%; display: block; }
+.pin { animation: pin 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes pin { 50% { transform: translateY(-6px); } }
+.addr { font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: -.01em; line-height: 1.15; }
+.zone { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.zone span { border: 1px solid var(--line); padding: 5px 12px; border-radius: 100px; font-size: 14px; color: var(--muted); }
+.zone span.hl { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 860px) { .where { grid-template-columns: 1fr; } }
+
+/* Contacto */
+.contact { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.big-phone { display: block; margin-top: 26px; font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 5vw, 54px); letter-spacing: -.02em; text-decoration: none; font-variant-numeric: tabular-nums; }
+.direct { margin-top: 22px; display: grid; gap: 10px; color: var(--on-deep-muted); }
+.direct b { color: var(--on-deep); font-weight: 600; }
+.copy { background: transparent; border: 1px solid rgba(159,176,198,.4); color: var(--on-deep); padding: 4px 10px; font-family: var(--font-mono); font-size: 11px; cursor: pointer; margin-left: 8px; }
+form { background: var(--surface); color: var(--fg); padding: clamp(22px, 3vw, 34px); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+form .full { grid-column: 1 / -1; }
+label { display: grid; gap: 6px; font-size: 13.5px; font-weight: 600; }
+input[type=text], input[type=tel], input[type=email], select, textarea { font: inherit; font-size: 16px; font-weight: 400; padding: 12px 14px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 3px; width: 100%; min-width: 0; }
+textarea { min-height: 96px; resize: vertical; }
+form .btn { justify-self: start; }
+.msg { color: var(--accent); font-size: 14.5px; font-weight: 500; min-height: 1.4em; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } form { grid-template-columns: 1fr; } }
+
+/* Pie */
+footer { background: var(--deep); color: var(--on-deep-muted); padding-block: 40px 96px; font-size: 14px; border-top: 1px solid rgba(159,176,198,.18); }
+footer .wrap { display: grid; gap: 22px; }
+footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+footer a { color: var(--on-deep); }
+footer .brand { color: var(--on-deep); }
+
+/* WhatsApp flotante */
+.wa { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: #1F8F52; color: #fff; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 15px; box-shadow: 0 12px 30px -8px rgba(0,0,0,.5); transition: transform .2s; }
+.wa:hover { transform: translateY(-3px); }
+.wa svg { width: 22px; height: 22px; }
+@media (max-width: 520px) { .wa span { display: none; } .wa { padding: 16px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="nut" viewBox="-22 -22 44 44"><path fill="currentColor" fill-rule="evenodd" d="M20 0 L10 17.32 L-10 17.32 L-20 0 L-10 -17.32 L10 -17.32 Z M9 0 a9 9 0 1 0 -18 0 a9 9 0 1 0 18 0 Z"/><path fill="none" stroke="currentColor" stroke-width="1" opacity=".5" d="M14 0 a14 14 0 1 0 -28 0 a14 14 0 1 0 28 0"/></symbol>
+    <symbol id="wa-ic" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="simbar">Simulación de diseño · imágenes provisionales · aún no publicada en twitrans90.com</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Twitrans 90, inicio">
+      <svg viewBox="0 0 44 44" aria-hidden="true"><use href="#nut"/></svg>
+      <span>TWITRANS 90<small>VEHÍCULOS INDUSTRIALES</small></span>
+    </a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#quienes">Quiénes somos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#tienda">Tienda</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-accent" href="#contacto">Pedir presupuesto</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero on-deep">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="status" id="status"><i></i><span id="statusTxt">Taller en Ripollet, Barcelona</span></div>
+        <h1>Tu taller de confianza para <em>vehículos industriales</em></h1>
+        <p class="sub">Hidráulica y plancha en Barcelona y Cataluña. Un vehículo parado cuesta dinero, así que resolvemos rápido y sin complicaciones.</p>
+        <div class="ctas">
+          <a class="btn btn-accent" href="https://wa.me/34654545653" target="_blank" rel="noopener"><svg><use href="#wa-ic"/></svg>Escríbenos por WhatsApp</a>
+          <a class="btn btn-ghost" href="#contacto">Pedir presupuesto</a>
+        </div>
+      </div>
+      <div class="scene" aria-label="Ilustración provisional de un camión en marcha">
+        <div class="gear g1" data-gear="16,100,82,34"></div>
+        <div class="gear g2" data-gear="12,100,80,30" data-speed="rev"></div>
+        <div class="gear g3" data-gear="10,100,78,30"></div>
+        <span class="tag tl">Plano 01 · Camión de taller</span>
+        <div class="dim"><span>ASISTENCIA EN RUTA · L–V</span></div>
+        <div class="truck" data-truck></div>
+        <div class="roadline"></div><div class="road"></div>
+        <span class="tag br">Foto de empresa · pendiente</span>
+      </div>
+    </div>
+  </section>
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track" id="strip"></div>
+  </div>
+
+  <section id="quienes">
+    <div class="wrap about">
+      <div class="photo">
+        <div class="gear" data-gear="14,100,84,36"></div>
+        <div class="cap"><b>Foto del taller</b><span>Nave 73, Ripollet · pendiente de sesión</span></div>
+      </div>
+      <div>
+        <p class="eyebrow">Quiénes somos</p>
+        <h2 style="margin-top:16px">Un taller completo para que tu flota no pare.</h2>
+        <p class="lead" style="margin-top:20px">Reparamos y mantenemos camiones y furgonetas, cambiamos neumáticos, hacemos plancha y pintura, fabricamos suministros hidráulicos y compramos y vendemos vehículos industriales de ocasión. Y si no puedes moverte, vamos nosotros con el taller móvil.</p>
+        <p style="color:var(--muted)">Trabajamos con empresas de transporte, autónomos, flotistas y empresas de logística. También con particulares que necesiten comprar, vender o reparar un vehículo industrial.</p>
+        <div class="since"><strong>12</strong><span>años en el taller,<br>desde 2014</span></div>
+        <div class="pillars">
+          <div><b>Rapidez</b><span>Atención ágil. Averías y cambio de ruedas in situ.</span></div>
+          <div><b>Profesionalidad</b><span>Personal cualificado, solución integral y máxima garantía.</span></div>
+          <div><b>Precio ajustado</b><span>Tarifas competitivas y transparentes.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="nuts" data-nuts aria-hidden="true"></div>
+
+  <section id="servicios">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Servicios</p><h2>Todo lo que necesita un vehículo industrial.</h2><p class="lead">Desde la diagnosis hasta la pintura. Cada trabajo con presupuesto personalizado y sin compromiso.</p></div>
+      <div class="svc-grid">
+        <article class="svc"><span class="idx">S1</span>
+          <div class="ic"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><g class="i-gear"><circle cx="24" cy="30" r="8"/><path d="M24 15v4M24 41v4M9 30h4M35 30h4M13.4 19.4l2.8 2.8M31.8 37.8l2.8 2.8M13.4 40.6l2.8-2.8M31.8 22.2l2.8-2.8"/></g><g class="i-wrench"><path d="M40 8a7 7 0 0 0-6 9L21 30l5 5 13-13a7 7 0 0 0 9-6l-5 3-3-3 3-5c-1-.2-2-.2-3-.1Z" stroke="var(--accent)"/></g></svg></div>
+          <h3>Reparación de vehículos industriales</h3>
+          <p>Reparación y mantenimiento integral de camiones y furgonetas. Mantenimiento preventivo, diagnosis electrónica, revisión de motor, frenos y suspensión, y preparación para la ITV.</p>
+          <p class="spec mono">Diagnóstico habitual en 24–48 h</p></article>
+        <article class="svc"><span class="idx">S2</span>
+          <div class="ic"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 38V24l8-10h20l8 10h6v14"/><path d="M14 24h22M6 38h44"/><circle cx="16" cy="40" r="4"/><circle cx="40" cy="40" r="4"/><path class="i-drop" d="M46 10c-3 4-4 6-4 8a4 4 0 0 0 8 0c0-2-1-4-4-8Z" stroke="var(--accent)"/></svg></div>
+          <h3>Plancha y pintura</h3>
+          <p>Carrocería, chapa y pintura para camiones y furgonetas. Eliminación de abolladuras, reparación de golpes, cabina de pintura y rotulación.</p>
+          <p class="spec mono">Gestión de partes con aseguradoras</p></article>
+        <article class="svc"><span class="idx">S3</span>
+          <div class="ic"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><g class="i-tyre"><circle cx="28" cy="28" r="20"/><circle cx="28" cy="28" r="11" stroke="var(--accent)"/><path d="M28 17v-4M28 43v4M17 28h-4M43 28h4M20 20l-3-3M39 39l3 3M36 20l3-3M17 39l3-3"/></g><circle cx="28" cy="28" r="2.5" fill="currentColor"/></svg></div>
+          <h3>Cambio y reparación de neumáticos</h3>
+          <p>Sustitución, reparación de pinchazos, equilibrado y montaje de neumáticos industriales. En el taller o a domicilio con la unidad móvil.</p>
+          <p class="spec mono">Montaje en el día bajo cita o stock</p></article>
+        <article class="svc"><span class="idx">S4</span>
+          <div class="ic"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><g class="i-van"><path d="M4 38V20h26v18M30 26h10l8 8v4"/><circle cx="14" cy="40" r="4"/><circle cx="40" cy="40" r="4"/><path d="M4 38h6M18 38h18M44 38h4"/></g><path d="M22 6l2 4 4 .6-3 3 .8 4-3.8-2-3.8 2 .8-4-3-3 4-.6Z" stroke="var(--accent)" transform="translate(-2 -2) scale(.9)"/></svg></div>
+          <h3>Taller móvil</h3>
+          <p>Desplazamiento e intervención rápida para urgencias en carretera, en empresas o en las bases de tus clientes. Resolvemos averías mecánicas y eléctricas sin mover el vehículo.</p>
+          <p class="spec mono">Toda Cataluña · lunes a viernes</p></article>
+        <article class="svc"><span class="idx">S5</span>
+          <div class="ic"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="22" width="9" height="12" rx="1"/><rect x="44" y="22" width="9" height="12" rx="1"/><path d="M12 28h6c6 0 4-12 10-12s4 24 10 24 4-12 6-12" stroke="var(--accent)"/><path class="i-flow" d="M12 28h6c6 0 4-12 10-12s4 24 10 24 4-12 6-12" stroke-dasharray="3 5" stroke="currentColor" stroke-width="1.4"/></svg></div>
+          <h3>Suministros hidráulicos y neumáticos</h3>
+          <p>Venta, reparación e instalación de racorería, mangueras y accesorios para maquinaria industrial, camiones y grúas. Variedad de racores, mangueras y medidas.</p>
+          <p class="spec mono">Atención inmediata en taller</p></article>
+        <article class="svc"><span class="idx">S6</span>
+          <div class="ic"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 36V18h24v18M28 24h10l10 10v2"/><circle cx="14" cy="38" r="4"/><circle cx="40" cy="38" r="4"/><path d="M6 8h14l4 4" stroke="var(--accent)"/><path d="M8 4v8" stroke="var(--accent)"/></svg></div>
+          <h3>Compraventa de vehículos industriales</h3>
+          <p>Camiones y maquinaria de ocasión revisados en nuestro taller, y valoración para compra directa. Venta a toda España.</p>
+          <p class="spec mono">Revisión pre-entrega incluida</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos" class="on-deep">
+    <div class="wrap prod">
+      <div class="hose">
+        <svg viewBox="0 0 520 210" fill="none" aria-label="Ilustración de una manguera hidráulica con sus racores">
+          <path d="M60 105 C150 105 150 45 260 45 S370 165 460 105" stroke="#1B3455" stroke-width="30" stroke-linecap="round"/>
+          <path d="M60 105 C150 105 150 45 260 45 S370 165 460 105" stroke="#2B4C79" stroke-width="22" stroke-linecap="round"/>
+          <path class="flow" d="M60 105 C150 105 150 45 260 45 S370 165 460 105" stroke="#E0706F" stroke-width="3" stroke-dasharray="6 18" stroke-linecap="round"/>
+          <g fill="#8A8A8A" stroke="#0E1D32" stroke-width="2"><rect x="18" y="80" width="44" height="50" rx="4"/><rect x="458" y="80" width="44" height="50" rx="4"/></g>
+          <g stroke="#0E1D32" stroke-width="2"><path d="M30 80v50M42 80v50M470 80v50M482 80v50"/></g>
+          <g fill="#EAF0F7"><use href="#nut" x="-22" y="-22" width="44" height="44" transform="translate(20 105)"/></g>
+          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#9FB0C6" letter-spacing="1"><text x="18" y="160">RACOR</text><text x="452" y="160">RACOR</text><text x="215" y="30">MANGUERA</text></g>
+        </svg>
+        <span class="tag">Fabricación y reparación al momento, en el taller</span>
+      </div>
+      <div>
+        <p class="eyebrow">Productos</p>
+        <h2 style="margin-top:16px">Hidráulica y neumática, sin esperas.</h2>
+        <p class="lead" style="margin-top:20px">Si se te rompe una manguera trabajando, ven al taller y te la fabricamos al momento. Si no puedes mover la máquina, avísanos y va el taller móvil.</p>
+        <ul>
+          <li><svg viewBox="0 0 44 44"><use href="#nut"/></svg><span><b>Latiguillos y mangueras hidráulicas</b> fabricados y reparados a medida.</span></li>
+          <li><svg viewBox="0 0 44 44"><use href="#nut"/></svg><span><b>Racorería y accesorios</b> para maquinaria industrial, camiones y grúas.</span></li>
+          <li><svg viewBox="0 0 44 44"><use href="#nut"/></svg><span><b>Neumática variada</b> con montaje e instalación en el taller.</span></li>
+        </ul>
+        <div class="chips"><span>Tubería hidráulica</span><span>Tubería neumática</span><span>Racores</span><span>Mangueras</span><span>Grúas</span><span>Maquinaria</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Cómo trabajamos</p><h2>De la avería a la carretera, en cinco pasos.</h2></div>
+      <div class="track" id="track" aria-hidden="true">
+        <div class="line"></div><div class="done"></div>
+        <div class="rig" data-truck data-small></div>
+      </div>
+      <ol class="steps">
+        <li><h3>Cuéntanos</h3><p>Llámanos o escríbenos por WhatsApp con el vehículo y qué le pasa. Las urgencias van primero.</p></li>
+        <li><h3>Diagnosis</h3><p>Revisamos el vehículo. El diagnóstico habitual está en 24–48 horas.</p></li>
+        <li><h3>Presupuesto</h3><p>Personalizado y sin compromiso, una vez evaluada la avería.</p></li>
+        <li><h3>Reparación</h3><p>Con recambios originales o de primeras marcas homologadas.</p></li>
+        <li><h3>Listo para rodar</h3><p>Te devolvemos el vehículo y, si lo necesitas, lo llevamos a la ITV.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="antes" class="on-deep">
+    <div class="wrap ba-wrap">
+      <div>
+        <div class="ba" id="ba" style="--pos:50%">
+          <div class="layer before" data-cab="before"></div>
+          <div class="layer after" data-cab="after"></div>
+          <input id="baRange" type="range" min="2" max="98" value="50" aria-label="Comparar antes y después">
+          <div class="knob"></div>
+          <span class="lbl l mono">Antes</span><span class="lbl r mono">Después</span>
+        </div>
+        <p class="ba-note mono">Ilustración provisional · aquí irán vuestros trabajos reales</p>
+      </div>
+      <div class="ba-copy">
+        <p class="eyebrow">Antes y después</p>
+        <h2 style="margin-top:16px">Golpes fuera. Tu imagen, intacta.</h2>
+        <p class="lead" style="margin-top:20px">Cabina de pintura industrial para camiones y furgonetas. Desde una abolladura hasta la pintura completa con los colores de tu empresa.</p>
+        <ul><li>Eliminación de abolladuras y reparación de golpes.</li><li>Pintura completa e imagen corporativa para flotas.</li><li>Gestionamos el parte con tu aseguradora.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="tienda">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Tienda</p><h2>Lo que necesitas, listo para llevar.</h2><p class="lead">Consulta disponibilidad y pide presupuesto personalizado. Aceptamos tarjeta, transferencia y efectivo.</p></div>
+      <div class="shop">
+        <article class="item"><div class="pic"><svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 60V22h56v38M62 34h26l22 22v4"/><circle cx="26" cy="62" r="8"/><circle cx="92" cy="62" r="8"/></svg><span class="mono">Foto pendiente</span></div>
+          <div class="body"><h3>Vehículos industriales de ocasión</h3><p>Camiones y maquinaria revisados en nuestro taller. Revisión mecánica pre-entrega completa incluida. Venta a toda España.</p><div class="foot"><span class="price mono">Según vehículo</span><a class="link" href="#contacto">Consultar</a></div></div></article>
+        <article class="item"><div class="pic"><svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="40" cy="40" r="32"/><circle cx="40" cy="40" r="18" stroke="var(--accent)"/><circle cx="40" cy="40" r="4"/></svg><span class="mono">Foto pendiente</span></div>
+          <div class="body"><h3>Neumáticos industriales</h3><p>Suministro y montaje para camiones y furgonetas. Montaje en el día bajo cita o stock.</p><div class="foot"><span class="price mono">Según marca y medida</span><a class="link" href="#contacto">Consultar</a></div></div></article>
+        <article class="item"><div class="pic"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="4" y="20" width="16" height="20" rx="2"/><rect x="100" y="20" width="16" height="20" rx="2"/><path d="M20 30h14c10 0 8-18 18-18s8 36 18 36 8-18 12-18" stroke="var(--accent)"/></svg><span class="mono">Foto pendiente</span></div>
+          <div class="body"><h3>Mangueras, racores y accesorios</h3><p>Suministros hidráulicos y neumáticos para camiones, grúas y maquinaria. Variedad de medidas.</p><div class="foot"><span class="price mono">Según pieza y medida</span><a class="link" href="#contacto">Consultar</a></div></div></article>
+      </div>
+      <details class="cond"><summary>Condiciones de venta</summary>
+        <div>
+          <p><b>Devolución:</b> 14 días. Los gastos de devolución los paga el cliente.</p>
+          <p><b>No admiten devolución:</b> mangueras hidráulicas fabricadas a medida, piezas encargadas bajo pedido específico, suministros instalados o usados, y la mano de obra de reparación y los trabajos de plancha y pintura.</p>
+          <p><b>Garantía:</b> la legal aplicable según normativa para recambios, componentes y mano de obra.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="galeria" class="on-deep" style="padding-block:clamp(56px,7vw,96px)">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Galería</p><h2>El taller por dentro.</h2></div>
+      <div class="gal" aria-label="Galería provisional">
+        <div><svg viewBox="0 0 100 100" fill="currentColor"><use href="#nut" x="-22" y="-22" width="44" height="44" transform="translate(50 50) scale(2)"/></svg><span class="mono">Foto: taller</span></div>
+        <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4"><circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="20"/></svg><span class="mono">Foto: neumáticos</span></div>
+        <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M10 70V30h50v40M60 42h20l14 16v12"/><circle cx="26" cy="72" r="8"/><circle cx="78" cy="72" r="8"/></svg><span class="mono">Foto: taller móvil</span></div>
+        <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M10 50c20 0 20-30 40-30s20 60 40 60"/></svg><span class="mono">Foto: hidráulica</span></div>
+        <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 70V35l10-15h40l10 15v35z"/></svg><span class="mono">Foto: plancha y pintura</span></div>
+        <div><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M50 15v20M50 65v20M15 50h20M65 50h20"/><circle cx="50" cy="50" r="12"/></svg><span class="mono">Foto: mecánica</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap faq">
+      <div class="head" style="margin:0"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan.</h2><p class="lead">¿No ves la tuya? Escríbenos por WhatsApp y te respondemos el mismo día laborable.</p></div>
+      <div class="faq-list">
+        <details open><summary>¿Qué tipo de vehículos reparáis?</summary><p>Todo tipo de vehículos industriales y pesados: camiones, furgonetas, autobuses y remolques.</p></details>
+        <details><summary>¿Tenéis suministros hidráulicos y neumáticos al momento?</summary><p>Sí. Tenemos un amplio catálogo de suministros hidráulicos, componentes neumáticos y accesorios, con instalación o reparación directa en el taller.</p></details>
+        <details><summary>¿Qué formas de pago aceptáis?</summary><p>Tarjeta, transferencia bancaria y efectivo.</p></details>
+        <details><summary>¿Hace falta cita previa para ir al taller?</summary><p>Para mantenimientos programados o trabajos grandes te recomendamos pedir cita. Para urgencias, pinchazos, mangueras, suministros hidráulicos y neumáticos te atendemos directamente.</p></details>
+        <details><summary>¿Hacéis revisiones y preparación para la ITV?</summary><p>Sí. Hacemos revisiones pre-ITV completas y, si lo necesitas, llevamos el vehículo a la estación.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="donde" style="padding-top:0">
+    <div class="wrap where">
+      <div class="card">
+        <p class="eyebrow">Horarios</p>
+        <h2 style="font-size:34px;margin-top:14px">Cuándo estamos.</h2>
+        <table class="hours" id="hours"><tbody>
+          <tr data-d="1"><td>Lunes</td><td>8:00–14:00 · 15:00–19:00</td></tr>
+          <tr data-d="2"><td>Martes</td><td>8:00–14:00 · 15:00–19:00</td></tr>
+          <tr data-d="3"><td>Miércoles</td><td>8:00–14:00 · 15:00–19:00</td></tr>
+          <tr data-d="4"><td>Jueves</td><td>8:00–14:00 · 15:00–19:00</td></tr>
+          <tr data-d="5"><td>Viernes</td><td>8:00–14:00 · 15:00–19:00</td></tr>
+          <tr class="off" data-d="6"><td>Sábado</td><td>Cerrado</td></tr>
+          <tr class="off" data-d="0"><td>Domingo y festivos</td><td>Cerrado</td></tr>
+        </tbody></table>
+        <p class="hnote">Cerramos los festivos oficiales de Barcelona y Cataluña, y la segunda quincena de agosto por vacaciones.</p>
+      </div>
+      <div class="card">
+        <div class="map" aria-hidden="true">
+          <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
+            <rect width="320" height="180" fill="#0F2038"/>
+            <g stroke="#1B3455" stroke-width="1"><path d="M0 30h320M0 70h320M0 110h320M0 150h320M40 0v180M100 0v180M160 0v180M220 0v180M280 0v180"/></g>
+            <path d="M-10 128 C90 118 150 92 190 78 S290 40 340 34" stroke="#2B4C79" stroke-width="10" fill="none"/>
+            <path d="M-10 128 C90 118 150 92 190 78 S290 40 340 34" stroke="#8A8A8A" stroke-width="1.4" stroke-dasharray="6 8" fill="none"/>
+            <path d="M120 180 L170 100" stroke="#2B4C79" stroke-width="5"/>
+            <circle cx="170" cy="86" r="26" fill="#E0706F" opacity=".14"/>
+            <g class="pin"><path d="M170 96c-9-12-14-19-14-26a14 14 0 0 1 28 0c0 7-5 14-14 26Z" fill="#E0706F"/><circle cx="170" cy="70" r="5.5" fill="#0E1D32"/></g>
+          </svg>
+        </div>
+        <p class="addr">Avda. Río Ripoll, nave 73<br>Ripollet (Barcelona)</p>
+        <div class="zone"><span class="hl">Toda Cataluña</span><span>Principalmente Barcelona</span><span>Compraventa en toda España</span></div>
+        <p style="margin-top:22px"><a class="link" href="https://maps.app.goo.gl/JANJiKN5tRn9K9n86" target="_blank" rel="noopener">Abrir en Google Maps</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="on-deep">
+    <div class="wrap contact">
+      <div>
+        <p class="eyebrow">Contacto</p>
+        <h2 style="margin-top:16px">¿Se te ha parado el vehículo?</h2>
+        <p class="lead" style="margin-top:20px">Llámanos o escríbenos. Las urgencias en ruta pasan por delante. Si estamos cerrados, te llamamos a primera hora del siguiente día hábil.</p>
+        <a class="big-phone" href="tel:+34654545653">654 54 56 53</a>
+        <div class="direct">
+          <span><b>WhatsApp</b> · <a href="https://wa.me/34654545653" target="_blank" rel="noopener">654 54 56 53</a></span>
+          <span><b>Correo</b> · <span id="mail">twitrans90@gmail.com</span><button class="copy" type="button" id="copyMail">Copiar</button></span>
+          <span><b>Respuesta</b> · el mismo día laborable</span>
+        </div>
+      </div>
+      <form id="form" novalidate>
+        <label>Nombre<input id="f-nombre" type="text" autocomplete="name" placeholder="Tu nombre"></label>
+        <label>Empresa<input id="f-empresa" type="text" autocomplete="organization" placeholder="Nombre de tu empresa"></label>
+        <label>Teléfono<input id="f-tel" type="tel" autocomplete="tel" placeholder="600 000 000"></label>
+        <label>Correo<input id="f-mail" type="email" autocomplete="email" placeholder="tu@empresa.com"></label>
+        <label>Qué necesitas
+          <select id="f-que"><option>Reparación de vehículo industrial</option><option>Taller móvil / urgencia</option><option>Neumáticos</option><option>Plancha y pintura</option><option>Suministros hidráulicos y neumáticos</option><option>Comprar o vender un vehículo</option></select></label>
+        <label>Cuándo lo necesitas<select id="f-cuando"><option>Hoy, es urgente</option><option>Esta semana</option><option>Sin prisa</option></select></label>
+        <label class="full">Matrícula o modelo, y cuéntanos qué le pasa<textarea id="f-msg" placeholder="Camión, furgoneta, remolque…"></textarea></label>
+        <button class="btn btn-accent" type="submit">Pedir presupuesto</button>
+        <p class="msg full" id="formMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <a class="brand" href="#inicio"><svg viewBox="0 0 44 44" aria-hidden="true"><use href="#nut"/></svg><span>TWITRANS 90</span></a>
+      <span>Reparación · Taller móvil · Neumáticos · Plancha y pintura · Hidráulica · Compraventa</span>
+    </div>
+    <div class="row">
+      <span>TWITRANS 90 SL · CIF B66394149 · Avda. Río Ripoll, nave 73, Ripollet (Barcelona)</span>
+      <span>Aviso legal · Privacidad · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/34654545653" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg><use href="#wa-ic"/></svg><span>WhatsApp</span></a>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Engranajes generados: perfil con dientes + agujero central */
+  function gearPath(teeth, ro, ri, hole) {
+    var pts = [], step = Math.PI * 2 / teeth, i, a;
+    function P(r, ang) { return (r * Math.cos(ang)).toFixed(2) + " " + (r * Math.sin(ang)).toFixed(2); }
+    for (i = 0; i < teeth; i++) {
+      a = i * step;
+      pts.push(P(ri, a), P(ro, a + step * .16), P(ro, a + step * .44), P(ri, a + step * .6));
+    }
+    return "M" + pts.join("L") + "Z M" + hole + " 0 a" + hole + " " + hole + " 0 1 0 " + (-2 * hole) + " 0 a" + hole + " " + hole + " 0 1 0 " + (2 * hole) + " 0Z";
+  }
+  document.querySelectorAll("[data-gear]").forEach(function (el, n) {
+    var p = el.getAttribute("data-gear").split(",").map(Number);
+    var rev = el.getAttribute("data-speed") === "rev";
+    var dur = (22 + n * 7) + "s";
+    el.innerHTML = '<svg viewBox="-104 -104 208 208" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="' + gearPath(p[0], p[1], p[2], p[3]) +
+      '" style="transform-box:fill-box;transform-origin:50% 50%;animation:spin ' + dur + ' linear infinite' + (rev ? ' reverse' : '') + '"/></svg>';
+  });
+
+  /* Camión */
+  function truck() {
+    var wheels = [84, 148, 300, 472].map(function (cx) {
+      var nuts = "";
+      for (var k = 0; k < 6; k++) { var a = k * Math.PI / 3; nuts += '<circle cx="' + (9 * Math.cos(a)).toFixed(1) + '" cy="' + (9 * Math.sin(a)).toFixed(1) + '" r="2.6" fill="#EAF0F7"/>'; }
+      return '<g transform="translate(' + cx + ' 186)"><g class="wheel"><circle r="27" fill="#070E1A"/><circle r="17" fill="#8A8A8A"/><circle r="13" fill="#5F6B7C"/>' + nuts + '<circle r="3.5" fill="#EAF0F7"/></g></g>';
+    }).join("");
+    return '<svg viewBox="0 0 600 230" role="img" aria-label="Camión de Twitrans 90">' +
+      '<g class="tbody">' +
+      '<rect x="14" y="44" width="360" height="112" rx="5" fill="#2B4C79" stroke="#7FA3D3" stroke-opacity=".5"/>' +
+      '<rect x="14" y="132" width="360" height="7" fill="#E0706F"/>' +
+      '<text x="194" y="103" text-anchor="middle" font-family="Bricolage Grotesque, Arial Narrow, sans-serif" font-weight="800" font-size="34" letter-spacing="3" fill="#EAF0F7">TWITRANS 90</text>' +
+      '<text x="194" y="122" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="3" fill="#9FB0C6">TALLER MÓVIL · L–V</text>' +
+      '<rect x="14" y="156" width="548" height="12" fill="#070E1A"/>' +
+      '<g><rect x="372" y="30" width="7" height="70" fill="#8A8A8A"/><circle class="puff" cx="375" cy="26" r="9" fill="#9FB0C6"/><circle class="puff" cx="375" cy="26" r="9" fill="#9FB0C6"/><circle class="puff" cx="375" cy="26" r="9" fill="#9FB0C6"/></g>' +
+      '<path d="M384 156V66Q384 58 392 58H486Q498 58 506 70L548 122Q556 132 556 144V156Z" fill="#B84545"/>' +
+      '<path d="M400 72H482L520 118H400Z" fill="#C9DAF0"/><path d="M420 74L400 118H424L446 74Z" fill="#fff" opacity=".35"/>' +
+      '<path d="M448 118V156" stroke="#7d2a2a" stroke-width="2"/><rect x="436" y="128" width="10" height="3" rx="1.5" fill="#EAF0F7"/>' +
+      '<rect x="546" y="126" width="10" height="11" fill="#F2D48A"/><rect x="540" y="148" width="22" height="8" fill="#070E1A"/>' +
+      '</g>' + wheels + '</svg>';
+  }
+  document.querySelectorAll("[data-truck]").forEach(function (el) { el.innerHTML = truck(); });
+
+  /* Marquesina */
+  var words = ["Reparación de vehículos industriales", "Taller móvil", "Neumáticos", "Plancha y pintura", "Suministros hidráulicos", "Compraventa"];
+  var unit = words.map(function (w) { return '<span><svg viewBox="0 0 44 44"><use href="#nut"/></svg>' + w + '</span>'; }).join("");
+  document.getElementById("strip").innerHTML = unit + unit;
+
+  /* Tuercas que giran con el scroll */
+  document.querySelectorAll("[data-nuts]").forEach(function (row) {
+    var s = ""; for (var i = 0; i < 9; i++) s += '<svg viewBox="0 0 44 44"><use href="#nut"/></svg>';
+    row.innerHTML = s;
+  });
+  var nuts = Array.prototype.slice.call(document.querySelectorAll("[data-nuts] svg"));
+  var track = document.getElementById("track");
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var y = window.scrollY;
+      if (!reduce) nuts.forEach(function (n, i) { n.style.transform = "rotate(" + ((i % 2 ? -1 : 1) * y * .35) + "deg)"; });
+      var sec = track.parentElement.parentElement.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = Math.min(1, Math.max(0, (vh * .85 - sec.top) / (sec.height * .9)));
+      track.style.setProperty("--p", p.toFixed(3));
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  /* Antes y después */
+  function cab(state) {
+    var after = state === "after";
+    var body = after ? "url(#bodyG)" : "#7C8590";
+    var dmg = after ? "" :
+      '<ellipse cx="96" cy="176" rx="34" ry="15" fill="#000" opacity=".28"/><ellipse cx="96" cy="172" rx="26" ry="9" fill="#fff" opacity=".12"/>' +
+      '<ellipse cx="292" cy="182" rx="30" ry="12" fill="#000" opacity=".26"/>' +
+      '<path d="M52 150l30 12M60 100l50 8M210 170l60 14M240 110l24 32" stroke="#3A2A20" stroke-width="2" opacity=".7" fill="none"/>' +
+      '<circle cx="66" cy="118" r="11" fill="#7A4A2A" opacity=".65"/><circle cx="196" cy="188" r="15" fill="#7A4A2A" opacity=".6"/><circle cx="330" cy="196" r="9" fill="#7A4A2A" opacity=".6"/>';
+    var shine = after ? '<g style="clip-path:url(#cabClip)"><rect class="shine" x="0" y="0" width="60" height="260" fill="#fff" opacity=".28" transform="skewX(-18)"/></g>' : "";
+    return '<svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+      '<defs><linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F5A93"/><stop offset="1" stop-color="#1F3A5F"/></linearGradient>' +
+      '<clipPath id="cabClip"><path d="M30 220V60Q30 40 52 40H236Q258 40 272 58L352 158Q368 178 368 202V220Z"/></clipPath></defs>' +
+      '<rect width="400" height="260" fill="#0F2038"/><rect y="226" width="400" height="34" fill="#08111F"/>' +
+      '<path d="M30 220V60Q30 40 52 40H236Q258 40 272 58L352 158Q368 178 368 202V220Z" fill="' + body + '"/>' +
+      '<path d="M56 62H228Q240 62 248 72L300 140H56Z" fill="' + (after ? "#C9DAF0" : "#98A3B0") + '"/>' +
+      '<path d="M170 140V220" stroke="#000" stroke-opacity=".35" stroke-width="2.5"/><rect x="146" y="162" width="16" height="5" rx="2.5" fill="#EAF0F7" opacity=".85"/>' +
+      (after ? '<rect x="30" y="196" width="338" height="7" fill="#E0706F"/>' : "") +
+      dmg + shine +
+      '<rect x="18" y="214" width="372" height="14" fill="#070E1A"/><rect x="356" y="182" width="16" height="16" fill="#F2D48A" opacity="' + (after ? 1 : .55) + '"/>' +
+      '<circle cx="156" cy="226" r="46" fill="#08111F"/><circle cx="156" cy="226" r="34" fill="#070E1A"/><circle cx="156" cy="226" r="20" fill="#8A8A8A"/><circle cx="156" cy="226" r="6" fill="#EAF0F7"/>' +
+      '</svg>';
+  }
+  document.querySelectorAll("[data-cab]").forEach(function (el) { el.innerHTML = cab(el.getAttribute("data-cab")); });
+  var ba = document.getElementById("ba"), range = document.getElementById("baRange");
+  range.addEventListener("input", function () { ba.style.setProperty("--pos", range.value + "%"); });
+
+  /* Estado abierto/cerrado y día actual (hora de Madrid) */
+  function madrid() {
+    try {
+      var f = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Madrid", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(new Date());
+      var o = {}; f.forEach(function (p) { o[p.type] = p.value; });
+      var map = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+      return { d: map[o.weekday], m: (+o.hour % 24) * 60 + (+o.minute) };
+    } catch (e) { var n = new Date(); return { d: n.getDay(), m: n.getHours() * 60 + n.getMinutes() }; }
+  }
+  var t = madrid(), status = document.getElementById("status"), txt = document.getElementById("statusTxt");
+  var weekday = t.d >= 1 && t.d <= 5;
+  if (weekday && ((t.m >= 480 && t.m < 840) || (t.m >= 900 && t.m < 1140))) {
+    txt.textContent = "Abierto ahora · hasta las " + (t.m < 840 ? "14:00" : "19:00");
+  } else {
+    status.classList.add("closed");
+    txt.textContent = "Cerrado ahora · te llamamos a primera hora";
+  }
+  var today = document.querySelector('#hours tr[data-d="' + t.d + '"]');
+  if (today) today.classList.add("today");
+
+  /* Copiar correo */
+  var cb = document.getElementById("copyMail");
+  cb.addEventListener("click", function () {
+    var mail = document.getElementById("mail").textContent;
+    function ok() { cb.textContent = "Copiado"; setTimeout(function () { cb.textContent = "Copiar"; }, 1600); }
+    function sel() { var r = document.createRange(); r.selectNodeContents(document.getElementById("mail")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    try { navigator.clipboard.writeText(mail).then(ok, sel); } catch (e) { sel(); }
+  });
+
+  /* Formulario (simulación) */
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var msg = document.getElementById("formMsg");
+    var nombre = document.getElementById("f-nombre").value.trim(), tel = document.getElementById("f-tel").value.trim();
+    if (!nombre || !tel) { msg.textContent = "Escribe al menos tu nombre y un teléfono para poder llamarte."; return; }
+    msg.textContent = "Simulación: en la web real, esta consulta llegaría al taller y te llamarían el mismo día laborable.";
+  });
+})();
+</script>
