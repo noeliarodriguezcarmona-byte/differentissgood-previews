@@ -283,7 +283,7 @@ Claro. Déjame tu nombre, un teléfono y el motivo, y el equipo te contacta el m
 Javier no inventa. Dice que lo confirma el equipo, y recoge nombre, teléfono, empresa, qué necesita, cuándo lo necesita y vehículo (o ubicación si es asistencia).
 
 ## Pendiente de confirmar con el cliente
-1. Teléfono para llamadas (hay tres versiones distintas en el cuestionario). Mientras tanto, Javier no da ningún número.
+1. Teléfono para llamadas. La tarjeta de visita impresa lleva el 654545650 (con CIF B-66394149 y código postal 08291 Ripollet), el cuestionario habla de 654545650-654545653 y el WhatsApp del agente es el 654545653. Confirmar cuál es el público. Mientras tanto, Javier no da ningún número.
 2. Criterio de la señal o anticipo (¿a partir de qué importe o trabajo?).
 3. Fechas exactas de vacaciones de agosto y calendario de festivos.
 4. Rotulación: la web la menciona en plancha y pintura y el agente dice que no la incluye.
