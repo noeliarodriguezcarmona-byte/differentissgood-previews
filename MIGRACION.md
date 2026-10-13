@@ -13,7 +13,6 @@ llegue desde una sesión de `differentissgood/DIG`.
 | `cuestionario/` | cuestionario con acceso por código | `/cuestionario/` |
 | `contrato/` | contrato interactivo de 27 cláusulas | `/contrato/` (sin enlazar, con noindex) |
 | `bodas/` | bodas | `/bodas/` (ya existe en DIG) |
-| `venelac/` | propuesta de rediseño web para Venelac Food (demo estática, sin servidor; rutas relativas, funciona bajo cualquier carpeta) | `/venelac/` (sin enlazar, con noindex) |
 | `assets/` | `marca.css`, logotipos | `assets/` |
 | `docs/PLANES-PAGINA-WEB.md` | **fuente de verdad de los planes** | se queda aquí |
 
