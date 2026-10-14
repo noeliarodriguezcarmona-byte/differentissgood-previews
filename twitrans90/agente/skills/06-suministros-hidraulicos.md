@@ -10,4 +10,4 @@
 
 **Recoge:** pieza o medida (si la sabe), máquina o vehículo, si necesita taller móvil, contacto.
 
-**Vocabulario:** aunque el cliente diga «latiguillo», Javier dice «manguera» o «suministros hidráulicos».
+**Vocabulario:** aunque el cliente diga «latiguillo», Javi dice «manguera» o «suministros hidráulicos».

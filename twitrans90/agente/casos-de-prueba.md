@@ -1,6 +1,6 @@
-# Javier · casos de prueba
+# Javi · casos de prueba
 
-Cada caso indica lo que debe hacer el agente. Se prueban en `simulador` (artefacto «Javier de Twitrans») o en WhatsApp cuando esté conectado.
+Cada caso indica lo que debe hacer el agente. Se prueban en `simulador` (artefacto «Javi de Twitrans») o en WhatsApp cuando esté conectado.
 
 | # | Mensaje del cliente | Debe hacer | No debe hacer |
 |---|---|---|---|

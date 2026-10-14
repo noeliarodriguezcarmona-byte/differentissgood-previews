@@ -1,4 +1,4 @@
-# Prompts de Javier
+# Prompts de Javi
 
 Un archivo por campo o automatización. Los datos concretos (servicios, horarios, condiciones) no van aquí: están en la base de conocimiento.
 

@@ -50,10 +50,10 @@ STYLE='body{font-family:Arial,Helvetica,sans-serif;max-width:760px;margin:24px a
 def doc(title,inner): return '<!doctype html><html lang="es"><head><meta charset="utf-8"><title>%s</title><style>%s</style></head><body><h1>%s</h1>\n%s</body></html>'%(title,STYLE,title,inner)
 outdir=os.path.join(base,'texto-enriquecido') if os.path.basename(base)!='texto-enriquecido' else base
 for f in os.listdir(outdir):
-    if f.endswith('.html'): os.remove(os.path.join(outdir,f))
+    if f.endswith('.html') and (f[:2].isdigit()): os.remove(os.path.join(outdir,f))
 def slug(s): return re.sub(r'[^a-z0-9]+','-',s.lower().replace('á','a').replace('é','e').replace('í','i').replace('ó','o').replace('ú','u').replace('ñ','n')).strip('-')[:38].strip('-')
 for n,(t,h) in enumerate(sections,1):
     open(os.path.join(outdir,'%02d-%s.html'%(n,slug(t))),'w',encoding='utf-8').write(doc('Twitrans 90 · '+t,h))
-open(os.path.join(outdir,'00-todo.html'),'w',encoding='utf-8').write(doc('Twitrans 90 · Base de conocimiento de Javier','\n'.join(h for _,h in sections)))
+open(os.path.join(outdir,'00-todo.html'),'w',encoding='utf-8').write(doc('Twitrans 90 · Base de conocimiento de Javi','\n'.join(h for _,h in sections)))
 json.dump([{'t':t,'h':h} for t,h in sections],open('/tmp/claude-0/sp/secciones.json','w'),ensure_ascii=False)
 print(len(sections),'secciones')

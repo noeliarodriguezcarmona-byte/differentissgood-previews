@@ -1,4 +1,4 @@
-# Javier · skills
+# Javi · skills
 
 Cada skill es una pieza independiente del agente: cuándo se activa, qué responde, qué recoge y qué no hace. Se pueden cargar por separado o todas juntas.
 

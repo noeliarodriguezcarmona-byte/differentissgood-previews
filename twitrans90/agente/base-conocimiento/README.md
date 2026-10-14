@@ -1,4 +1,4 @@
-# Base de conocimiento de Javier
+# Base de conocimiento de Javi
 
 - `base-de-conocimiento.md`: documento completo, agrupado por tema. Sirve para cargarlo como archivo o texto en la plataforma del agente.
 - `faq.csv`: las mismas entradas como preguntas y respuestas (columnas: tema, pregunta, respuesta, palabras_clave), para importar como FAQ.

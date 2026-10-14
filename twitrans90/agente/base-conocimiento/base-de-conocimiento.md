@@ -1,8 +1,8 @@
-# TWITRANS 90 SL · Base de conocimiento de Javier
+# TWITRANS 90 SL · Base de conocimiento de Javi
 
-Fuente única de información que Javier puede usar. Todo lo que no esté aquí lo confirma el equipo. Se genera a partir de las respuestas del cuestionario `DIG-2026-001` (29/09/2026) y del horario confirmado por Noelia (lunes a viernes, 8-14 y 15-19).
+Fuente única de información que Javi puede usar. Todo lo que no esté aquí lo confirma el equipo. Se genera a partir de las respuestas del cuestionario `DIG-2026-001` (29/09/2026), de la tarjeta de visita y del horario confirmado por Noelia (lunes a viernes, 8-14 y 15-19).
 
-Entradas: 55. Mismo contenido en `faq.csv` para importarlo como preguntas y respuestas.
+Entradas: 61. Mismo contenido en `faq.csv` para importarlo como preguntas y respuestas.
 
 
 ## Empresa
@@ -14,6 +14,14 @@ Somos Twitrans, un taller de vehículos industriales en Ripollet (Barcelona), en
 ### ¿Dónde estáis?
 Estamos en la Avda. Río Ripoll, nave 73, en Ripollet (Barcelona). Aquí tienes el mapa: https://maps.app.goo.gl/JANJiKN5tRn9K9n86
 *Palabras clave: dirección, ubicación, dónde, cómo llegar, mapa, taller mecánico camiones cerca de mí, Ripollet*
+
+### ¿Cuál es vuestra razón social y vuestro CIF?
+Somos TWITRANS 90 SL, con CIF B66394149. Nuestro domicilio es Avda. del Río Ripoll, nave 73, 08291 Ripollet (Barcelona).
+*Palabras clave: razón social, CIF, datos fiscales, nif, domicilio, código postal*
+
+### ¿Cuál es vuestro correo o vuestro teléfono?
+El correo es twitrans90@gmail.com. Y lo más rápido es que me dejes aquí tu nombre y tu número: el equipo te llama en horario de taller, de lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00.
+*Palabras clave: teléfono, llamar, contacto, correo, email, número*
 
 ### ¿Qué zona cubrís?
 Trabajamos sobre todo en la provincia de Barcelona y damos servicio de taller móvil en toda Cataluña. La compraventa de vehículos industriales la hacemos en toda España.
@@ -45,6 +53,10 @@ Sí. Trabajamos con recambios originales y de primeras marcas homologadas para a
 ### ¿Cuál es vuestro horario?
 De lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00.
 *Palabras clave: horario, abrís, hora, cuándo abrís, abierto*
+
+### ¿Estáis abiertos ahora?
+Depende del día y la hora. De lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00, sí. Fuera de ese horario el taller está cerrado y el equipo te contesta en cuanto abra.
+*Palabras clave: abierto ahora, abrís hoy, estáis, hay alguien*
 
 ### ¿Abrís los sábados o domingos?
 No. Sábados, domingos y festivos el taller permanece cerrado. El taller móvil tampoco sale en fin de semana ni en festivos.
@@ -195,6 +207,18 @@ Sí. La compraventa la hacemos a nivel nacional, en toda España.
 El coste depende de la avería, el tipo de vehículo industrial o el material necesario. Te tomo los datos para que te enviemos un presupuesto personalizado y sin compromiso lo antes posible.
 *Palabras clave: precio, cuánto cuesta, tarifa, coste, presupuesto*
 
+### ¿Cómo pido un presupuesto?
+Muy fácil: cuéntame qué necesita tu vehículo y déjame tu nombre y tu teléfono. El equipo te envía un presupuesto personalizado y sin compromiso lo antes posible.
+*Palabras clave: pedir presupuesto, solicitar presupuesto, cómo contrato*
+
+### ¿Qué datos necesitáis para hacerme el presupuesto?
+Tu nombre, un teléfono, tu empresa si es para una, qué necesitas, para cuándo lo necesitas y el vehículo (matrícula o modelo). Si es una asistencia, también dónde estás.
+*Palabras clave: datos presupuesto, qué necesitáis, información*
+
+### ¿Cuánto tardáis en enviarme el presupuesto?
+Lo antes posible. El equipo responde el mismo día laborable, y antes si es una urgencia.
+*Palabras clave: plazo presupuesto, cuándo me contestan*
+
 ### ¿El presupuesto tiene coste?
 No. Elaboramos presupuestos sin compromiso una vez evaluada la avería o las necesidades del vehículo.
 *Palabras clave: presupuesto gratis, sin compromiso, coste presupuesto*
@@ -250,7 +274,7 @@ El plazo lo confirma el mecánico después del diagnóstico, que habitualmente e
 *Palabras clave: plazo, urgente, para el jueves, fecha de entrega*
 
 ### ¿Eres una persona o un robot?
-Soy Javier, el asistente virtual de Twitrans. El equipo del taller te atiende a continuación con lo que necesites.
+Soy Javi, el asistente virtual de Twitrans. El equipo del taller te atiende a continuación con lo que necesites.
 *Palabras clave: robot, persona, humano, bot*
 
 ### Quiero hablar con una persona
@@ -262,28 +286,30 @@ Claro. Déjame tu nombre, un teléfono y el motivo, y el equipo te contacta el m
 
 | El cliente dice | Twitrans lo llama |
 |---|---|
-| latiguillo / latiguillos hidráulicos | manguera hidráulica o suministros hidráulicos. Javier no usa «latiguillo»; en la web sí aparece como palabra de búsqueda. |
+| latiguillo / latiguillos hidráulicos | manguera hidráulica o suministros hidráulicos. Javi no usa «latiguillo»; en la web sí aparece como palabra de búsqueda. |
 | taller mecánico de camiones | reparación de vehículos industriales |
 | cambio de ruedas | cambio y reparación de neumáticos industriales |
 | asistencia en carretera / auxilio | taller móvil (no es servicio de grúa) |
-| coche / turismo / auto | no atendemos; solo vehículos industriales. Javier no repite estas palabras. |
+| coche / turismo / auto | no atendemos; solo vehículos industriales. Javi no repite estas palabras. |
 | chapa y pintura | plancha y pintura de vehículos industriales |
 | camión de segunda mano | vehículo industrial de ocasión revisado en taller |
-| precio / tarifa | presupuesto personalizado (Javier no dice «tarifa plana») |
+| precio / tarifa | presupuesto personalizado (Javi no dice «tarifa plana») |
 
 
 ## Datos fijos de la empresa
 - Razón social: TWITRANS 90 SL · CIF B66394149
-- Dirección: Avda. Río Ripoll, nave 73, Ripollet (Barcelona)
-- Correo de avisos: twitrans90@gmail.com
+- Dirección: Avda. del Río Ripoll, nave 73, 08291 Ripollet (Barcelona)
+- Correo: twitrans90@gmail.com
 - En el negocio desde 2014
 - Horario: lunes a viernes, 8:00-14:00 y 15:00-19:00. Cerrado sábados, domingos, festivos y la segunda quincena de agosto.
 
+
 ## Si la respuesta no está aquí
-Javier no inventa. Dice que lo confirma el equipo, y recoge nombre, teléfono, empresa, qué necesita, cuándo lo necesita y vehículo (o ubicación si es asistencia).
+Javi no inventa. Dice que lo confirma el equipo, y recoge nombre, teléfono, empresa, qué necesita, cuándo lo necesita y vehículo (o ubicación si es asistencia).
+
 
 ## Pendiente de confirmar con el cliente
-1. Teléfono para llamadas. La tarjeta de visita impresa lleva el 654545650 (con CIF B-66394149 y código postal 08291 Ripollet), el cuestionario habla de 654545650-654545653 y el WhatsApp del agente es el 654545653. Confirmar cuál es el público. Mientras tanto, Javier no da ningún número.
+1. Teléfono para llamadas. La tarjeta impresa lleva el 654545650 (con CIF B-66394149 y código postal 08291 Ripollet), el cuestionario habla de 654545650-654545653 y el WhatsApp del agente es el 654545653. Confirmar cuál es el público. Mientras tanto, Javi no da ningún número y ofrece que el equipo llame.
 2. Criterio de la señal o anticipo (¿a partir de qué importe o trabajo?).
 3. Fechas exactas de vacaciones de agosto y calendario de festivos.
 4. Rotulación: la web la menciona en plancha y pintura y el agente dice que no la incluye.
