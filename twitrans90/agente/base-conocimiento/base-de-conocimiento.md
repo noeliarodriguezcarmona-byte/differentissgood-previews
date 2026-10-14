@@ -2,7 +2,7 @@
 
 Fuente única de información que Javi puede usar. Todo lo que no esté aquí lo confirma el equipo. Se genera a partir de las respuestas del cuestionario `DIG-2026-001` (29/09/2026), de la tarjeta de visita y del horario confirmado por Noelia (lunes a viernes, 8-14 y 15-19).
 
-Entradas: 61. Mismo contenido en `faq.csv` para importarlo como preguntas y respuestas.
+Entradas: 62. Mismo contenido en `faq.csv` para importarlo como preguntas y respuestas.
 
 
 ## Empresa
@@ -39,8 +39,12 @@ A empresas de transporte, gestores de flotas, autónomos, empresas de logística
 Todo tipo de vehículos industriales y pesados: camiones, furgonetas, autobuses, remolques y maquinaria comercial.
 *Palabras clave: vehículos, camiones, furgonetas, autobuses, remolques, maquinaria*
 
+### ¿Reparáis furgonetas?
+Sí. Reparamos furgonetas, camiones, autobuses, remolques y maquinaria industrial, tanto en el taller como in situ con el taller móvil.
+*Palabras clave: furgonetas, furgones, reparto, furgoneta industrial, reparación furgonetas industriales*
+
 ### ¿Reparáis turismos o coches particulares?
-No. Estamos especializados exclusivamente en vehículos industriales: camiones, furgonetas y maquinaria comercial. No podemos ayudarte con turismos ni motos.
+Solo trabajamos con vehículos industriales: camiones, furgonetas, autobuses, remolques y maquinaria. Los vehículos de uso particular no los atendemos.
 *Palabras clave: turismo, coche, moto, particular, vehículo particular*
 
 ### ¿Trabajáis con recambios originales?

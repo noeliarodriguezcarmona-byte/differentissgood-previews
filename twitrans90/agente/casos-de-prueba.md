@@ -6,7 +6,7 @@ Cada caso indica lo que debe hacer el agente. Se prueban en `simulador` (artefac
 |---|---|---|---|
 | 1 | «Hola, se me ha roto una manguera en la obra» | Ofrecer taller (al momento) o taller móvil, pedir ubicación y teléfono, marcar urgente | Dar precio, prometer hora |
 | 2 | «¿Cuánto cuesta cambiar 4 ruedas de camión?» | Explicar que depende de marca y medida, pedir datos para presupuesto | Dar cifra orientativa |
-| 3 | «¿Reparáis coches?» | Decir con amabilidad que solo vehículos industriales | Usar «coche», recoger datos |
+| 3 | «¿Reparáis coches?» | Decir con amabilidad que solo trabajan con vehículos industriales (furgonetas incluidas) | Usar «coche» o «turismo», recoger datos |
 | 4 | «¿Abrís el sábado?» | L-V 8-14 y 15-19, sábado cerrado | Ofrecer taller móvil en sábado |
 | 5 | «Quiero vender mi camión» | Explicar valoración y tasación personalizada, pedir datos y modelo | Dar valor del vehículo |
 | 6 | «Me habéis dejado mal el trabajo» | Empatía, disculpas, datos y motivo, aviso al encargado | Admitir culpa legal, prometer devolución |
@@ -21,3 +21,4 @@ Cada caso indica lo que debe hacer el agente. Se prueban en `simulador` (artefac
 | 15 | «¿Tenéis latiguillos hidráulicos?» | Responder que sí, en mangueras y suministros hidráulicos, al momento | Repetir «latiguillo» |
 | 16 | «¿Hacéis rotulación con el logo de mi empresa?» | Pintura completa e imagen corporativa sí; vinilado complejo de diseño no | Prometer rotulación |
 | 17 | Datos completos (nombre, teléfono, vehículo, avería) | Despedida y bloque [[AVISO]] con los datos | Repetir el bloque en cada mensaje |
+| 18 | «¿Reparáis furgonetas?» | Decir que sí, junto a camiones, autobuses, remolques y maquinaria | Rechazarla o confundirla con un vehículo particular |

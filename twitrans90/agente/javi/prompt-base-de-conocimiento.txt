@@ -33,8 +33,11 @@ R: A empresas de transporte, gestores de flotas, autónomos, empresas de logíst
 P: ¿Qué vehículos reparáis?
 R: Todo tipo de vehículos industriales y pesados: camiones, furgonetas, autobuses, remolques y maquinaria comercial.  [También se pregunta: vehículos, camiones, furgonetas, autobuses, remolques, maquinaria]
 
+P: ¿Reparáis furgonetas?
+R: Sí. Reparamos furgonetas, camiones, autobuses, remolques y maquinaria industrial, tanto en el taller como in situ con el taller móvil.  [También se pregunta: furgonetas, furgones, reparto, furgoneta industrial, reparación furgonetas industriales]
+
 P: ¿Reparáis turismos o coches particulares?
-R: No. Estamos especializados exclusivamente en vehículos industriales: camiones, furgonetas y maquinaria comercial. No podemos ayudarte con turismos ni motos.  [También se pregunta: turismo, coche, moto, particular, vehículo particular]
+R: Solo trabajamos con vehículos industriales: camiones, furgonetas, autobuses, remolques y maquinaria. Los vehículos de uso particular no los atendemos.  [También se pregunta: turismo, coche, moto, particular, vehículo particular]
 
 P: ¿Trabajáis con recambios originales?
 R: Sí. Trabajamos con recambios originales y de primeras marcas homologadas para asegurar la máxima durabilidad del vehículo.  [También se pregunta: recambios, originales, piezas, marcas]
