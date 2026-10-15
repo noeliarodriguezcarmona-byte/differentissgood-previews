@@ -3,7 +3,9 @@ here=os.path.dirname(os.path.abspath(__file__))
 FECHA='15 de octubre de 2026'
 EMPRESA='TWITRANS 90 SL'; CIF='B66394149'
 DOM='Avda. del Río Ripoll, nave 73, 08291 Ripollet (Barcelona)'; MAIL='twitrans90@gmail.com'; WEB='twitrans90.com'
-REG='<mark>[PENDIENTE: datos de inscripción en el Registro Mercantil de Barcelona: tomo, folio, hoja e inscripción]</mark>'
+# Datos del Registro Mercantil: se escriben en registro-mercantil.txt (una línea). Si el archivo no existe, la línea no se muestra.
+_rp=os.path.join(here,'registro-mercantil.txt')
+REG=open(_rp,encoding='utf-8').read().strip() if os.path.exists(_rp) else ''
 NAV=[('aviso-legal.html','Aviso legal'),('politica-de-privacidad.html','Política de privacidad'),('politica-de-cookies.html','Política de cookies'),('condiciones-de-venta.html','Condiciones de venta')]
 CSS='''*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:17px;line-height:1.65;color:#0F1D30;background:#D6D6D3}
 a{color:#7E2A2A}header{background:#0E1D32;color:#EAF0F7}header .w{max-width:820px;margin:auto;padding:14px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}header a{color:#EAF0F7;text-decoration:none;font-weight:700}
@@ -25,7 +27,7 @@ def page(fn,title,body):
 ID=f'<strong>{EMPRESA}</strong>, con CIF {CIF}, domicilio en {DOM}'
 aviso=f'''<h2>1. Titular del sitio web</h2>
 <p>En cumplimiento de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI-CE), se informa de que el sitio web <strong>{WEB}</strong> es titularidad de:</p>
-<ul><li>Denominación social: {EMPRESA}</li><li>CIF: {CIF}</li><li>Domicilio: {DOM}</li><li>Correo electrónico: <a href="mailto:{MAIL}">{MAIL}</a></li><li>Datos registrales: {REG}</li><li>Actividad: taller de reparación de vehículos industriales, taller móvil, neumáticos, plancha y pintura, suministros hidráulicos y neumáticos, y compraventa de vehículos industriales.</li></ul>
+<ul><li>Denominación social: {EMPRESA}</li><li>CIF: {CIF}</li><li>Domicilio: {DOM}</li><li>Correo electrónico: <a href="mailto:{MAIL}">{MAIL}</a></li>{('<li>Datos registrales: '+REG+'</li>') if REG else ''}<li>Actividad: taller de reparación de vehículos industriales, taller móvil, neumáticos, plancha y pintura, suministros hidráulicos y neumáticos, y compraventa de vehículos industriales.</li></ul>
 <h2>2. Objeto y aceptación</h2>
 <p>Este sitio web ofrece información sobre los servicios de {EMPRESA} y facilita el contacto con la empresa. Navegar por él implica aceptar este aviso legal. Si no estás de acuerdo con su contenido, te pedimos que no uses el sitio.</p>
 <h2>3. Condiciones de uso</h2>
