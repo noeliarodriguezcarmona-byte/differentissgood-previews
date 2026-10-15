@@ -19,6 +19,10 @@ cut(r'<div class="cap"><b>Foto del taller</b>.*?</div>','<div class="cap"><img s
 # 4. galería: sin fotos reales no se publica
 cut(r'  <section id="galeria".*?</section>\n\n')
 cut(r'<li><a href="#galeria" data-sec="galeria">Galería</a></li>')
+# 4b. pie con enlaces legales reales
+old='<span>Aviso legal · Privacidad · Cookies</span>'
+assert old in s
+s=s.replace(old,'<span><a href="aviso-legal.html">Aviso legal</a> · <a href="politica-de-privacidad.html">Privacidad</a> · <a href="politica-de-cookies.html">Cookies</a> · <a href="condiciones-de-venta.html">Condiciones de venta</a></span>')
 # 5. documento completo con SEO
 head=('''<!doctype html>
 <html lang="es">
@@ -50,5 +54,5 @@ head=('''<!doctype html>
 s=head+s.lstrip()+'\n</body>\n</html>\n'
 open(os.path.join(here,'index.html'),'w',encoding='utf-8').write(s)
 open(os.path.join(here,'robots.txt'),'w').write('User-agent: *\nAllow: /\nSitemap: https://twitrans90.com/sitemap.xml\n')
-open(os.path.join(here,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://twitrans90.com/</loc></url></urlset>\n')
+open(os.path.join(here,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://twitrans90.com/</loc></url><url><loc>https://twitrans90.com/aviso-legal.html</loc></url><url><loc>https://twitrans90.com/politica-de-privacidad.html</loc></url><url><loc>https://twitrans90.com/politica-de-cookies.html</loc></url><url><loc>https://twitrans90.com/condiciones-de-venta.html</loc></url></urlset>\n')
 print(len(s))
