@@ -1429,7 +1429,7 @@ footer .credit a:hover { color: var(--accent-on-deep); }
 var K='tw90_chat',cb=document.getElementById('tw-cb');
 function get(){try{return localStorage.getItem(K)}catch(e){return null}}
 function set(v){try{localStorage.setItem(K,v)}catch(e){}}
-function load(){if(window.__twChat)return;window.__twChat=1;var s=document.createElement('script');s.src='https://widgets.leadconnectorhq.com/loader.js';s.setAttribute('data-resources-url','https://widgets.leadconnectorhq.com/chat-widget/loader.js');s.setAttribute('data-widget-id','6ad5ea7fe0d80451b724ad4e');document.body.appendChild(s)}
+function load(){if(window.__twChat)return;window.__twChat=1;var s=document.createElement('script');s.src='https://widgets.leadconnectorhq.com/loader.js';s.setAttribute('data-resources-url','https://widgets.leadconnectorhq.com/chat-widget/loader.js');s.setAttribute('data-widget-id','6ad60b7de0d80451b72f85e4');document.body.appendChild(s)}
 function show(){cb.style.display='block'}
 function hide(){cb.style.display='none'}
 document.getElementById('tw-ok').onclick=function(){set('si');hide();load()};
