@@ -1,6 +1,6 @@
 import os, html
 here=os.path.dirname(os.path.abspath(__file__))
-FECHA='15 de octubre de 2026'
+FECHA='19 de octubre de 2026'
 EMPRESA='TWITRANS 90 SL'; CIF='B66394149'
 DOM='Avda. del Río Ripoll, nave 73, 08291 Ripollet (Barcelona)'; MAIL='twitrans90@gmail.com'; WEB='twitrans90.com'
 # Datos del Registro Mercantil: se escriben en registro-mercantil.txt (una línea). Si el archivo no existe, la línea no se muestra.
@@ -47,11 +47,11 @@ aviso=f'''<h2>1. Titular del sitio web</h2>
 priv=f'''<h2>1. Responsable del tratamiento</h2>
 <ul><li>Responsable: {EMPRESA}</li><li>CIF: {CIF}</li><li>Domicilio: {DOM}</li><li>Correo electrónico: <a href="mailto:{MAIL}">{MAIL}</a></li></ul>
 <h2>2. Qué datos tratamos y cómo los recogemos</h2>
-<p>Este sitio web <strong>no almacena en sus servidores</strong> los datos que escribas en el cuestionario de presupuesto. Al pulsar «Enviar», se abre WhatsApp con un mensaje ya redactado con lo que has escrito, y es tu decisión enviarlo o no. Tratamos los datos cuando nos escribes por WhatsApp, por correo electrónico o por cualquier otro medio:</p>
+<p>Este sitio web <strong>no almacena en sus servidores</strong> los datos que escribas en el cuestionario de presupuesto. Al pulsar «Enviar», se abre WhatsApp con un mensaje ya redactado con lo que has escrito, y es tu decisión enviarlo o no. Tratamos los datos cuando nos escribes por WhatsApp, por el chat de la web (si lo aceptas), por correo electrónico o por cualquier otro medio:</p>
 <ul><li>Datos identificativos y de contacto: nombre, empresa, teléfono y correo electrónico.</li><li>Datos de tu consulta: qué necesitas, cuándo lo necesitas, matrícula o modelo del vehículo industrial y, si pides asistencia, tu ubicación.</li><li>El contenido de los mensajes que nos envías.</li></ul>
 <p>No te pedimos datos bancarios, números de tarjeta, DNI ni datos de salud, y te rogamos que no nos los envíes.</p>
 <h2>3. Asistente virtual</h2>
-<p>Parte de las conversaciones por WhatsApp las atiende «Javi», un asistente virtual con inteligencia artificial que responde dudas sobre la empresa y recoge los datos necesarios para que el equipo prepare un presupuesto o gestione una asistencia. Javi no toma decisiones automatizadas con efectos jurídicos sobre ti: los presupuestos, los precios y los plazos los decide siempre el equipo de {EMPRESA}. Puedes pedir en cualquier momento hablar con una persona del equipo.</p>
+<p>Parte de las conversaciones por WhatsApp y por el chat de la web las atiende «Javi», un asistente virtual con inteligencia artificial que responde dudas sobre la empresa y recoge los datos necesarios para que el equipo prepare un presupuesto o gestione una asistencia. Javi no toma decisiones automatizadas con efectos jurídicos sobre ti: los presupuestos, los precios y los plazos los decide siempre el equipo de {EMPRESA}. Puedes pedir en cualquier momento hablar con una persona del equipo. El chat de la web solo se activa si aceptas su uso en el aviso de cookies; consulta la <a href="politica-de-cookies.html">política de cookies</a>.</p>
 <h2>4. Para qué usamos tus datos y con qué base legal</h2>
 <table><tr><th>Finalidad</th><th>Base legal (RGPD)</th></tr>
 <tr><td>Atender tu consulta o tu solicitud de presupuesto o asistencia.</td><td>Aplicación de medidas precontractuales a petición tuya (art. 6.1.b) y, en su caso, tu consentimiento al escribirnos (art. 6.1.a).</td></tr>
@@ -71,10 +71,15 @@ priv=f'''<h2>1. Responsable del tratamiento</h2>
 cook=f'''<h2>1. Qué son las cookies</h2>
 <p>Las cookies son pequeños archivos que un sitio web guarda en tu dispositivo para recordar información sobre tu visita.</p>
 <h2>2. Qué cookies usa este sitio</h2>
-<p>Este sitio web <strong>no utiliza cookies propias ni de terceros</strong> y no guarda información en tu navegador con fines de análisis, personalización o publicidad. Por eso no te mostramos un aviso de cookies.</p>
-<h2>3. Servicios de terceros</h2>
+<p>Al entrar en el sitio <strong>no se instala ninguna cookie</strong> ni se guarda información en tu navegador con fines de análisis, personalización o publicidad, salvo lo que se indica a continuación.</p>
+<h2>3. Chat con el asistente virtual (solo si lo aceptas)</h2>
+<p>El sitio incluye un chat con «Javi», nuestro asistente virtual. Está proporcionado por <strong>LeadConnector / HighLevel</strong> (a través de la plataforma de gestión que utilizamos) y <strong>solo se carga si pulsas «Aceptar» en el aviso que te mostramos</strong>. Si pulsas «Rechazar», el chat no se carga y puedes escribirnos por WhatsApp.</p>
+<table><tr><th>Qué</th><th>Para qué</th><th>Quién</th></tr>
+<tr><td>Cookies y almacenamiento local del chat (identificador del visitante y de la conversación)</td><td>Mantener tu conversación con el asistente y que no se pierda al cambiar de página.</td><td>LeadConnector / HighLevel (tercero)</td></tr>
+<tr><td>Recuerdo de tu elección (aceptar o rechazar), guardado en tu navegador</td><td>No volver a preguntarte en cada visita. Es técnico y necesario.</td><td>Este sitio</td></tr></table>
+<p>Puedes cambiar de opinión en cualquier momento pulsando «Configurar cookies» al pie de la página, o borrando los datos del sitio en tu navegador.</p>
+<h2>4. Otros servicios de terceros</h2>
 <ul><li><strong>Tipografías de Google Fonts:</strong> para mostrar las letras del sitio, tu navegador las descarga de los servidores de Google, que reciben tu dirección IP. Google Fonts no instala cookies en tu dispositivo.</li><li><strong>WhatsApp y Google Maps:</strong> son enlaces a servicios externos. Si los abres, se aplican las cookies y las políticas de esos servicios.</li></ul>
-<h2>4. Si esto cambia</h2>
 <p>Si en el futuro incorporamos herramientas de analítica de visitas, publicidad u otras que usen cookies, te lo informaremos en esta página y te pediremos tu consentimiento antes de activarlas, salvo las cookies estrictamente necesarias.</p>
 <h2>5. Cómo gestionar las cookies en tu navegador</h2>
 <p>Puedes bloquear o borrar cookies desde la configuración de tu navegador. Consulta la ayuda de Chrome, Safari, Firefox o Edge.</p>

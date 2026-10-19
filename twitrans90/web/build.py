@@ -22,7 +22,7 @@ cut(r'<li><a href="#galeria" data-sec="galeria">Galería</a></li>')
 # 4b. pie con enlaces legales reales
 old='<span>Aviso legal · Privacidad · Cookies</span>'
 assert old in s
-s=s.replace(old,'<span><a href="aviso-legal.html">Aviso legal</a> · <a href="politica-de-privacidad.html">Privacidad</a> · <a href="politica-de-cookies.html">Cookies</a> · <a href="condiciones-de-venta.html">Condiciones de venta</a></span>')
+s=s.replace(old,'<span><a href="aviso-legal.html">Aviso legal</a> · <a href="politica-de-privacidad.html">Privacidad</a> · <a href="politica-de-cookies.html">Cookies</a> · <a href="condiciones-de-venta.html">Condiciones de venta</a> · <a href="#" id="tw-cookies-cfg">Configurar cookies</a></span>')
 # 5. documento completo con SEO
 head=('''<!doctype html>
 <html lang="es">
@@ -51,7 +51,32 @@ head=('''<!doctype html>
  "areaServed":["Cataluña","España"],
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"15:00","closes":"19:00"}],
  "hasMap":"https://maps.app.goo.gl/JANJiKN5tRn9K9n86"},ensure_ascii=False))
-s=head+s.lstrip()+'\n</body>\n</html>\n'
+
+CHAT='''
+<style>
+#tw-cb{position:fixed;left:16px;right:16px;bottom:16px;z-index:2147483000;max-width:560px;margin:0 auto;background:var(--deep,#0E1D32);color:#fff;border-radius:14px;padding:18px 18px 16px;box-shadow:0 10px 40px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:none}
+#tw-cb p{margin:0 0 12px}#tw-cb a{color:#fff;text-decoration:underline}
+#tw-cb .b{display:flex;gap:10px;flex-wrap:wrap}
+#tw-cb button{flex:1 1 140px;min-height:44px;border-radius:10px;border:2px solid #fff;font:600 15px system-ui,sans-serif;cursor:pointer}
+#tw-cb .ok{background:#fff;color:#0E1D32}#tw-cb .no{background:transparent;color:#fff}
+</style>
+<div id="tw-cb" role="dialog" aria-label="Chat y cookies"><p>Para usar el chat con Javi, nuestro asistente virtual, se cargan cookies y almacenamiento de un tercero (LeadConnector). Si lo rechazas, no se carga y puedes escribirnos por WhatsApp. <a href="politica-de-cookies.html">Más información</a></p><div class="b"><button class="ok" id="tw-ok">Aceptar el chat</button><button class="no" id="tw-no">Rechazar</button></div></div>
+<script>
+(function(){
+var K='tw90_chat',cb=document.getElementById('tw-cb');
+function get(){try{return localStorage.getItem(K)}catch(e){return null}}
+function set(v){try{localStorage.setItem(K,v)}catch(e){}}
+function load(){if(window.__twChat)return;window.__twChat=1;var s=document.createElement('script');s.src='https://widgets.leadconnectorhq.com/loader.js';s.setAttribute('data-resources-url','https://widgets.leadconnectorhq.com/chat-widget/loader.js');s.setAttribute('data-widget-id','6ad5ea7fe0d80451b724ad4e');document.body.appendChild(s)}
+function show(){cb.style.display='block'}
+function hide(){cb.style.display='none'}
+document.getElementById('tw-ok').onclick=function(){set('si');hide();load()};
+document.getElementById('tw-no').onclick=function(){set('no');hide()};
+document.getElementById('tw-cookies-cfg').onclick=function(e){e.preventDefault();show()};
+var v=get();if(v==='si')load();else if(v!=='no')show();
+})();
+</script>
+'''
+s=head+s.lstrip()+CHAT+'\n</body>\n</html>\n'
 open(os.path.join(here,'index.html'),'w',encoding='utf-8').write(s)
 open(os.path.join(here,'robots.txt'),'w').write('User-agent: *\nAllow: /\nSitemap: https://twitrans90.com/sitemap.xml\n')
 open(os.path.join(here,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://twitrans90.com/</loc></url><url><loc>https://twitrans90.com/aviso-legal.html</loc></url><url><loc>https://twitrans90.com/politica-de-privacidad.html</loc></url><url><loc>https://twitrans90.com/politica-de-cookies.html</loc></url><url><loc>https://twitrans90.com/condiciones-de-venta.html</loc></url></urlset>\n')
