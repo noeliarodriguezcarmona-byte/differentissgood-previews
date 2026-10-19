@@ -85,21 +85,27 @@ if(get()==='si')load();
 # 5. fotografías y vídeo reales del cliente (carpeta media/)
 VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
 cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
-def slider(name,n,label):
-    imgs=''.join('<img src="media/%s-%02d.jpg" alt="%s, de Twitrans 90" width="1000" height="667" decoding="async"%s%s>'%(name,k,label,' class="on"' if k==1 else '',' loading="lazy"' if k>1 else '') for k in range(1,n+1))
-    return '<figure class="slider" data-slider data-delay="3600" aria-label="Fotos de %s"><div class="slides">%s</div><figcaption>%s</figcaption><span class="count mono" aria-hidden="true">1/%d</span></figure>'%(label,imgs,label,n)
-TEAM='<div class="photo team">'+slider('isa',14,'Isa')+slider('javi',9,'Javi')+'</div>'
+def slider(prefix,alts,cls='',caption=None,delay=3600,click=True,label=''):
+    n=len(alts)
+    imgs=''.join('<img src="media/%s-%02d.jpg" alt="%s" width="1000" height="667" decoding="async"%s%s>'%(prefix,k,a,' class="on"' if k==1 else '',' loading="lazy"' if k>1 else '') for k,a in enumerate(alts,1))
+    cap='<figcaption>%s</figcaption>'%caption if caption else ''
+    cnt='<span class="count mono" aria-hidden="true">1/%d</span>'%n if n>1 else ''
+    auto=' data-slider data-delay="%d"%s'%(delay,'' if click else ' data-click="0"') if n>1 else ''
+    return '<figure class="slider %s"%s aria-label="%s"><div class="slides">%s</div>%s%s</figure>'%(cls,auto,label,imgs,cap,cnt)
+ISA=['Isa, de Twitrans 90, sonriendo en la oficina','Isa atendiendo a un cliente en la oficina','Isa con el móvil en la mano','Isa hablando por teléfono con una sonrisa','Isa mirando hacia un lado en la oficina','Isa trabajando en el ordenador','Isa al teléfono en la oficina','Isa recibiendo a un cliente en la oficina']
+JAVI=['Javi, de Twitrans 90, con los brazos cruzados en el taller','Javi hablando por teléfono junto a un camión','Javi saludando a un cliente en el taller','Javi en la cabina de un camión','Javi reparando un vehículo industrial']
+TEAM='<div class="photo team">'+slider('isa',ISA,caption='Isa',delay=3800,label='Fotos de Isa')+slider('javi',JAVI,caption='Javi',delay=3800,label='Fotos de Javi')+'</div>'
 cut(r'<div class="photo">.*?(?=\s*<div class="about-body">)', TEAM)
-SVC={1:('servicio-reparacion.jpg','Mecánico de Twitrans 90 reparando el motor de un vehículo industrial','60% 50%'),
-     2:('servicio-plancha-pintura.jpg','Pintando una furgoneta en el taller de Twitrans 90','70% 50%'),
-     3:('servicio-neumaticos.jpg','Montaje de un neumático de camión con pistola neumática','50% 50%'),
-     4:('servicio-taller-movil.jpg','Furgoneta del taller móvil de Twitrans 90','50% 50%'),
-     5:('servicio-suministros.jpg','Manos de un mecánico apretando racores en un motor','50% 50%'),
-     6:('servicio-compraventa.jpg','Camión de ocasión revisado en el taller de Twitrans 90','50% 55%')}
-for n,(f,alt,pos) in SVC.items():
+SVC={1:('reparacion',['Mecánico de Twitrans 90 reparando el motor de un vehículo industrial','Manos de un mecánico apretando con una herramienta en un motor','Nave del taller de Twitrans 90 en Ripollet','Juego de llaves de vaso abierto en el taller']),
+     2:('plancha',['Furgoneta preparada con papel de enmascarar en la cabina de pintura','Pintando una furgoneta en el taller de Twitrans 90']),
+     3:('neumaticos',['Montaje de un neumático en la máquina del taller','Montaje de una rueda de camión con pistola neumática']),
+     4:('movil',['Furgoneta del taller móvil de Twitrans 90','Interior de la furgoneta taller, con las herramientas organizadas','Taller profesional móvil: compresor y herramientas dentro de la furgoneta']),
+     5:('suministros',['Manos de un mecánico trabajando con llaves sobre un motor']),
+     6:('compraventa',['Furgoneta de ocasión revisada en el taller','Furgoneta blanca de ocasión en el taller de Twitrans 90','Furgoneta del taller móvil de Twitrans 90 vista por detrás'])}
+for n,(name,alts) in SVC.items():
     old='<article class="svc"><span class="idx">S%d</span>'%n
     assert old in s, old
-    s=s.replace(old, old+'\n          <div class="svc-photo"><img src="media/%s" alt="%s" width="1000" height="667" loading="lazy" decoding="async" style="object-position:%s"></div>'%(f,alt,pos),1)
+    s=s.replace(old, old+'\n          '+slider('serv-'+name,alts,cls='svc-photo',delay=3400+n*250,click=False,label='Fotos del servicio'),1)
 MEDIA_CSS='''
 <style>
 .hero{padding-block:clamp(12px,2.4svh,28px);min-height:calc(100svh - var(--navh,64px));display:flex;align-items:flex-start}
@@ -122,19 +128,19 @@ MEDIA_CSS='''
 @media (max-width:700px) and (min-height:700px){.hero h1{font-size:clamp(30px,8.6vw,44px)}.hero .sub{font-size:17px}.hero .scene.hero-video{margin-bottom:6px}}
 @media (max-height:640px){.hero h1{font-size:clamp(23px,min(5vw,5svh),60px)}.hero .sub{font-size:14px}.hero .status{padding:5px 11px;font-size:11px}}
 .hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.slider{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--deep)}
+.slider .slides,.slider .slides img{position:absolute;inset:0;width:100%;height:100%}
+.slider .slides img{object-fit:cover;display:block;opacity:0;transition:opacity .9s ease}
+.slider .slides img.on{opacity:1}
+.slider .count{position:absolute;right:12px;bottom:12px;color:#fff;font-size:11px;letter-spacing:.08em;background:rgba(14,29,50,.62);padding:2px 7px;pointer-events:none}
 .photo.team{aspect-ratio:auto;background:none;border:0;display:grid;grid-template-columns:1fr;gap:14px;place-items:stretch}
-.photo.team .slider{margin:0;position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--surface);border:1px solid var(--line);cursor:pointer}
-.photo.team .slides,.photo.team .slides img{position:absolute;inset:0;width:100%;height:100%}
-.photo.team .slides img{object-fit:cover;display:block;opacity:0;transition:opacity .9s ease}
-.photo.team .slides img.on{opacity:1}
+.photo.team .slider{margin:0;border:1px solid var(--line);cursor:pointer}
 .photo.team figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 12px;color:#fff;font:700 22px var(--font-display,system-ui);letter-spacing:-.01em;background:linear-gradient(0deg,rgba(14,29,50,.85),rgba(14,29,50,0));pointer-events:none}
-.photo.team .count{position:absolute;right:12px;bottom:14px;color:#fff;font-size:12px;letter-spacing:.08em;pointer-events:none}
+.photo.team .count{bottom:14px}
 .svc{min-height:0}
-.svc-photo{margin:-28px -28px 6px;height:190px;overflow:hidden;background:var(--deep);flex:none}
-.svc-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-.svc:hover .svc-photo img{transform:scale(1.05)}
-.svc .idx{z-index:1;background:rgba(14,29,50,.78);color:#fff;padding:3px 8px}
-@media (max-width:520px){.svc-photo{height:170px}}
+.svc-photo{margin:-28px -28px 6px;flex:none;width:calc(100% + 56px)}
+.svc .idx{z-index:2;background:rgba(14,29,50,.78);color:#fff;padding:3px 8px}
+@media (max-width:560px){.svc-grid{grid-template-columns:1fr}.svc,.svc:nth-child(1),.svc:nth-child(2){grid-column:auto}}
 @media (prefers-reduced-motion:reduce){.hero-video video{display:none}.hero .scene.hero-video{background:url(media/video-home-poster.jpg) center/cover}}
 </style>
 <script>
@@ -145,7 +151,7 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
  function go(i){im[k].classList.remove('on');k=(i+im.length)%im.length;im[k].classList.add('on');if(c)c.textContent=(k+1)+'/'+im.length}
  function start(){if(rm||t)return;t=setInterval(function(){go(k+1)},d)}
  function stop(){clearInterval(t);t=null}
- f.addEventListener('click',function(){go(k+1);if(t){stop();start()}});
+ if(f.dataset.click!=='0')f.addEventListener('click',function(){go(k+1);if(t){stop();start()}});
  if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?setTimeout(start,n*1500):stop()},{threshold:.25}).observe(f)}else{start()}
 });
 })();
