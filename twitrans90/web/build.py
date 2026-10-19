@@ -102,7 +102,23 @@ for n,(f,alt,pos) in SVC.items():
     s=s.replace(old, old+'\n          <div class="svc-photo"><img src="media/%s" alt="%s" width="1000" height="667" loading="lazy" decoding="async" style="object-position:%s"></div>'%(f,alt,pos),1)
 MEDIA_CSS='''
 <style>
-.hero .scene.hero-video{aspect-ratio:16/9;max-height:none;background:#000}
+.hero{padding-block:clamp(12px,2.4svh,28px);min-height:calc(100svh - var(--navh,64px));display:flex}
+.hero-stack{width:100%;display:flex;flex-direction:column;gap:clamp(12px,2.2svh,24px)}
+.hero .scene.hero-video{flex:1 1 auto;min-height:clamp(160px,30svh,420px);aspect-ratio:auto;max-height:none;width:100%;background:#000}
+.hero-text{flex:none}
+.hero h1{font-size:clamp(28px,min(5vw,6svh),60px)}
+.hero .sub{font-size:clamp(15px,2.2svh,19px);margin-top:clamp(8px,1.6svh,16px)}
+.hero .ctas{margin-top:clamp(12px,2.4svh,24px)}
+.hero .status{margin-bottom:clamp(10px,2svh,20px)}
+@media (min-width:960px) and (min-aspect-ratio:1/1),(min-width:700px) and (max-height:520px) and (min-aspect-ratio:1/1){
+.hero .wrap{max-width:min(1400px,100%)}
+.hero-stack{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.5fr);align-items:center;gap:clamp(28px,4vw,56px)}
+.hero .scene.hero-video{order:2;flex:none;align-self:center;aspect-ratio:16/9;min-height:0;max-height:calc(100svh - var(--navh,64px) - 40px)}
+.hero-text{order:1}
+.hero h1{font-size:clamp(22px,min(3.8vw,6.4svh),56px);max-width:none}
+}
+@media (max-width:700px){.hero{padding-bottom:72px}#tw-lz .btn{min-height:46px;padding:0 15px;font-size:14px}}
+@media (max-height:640px){.hero h1{font-size:clamp(23px,min(5vw,5svh),60px)}.hero .scene.hero-video{min-height:clamp(110px,22svh,420px)}.hero .sub{font-size:14px}.hero .status{padding:5px 11px;font-size:11px}}
 .hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .photo.team{aspect-ratio:auto;background:none;border:0;display:grid;grid-template-columns:1fr 1fr;gap:12px;place-items:stretch}
 .photo.team figure{margin:0;position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
@@ -113,10 +129,12 @@ MEDIA_CSS='''
 .svc-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
 .svc:hover .svc-photo img{transform:scale(1.05)}
 .svc .idx{z-index:1;background:rgba(14,29,50,.78);color:#fff;padding:3px 8px}
-@media (max-width:860px){.hero .scene.hero-video{aspect-ratio:16/9}}
 @media (max-width:520px){.svc-photo{height:170px}}
 @media (prefers-reduced-motion:reduce){.hero-video video{display:none}.hero .scene.hero-video{background:url(media/video-home-poster.jpg) center/cover}}
 </style>
+<script>
+(function(){var h=document.querySelector('header.nav');function s(){if(h)document.documentElement.style.setProperty('--navh',h.offsetHeight+'px')}s();addEventListener('resize',s);addEventListener('load',s)})();
+</script>
 '''
 s=head+s.lstrip()+MEDIA_CSS+CHAT+'\n</body>\n</html>\n'
 open(os.path.join(here,'index.html'),'w',encoding='utf-8').write(s)
