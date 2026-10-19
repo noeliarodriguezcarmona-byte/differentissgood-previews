@@ -81,7 +81,44 @@ if(get()==='si')load();
 })();
 </script>
 '''
-s=head+s.lstrip()+CHAT+'\n</body>\n</html>\n'
+
+# 5. fotografías y vídeo reales del cliente (carpeta media/)
+VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
+cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
+TEAM=('<div class="photo team">'
+ '<figure><img src="media/isa.jpg" alt="Isa, de Twitrans 90" width="800" height="1000" loading="lazy" decoding="async" style="object-position:50% 20%"><figcaption>Isa</figcaption></figure>'
+ '<figure><img src="media/javi.jpg" alt="Javi, de Twitrans 90" width="800" height="1000" loading="lazy" decoding="async" style="object-position:50% 20%"><figcaption>Javi</figcaption></figure>'
+ '</div>')
+cut(r'<div class="photo">.*?(?=\s*<div class="about-body">)', TEAM)
+SVC={1:('servicio-reparacion.jpg','Mecánico de Twitrans 90 reparando el motor de un vehículo industrial','60% 50%'),
+     2:('servicio-plancha-pintura.jpg','Pintando una furgoneta en el taller de Twitrans 90','70% 50%'),
+     3:('servicio-neumaticos.jpg','Montaje de un neumático de camión con pistola neumática','50% 50%'),
+     4:('servicio-taller-movil.jpg','Furgoneta del taller móvil de Twitrans 90','50% 50%'),
+     5:('servicio-suministros.jpg','Manos de un mecánico apretando racores en un motor','50% 50%'),
+     6:('servicio-compraventa.jpg','Camión de ocasión revisado en el taller de Twitrans 90','50% 55%')}
+for n,(f,alt,pos) in SVC.items():
+    old='<article class="svc"><span class="idx">S%d</span>'%n
+    assert old in s, old
+    s=s.replace(old, old+'\n          <div class="svc-photo"><img src="media/%s" alt="%s" width="1000" height="667" loading="lazy" decoding="async" style="object-position:%s"></div>'%(f,alt,pos),1)
+MEDIA_CSS='''
+<style>
+.hero .scene.hero-video{aspect-ratio:16/9;max-height:none;background:#000}
+.hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.photo.team{aspect-ratio:auto;background:none;border:0;display:grid;grid-template-columns:1fr 1fr;gap:12px;place-items:stretch}
+.photo.team figure{margin:0;position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
+.photo.team img{width:100%;height:100%;object-fit:cover;display:block}
+.photo.team figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;color:#fff;font:700 20px var(--font-display,system-ui);letter-spacing:-.01em;background:linear-gradient(0deg,rgba(14,29,50,.82),rgba(14,29,50,0))}
+.svc{min-height:0}
+.svc-photo{margin:-28px -28px 6px;height:190px;overflow:hidden;background:var(--deep);flex:none}
+.svc-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.svc:hover .svc-photo img{transform:scale(1.05)}
+.svc .idx{z-index:1;background:rgba(14,29,50,.78);color:#fff;padding:3px 8px}
+@media (max-width:860px){.hero .scene.hero-video{aspect-ratio:16/9}}
+@media (max-width:520px){.svc-photo{height:170px}}
+@media (prefers-reduced-motion:reduce){.hero-video video{display:none}.hero .scene.hero-video{background:url(media/video-home-poster.jpg) center/cover}}
+</style>
+'''
+s=head+s.lstrip()+MEDIA_CSS+CHAT+'\n</body>\n</html>\n'
 open(os.path.join(here,'index.html'),'w',encoding='utf-8').write(s)
 open(os.path.join(here,'robots.txt'),'w').write('User-agent: *\nAllow: /\nSitemap: https://twitrans90.com/sitemap.xml\n')
 open(os.path.join(here,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://twitrans90.com/</loc></url><url><loc>https://twitrans90.com/aviso-legal.html</loc></url><url><loc>https://twitrans90.com/politica-de-privacidad.html</loc></url><url><loc>https://twitrans90.com/politica-de-cookies.html</loc></url><url><loc>https://twitrans90.com/condiciones-de-venta.html</loc></url></urlset>\n')
