@@ -16,6 +16,8 @@ cut(r'\s*<p class="ba-note mono">Ilustración provisional.*?</p>')
 # 3. bloque de foto de "Quiénes somos": logotipo en lugar del texto de pendiente
 logo=re.search(r'<img src="(data:image/png;base64,[A-Za-z0-9+/=]+)" alt="Twitrans 90 S.L."',s).group(1)
 cut(r'<div class="cap"><b>Foto del taller</b>.*?</div>','<div class="cap"><img src="%s" alt="Twitrans 90 S.L." style="width:min(300px,80%%);height:auto;mix-blend-mode:multiply"></div>'%logo)
+# 3b. fuera el botón flotante de WhatsApp (el contacto va por el formulario y por el chat de Javi)
+cut(r'<a class="wa" href="https://wa.me/[^"]*"[^>]*>.*?</a>\n?')
 # 4. galería: sin fotos reales no se publica
 cut(r'  <section id="galeria".*?</section>\n\n')
 cut(r'<li><a href="#galeria" data-sec="galeria">Galería</a></li>')
@@ -54,7 +56,7 @@ head=('''<!doctype html>
 
 CHAT='''
 <style>
-#tw-lz{position:fixed;right:16px;bottom:92px;z-index:2147483000;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+#tw-lz{position:fixed;right:16px;bottom:16px;z-index:2147483000;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 #tw-lz .btn{display:flex;align-items:center;gap:10px;min-height:52px;padding:0 20px;border:0;border-radius:999px;background:var(--brand,#1F3A5F);color:#fff;font:600 15px system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.35)}
 #tw-lz .btn i{width:10px;height:10px;border-radius:50%;background:#7ED9A0;display:inline-block}
 #tw-lz .pn{display:none;position:absolute;right:0;bottom:64px;width:min(320px,calc(100vw - 32px));background:var(--deep,#0E1D32);color:#fff;border-radius:14px;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.4)}
