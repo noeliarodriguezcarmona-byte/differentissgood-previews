@@ -20,6 +20,9 @@
   .nav { transition: background-color .35s, border-color .35s, backdrop-filter .35s; }
   .nav.nav--over { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom-color: transparent; }
   .nav.nav--over .brand img { background: none !important; padding: 0 !important; }
+  .nav .brand .brand-w { display: none; }
+  .nav.nav--over .brand img:not(.brand-w) { display: none; }
+  .nav.nav--over .brand .brand-w { display: block; }
   .nav.nav--over .burger { color: #fff; }
   .nav .btn-accent { background: #B3141B; border-color: #B3141B; color: #fff; }
   .nav .btn-accent:hover { background: #D21B23; border-color: #D21B23; color: #fff; }

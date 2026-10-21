@@ -91,6 +91,8 @@ cut(r'<li><a href="#tienda" data-sec="tienda">Tienda</a></li>')
 # 4e. «Antes y después» con la furgoneta real
 cut(r'<div class="layer before" data-cab="before"></div>','<div class="layer before"><img src="media/antes.jpg" alt="Furgoneta con el parachoques y el lateral golpeados, antes de la reparación" width="1200" height="800" loading="lazy" decoding="async"></div>')
 cut(r'<div class="layer after" data-cab="after"></div>','<div class="layer after"><img src="media/despues.jpg" alt="La misma furgoneta ya reparada, sin daños" width="1200" height="800" loading="lazy" decoding="async"></div>')
+# 4h. logo con letras blancas para cuando el menú está encima del vídeo de portada
+cut(r'(<a class="brand" href="#inicio"[^>]*><img [^>]*>)', lambda m: m.group(1)+'<img class="brand-w" src="media/logo-blanco.png" alt="" width="255" height="83">')
 # 4g. en preguntas frecuentes se quita el titular «Lo que más nos preguntan.»
 cut(r'<h2>Lo que más nos preguntan\.</h2>')
 # 4f. «Horarios y dónde estamos»: mapa a todo el ancho con tarjeta flotante (donde.html/.css/.js)
