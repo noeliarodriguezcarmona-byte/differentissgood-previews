@@ -51,28 +51,21 @@
   .pt-loading #tw-pre { display: block; pointer-events: auto; }
   .pt-loading, .pt-loading body { overflow: hidden; }
   #tw-pre .strips { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); }
-  #tw-pre .strips i { background: #2A4E7C; margin-right: -1px; transition: transform 1s cubic-bezier(.77,0,.18,1); }
+  #tw-pre .strips i { background: #0E1D32; margin-right: -1px; transition: transform 1s cubic-bezier(.77,0,.18,1); }
   #tw-pre.done .strips i { transform: translateY(-101%); }
   #tw-pre.done .strips i:nth-child(2) { transition-delay: .07s; } #tw-pre.done .strips i:nth-child(3) { transition-delay: .14s; } #tw-pre.done .strips i:nth-child(4) { transition-delay: .21s; } #tw-pre.done .strips i:nth-child(5) { transition-delay: .28s; }
-  #tw-pre .fx { position: absolute; inset: 0; overflow: hidden; transition: opacity .5s, filter .5s, transform .7s cubic-bezier(.2,.7,.2,1); background: radial-gradient(55% 45% at 50% 46%, rgba(179,20,27,.2), transparent 70%), radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.5) 100%); }
+  #tw-pre .fx { position: absolute; inset: 0; overflow: hidden; transition: opacity .5s, filter .5s, transform .7s cubic-bezier(.2,.7,.2,1); }
   #tw-pre.done .fx { opacity: 0; filter: blur(8px); transform: scale(1.06); }
-  #tw-pre .grid { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s; background: linear-gradient(90deg, rgba(231,236,243,.05) 1px, transparent 1px) 0 0 / 20% 100%, linear-gradient(0deg, rgba(231,236,243,.05) 1px, transparent 1px) 0 0 / 100% 25%; }
-  #tw-pre.run .grid { opacity: 1; }
   #tw-pre .logo-c { position: absolute; left: 50%; top: 46%; width: min(480px, 72vw); transform: translate(-50%, -50%); }
   #tw-pre .logo-c .rev { opacity: 0; transform: scale(.94); transition: opacity .8s cubic-bezier(.2,.7,.2,1) .1s, transform 1.2s cubic-bezier(.2,.7,.2,1) .1s; }
   #tw-pre.run .logo-c .rev { opacity: 1; transform: none; }
   #tw-pre .logo-c img { display: block; width: 100%; height: auto; clip-path: inset(0 100% 0 0); transition: clip-path 1.4s cubic-bezier(.77,0,.18,1) .5s; }
   #tw-pre.run .logo-c img { clip-path: inset(0 0 0 0); }
-  #tw-pre .logo-c .line { position: absolute; left: 0; right: 0; bottom: -26px; height: 2px; background: linear-gradient(90deg, transparent, #B3141B, transparent); transform: scaleX(0); transition: transform 1.4s cubic-bezier(.77,0,.18,1) .5s; }
-  #tw-pre.run .logo-c .line { transform: scaleX(1); }
-  #tw-pre .tag { position: absolute; left: 0; right: 0; top: calc(46% + clamp(52px, 9vw, 96px)); margin: 0; text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: #B4C2D6; opacity: 0; transition: opacity .9s 1.1s, letter-spacing 1.6s cubic-bezier(.2,.7,.2,1) 1.1s; }
+  #tw-pre .tag { position: absolute; left: 0; right: 0; top: calc(46% + clamp(48px, 8vw, 90px)); margin: 0; text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: #B4C2D6; opacity: 0; transition: opacity .9s 1.1s, letter-spacing 1.6s cubic-bezier(.2,.7,.2,1) 1.1s; }
   #tw-pre.run .tag { opacity: 1; letter-spacing: .42em; }
   #tw-pre .meta { position: absolute; top: max(24px, env(safe-area-inset-top, 0px)); margin: 0; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(180,194,214,.75); opacity: 0; transition: opacity 1s .4s; }
   #tw-pre.run .meta { opacity: 1; }
   #tw-pre .m1 { left: var(--gutter, 24px); } #tw-pre .m2 { right: var(--gutter, 24px); }
-  #tw-pre .num { position: absolute; left: var(--gutter, 24px); bottom: max(26px, env(safe-area-inset-bottom, 0px)); margin: 0; font-family: var(--font-body); font-weight: 600; font-size: clamp(54px, 11vw, 150px); line-height: .85; letter-spacing: -.04em; color: #E7ECF3; font-variant-numeric: tabular-nums; opacity: 0; transition: opacity .8s .4s; }
-  #tw-pre.run .num { opacity: 1; }
-  #tw-pre .num span { font-size: .26em; color: #D21B23; margin-left: .12em; letter-spacing: 0; }
   #tw-pre .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(231,236,243,.1); }
   #tw-pre .prog i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #B3141B, #D21B23); box-shadow: 0 0 18px rgba(210,27,35,.8); transition: width 2.4s cubic-bezier(.5,0,.2,1); }
   #tw-pre.run .prog i { width: 100%; }
@@ -82,7 +75,7 @@
     .pt-bottom { flex-direction: column; align-items: flex-start; }
     .hero .pt-bottom .status { font-size: 10px; letter-spacing: 0; }
     .pt-scroll span:last-child { display: none; }
-    #tw-pre .m2 { display: none; }
+    #tw-pre .tag, #tw-pre.run .tag { letter-spacing: .2em; font-size: 11px; }
   }
   @media (prefers-reduced-motion: reduce) { .pt-video { transform: none; transition: none; } .pt-wheel::after { animation: none; } }
 </style>
@@ -90,11 +83,10 @@
 <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('pt-loading')}catch(e){}</script>
 <div id="tw-pre" aria-hidden="true">
   <div class="strips"><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="fx"><div class="grid"></div>
-    <p class="meta m1">Twitrans 90 · Taller industrial</p><p class="meta m2">41°29′ N · 2°09′ E</p>
-    <div class="logo-c"><div class="rev"><img src="media/logo.png" alt="" width="510" height="166"></div><div class="line"></div></div>
+  <div class="fx">
+    <p class="meta m1">Twitrans 90 · Taller industrial</p>
+    <div class="logo-c"><div class="rev"><img src="media/logo-carga.png" alt="" width="1530" height="498"></div></div>
     <p class="tag">Hidráulica · Plancha · Neumáticos</p>
-    <p class="num"><b data-num>0</b><span>%</span></p>
     <div class="prog"><i></i></div>
   </div>
 </div>
@@ -1534,12 +1526,11 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
     var over = function () { nav.classList.toggle("nav--over", window.scrollY < hero.offsetHeight - nav.offsetHeight - 10); };
     over(); addEventListener("scroll", over, { passive: true }); addEventListener("resize", over);
   }
-  /* Pantalla de carga: logo, contador y persiana */
+  /* Pantalla de carga: logo, barra y persiana */
   var pre = document.getElementById("tw-pre"), root = document.documentElement;
   if (!pre || !root.classList.contains("pt-loading")) { if (hero) hero.classList.add("pt-noload"); return; }
-  var num = pre.querySelector("[data-num]"), dur = 2800, t0 = performance.now();
+  var dur = 2800;
   requestAnimationFrame(function () { pre.classList.add("run"); });
-  var tn = setInterval(function () { var p = Math.min(1, (performance.now() - t0) / (dur - 300)); num.textContent = Math.round(100 * (1 - Math.pow(1 - p, 2.2))); if (p >= 1) clearInterval(tn); }, 40);
   setTimeout(function () {
     pre.classList.add("done"); root.classList.remove("pt-loading");
     setTimeout(function () { if (hero) hero.classList.add("pt-ready"); }, 300);
