@@ -91,6 +91,8 @@ cut(r'<li><a href="#tienda" data-sec="tienda">Tienda</a></li>')
 # 4e. «Antes y después» con la furgoneta real
 cut(r'<div class="layer before" data-cab="before"></div>','<div class="layer before"><img src="media/antes.jpg" alt="Furgoneta con el parachoques y el lateral golpeados, antes de la reparación" width="1200" height="800" loading="lazy" decoding="async"></div>')
 cut(r'<div class="layer after" data-cab="after"></div>','<div class="layer after"><img src="media/despues.jpg" alt="La misma furgoneta ya reparada, sin daños" width="1200" height="800" loading="lazy" decoding="async"></div>')
+# 4f. «Horarios y dónde estamos»: mapa a todo el ancho con tarjeta flotante (donde.html/.css/.js)
+cut(r'  <section id="donde".*?</section>\n', lambda m: open(os.path.join(here,'donde.html'),encoding='utf-8').read())
 # 5. fotografías y vídeo reales del cliente (carpeta media/)
 VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
 cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
@@ -180,7 +182,8 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
 (function(){var h=document.querySelector('header.nav');function s(){if(h)document.documentElement.style.setProperty('--navh',h.offsetHeight+'px')}s();addEventListener('resize',s);addEventListener('load',s)})();
 </script>
 '''
-s=head+s.lstrip()+MEDIA_CSS+CHAT+'\n</body>\n</html>\n'
+DONDE=open(os.path.join(here,'donde.css'),encoding='utf-8').read()+open(os.path.join(here,'donde.js'),encoding='utf-8').read()
+s=head+s.lstrip()+MEDIA_CSS+DONDE+CHAT+'\n</body>\n</html>\n'
 open(os.path.join(here,'index.html'),'w',encoding='utf-8').write(s)
 open(os.path.join(here,'robots.txt'),'w').write('User-agent: *\nAllow: /\nSitemap: https://twitrans90.com/sitemap.xml\n')
 open(os.path.join(here,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://twitrans90.com/</loc></url><url><loc>https://twitrans90.com/aviso-legal.html</loc></url><url><loc>https://twitrans90.com/politica-de-privacidad.html</loc></url><url><loc>https://twitrans90.com/politica-de-cookies.html</loc></url><url><loc>https://twitrans90.com/condiciones-de-venta.html</loc></url></urlset>\n')

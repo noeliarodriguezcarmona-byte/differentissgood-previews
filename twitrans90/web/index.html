@@ -823,29 +823,20 @@ footer .credit a:hover { color: var(--accent-on-deep); }
     </div>
   </section>
 
-  <section id="donde" style="padding-top:0">
-    <div class="wrap where">
-      <div class="card">
-        <p class="eyebrow">Horarios</p>
-        <h2 style="font-size:34px;margin-top:14px">Cuándo estamos.</h2>
-        <p class="days">Lunes a viernes</p>
-        <p class="times"><span>8:00–14:00</span><span>15:00–19:00</span></p>
-        <p class="hnote">Sábados, domingos y festivos cerrado. En agosto cerramos la segunda quincena por vacaciones.</p>
-      </div>
-      <div class="card">
-        <div class="map" aria-hidden="true">
-          <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
-            <rect width="320" height="180" fill="#0F2038"/>
-            <g stroke="#1B3455" stroke-width="1"><path d="M0 30h320M0 70h320M0 110h320M0 150h320M40 0v180M100 0v180M160 0v180M220 0v180M280 0v180"/></g>
-            <path d="M-10 128 C90 118 150 92 190 78 S290 40 340 34" stroke="#2B4C79" stroke-width="10" fill="none"/>
-            <path d="M-10 128 C90 118 150 92 190 78 S290 40 340 34" stroke="#8A8A8A" stroke-width="1.4" stroke-dasharray="6 8" fill="none"/>
-            <path d="M120 180 L170 100" stroke="#2B4C79" stroke-width="5"/>
-            <circle cx="170" cy="86" r="26" fill="#E0706F" opacity=".14"/>
-            <g class="pin"><path d="M170 96c-9-12-14-19-14-26a14 14 0 0 1 28 0c0 7-5 14-14 26Z" fill="#E0706F"/><circle cx="170" cy="70" r="5.5" fill="#0E1D32"/></g>
-          </svg>
+  <section id="donde" class="dn" style="padding:0">
+    <div class="dn-stage">
+      <div class="dn-map" role="img" aria-label="Mapa de la zona del taller, en el polígono junto a la avenida del Río Ripoll, Ripollet"><span class="dn-pin"><svg viewBox="0 0 46 58" aria-hidden="true"><path d="M23 56C10 40 3 31 3 21a20 20 0 0 1 40 0c0 10-7 19-20 35Z" fill="#E0706F" stroke="#0E1D32" stroke-width="3"/><circle cx="23" cy="21" r="7.5" fill="#0E1D32"/></svg></span><span class="dn-osm">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></span></div>
+      <div class="dn-card">
+        <p class="eyebrow">Dónde estamos</p>
+        <h2>Estamos en Ripollet.</h2>
+        <p class="dn-addr"><b>Avda. Río Ripoll, nave 73</b><br>08291 Ripollet (Barcelona)</p>
+        <span class="dn-pill" id="dnPill"><i></i><span id="dnPillTxt">Taller en Ripollet</span></span>
+        <div class="dn-hrs">
+          <div class="r" id="dnWk"><span>Lunes a viernes</span><span>8:00–14:00 · 15:00–19:00</span></div>
+          <div class="r off"><span>Sábado y domingo</span><span>Cerrado</span></div>
         </div>
-        <p class="addr">Avda. Río Ripoll, nave 73<br>Ripollet (Barcelona)</p>
-        <p style="margin-top:22px"><a class="link" href="https://maps.app.goo.gl/JANJiKN5tRn9K9n86" target="_blank" rel="noopener">Abrir en Google Maps</a></p>
+        <p class="dn-note">Sábados, domingos y festivos cerrado. En agosto cerramos la segunda quincena por vacaciones.</p>
+        <div class="dn-acts"><a class="dn-btn" href="https://www.google.com/maps/dir/?api=1&destination=Avda.%20del%20R%C3%ADo%20Ripoll%2073%2C%2008291%20Ripollet%2C%20Barcelona" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2Z"/></svg>Cómo llegar</a><button class="dn-btn ghost" id="dnCopy" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span id="dnCopyTxt">Copiar dirección</span></button></div>
       </div>
     </div>
   </section>
@@ -1400,6 +1391,77 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
 </script>
 <script>
 (function(){var h=document.querySelector('header.nav');function s(){if(h)document.documentElement.style.setProperty('--navh',h.offsetHeight+'px')}s();addEventListener('resize',s);addEventListener('load',s)})();
+</script>
+
+<style>
+  /* Horarios y dónde estamos: mapa a todo el ancho con tarjeta flotante */
+  .dn { background: #0E1D32; color: #E7ECF3; }
+  .dn-stage { position: relative; min-height: 640px; overflow: hidden; background: #0B1830; }
+  .dn-map { position: absolute; inset: 0; background: #0B1830 url(media/mapa-oscuro.jpg) center/cover; }
+  .dn-map::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,24,48,.92) 0, rgba(11,24,48,.55) 38%, rgba(11,24,48,0) 62%); pointer-events: none; }
+  .dn-pin { position: absolute; left: 68%; top: 56%; width: 0; height: 0; transform: translate(-50%, -100%); z-index: 2; }
+  .dn-pin svg { width: 46px; height: 58px; display: block; transform: translate(-50%, 0); filter: drop-shadow(0 6px 8px rgba(0,0,0,.35)); }
+  .dn-pin::after { content: ""; position: absolute; left: 0; top: 0; width: 60px; height: 60px; margin: -6px 0 0 -30px; border-radius: 50%; background: rgba(224,112,111,.28); animation: dnHalo 2.4s ease-out infinite; z-index: -1; transform: scale(.4); }
+  @keyframes dnHalo { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.8); opacity: 0; } }
+  .dn-osm { position: absolute; right: 10px; bottom: 8px; font: 500 10px var(--font-body); color: rgba(255,255,255,.85); background: rgba(8,17,31,.55); padding: 2px 7px; z-index: 3; }
+  .dn-osm a { color: inherit; }
+  .dn-card { position: absolute; z-index: 3; left: clamp(16px, 4vw, 48px); top: 50%; transform: translateY(-50%); width: min(430px, calc(100% - 32px)); background: rgba(14,29,50,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(159,176,198,.28); padding: clamp(22px, 3vw, 34px); }
+  .dn .eyebrow { color: #E0706F; }
+  .dn h2 { font-size: clamp(30px, 3.6vw, 42px); margin: 14px 0 12px; color: #fff; }
+  .dn-addr { color: #9FB0C6; font-size: 17px; margin: 0; }
+  .dn-addr b { color: #fff; font-weight: 600; }
+  .dn-pill { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; padding: 7px 14px 7px 12px; border-radius: 100px; border: 1px solid currentColor; font: 500 12px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: #7ED9A0; }
+  .dn-pill i { width: 8px; height: 8px; border-radius: 50%; background: #7ED9A0; animation: dnPing 2s infinite; }
+  .dn-pill.closed { color: #9FB0C6; } .dn-pill.closed i { background: #8A8A8A; animation: none; }
+  @keyframes dnPing { 0% { box-shadow: 0 0 0 0 rgba(126,217,160,.55); } 70% { box-shadow: 0 0 0 9px rgba(126,217,160,0); } 100% { box-shadow: 0 0 0 0 rgba(126,217,160,0); } }
+  .dn-hrs { margin-top: 20px; border-top: 1px solid rgba(159,176,198,.25); }
+  .dn-hrs .r { display: flex; justify-content: space-between; gap: 14px; padding: 11px 0; border-bottom: 1px solid rgba(159,176,198,.18); font-size: 15.5px; }
+  .dn-hrs .r span:last-child { font-family: var(--font-mono); font-size: 14px; text-align: right; }
+  .dn-hrs .r.today { color: #E0706F; font-weight: 600; }
+  .dn-hrs .r.off span:last-child { color: #9FB0C6; }
+  .dn-note { color: #9FB0C6; font-size: 14px; margin: 14px 0 0; }
+  .dn-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .dn-btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 0 20px; border: 2px solid #E0706F; background: #E0706F; color: #1A0B0B; font: 600 15px var(--font-body); text-decoration: none; cursor: pointer; transition: transform .2s; }
+  .dn-btn:hover { transform: translateY(-2px); }
+  .dn-btn.ghost { background: transparent; color: #fff; border-color: rgba(159,176,198,.55); }
+  .dn-btn svg { width: 18px; height: 18px; flex: none; }
+  @media (max-width: 860px) {
+    .dn-stage { min-height: 0; display: flex; flex-direction: column; }
+    .dn-map { position: relative; inset: auto; height: 300px; background-position: 56% 54%; background-size: auto 220%; }
+    .dn-map::after { display: none; }
+    .dn-pin { left: 56%; top: 54%; }
+    .dn-card { position: relative; transform: none; left: auto; top: auto; width: 100%; border: 0; border-top: 1px solid rgba(159,176,198,.28); }
+  }
+  @media (max-width: 480px) { .dn-hrs .r span:first-child { white-space: nowrap; } .dn-hrs .r span:last-child { font-size: 12.5px; white-space: nowrap; } }
+  @media (prefers-reduced-motion: reduce) { .dn-pin::after, .dn-pill i { animation: none; } }
+</style>
+
+<script>
+(function () {
+  /* Horarios y dónde estamos: estado del taller (hora de Madrid) y copiar dirección */
+  var pill = document.getElementById("dnPill"), txt = document.getElementById("dnPillTxt");
+  if (!pill) return;
+  var B = [[8, 14], [15, 19]];
+  function hh(x) { var h = Math.floor(x), m = Math.round((x - h) * 60); return h + ":" + (m < 10 ? "0" : "") + m; }
+  var d = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" }));
+  var dow = d.getDay(), h = d.getHours() + d.getMinutes() / 60, vac = d.getMonth() === 7 && d.getDate() >= 16, lab = dow >= 1 && dow <= 5;
+  var abierto = false, msg = null;
+  if (lab && !vac) {
+    for (var i = 0; i < B.length; i++) {
+      if (h >= B[i][0] && h < B[i][1]) { abierto = true; msg = "Abierto ahora · hasta las " + hh(B[i][1]); break; }
+      if (h < B[i][0]) { msg = "Cerrado · abre hoy a las " + hh(B[i][0]); break; }
+    }
+  }
+  if (!msg) { var n = dow, k = 0; do { n = (n + 1) % 7; k++; } while (n === 0 || n === 6); msg = "Cerrado · abre " + (k === 1 ? "mañana" : "el lunes") + " a las 8:00"; }
+  txt.textContent = msg; pill.classList.toggle("closed", !abierto);
+  if (lab) document.getElementById("dnWk").classList.add("today");
+  var b = document.getElementById("dnCopy"), t = document.getElementById("dnCopyTxt");
+  b.addEventListener("click", function () {
+    var dir = "Avda. del Río Ripoll 73, 08291 Ripollet, Barcelona";
+    function ok() { t.textContent = "Dirección copiada"; setTimeout(function () { t.textContent = "Copiar dirección"; }, 1800); }
+    try { navigator.clipboard.writeText(dir).then(ok, function () { t.textContent = dir; }); } catch (e) { t.textContent = dir; }
+  });
+})();
 </script>
 
 <style>
