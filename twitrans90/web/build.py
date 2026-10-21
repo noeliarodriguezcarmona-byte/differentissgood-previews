@@ -85,6 +85,9 @@ if(get()==='si')load();
 # 4c. la sección «Productos» se quita (y su enlace del menú)
 cut(r'  <section id="productos".*?</section>\n\n')
 cut(r'<li><a href="#productos" data-sec="productos">Productos</a></li>')
+# 4d. la sección «Tienda» se quita (y su enlace del menú)
+cut(r'  <section id="tienda".*?</section>\n\n')
+cut(r'<li><a href="#tienda" data-sec="tienda">Tienda</a></li>')
 # 5. fotografías y vídeo reales del cliente (carpeta media/)
 VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
 cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
@@ -102,7 +105,7 @@ TEAM='<div class="photo team">'+slider('isa',ISA,caption='Isa',delay=3800,label=
 cut(r'<div class="photo">.*?(?=\s*<div class="about-body">)', TEAM)
 SVC={1:('reparacion',['Mecánico de Twitrans 90 reparando el motor de un vehículo industrial','Manos de un mecánico apretando con una herramienta en un motor','Nave del taller de Twitrans 90 en Ripollet','Juego de llaves de vaso abierto en el taller']),
      2:('plancha',['Furgoneta preparada con papel de enmascarar en la cabina de pintura','Pintando una furgoneta en el taller de Twitrans 90']),
-     3:('neumaticos',['Montaje de una rueda de camión con pistola neumática']),
+     3:('neumaticos',['Mecánico de Twitrans 90 montando un neumático en la máquina','Neumático de camión en la máquina de montaje del taller']),
      4:('movil',['Furgoneta del taller móvil de Twitrans 90','Interior de la furgoneta taller, con las herramientas organizadas','Taller profesional móvil: compresor y herramientas dentro de la furgoneta']),
      5:('suministros',['Mangueras hidráulicas con racores y protección en espiral']),
      6:('compraventa',['Camión de ocasión revisado en el taller de Twitrans 90'])}
@@ -110,13 +113,6 @@ for n,(name,alts) in SVC.items():
     old='<article class="svc"><span class="idx">S%d</span>'%n
     assert old in s, old
     s=s.replace(old, old+'\n          '+slider('serv-'+name,alts,cls='svc-photo',delay=3400+n*250,click=False,label='Fotos del servicio'),1)
-TIENDA={'Vehículos industriales de ocasión':('tienda-ocasion',['Furgoneta de ocasión revisada en el taller','Furgoneta blanca de ocasión en el taller de Twitrans 90']),
-        'Mangueras, racores y accesorios':('tienda-mangueras',['Mangueras hidráulicas con racores y protección en espiral']),
-        'Neumáticos industriales':('tienda-neumaticos',['Mecánico de Twitrans 90 montando un neumático en la máquina','Neumático de camión en la máquina de montaje del taller'])}
-for titulo,(pref,alts) in TIENDA.items():
-    pat=r'<div class="pic">(?:(?!</div>).)*</div>(\s*<div class="body"><h3>'+re.escape(titulo)+')'
-    assert re.search(pat,s,re.S),titulo
-    s=re.sub(pat,lambda m:'<div class="pic has-photo">'+slider(pref,alts,cls='shop-photo',delay=3600,click=False,label='Fotos de '+titulo)+'</div>'+m.group(1),s,count=1,flags=re.S)
 # 3) las tuercas que giran van al final de la página, cerrando
 m=re.search(r'\n  <div class="bolt" id="bolt" aria-hidden="true">.*?\n  </div>\n',s,re.S)
 assert m,'bolt'
