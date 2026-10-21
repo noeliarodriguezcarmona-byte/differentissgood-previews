@@ -101,13 +101,14 @@ SVC={1:('reparacion',['Mecánico de Twitrans 90 reparando el motor de un vehícu
      2:('plancha',['Furgoneta preparada con papel de enmascarar en la cabina de pintura','Pintando una furgoneta en el taller de Twitrans 90']),
      3:('neumaticos',['Montaje de una rueda de camión con pistola neumática']),
      4:('movil',['Furgoneta del taller móvil de Twitrans 90','Interior de la furgoneta taller, con las herramientas organizadas','Taller profesional móvil: compresor y herramientas dentro de la furgoneta']),
-     5:('suministros',['Manos de un mecánico trabajando con llaves sobre un motor']),
+     5:('suministros',['Mangueras hidráulicas con racores y protección en espiral']),
      6:('compraventa',['Camión de ocasión revisado en el taller de Twitrans 90'])}
 for n,(name,alts) in SVC.items():
     old='<article class="svc"><span class="idx">S%d</span>'%n
     assert old in s, old
     s=s.replace(old, old+'\n          '+slider('serv-'+name,alts,cls='svc-photo',delay=3400+n*250,click=False,label='Fotos del servicio'),1)
 TIENDA={'Vehículos industriales de ocasión':('tienda-ocasion',['Furgoneta de ocasión revisada en el taller','Furgoneta blanca de ocasión en el taller de Twitrans 90']),
+        'Mangueras, racores y accesorios':('tienda-mangueras',['Mangueras hidráulicas con racores y protección en espiral']),
         'Neumáticos industriales':('tienda-neumaticos',['Mecánico de Twitrans 90 montando un neumático en la máquina','Neumático de camión en la máquina de montaje del taller'])}
 for titulo,(pref,alts) in TIENDA.items():
     pat=r'<div class="pic">(?:(?!</div>).)*</div>(\s*<div class="body"><h3>'+re.escape(titulo)+')'
