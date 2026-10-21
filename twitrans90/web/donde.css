@@ -3,12 +3,13 @@
   /* Horarios y dónde estamos: mapa a todo el ancho con tarjeta flotante */
   .dn { background: #0E1D32; color: #E7ECF3; }
   .dn-stage { position: relative; min-height: 640px; overflow: hidden; background: #0B1830; }
-  .dn-map { position: absolute; inset: 0; background: #0B1830 url(media/mapa-oscuro.jpg) center/cover; }
+  .dn-map { display: block; position: absolute; inset: 0; background: #0B1830 url(media/mapa-oscuro.jpg) center/cover; }
   .dn-map::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,24,48,.92) 0, rgba(11,24,48,.55) 38%, rgba(11,24,48,0) 62%); pointer-events: none; }
   .dn-pin { position: absolute; left: 68%; top: 56%; width: 0; height: 0; transform: translate(-50%, -100%); z-index: 2; }
   .dn-pin svg { width: 46px; height: 58px; display: block; transform: translate(-50%, 0); filter: drop-shadow(0 6px 8px rgba(0,0,0,.35)); }
   .dn-pin::after { content: ""; position: absolute; left: 0; top: 0; width: 60px; height: 60px; margin: -6px 0 0 -30px; border-radius: 50%; background: rgba(224,112,111,.28); animation: dnHalo 2.4s ease-out infinite; z-index: -1; transform: scale(.4); }
   @keyframes dnHalo { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.8); opacity: 0; } }
+  .dn-map:focus-visible { outline: 3px solid #E0706F; outline-offset: -3px; }
   .dn-osm { position: absolute; right: 10px; bottom: 8px; font: 500 10px var(--font-body); color: rgba(255,255,255,.85); background: rgba(8,17,31,.55); padding: 2px 7px; z-index: 3; }
   .dn-osm a { color: inherit; }
   .dn-card { position: absolute; z-index: 3; left: clamp(16px, 4vw, 48px); top: 50%; transform: translateY(-50%); width: min(430px, calc(100% - 32px)); background: rgba(14,29,50,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(159,176,198,.28); padding: clamp(22px, 3vw, 34px); }
@@ -35,6 +36,7 @@
     .dn-stage { min-height: 0; display: flex; flex-direction: column; }
     .dn-map { position: relative; inset: auto; height: 300px; background-position: 56% 54%; background-size: auto 220%; }
     .dn-map::after { display: none; }
+    .dn-osm { top: 274px; bottom: auto; }
     .dn-pin { left: 56%; top: 54%; }
     .dn-card { position: relative; transform: none; left: auto; top: auto; width: 100%; border: 0; border-top: 1px solid rgba(159,176,198,.28); }
   }

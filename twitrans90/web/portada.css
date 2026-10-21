@@ -23,10 +23,10 @@
   .nav.nav--over .burger { color: #fff; }
   .nav .btn-accent { background: #B3141B; border-color: #B3141B; color: #fff; }
   .nav .btn-accent:hover { background: #D21B23; border-color: #D21B23; color: #fff; }
-  /* ratón: llave inglesa */
-  html { cursor: url(media/llave.png) 2 0, auto; cursor: -webkit-image-set(url(media/llave.png) 1x, url(media/llave@2x.png) 2x) 2 0, auto; }
-  a, button, summary, label, select, [role="button"], .slider, .ba { cursor: url(media/llave.png) 2 0, pointer; cursor: -webkit-image-set(url(media/llave.png) 1x, url(media/llave@2x.png) 2x) 2 0, pointer; }
-  input, textarea { cursor: text; }
+  /* ratón: llave inglesa en toda la página; un poco más grande sobre lo que se puede pulsar */
+  html, html * { cursor: url(media/llave.png) 2 0, auto !important; cursor: -webkit-image-set(url(media/llave.png) 1x, url(media/llave@2x.png) 2x) 2 0, auto !important; }
+  html a, html a *, html button, html button *, html summary, html label, html select, html [role="button"], html .slider, html .ba, html .ba *, html .dn-map, html input[type="submit"], html input[type="checkbox"], html input[type="radio"] { cursor: url(media/llave-clic.png) 3 0, pointer !important; cursor: -webkit-image-set(url(media/llave-clic.png) 1x, url(media/llave-clic@2x.png) 2x) 3 0, pointer !important; }
+  html input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]), html textarea { cursor: text !important; }
   /* pantalla de carga */
   #tw-pre { display: none; position: fixed; inset: 0; z-index: 2147483646; pointer-events: none; }
   .pt-loading #tw-pre { display: block; pointer-events: auto; }

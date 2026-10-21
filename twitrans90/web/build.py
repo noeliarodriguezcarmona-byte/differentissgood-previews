@@ -91,6 +91,8 @@ cut(r'<li><a href="#tienda" data-sec="tienda">Tienda</a></li>')
 # 4e. «Antes y después» con la furgoneta real
 cut(r'<div class="layer before" data-cab="before"></div>','<div class="layer before"><img src="media/antes.jpg" alt="Furgoneta con el parachoques y el lateral golpeados, antes de la reparación" width="1200" height="800" loading="lazy" decoding="async"></div>')
 cut(r'<div class="layer after" data-cab="after"></div>','<div class="layer after"><img src="media/despues.jpg" alt="La misma furgoneta ya reparada, sin daños" width="1200" height="800" loading="lazy" decoding="async"></div>')
+# 4g. en preguntas frecuentes se quita el titular «Lo que más nos preguntan.»
+cut(r'<h2>Lo que más nos preguntan\.</h2>')
 # 4f. «Horarios y dónde estamos»: mapa a todo el ancho con tarjeta flotante (donde.html/.css/.js)
 cut(r'  <section id="donde".*?</section>\n', lambda m: open(os.path.join(here,'donde.html'),encoding='utf-8').read())
 # 5. fotografías y vídeo reales del cliente (carpeta media/)
@@ -129,6 +131,7 @@ MEDIA_CSS='''
 <style>
 @media (max-width:700px){#tw-lz .btn{min-height:46px;padding:0 15px;font-size:14px}}
 .ba{aspect-ratio:3/2}
+#faq .head{align-self:start}
 .ba .layer img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .slider{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--deep)}
 .slider .slides,.slider .slides img{position:absolute;inset:0;width:100%;height:100%}
