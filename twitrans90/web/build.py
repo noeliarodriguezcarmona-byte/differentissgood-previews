@@ -88,6 +88,9 @@ cut(r'<li><a href="#productos" data-sec="productos">Productos</a></li>')
 # 4d. la sección «Tienda» se quita (y su enlace del menú)
 cut(r'  <section id="tienda".*?</section>\n\n')
 cut(r'<li><a href="#tienda" data-sec="tienda">Tienda</a></li>')
+# 4e. «Antes y después» con la furgoneta real
+cut(r'<div class="layer before" data-cab="before"></div>','<div class="layer before"><img src="media/antes.jpg" alt="Furgoneta con el parachoques y el lateral golpeados, antes de la reparación" width="1200" height="800" loading="lazy" decoding="async"></div>')
+cut(r'<div class="layer after" data-cab="after"></div>','<div class="layer after"><img src="media/despues.jpg" alt="La misma furgoneta ya reparada, sin daños" width="1200" height="800" loading="lazy" decoding="async"></div>')
 # 5. fotografías y vídeo reales del cliente (carpeta media/)
 VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
 cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
@@ -140,6 +143,8 @@ MEDIA_CSS='''
 @media (max-width:700px){.hero{padding-bottom:72px}#tw-lz .btn{min-height:46px;padding:0 15px;font-size:14px}}
 @media (max-width:700px) and (min-height:700px){.hero h1{font-size:clamp(30px,8.6vw,44px)}.hero .sub{font-size:17px}.hero .scene.hero-video{margin-bottom:6px}}
 @media (max-height:640px){.hero h1{font-size:clamp(23px,min(5vw,5svh),60px)}.hero .sub{font-size:14px}.hero .status{padding:5px 11px;font-size:11px}}
+.ba{aspect-ratio:3/2}
+.ba .layer img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
 .slider{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--deep)}
 .slider .slides,.slider .slides img{position:absolute;inset:0;width:100%;height:100%}
