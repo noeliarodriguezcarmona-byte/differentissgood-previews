@@ -116,12 +116,11 @@ for n,(name,alts) in SVC.items():
     old='<article class="svc"><span class="idx">S%d</span>'%n
     assert old in s, old
     s=s.replace(old, old+'\n          '+slider('serv-'+name,alts,cls='svc-photo',delay=3400+n*250,click=False,label='Fotos del servicio'),1)
-# 3) las tuercas que giran van al final de la página, cerrando
+# 3) las tuercas que giran se quitan de la página
 m=re.search(r'\n  <div class="bolt" id="bolt" aria-hidden="true">.*?\n  </div>\n',s,re.S)
 assert m,'bolt'
 BOLT=m.group(0); s=s.replace(BOLT,'\n',1)
 assert '</main>' in s
-s=s.replace('</main>','</main>\n'+BOLT,1)
 MEDIA_CSS='''
 <style>
 .hero{padding-block:clamp(12px,2.4svh,28px);min-height:calc(100svh - var(--navh,64px));display:flex;align-items:flex-start}
