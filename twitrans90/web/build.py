@@ -96,6 +96,8 @@ cut(r'  <section id="donde".*?</section>\n', lambda m: open(os.path.join(here,'d
 # 5. fotografías y vídeo reales del cliente (carpeta media/)
 VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
 cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
+# 5b. portada a pantalla completa (portada.html/.css/.js + carga.html)
+cut(r'<section class="hero on-deep">.*?</section>', lambda m: open(os.path.join(here,'portada.html'),encoding='utf-8').read().rstrip())
 def slider(prefix,alts,cls='',caption=None,delay=3600,click=True,label=''):
     n=len(alts)
     imgs=''.join('<img src="media/%s-%02d.jpg" alt="%s" width="1000" height="667" decoding="async"%s%s>'%(prefix,k,a,' class="on"' if k==1 else '',' loading="lazy"' if k>1 else '') for k,a in enumerate(alts,1))
@@ -125,28 +127,9 @@ BOLT=m.group(0); s=s.replace(BOLT,'\n',1)
 assert '</main>' in s
 MEDIA_CSS='''
 <style>
-.hero{padding-block:clamp(12px,2.4svh,28px);min-height:calc(100svh - var(--navh,64px));display:flex;align-items:flex-start}
-.hero-stack{width:100%;display:flex;flex-direction:column;gap:clamp(12px,2.2svh,24px)}
-.hero .scene.hero-video{flex:none;aspect-ratio:16/9;min-height:0;max-height:none;width:100%;background:#000}
-.hero-text{flex:none}
-.hero h1{font-size:clamp(28px,min(5vw,6svh),60px)}
-.hero .sub{font-size:clamp(15px,2.2svh,19px);margin-top:clamp(8px,1.6svh,16px)}
-.hero .ctas{margin-top:clamp(12px,2.4svh,24px)}
-.hero .status{margin-bottom:clamp(10px,2svh,20px)}
-@media (min-width:960px) and (min-aspect-ratio:1/1),(min-width:700px) and (max-height:520px) and (min-aspect-ratio:1/1){
-.hero .wrap{max-width:min(1400px,100%)}
-.hero{align-items:center}
-.hero-stack{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.5fr);align-items:center;gap:clamp(28px,4vw,56px)}
-.hero .scene.hero-video{order:2;flex:none;align-self:center;aspect-ratio:16/9;min-height:0;max-height:calc(100svh - var(--navh,64px) - 40px);width:min(100%,calc((100svh - var(--navh,64px) - 40px)*16/9))}
-.hero-text{order:1}
-.hero h1{font-size:clamp(22px,min(3.8vw,6.4svh),56px);max-width:none}
-}
-@media (max-width:700px){.hero{padding-bottom:72px}#tw-lz .btn{min-height:46px;padding:0 15px;font-size:14px}}
-@media (max-width:700px) and (min-height:700px){.hero h1{font-size:clamp(30px,8.6vw,44px)}.hero .sub{font-size:17px}.hero .scene.hero-video{margin-bottom:6px}}
-@media (max-height:640px){.hero h1{font-size:clamp(23px,min(5vw,5svh),60px)}.hero .sub{font-size:14px}.hero .status{padding:5px 11px;font-size:11px}}
+@media (max-width:700px){#tw-lz .btn{min-height:46px;padding:0 15px;font-size:14px}}
 .ba{aspect-ratio:3/2}
 .ba .layer img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-.hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
 .slider{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--deep)}
 .slider .slides,.slider .slides img{position:absolute;inset:0;width:100%;height:100%}
 .slider .slides img{object-fit:cover;display:block;opacity:0;transition:opacity .6s ease}
@@ -163,7 +146,6 @@ MEDIA_CSS='''
 .item .pic.has-photo .slider{position:absolute;inset:0;width:100%;height:100%;margin:0;aspect-ratio:auto}
 .svc .idx{z-index:2;background:rgba(14,29,50,.78);color:#fff;padding:3px 8px}
 @media (max-width:560px){.svc-grid{grid-template-columns:1fr}.svc,.svc:nth-child(1),.svc:nth-child(2){grid-column:auto}}
-@media (prefers-reduced-motion:reduce){.hero-video video{display:none}.hero .scene.hero-video{background:url(media/video-home-poster.jpg) center/cover}}
 </style>
 <script>
 (function(){
@@ -183,7 +165,9 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
 </script>
 '''
 DONDE=open(os.path.join(here,'donde.css'),encoding='utf-8').read()+open(os.path.join(here,'donde.js'),encoding='utf-8').read()
-s=head+s.lstrip()+MEDIA_CSS+DONDE+CHAT+'\n</body>\n</html>\n'
+PORTADA_TOP=open(os.path.join(here,'portada.css'),encoding='utf-8').read()+'\n'+open(os.path.join(here,'carga.html'),encoding='utf-8').read()
+PORTADA_JS=open(os.path.join(here,'portada.js'),encoding='utf-8').read()
+s=head+PORTADA_TOP+s.lstrip()+MEDIA_CSS+DONDE+PORTADA_JS+CHAT+'\n</body>\n</html>\n'
 open(os.path.join(here,'index.html'),'w',encoding='utf-8').write(s)
 open(os.path.join(here,'robots.txt'),'w').write('User-agent: *\nAllow: /\nSitemap: https://twitrans90.com/sitemap.xml\n')
 open(os.path.join(here,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://twitrans90.com/</loc></url><url><loc>https://twitrans90.com/aviso-legal.html</loc></url><url><loc>https://twitrans90.com/politica-de-privacidad.html</loc></url><url><loc>https://twitrans90.com/politica-de-cookies.html</loc></url><url><loc>https://twitrans90.com/condiciones-de-venta.html</loc></url></urlset>\n')
