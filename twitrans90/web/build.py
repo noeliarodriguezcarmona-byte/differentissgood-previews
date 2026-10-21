@@ -82,6 +82,9 @@ if(get()==='si')load();
 </script>
 '''
 
+# 4c. la sección «Productos» se quita (y su enlace del menú)
+cut(r'  <section id="productos".*?</section>\n\n')
+cut(r'<li><a href="#productos" data-sec="productos">Productos</a></li>')
 # 5. fotografías y vídeo reales del cliente (carpeta media/)
 VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
 cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
