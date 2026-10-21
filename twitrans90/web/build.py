@@ -89,7 +89,8 @@ def slider(prefix,alts,cls='',caption=None,delay=3600,click=True,label=''):
     n=len(alts)
     imgs=''.join('<img src="media/%s-%02d.jpg" alt="%s" width="1000" height="667" decoding="async"%s%s>'%(prefix,k,a,' class="on"' if k==1 else '',' loading="lazy"' if k>1 else '') for k,a in enumerate(alts,1))
     cap='<figcaption>%s</figcaption>'%caption if caption else ''
-    cnt='<span class="count mono" aria-hidden="true">1/%d</span>'%n if n>1 else ''
+    cnt=''
+    delay=2300
     auto=' data-slider data-delay="%d"%s'%(delay,'' if click else ' data-click="0"') if n>1 else ''
     return '<figure class="slider %s"%s aria-label="%s"><div class="slides">%s</div>%s%s</figure>'%(cls,auto,label,imgs,cap,cnt)
 ISA=['Isa, de Twitrans 90, sonriendo en la oficina','Isa atendiendo a un cliente en la oficina','Isa con el móvil en la mano','Isa hablando por teléfono con una sonrisa','Isa mirando hacia un lado en la oficina','Isa trabajando en el ordenador','Isa al teléfono en la oficina','Isa recibiendo a un cliente en la oficina']
@@ -106,7 +107,7 @@ for n,(name,alts) in SVC.items():
     old='<article class="svc"><span class="idx">S%d</span>'%n
     assert old in s, old
     s=s.replace(old, old+'\n          '+slider('serv-'+name,alts,cls='svc-photo',delay=3400+n*250,click=False,label='Fotos del servicio'),1)
-TIENDA={'Vehículos industriales de ocasión':('tienda-ocasion',['Furgoneta de ocasión revisada en el taller','Furgoneta blanca de ocasión en el taller de Twitrans 90','Furgoneta del taller móvil de Twitrans 90 vista por detrás']),
+TIENDA={'Vehículos industriales de ocasión':('tienda-ocasion',['Furgoneta de ocasión revisada en el taller','Furgoneta blanca de ocasión en el taller de Twitrans 90']),
         'Neumáticos industriales':('tienda-neumaticos',['Mecánico de Twitrans 90 montando un neumático en la máquina','Neumático de camión en la máquina de montaje del taller'])}
 for titulo,(pref,alts) in TIENDA.items():
     pat=r'<div class="pic">(?:(?!</div>).)*</div>(\s*<div class="body"><h3>'+re.escape(titulo)+')'
@@ -142,7 +143,7 @@ MEDIA_CSS='''
 .hero-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
 .slider{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--deep)}
 .slider .slides,.slider .slides img{position:absolute;inset:0;width:100%;height:100%}
-.slider .slides img{object-fit:cover;display:block;opacity:0;transition:opacity .9s ease}
+.slider .slides img{object-fit:cover;display:block;opacity:0;transition:opacity .6s ease}
 .slider .slides img.on{opacity:1}
 .slider .count{position:absolute;right:12px;bottom:12px;color:#fff;font-size:11px;letter-spacing:.08em;background:rgba(14,29,50,.62);padding:2px 7px;pointer-events:none}
 .photo.team{aspect-ratio:auto;background:none;border:0;display:grid;grid-template-columns:1fr;gap:14px;place-items:stretch}
@@ -167,7 +168,7 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
  function start(){if(rm||t)return;t=setInterval(function(){go(k+1)},d)}
  function stop(){clearInterval(t);t=null}
  if(f.dataset.click!=='0')f.addEventListener('click',function(){go(k+1);if(t){stop();start()}});
- if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?setTimeout(start,(n%3)*1200):stop()},{threshold:.25}).observe(f)}else{start()}
+ if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?setTimeout(start,(n%3)*700):stop()},{threshold:.25}).observe(f)}else{start()}
 });
 })();
 </script>
