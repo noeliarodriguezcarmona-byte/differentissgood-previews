@@ -98,14 +98,26 @@ TEAM='<div class="photo team">'+slider('isa',ISA,caption='Isa',delay=3800,label=
 cut(r'<div class="photo">.*?(?=\s*<div class="about-body">)', TEAM)
 SVC={1:('reparacion',['Mecánico de Twitrans 90 reparando el motor de un vehículo industrial','Manos de un mecánico apretando con una herramienta en un motor','Nave del taller de Twitrans 90 en Ripollet','Juego de llaves de vaso abierto en el taller']),
      2:('plancha',['Furgoneta preparada con papel de enmascarar en la cabina de pintura','Pintando una furgoneta en el taller de Twitrans 90']),
-     3:('neumaticos',['Montaje de un neumático en la máquina del taller','Montaje de una rueda de camión con pistola neumática']),
+     3:('neumaticos',['Montaje de una rueda de camión con pistola neumática']),
      4:('movil',['Furgoneta del taller móvil de Twitrans 90','Interior de la furgoneta taller, con las herramientas organizadas','Taller profesional móvil: compresor y herramientas dentro de la furgoneta']),
      5:('suministros',['Manos de un mecánico trabajando con llaves sobre un motor']),
-     6:('compraventa',['Furgoneta de ocasión revisada en el taller','Furgoneta blanca de ocasión en el taller de Twitrans 90','Furgoneta del taller móvil de Twitrans 90 vista por detrás'])}
+     6:('compraventa',['Camión de ocasión revisado en el taller de Twitrans 90'])}
 for n,(name,alts) in SVC.items():
     old='<article class="svc"><span class="idx">S%d</span>'%n
     assert old in s, old
     s=s.replace(old, old+'\n          '+slider('serv-'+name,alts,cls='svc-photo',delay=3400+n*250,click=False,label='Fotos del servicio'),1)
+TIENDA={'Vehículos industriales de ocasión':('tienda-ocasion',['Furgoneta de ocasión revisada en el taller','Furgoneta blanca de ocasión en el taller de Twitrans 90','Furgoneta del taller móvil de Twitrans 90 vista por detrás']),
+        'Neumáticos industriales':('tienda-neumaticos',['Mecánico de Twitrans 90 montando un neumático en la máquina','Neumático de camión en la máquina de montaje del taller'])}
+for titulo,(pref,alts) in TIENDA.items():
+    pat=r'<div class="pic">(?:(?!</div>).)*</div>(\s*<div class="body"><h3>'+re.escape(titulo)+')'
+    assert re.search(pat,s,re.S),titulo
+    s=re.sub(pat,lambda m:'<div class="pic has-photo">'+slider(pref,alts,cls='shop-photo',delay=3600,click=False,label='Fotos de '+titulo)+'</div>'+m.group(1),s,count=1,flags=re.S)
+# 3) las tuercas que giran van al final de la página, cerrando
+m=re.search(r'\n  <div class="bolt" id="bolt" aria-hidden="true">.*?\n  </div>\n',s,re.S)
+assert m,'bolt'
+BOLT=m.group(0); s=s.replace(BOLT,'\n',1)
+assert '</main>' in s
+s=s.replace('</main>','</main>\n'+BOLT,1)
 MEDIA_CSS='''
 <style>
 .hero{padding-block:clamp(12px,2.4svh,28px);min-height:calc(100svh - var(--navh,64px));display:flex;align-items:flex-start}
@@ -139,6 +151,9 @@ MEDIA_CSS='''
 .photo.team .count{bottom:14px}
 .svc{min-height:0}
 .svc-photo{margin:-28px -28px 6px;flex:none;width:calc(100% + 56px)}
+.item .pic.has-photo{display:block;aspect-ratio:3/2;background:var(--deep);border-bottom:0}
+.item .pic.has-photo .count{left:auto;right:12px;bottom:12px;color:#fff;font-size:11px}
+.item .pic.has-photo .slider{position:absolute;inset:0;width:100%;height:100%;margin:0;aspect-ratio:auto}
 .svc .idx{z-index:2;background:rgba(14,29,50,.78);color:#fff;padding:3px 8px}
 @media (max-width:560px){.svc-grid{grid-template-columns:1fr}.svc,.svc:nth-child(1),.svc:nth-child(2){grid-column:auto}}
 @media (prefers-reduced-motion:reduce){.hero-video video{display:none}.hero .scene.hero-video{background:url(media/video-home-poster.jpg) center/cover}}
@@ -152,7 +167,7 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
  function start(){if(rm||t)return;t=setInterval(function(){go(k+1)},d)}
  function stop(){clearInterval(t);t=null}
  if(f.dataset.click!=='0')f.addEventListener('click',function(){go(k+1);if(t){stop();start()}});
- if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?setTimeout(start,n*1500):stop()},{threshold:.25}).observe(f)}else{start()}
+ if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?setTimeout(start,(n%3)*1200):stop()},{threshold:.25}).observe(f)}else{start()}
 });
 })();
 </script>
