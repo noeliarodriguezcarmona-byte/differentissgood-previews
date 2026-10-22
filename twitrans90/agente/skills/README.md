@@ -1,3 +1,5 @@
+> **Obsoleto desde el 22/10/2026.** La versión vigente de Javi está en `javi/prompt-conversacion.txt` y `prompts/`: resuelve dudas y lleva siempre al teléfono de Javi (654 545 650), sin recoger datos.
+
 # Javi · skills
 
 Cada skill es una pieza independiente del agente: cuándo se activa, qué responde, qué recoge y qué no hace. Se pueden cargar por separado o todas juntas.

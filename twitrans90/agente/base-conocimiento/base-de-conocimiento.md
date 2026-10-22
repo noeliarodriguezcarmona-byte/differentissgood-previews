@@ -20,7 +20,7 @@ Somos TWITRANS 90 SL, con CIF B66394149. Nuestro domicilio es Avda. del Río Rip
 *Palabras clave: razón social, CIF, datos fiscales, nif, domicilio, código postal*
 
 ### ¿Cuál es vuestro correo o vuestro teléfono?
-El correo es twitrans90@gmail.com. Y lo más rápido es que me dejes aquí tu nombre y tu número: el equipo te llama en horario de taller, de lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00.
+Lo más rápido es llamar a Javi al 654 545 650, de lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00. Y si prefieres escribir, el correo es twitrans90@gmail.com.
 *Palabras clave: teléfono, llamar, contacto, correo, email, número*
 
 ### ¿Qué zona cubrís?
@@ -59,7 +59,7 @@ De lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00.
 *Palabras clave: horario, abrís, hora, cuándo abrís, abierto*
 
 ### ¿Estáis abiertos ahora?
-Depende del día y la hora. De lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00, sí. Fuera de ese horario el taller está cerrado y el equipo te contesta en cuanto abra.
+De lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00, sí. Fuera de ese horario el taller está cerrado; llama a Javi al 654 545 650 en cuanto abramos.
 *Palabras clave: abierto ahora, abrís hoy, estáis, hay alguien*
 
 ### ¿Abrís los sábados o domingos?
@@ -67,16 +67,16 @@ No. Sábados, domingos y festivos el taller permanece cerrado. El taller móvil 
 *Palabras clave: sábado, domingo, fin de semana, festivo*
 
 ### ¿Cerráis por vacaciones?
-Cerramos los festivos oficiales de Barcelona y Cataluña, y la segunda quincena de agosto por vacaciones. Para fechas concretas, te lo confirma el equipo.
+Cerramos los festivos oficiales de Barcelona y Cataluña, y la segunda quincena de agosto por vacaciones. Para fechas concretas, llama a Javi al 654 545 650.
 *Palabras clave: vacaciones, agosto, festivos, cerrado*
 
 ### Escribo con el taller cerrado, ¿qué hago?
-Déjame tus datos de contacto y tu consulta, y el equipo te contesta en cuanto abra. Si es una urgencia, cuéntame qué le pasa al vehículo y dónde está para que se avise con prioridad.
+Llama a Javi al 654 545 650 en cuanto abramos, de lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00. Si es urgente, llámale igualmente y él te dice cómo lo hacemos.
 *Palabras clave: cerrado, fuera de horario, noche, urgencia fuera de horario*
 
-### ¿Cuándo me responde una persona del equipo?
-El mismo día laborable, y antes si es una urgencia.
-*Palabras clave: tiempo de respuesta, cuándo me contestan, respuesta*
+### ¿Puedo hablar con alguien del taller?
+Sí. Llama a Javi al 654 545 650, de lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00.
+*Palabras clave: tiempo de respuesta, cuándo me contestan, respuesta, hablar con alguien, persona*
 
 
 ## Reparación
@@ -94,7 +94,7 @@ Para mantenimientos programados, reparaciones mecánicas y plancha y pintura rec
 *Palabras clave: cita, cita previa, reservar, pedir hora*
 
 ### ¿Lleváis el vehículo a pasar la ITV?
-Sí. Hacemos la revisión pre-ITV completa y nos encargamos de llevar el vehículo a la estación de ITV. La tarifa de la pre-ITV se consulta al pedir presupuesto.
+Sí. Hacemos la revisión pre-ITV completa y nos encargamos de llevar el vehículo a la estación de ITV. Para el precio y la cita, llama a Javi al 654 545 650.
 *Palabras clave: ITV, pre-ITV, revisión, inspección técnica*
 
 ### ¿Ofrecéis mantenimiento para flotas?
@@ -121,7 +121,7 @@ Sí. Hacemos pintura completa y adecuación de imagen corporativa para flotas en
 *Palabras clave: colores, imagen corporativa, pintar flota, pintura completa*
 
 ### ¿Hacéis rotulación o vinilado?
-Podemos hacer pintura completa con la imagen de tu empresa. El vinilado o la rotulación de diseño complejo no lo hacemos. Para cualquier otro caso, te lo confirma el equipo.
+Podemos hacer pintura completa con la imagen de tu empresa. El vinilado o la rotulación de diseño complejo no lo hacemos. Si tienes otra idea, coméntaselo a Javi al 654 545 650.
 *Palabras clave: rotulación, vinilo, vinilado, logo*
 
 
@@ -159,15 +159,15 @@ No. Solo de lunes a viernes, no fines de semana ni festivos.
 *Palabras clave: taller móvil sábado, domingo, festivo*
 
 ### ¿Sois un servicio de grúa?
-No. El taller móvil no sustituye a una grúa de rescate para vehículos siniestrados o totalmente inmovilizados. Cuéntame qué ha pasado y el equipo valora cómo ayudarte con la reparación.
+No. El taller móvil no sustituye a una grúa de rescate para vehículos siniestrados o totalmente inmovilizados. Llama a Javi al 654 545 650, cuéntale qué ha pasado y él te dice cómo te podemos ayudar.
 *Palabras clave: grúa, rescate, remolcar, siniestro*
 
 ### ¿Cuánto cuesta el taller móvil?
-Se compone del desplazamiento más la mano de obra urgente. Te tomo los datos para que el equipo te pase la tarifa concreta.
+Se calcula con el desplazamiento más la mano de obra, así que depende de dónde estés y de la avería. Para saber el precio de tu caso, llama a Javi al 654 545 650.
 *Palabras clave: precio taller móvil, tarifa, desplazamiento*
 
 ### Se me ha roto una manguera trabajando, ¿qué hago?
-Puedes venir directamente al taller para que te la fabriquemos al momento. Si no puedes mover la máquina, avísanos y va el taller móvil (de lunes a viernes). Dime dónde estás y un teléfono.
+Llama ahora a Javi al 654 545 650, cuéntale qué ha pasado y dónde estás, y él te dice cómo lo solucionamos. Las mangueras las fabricamos al momento en el taller.
 *Palabras clave: manguera rota, avería hidráulica, urgencia hidráulica, latiguillo roto*
 
 
@@ -197,7 +197,7 @@ Sí. Vendemos camiones y maquinaria de ocasión revisados minuciosamente en nues
 *Palabras clave: compra, venta, ocasión, segunda mano, compraventa vehículos industriales cataluña*
 
 ### Quiero vender mi camión, ¿lo compráis?
-Hacemos valoración para compra directa con una tasación personalizada. Cuéntame marca, modelo, año y kilómetros, y tus datos de contacto, y el equipo te responde.
+Sí, hacemos valoración para compra directa con una tasación personalizada. Llama a Javi al 654 545 650 y ten a mano marca, modelo, año y kilómetros.
 *Palabras clave: vender, tasación, compra directa, valorar camión*
 
 ### ¿Vendéis fuera de Cataluña?
@@ -208,19 +208,19 @@ Sí. La compraventa la hacemos a nivel nacional, en toda España.
 ## Presupuestos, pagos y facturas
 
 ### ¿Cuánto cuesta reparar mi vehículo?
-El coste depende de la avería, el tipo de vehículo industrial o el material necesario. Te tomo los datos para que te enviemos un presupuesto personalizado y sin compromiso lo antes posible.
+Depende de la avería, del tipo de vehículo industrial y del material que haga falta, por eso cada presupuesto es personalizado y sin compromiso. Para el tuyo, llama a Javi al 654 545 650.
 *Palabras clave: precio, cuánto cuesta, tarifa, coste, presupuesto*
 
 ### ¿Cómo pido un presupuesto?
-Muy fácil: cuéntame qué necesita tu vehículo y déjame tu nombre y tu teléfono. El equipo te envía un presupuesto personalizado y sin compromiso lo antes posible.
+Llama a Javi al 654 545 650, de lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00. Cuéntale qué necesita el vehículo y te prepara un presupuesto personalizado y sin compromiso.
 *Palabras clave: pedir presupuesto, solicitar presupuesto, cómo contrato*
 
 ### ¿Qué datos necesitáis para hacerme el presupuesto?
-Tu nombre, un teléfono, tu empresa si es para una, qué necesitas, para cuándo lo necesitas y el vehículo (matrícula o modelo). Si es una asistencia, también dónde estás.
+Ten a mano qué le pasa al vehículo, la matrícula o el modelo y para cuándo lo necesitas. Con eso, llama a Javi al 654 545 650 y te prepara el presupuesto.
 *Palabras clave: datos presupuesto, qué necesitáis, información*
 
 ### ¿Cuánto tardáis en enviarme el presupuesto?
-Lo antes posible. El equipo responde el mismo día laborable, y antes si es una urgencia.
+Lo antes posible. Llama a Javi al 654 545 650 y te dice el plazo según lo que necesites.
 *Palabras clave: plazo presupuesto, cuándo me contestan*
 
 ### ¿El presupuesto tiene coste?
@@ -232,7 +232,7 @@ Tarjeta, transferencia bancaria y efectivo.
 *Palabras clave: pago, tarjeta, transferencia, efectivo*
 
 ### ¿Hay que pagar una señal?
-Según la avería, el presupuesto o la venta, puede pedirse una señal. Lo confirma el equipo al enviarte el presupuesto.
+Según la avería, el presupuesto o la venta, puede pedirse una señal. Te lo dice Javi al darte el presupuesto; puedes llamarle al 654 545 650.
 *Palabras clave: señal, anticipo, adelanto*
 
 ### ¿Podéis facturar a nombre de mi empresa?
@@ -255,18 +255,18 @@ Las mangueras hidráulicas fabricadas a medida, las piezas encargadas bajo pedid
 *Palabras clave: excepciones devolución, no se puede devolver*
 
 ### ¿Qué garantía tienen los trabajos y piezas?
-La garantía legal aplicable según la normativa para recambios, componentes y mano de obra. Si tienes un caso concreto, lo revisa el equipo.
+La garantía legal aplicable según la normativa para recambios, componentes y mano de obra. Si tienes un caso concreto, llama a Javi al 654 545 650 y lo revisa contigo.
 *Palabras clave: garantía, garantizado*
 
 
 ## Casos delicados
 
 ### Estoy molesto con el trabajo que me hicieron
-Lamento la molestia. Cuéntame qué ha pasado y déjame tus datos: se lo paso ahora mismo al encargado del taller para que lo revise y te contacte. No puedo adelantarte devoluciones ni compensaciones hasta que lo revise el equipo.
+Lamento la molestia, de verdad. Llama a Javi al 654 545 650 y cuéntaselo directamente: él lo revisa contigo.
 *Palabras clave: queja, reclamación, mal trabajo, enfadado*
 
 ### Voy a denunciar / temas legales o de garantía complicados
-Entiendo. Este tema lo tiene que ver directamente el equipo. Déjame tus datos y el motivo, y se lo traslado para que te contacten.
+Entiendo. Este tema lo tiene que ver directamente Javi. Llámale al 654 545 650.
 *Palabras clave: denuncia, abogado, legal, reclamación garantía*
 
 ### ¿Sois más económicos que otro taller?
@@ -274,15 +274,15 @@ No puedo hablar de otros talleres. Lo que sí hacemos es un presupuesto personal
 *Palabras clave: comparar, competencia, más barato*
 
 ### Necesito el vehículo para un día concreto
-El plazo lo confirma el mecánico después del diagnóstico, que habitualmente está en 24 a 48 horas. Si me dices qué le pasa y para cuándo lo necesitas, se lo paso al equipo con esa prioridad.
+El plazo lo confirma el mecánico después del diagnóstico, que suele estar en 24 a 48 horas. Llama a Javi al 654 545 650 y dile para cuándo lo necesitas.
 *Palabras clave: plazo, urgente, para el jueves, fecha de entrega*
 
 ### ¿Eres una persona o un robot?
-Soy Javi, el asistente virtual de Twitrans. El equipo del taller te atiende a continuación con lo que necesites.
+Soy el asistente virtual de Twitrans. Resuelvo dudas; para todo lo demás, te atiende Javi en persona al 654 545 650.
 *Palabras clave: robot, persona, humano, bot*
 
 ### Quiero hablar con una persona
-Claro. Déjame tu nombre, un teléfono y el motivo, y el equipo te contacta el mismo día laborable, o antes si es urgente.
+Claro. Llama a Javi al 654 545 650, de lunes a viernes, de 8:00 a 14:00 y de 15:00 a 19:00.
 *Palabras clave: hablar con alguien, llamar, teléfono, humano*
 
 
@@ -297,7 +297,7 @@ Claro. Déjame tu nombre, un teléfono y el motivo, y el equipo te contacta el m
 | coche / turismo / auto | no atendemos; solo vehículos industriales. Javi no repite estas palabras. |
 | chapa y pintura | plancha y pintura de vehículos industriales |
 | camión de segunda mano | vehículo industrial de ocasión revisado en taller |
-| precio / tarifa | presupuesto personalizado (Javi no dice «tarifa plana») |
+| precio / tarifa | presupuesto personalizado y sin compromiso (no se dice «tarifa plana») |
 
 
 ## Datos fijos de la empresa
@@ -306,15 +306,15 @@ Claro. Déjame tu nombre, un teléfono y el motivo, y el equipo te contacta el m
 - Correo: twitrans90@gmail.com
 - En el negocio desde 2014
 - Horario: lunes a viernes, 8:00-14:00 y 15:00-19:00. Cerrado sábados, domingos, festivos y la segunda quincena de agosto.
+- Teléfono de Javi (citas, averías, presupuestos y todo lo que haya que decidir): 654 545 650
 
 
 ## Si la respuesta no está aquí
-Javi no inventa. Dice que lo confirma el equipo, y recoge nombre, teléfono, empresa, qué necesita, cuándo lo necesita y vehículo (o ubicación si es asistencia).
+El asistente no inventa. Dice que eso se lo confirma Javi y da su teléfono: 654 545 650 (lunes a viernes, 8:00-14:00 y 15:00-19:00).
 
 
 ## Pendiente de confirmar con el cliente
-1. Teléfono para llamadas. La tarjeta impresa lleva el 654545650 (con CIF B-66394149 y código postal 08291 Ripollet), el cuestionario habla de 654545650-654545653 y el WhatsApp del agente es el 654545653. Confirmar cuál es el público. Mientras tanto, Javi no da ningún número y ofrece que el equipo llame.
-2. Criterio de la señal o anticipo (¿a partir de qué importe o trabajo?).
-3. Fechas exactas de vacaciones de agosto y calendario de festivos.
-4. Rotulación: la web la menciona en plancha y pintura y el agente dice que no la incluye.
-5. Si el taller móvil sale dentro del mismo horario del taller.
+1. Criterio de la señal o anticipo (¿a partir de qué importe o trabajo?).
+2. Fechas exactas de vacaciones de agosto y calendario de festivos.
+3. Rotulación: la web la menciona en plancha y pintura y el agente dice que no la incluye.
+4. Si el taller móvil sale dentro del mismo horario del taller.
