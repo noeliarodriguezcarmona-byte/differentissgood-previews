@@ -91,6 +91,8 @@ cut(r'<li><a href="#tienda" data-sec="tienda">Tienda</a></li>')
 # 4e. «Antes y después» con la furgoneta real
 cut(r'<div class="layer before" data-cab="before"></div>','<div class="layer before"><img src="media/antes.jpg" alt="Furgoneta con el parachoques y el lateral golpeados, antes de la reparación" width="1200" height="800" loading="lazy" decoding="async"></div>')
 cut(r'<div class="layer after" data-cab="after"></div>','<div class="layer after"><img src="media/despues.jpg" alt="La misma furgoneta ya reparada, sin daños" width="1200" height="800" loading="lazy" decoding="async"></div>')
+# 4i. el formulario de contacto se envía por WhatsApp al teléfono de Javi (654 545 650)
+s=s.replace('wa.me/34654545653','wa.me/34654545650')
 # 4h. logo del menú en alta resolución (negro) y con letras blancas para cuando está encima del vídeo de portada
 cut(r'(<a class="brand" href="#inicio"[^>]*>)<img [^>]*>', lambda m: m.group(1)+'<img src="media/logo-negro.png" alt="Twitrans 90 S.L." width="255" height="79"><img class="brand-w" src="media/logo-blanco.png" alt="" width="255" height="79">')
 # 4g. en preguntas frecuentes se quita el titular «Lo que más nos preguntan.»
