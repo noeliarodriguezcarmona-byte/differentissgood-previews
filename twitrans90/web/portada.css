@@ -23,6 +23,15 @@
   .nav .brand .brand-w { display: none; }
   .nav.nav--over .brand img:not(.brand-w) { display: none; }
   .nav.nav--over .brand .brand-w { display: block; }
+  /* modo oscuro: la barra es oscura, así que el logo va siempre con letras blancas y sin placa */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .nav .brand img { background: none !important; padding: 0 !important; }
+    :root:not([data-theme="light"]) .nav .brand img:not(.brand-w) { display: none; }
+    :root:not([data-theme="light"]) .nav .brand .brand-w { display: block; }
+  }
+  :root[data-theme="dark"] .nav .brand img { background: none !important; padding: 0 !important; }
+  :root[data-theme="dark"] .nav .brand img:not(.brand-w) { display: none; }
+  :root[data-theme="dark"] .nav .brand .brand-w { display: block; }
   .nav.nav--over .burger { color: #fff; }
   .nav .btn-accent { background: #B3141B; border-color: #B3141B; color: #fff; }
   .nav .btn-accent:hover { background: #D21B23; border-color: #D21B23; color: #fff; }
