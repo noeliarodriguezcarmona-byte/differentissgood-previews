@@ -52,7 +52,7 @@ head=('''<!doctype html>
  "address":{"@type":"PostalAddress","streetAddress":"Avda. del Río Ripoll, 73, nave","postalCode":"08291","addressLocality":"Ripollet","addressRegion":"Barcelona","addressCountry":"ES"},
  "areaServed":["Cataluña","España"],
  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"15:00","closes":"19:00"}],
- "hasMap":"https://maps.app.goo.gl/JANJiKN5tRn9K9n86"},ensure_ascii=False))
+ "hasMap":"https://www.google.com/maps/search/?api=1&query=Avinguda+del+Riu+Ripoll+73%2C+08291+Ripollet%2C+Barcelona"},ensure_ascii=False))
 
 CHAT='''
 <style>

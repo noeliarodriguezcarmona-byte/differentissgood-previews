@@ -12,7 +12,7 @@ Somos Twitrans, un taller de vehículos industriales en Ripollet (Barcelona), en
 *Palabras clave: quiénes sois, empresa, twitrans, taller de camiones*
 
 ### ¿Dónde estáis?
-Estamos en la Avda. Río Ripoll, nave 73, en Ripollet (Barcelona). Aquí tienes el mapa: https://maps.app.goo.gl/JANJiKN5tRn9K9n86
+Estamos en la Avda. Río Ripoll, nave 73, en Ripollet (Barcelona). Aquí tienes el mapa: https://www.google.com/maps/search/?api=1&query=Avinguda+del+Riu+Ripoll+73%2C+08291+Ripollet%2C+Barcelona
 *Palabras clave: dirección, ubicación, dónde, cómo llegar, mapa, taller mecánico camiones cerca de mí, Ripollet*
 
 ### ¿Cuál es vuestra razón social y vuestro CIF?

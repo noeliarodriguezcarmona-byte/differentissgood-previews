@@ -125,7 +125,7 @@ Preguntas que la web ya responde además: tipos de vehículo (camiones, furgonet
 
 - Razón social: TWITRANS 90 SL · CIF B66394149
 - Dirección: Avda. Río Ripoll, nave 73 · Ripollet (Barcelona)
-- Google Maps: https://maps.app.goo.gl/JANJiKN5tRn9K9n86
+- Google Maps: https://www.google.com/maps/search/?api=1&query=Avinguda+del+Riu+Ripoll+73%2C+08291+Ripollet%2C+Barcelona
 - En el negocio desde 2014.
 - Condiciones de venta: devolución en 14 días (mínimo legal); la devolución la paga el cliente. Excepciones: mangueras hidráulicas fabricadas a medida, piezas encargadas bajo pedido específico, suministros instalados o usados, mano de obra de reparación y trabajos de plancha y pintura. Garantía legal aplicable según normativa para recambios, componentes y mano de obra.
   *(El agente no entra en disputas de garantía: las deriva.)*
