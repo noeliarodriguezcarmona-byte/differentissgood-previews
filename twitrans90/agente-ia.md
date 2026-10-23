@@ -133,7 +133,7 @@ Preguntas que la web ya responde además: tipos de vehículo (camiones, furgonet
 ## 12. Contradicciones y dudas a resolver con el cliente antes de construir el agente
 
 1. **Horario.** Tres versiones: «L-V 8:00-14:00» (campo horario del agente), «L-V 8-14 y 15-19» (reservas, FAQ y respuesta 8) y «9 a 19 h» (datos de contacto). El cuestionario dice tarde hasta las 19:00; Noelia indicó el 29/09 que la web lleve **8-14 y 15-19**, y así está en la simulación. Confirmar con el cliente antes de publicar.
-2. **Teléfono.** Público: `654545650-654545653`; contacto: `65454563` (8 cifras, incompleto). Agente y derivación: 654545653. Confirmar si 654545650 es un número real distinto.
+2. **Teléfono.** Resuelto el 23/10/2026: el único teléfono de contacto es el **654 545 650** (Javi), para llamar o por WhatsApp (https://wa.me/34654545650). El 654 545 653 ya no se usa en ningún sitio.
 3. **Agosto.** «Segunda quincena»: confirmar fechas exactas.
 4. **Taller móvil.** Solo L-V: ¿dentro del mismo horario del taller?
 5. **Señal o anticipo:** «según la avería»: falta criterio (¿a partir de qué importe?).
