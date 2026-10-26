@@ -730,7 +730,9 @@ footer .credit a:hover { color: var(--accent-on-deep); }
 
 <main id="inicio">
   <section class="hero on-deep pt-hero" id="portada">
-    <video class="pt-video" id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="auto" aria-hidden="true" tabindex="-1"></video>
+    <video class="pt-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture disableremoteplayback preload="auto" aria-hidden="true" tabindex="-1"></video>
+    <script>(function(){var v=document.getElementById("heroVideo"),p=matchMedia("(max-aspect-ratio: 1/1)").matches;v.poster=p?"media/video-home-poster-vertical.jpg":"media/video-home-poster.jpg";v.src=p?"media/video-home-vertical.mp4":"media/video-home.mp4";v.dataset.vertical=p?"1":"0";})();</script>
+    <noscript><video class="pt-video" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline></video></noscript>
     <div class="pt-shade"></div>
     <div class="wrap pt-in">
       <p class="pt-kicker"><b>Taller</b> · Ripollet, Barcelona</p>
@@ -1557,6 +1559,15 @@ document.querySelectorAll('[data-slider]').forEach(function(f,n){
       ["touchstart", "pointerdown", "scroll", "keydown"].forEach(function (ev) { addEventListener(ev, once, { capture: true, passive: true }); });
     };
     ["loadedmetadata", "loadeddata", "canplay"].forEach(function (ev) { v.addEventListener(ev, play); });
+    /* móvil en vertical: versión vertical con las caras centradas; al girar el móvil se cambia sin perder el punto */
+    var mq = matchMedia("(max-aspect-ratio: 1/1)"), swap = function () {
+      var vert = mq.matches ? "1" : "0"; if (v.dataset.vertical === vert) return;
+      var t = v.currentTime || 0; v.dataset.vertical = vert;
+      v.poster = mq.matches ? "media/video-home-poster-vertical.jpg" : "media/video-home-poster.jpg";
+      v.src = mq.matches ? "media/video-home-vertical.mp4" : "media/video-home.mp4";
+      v.addEventListener("loadedmetadata", function () { try { v.currentTime = t; } catch (e) {} play(); }, { once: true });
+    };
+    if (mq.addEventListener) mq.addEventListener("change", swap); else if (mq.addListener) mq.addListener(swap);
     addEventListener("pageshow", play);
     document.addEventListener("visibilitychange", function () { if (!document.hidden) play(); });
     if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { if (e[0].isIntersecting) play(); }).observe(v);

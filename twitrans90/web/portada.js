@@ -21,6 +21,15 @@
       ["touchstart", "pointerdown", "scroll", "keydown"].forEach(function (ev) { addEventListener(ev, once, { capture: true, passive: true }); });
     };
     ["loadedmetadata", "loadeddata", "canplay"].forEach(function (ev) { v.addEventListener(ev, play); });
+    /* móvil en vertical: versión vertical con las caras centradas; al girar el móvil se cambia sin perder el punto */
+    var mq = matchMedia("(max-aspect-ratio: 1/1)"), swap = function () {
+      var vert = mq.matches ? "1" : "0"; if (v.dataset.vertical === vert) return;
+      var t = v.currentTime || 0; v.dataset.vertical = vert;
+      v.poster = mq.matches ? "media/video-home-poster-vertical.jpg" : "media/video-home-poster.jpg";
+      v.src = mq.matches ? "media/video-home-vertical.mp4" : "media/video-home.mp4";
+      v.addEventListener("loadedmetadata", function () { try { v.currentTime = t; } catch (e) {} play(); }, { once: true });
+    };
+    if (mq.addEventListener) mq.addEventListener("change", swap); else if (mq.addListener) mq.addListener(swap);
     addEventListener("pageshow", play);
     document.addEventListener("visibilitychange", function () { if (!document.hidden) play(); });
     if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { if (e[0].isIntersecting) play(); }).observe(v);
