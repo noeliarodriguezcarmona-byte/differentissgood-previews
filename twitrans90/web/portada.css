@@ -4,6 +4,8 @@
   .pt-hero { position: relative; isolation: isolate; min-height: 100svh; margin-top: calc(-1 * var(--navh, 64px)); padding: 0; display: flex; flex-direction: column; justify-content: flex-end; background: #0a0a0a; overflow: hidden; }
   .pt-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; background: #000; pointer-events: none; transform: scale(1.12); transition: transform 2.8s cubic-bezier(.2,.7,.2,1); }
   .pt-ready .pt-video, .pt-noload .pt-video { transform: none; }
+  /* sin botón de play encima del vídeo (Safari lo enseña si no puede arrancar solo) */
+  .pt-video::-webkit-media-controls, .pt-video::-webkit-media-controls-panel, .pt-video::-webkit-media-controls-overlay-play-button, .pt-video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; opacity: 0 !important; }
   .pt-shade { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(8,14,24,.3) 0, rgba(8,14,24,.12) 130px, rgba(8,14,24,0) 250px), linear-gradient(180deg, rgba(8,14,24,.2) 0%, rgba(8,14,24,.34) 50%, rgba(8,14,24,.82) 100%); }
   .pt-in { width: 100%; }
   .pt-kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #B4C2D6; margin: 0 0 clamp(10px, 2svh, 20px); }
