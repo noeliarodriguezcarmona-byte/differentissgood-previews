@@ -1,0 +1,181 @@
+import re, os, json
+here=os.path.dirname(os.path.abspath(__file__))
+s=open(os.path.join(here,'..','simulacion.html'),encoding='utf-8').read()
+def cut(pat,new='',flags=re.S,count=1):
+    global s
+    assert re.search(pat,s,flags), pat[:60]
+    s=re.sub(pat,new,s,count=count,flags=flags)
+# 1. título propio de la web (el <title> del artefacto) y cabecera HTML completa
+s=re.sub(r'^<title>.*?</title>\n','',s,count=1)
+# 2. fuera la barra de simulación y las etiquetas provisionales
+cut(r'<div class="simbar">.*?</div>\n')
+cut(r'\s*<span class="tag br">Foto de empresa · pendiente</span>')
+cut(r'\s*<span class="tag tl">Plano 01 · Furgoneta de taller</span>')
+cut(r'\s*<span class="mono">Foto pendiente</span>',count=3)
+cut(r'\s*<p class="ba-note mono">Ilustración provisional.*?</p>')
+# 3. bloque de foto de "Quiénes somos": logotipo en lugar del texto de pendiente
+logo=re.search(r'<img src="(data:image/png;base64,[A-Za-z0-9+/=]+)" alt="Twitrans 90 S.L."',s).group(1)
+cut(r'<div class="cap"><b>Foto del taller</b>.*?</div>','<div class="cap"><img src="%s" alt="Twitrans 90 S.L." style="width:min(300px,80%%);height:auto;mix-blend-mode:multiply"></div>'%logo)
+# 3b. fuera el botón flotante de WhatsApp (el contacto va por el formulario y por el chat de Javi)
+cut(r'<a class="wa" href="https://wa.me/[^"]*"[^>]*>.*?</a>\n?')
+# 4. galería: sin fotos reales no se publica
+cut(r'  <section id="galeria".*?</section>\n\n')
+cut(r'<li><a href="#galeria" data-sec="galeria">Galería</a></li>')
+# 4b. pie con enlaces legales reales
+old='<span>Aviso legal · Privacidad · Cookies</span>'
+assert old in s
+s=s.replace(old,'<span><a href="aviso-legal.html">Aviso legal</a> · <a href="politica-de-privacidad.html">Privacidad</a> · <a href="politica-de-cookies.html">Cookies</a> · <a href="condiciones-de-venta.html">Condiciones de venta</a> · <a href="#" id="tw-cookies-cfg">Cookies del chat</a></span>')
+# 5. documento completo con SEO
+head=('''<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Twitrans 90 · Taller de vehículos industriales en Ripollet, Barcelona</title>
+<meta name="description" content="Taller de confianza para vehículos industriales en Barcelona y Cataluña: reparación, taller móvil, neumáticos, plancha y pintura, suministros hidráulicos y compraventa. Presupuesto personalizado y sin compromiso.">
+<link rel="canonical" href="https://twitrans90.com/">
+<meta name="theme-color" content="#0E1D32">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Twitrans 90 · Taller de vehículos industriales">
+<meta property="og:description" content="Reparación, taller móvil, neumáticos, plancha y pintura, hidráulica y compraventa de vehículos industriales en Barcelona y Cataluña.">
+<meta property="og:url" content="https://twitrans90.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-22 -22 44 44'%3E%3Cpath fill='%23A33B3B' fill-rule='evenodd' d='M20 0 L10 17.32 L-10 17.32 L-20 0 L-10 -17.32 L10 -17.32 Z M9 0 a9 9 0 1 0 -18 0 a9 9 0 1 0 18 0 Z'/%3E%3C/svg%3E">
+<script type="application/ld+json">__LD__</script>
+<style>:root{color-scheme:light}html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+''').replace('__LD__',json.dumps({
+ "@context":"https://schema.org","@type":"AutoRepair","name":"TWITRANS 90 SL","url":"https://twitrans90.com/",
+ "description":"Taller de reparación de vehículos industriales, taller móvil, neumáticos, plancha y pintura, suministros hidráulicos y compraventa.",
+ "email":"twitrans90@gmail.com","foundingDate":"2014",
+ "address":{"@type":"PostalAddress","streetAddress":"Avda. del Río Ripoll, 73, nave","postalCode":"08291","addressLocality":"Ripollet","addressRegion":"Barcelona","addressCountry":"ES"},
+ "areaServed":["Cataluña","España"],
+ "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"15:00","closes":"19:00"}],
+ "hasMap":"https://www.google.com/maps/search/?api=1&query=Avinguda+del+Riu+Ripoll+73%2C+08291+Ripollet%2C+Barcelona"},ensure_ascii=False))
+
+CHAT='''
+<style>
+#tw-lz{position:fixed;right:16px;bottom:16px;z-index:2147483000;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+#tw-lz .btn{display:flex;align-items:center;gap:10px;min-height:52px;padding:0 20px;border:0;border-radius:999px;background:var(--brand,#1F3A5F);color:#fff;font:600 15px system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+#tw-lz .btn i{width:10px;height:10px;border-radius:50%;background:#7ED9A0;display:inline-block}
+#tw-lz .pn{display:none;position:absolute;right:0;bottom:64px;width:min(320px,calc(100vw - 32px));background:var(--deep,#0E1D32);color:#fff;border-radius:14px;padding:16px;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+#tw-lz .pn p{margin:0 0 12px}#tw-lz .pn a{color:#fff;text-decoration:underline}
+#tw-lz .pn b{display:block;font-size:16px;margin-bottom:6px}
+#tw-lz .go{width:100%;min-height:44px;border-radius:10px;border:0;background:#fff;color:#0E1D32;font:600 15px system-ui,sans-serif;cursor:pointer}
+#tw-lz.open .pn{display:block}
+</style>
+<div id="tw-lz"><div class="pn" role="dialog" aria-label="Chat con Javi"><b>Chat con Javi</b><p>Javi es nuestro asistente virtual. Para chatear se cargan cookies y almacenamiento de un tercero (LeadConnector). <a href="politica-de-cookies.html">Más información</a></p><button class="go" id="tw-go">Empezar chat</button></div><button class="btn" id="tw-open" aria-expanded="false"><i></i>Chat con Javi</button></div>
+<script>
+(function(){
+var K='tw90_chat',lz=document.getElementById('tw-lz');
+function get(){try{return localStorage.getItem(K)}catch(e){return null}}
+function set(v){try{localStorage.setItem(K,v)}catch(e){}}
+function del(){try{localStorage.removeItem(K)}catch(e){}}
+function load(){if(window.__twChat)return;window.__twChat=1;lz.style.display='none';var s=document.createElement('script');s.src='https://widgets.leadconnectorhq.com/loader.js';s.setAttribute('data-resources-url','https://widgets.leadconnectorhq.com/chat-widget/loader.js');s.setAttribute('data-widget-id','6ad60b7de0d80451b72f85e4');document.body.appendChild(s)}
+document.getElementById('tw-open').onclick=function(){var o=lz.classList.toggle('open');this.setAttribute('aria-expanded',o)};
+document.getElementById('tw-go').onclick=function(){set('si');load()};
+var c=document.getElementById('tw-cookies-cfg');
+if(c)c.onclick=function(e){e.preventDefault();del();location.reload()};
+if(get()==='si')load();
+})();
+</script>
+'''
+
+# 4c. la sección «Productos» se quita (y su enlace del menú)
+cut(r'  <section id="productos".*?</section>\n\n')
+cut(r'<li><a href="#productos" data-sec="productos">Productos</a></li>')
+# 4d. la sección «Tienda» se quita (y su enlace del menú)
+cut(r'  <section id="tienda".*?</section>\n\n')
+cut(r'<li><a href="#tienda" data-sec="tienda">Tienda</a></li>')
+# 4e. «Antes y después» con la furgoneta real
+cut(r'<div class="layer before" data-cab="before"></div>','<div class="layer before"><img src="media/antes.jpg" alt="Furgoneta con el parachoques y el lateral golpeados, antes de la reparación" width="1200" height="800" loading="lazy" decoding="async"></div>')
+cut(r'<div class="layer after" data-cab="after"></div>','<div class="layer after"><img src="media/despues.jpg" alt="La misma furgoneta ya reparada, sin daños" width="1200" height="800" loading="lazy" decoding="async"></div>')
+# 4i. el formulario de contacto se envía por WhatsApp al teléfono de Javi (654 545 650)
+s=s.replace('wa.me/34654545653','wa.me/34654545650')
+# 4h. logo del menú en alta resolución (negro) y con letras blancas para cuando está encima del vídeo de portada
+cut(r'(<a class="brand" href="#inicio"[^>]*>)<img [^>]*>', lambda m: m.group(1)+'<img src="media/logo-negro.png" alt="Twitrans 90 S.L." width="255" height="79"><img class="brand-w" src="media/logo-blanco.png" alt="" width="255" height="79">')
+# 4g. en preguntas frecuentes se quita el titular «Lo que más nos preguntan.»
+cut(r'<h2>Lo que más nos preguntan\.</h2>')
+# 4f. «Horarios y dónde estamos»: mapa a todo el ancho con tarjeta flotante (donde.html/.css/.js)
+cut(r'  <section id="donde".*?</section>\n', lambda m: open(os.path.join(here,'donde.html'),encoding='utf-8').read())
+# 5. fotografías y vídeo reales del cliente (carpeta media/)
+VIDEO='<div class="scene hero-video"><video id="heroVideo" src="media/video-home.mp4" poster="media/video-home-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Taller de Twitrans 90 en Ripollet: vídeo de presentación"></video></div>'
+cut(r'<div class="scene".*?(?=\s*<div class="hero-text">)', VIDEO)
+# 5b. portada a pantalla completa (portada.html/.css/.js + carga.html)
+cut(r'<section class="hero on-deep">.*?</section>', lambda m: open(os.path.join(here,'portada.html'),encoding='utf-8').read().rstrip())
+def slider(prefix,alts,cls='',caption=None,delay=3600,click=True,label=''):
+    n=len(alts)
+    imgs=''.join('<img src="media/%s-%02d.jpg" alt="%s" width="1000" height="667" decoding="async"%s%s>'%(prefix,k,a,' class="on"' if k==1 else '',' loading="lazy"' if k>1 else '') for k,a in enumerate(alts,1))
+    cap='<figcaption>%s</figcaption>'%caption if caption else ''
+    cnt=''
+    delay=2300
+    auto=' data-slider data-delay="%d"%s'%(delay,'' if click else ' data-click="0"') if n>1 else ''
+    return '<figure class="slider %s"%s aria-label="%s"><div class="slides">%s</div>%s%s</figure>'%(cls,auto,label,imgs,cap,cnt)
+ISA=['Isa, de Twitrans 90, sonriendo en la oficina','Isa atendiendo a un cliente en la oficina','Isa con el móvil en la mano','Isa hablando por teléfono con una sonrisa','Isa mirando hacia un lado en la oficina','Isa trabajando en el ordenador','Isa al teléfono en la oficina','Isa recibiendo a un cliente en la oficina']
+JAVI=['Javi, de Twitrans 90, con los brazos cruzados en el taller','Javi hablando por teléfono junto a un camión','Javi saludando a un cliente en el taller','Javi en la cabina de un camión','Javi reparando un vehículo industrial']
+TEAM='<div class="photo team">'+slider('isa',ISA,caption='Isa',delay=3800,label='Fotos de Isa')+slider('javi',JAVI,caption='Javi',delay=3800,label='Fotos de Javi')+'</div>'
+cut(r'<div class="photo">.*?(?=\s*<div class="about-body">)', TEAM)
+SVC={1:('reparacion',['Mecánico de Twitrans 90 reparando el motor de un vehículo industrial','Manos de un mecánico apretando con una herramienta en un motor','Nave del taller de Twitrans 90 en Ripollet','Juego de llaves de vaso abierto en el taller']),
+     2:('plancha',['Furgoneta preparada con papel de enmascarar en la cabina de pintura','Pintando una furgoneta en el taller de Twitrans 90']),
+     3:('neumaticos',['Mecánico de Twitrans 90 montando un neumático en la máquina','Neumático de camión en la máquina de montaje del taller']),
+     4:('movil',['Furgoneta del taller móvil de Twitrans 90','Interior de la furgoneta taller, con las herramientas organizadas','Taller profesional móvil: compresor y herramientas dentro de la furgoneta']),
+     5:('suministros',['Mangueras hidráulicas con racores y protección en espiral']),
+     6:('compraventa',['Camión de ocasión revisado en el taller de Twitrans 90'])}
+for n,(name,alts) in SVC.items():
+    old='<article class="svc"><span class="idx">S%d</span>'%n
+    assert old in s, old
+    s=s.replace(old, old+'\n          '+slider('serv-'+name,alts,cls='svc-photo',delay=3400+n*250,click=False,label='Fotos del servicio'),1)
+# 3) las tuercas que giran se quitan de la página
+m=re.search(r'\n  <div class="bolt" id="bolt" aria-hidden="true">.*?\n  </div>\n',s,re.S)
+assert m,'bolt'
+BOLT=m.group(0); s=s.replace(BOLT,'\n',1)
+assert '</main>' in s
+MEDIA_CSS='''
+<style>
+@media (max-width:700px){#tw-lz .btn{min-height:46px;padding:0 15px;font-size:14px}}
+.ba{aspect-ratio:3/2}
+#faq .head{align-self:start}
+.ba .layer img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.slider{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--deep)}
+.slider .slides,.slider .slides img{position:absolute;inset:0;width:100%;height:100%}
+.slider .slides img{object-fit:cover;display:block;opacity:0;transition:opacity .6s ease}
+.slider .slides img.on{opacity:1}
+.slider .count{position:absolute;right:12px;bottom:12px;color:#fff;font-size:11px;letter-spacing:.08em;background:rgba(14,29,50,.62);padding:2px 7px;pointer-events:none}
+.photo.team{aspect-ratio:auto;background:none;border:0;display:grid;grid-template-columns:1fr;gap:14px;place-items:stretch}
+.photo.team .slider{margin:0;border:1px solid var(--line);cursor:pointer}
+.photo.team figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 12px;color:#fff;font:700 22px var(--font-display,system-ui);letter-spacing:-.01em;background:linear-gradient(0deg,rgba(14,29,50,.85),rgba(14,29,50,0));pointer-events:none}
+.photo.team .count{bottom:14px}
+.svc{min-height:0}
+.svc-photo{margin:-28px -28px 6px;flex:none;width:calc(100% + 56px)}
+.item .pic.has-photo{display:block;aspect-ratio:3/2;background:var(--deep);border-bottom:0}
+.item .pic.has-photo .count{left:auto;right:12px;bottom:12px;color:#fff;font-size:11px}
+.item .pic.has-photo .slider{position:absolute;inset:0;width:100%;height:100%;margin:0;aspect-ratio:auto}
+.svc .idx{z-index:2;background:rgba(14,29,50,.78);color:#fff;padding:3px 8px}
+@media (max-width:560px){.svc-grid{grid-template-columns:1fr}.svc,.svc:nth-child(1),.svc:nth-child(2){grid-column:auto}}
+</style>
+<script>
+(function(){
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('[data-slider]').forEach(function(f,n){
+ var im=f.querySelectorAll('.slides img'),c=f.querySelector('.count'),k=0,t=null,seen=false,d=+f.dataset.delay||3600;
+ function go(i){im[k].classList.remove('on');k=(i+im.length)%im.length;im[k].classList.add('on');if(c)c.textContent=(k+1)+'/'+im.length}
+ function start(){if(rm||t)return;t=setInterval(function(){go(k+1)},d)}
+ function stop(){clearInterval(t);t=null}
+ if(f.dataset.click!=='0')f.addEventListener('click',function(){go(k+1);if(t){stop();start()}});
+ if('IntersectionObserver' in window){new IntersectionObserver(function(e){e[0].isIntersecting?setTimeout(start,(n%3)*700):stop()},{threshold:.25}).observe(f)}else{start()}
+});
+})();
+</script>
+<script>
+(function(){var h=document.querySelector('header.nav');function s(){if(h)document.documentElement.style.setProperty('--navh',h.offsetHeight+'px')}s();addEventListener('resize',s);addEventListener('load',s)})();
+</script>
+'''
+DONDE=open(os.path.join(here,'donde.css'),encoding='utf-8').read()+open(os.path.join(here,'donde.js'),encoding='utf-8').read()
+PORTADA_TOP=open(os.path.join(here,'portada.css'),encoding='utf-8').read()+'\n'+open(os.path.join(here,'carga.html'),encoding='utf-8').read()
+PORTADA_JS=open(os.path.join(here,'portada.js'),encoding='utf-8').read()
+s=head+PORTADA_TOP+s.lstrip()+MEDIA_CSS+DONDE+PORTADA_JS+CHAT+'\n</body>\n</html>\n'
+open(os.path.join(here,'index.html'),'w',encoding='utf-8').write(s)
+open(os.path.join(here,'robots.txt'),'w').write('User-agent: *\nAllow: /\nSitemap: https://twitrans90.com/sitemap.xml\n')
+open(os.path.join(here,'sitemap.xml'),'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://twitrans90.com/</loc></url><url><loc>https://twitrans90.com/aviso-legal.html</loc></url><url><loc>https://twitrans90.com/politica-de-privacidad.html</loc></url><url><loc>https://twitrans90.com/politica-de-cookies.html</loc></url><url><loc>https://twitrans90.com/condiciones-de-venta.html</loc></url></urlset>\n')
+print(len(s))

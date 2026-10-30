@@ -1,0 +1,45 @@
+
+<style>
+  /* Horarios y dónde estamos: mapa a todo el ancho con tarjeta flotante */
+  .dn { background: #0E1D32; color: #E7ECF3; }
+  .dn-stage { position: relative; min-height: 640px; overflow: hidden; background: #0B1830; }
+  .dn-map { display: block; position: absolute; inset: 0; background: #0B1830 url(media/mapa-oscuro.jpg) center/cover; }
+  .dn-map::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,24,48,.92) 0, rgba(11,24,48,.55) 38%, rgba(11,24,48,0) 62%); pointer-events: none; }
+  .dn-pin { position: absolute; left: 68%; top: 56%; width: 0; height: 0; transform: translate(-50%, -100%); z-index: 2; }
+  .dn-pin svg { width: 46px; height: 58px; display: block; transform: translate(-50%, 0); filter: drop-shadow(0 6px 8px rgba(0,0,0,.35)); }
+  .dn-pin::after { content: ""; position: absolute; left: 0; top: 0; width: 60px; height: 60px; margin: -6px 0 0 -30px; border-radius: 50%; background: rgba(224,112,111,.28); animation: dnHalo 2.4s ease-out infinite; z-index: -1; transform: scale(.4); }
+  @keyframes dnHalo { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.8); opacity: 0; } }
+  .dn-map:focus-visible { outline: 3px solid #E0706F; outline-offset: -3px; }
+  .dn-osm { position: absolute; right: 10px; bottom: 8px; font: 500 10px var(--font-body); color: rgba(255,255,255,.85); background: rgba(8,17,31,.55); padding: 2px 7px; z-index: 3; }
+  .dn-osm a { color: inherit; }
+  .dn-card { position: absolute; z-index: 3; left: clamp(16px, 4vw, 48px); top: 50%; transform: translateY(-50%); width: min(430px, calc(100% - 32px)); background: rgba(14,29,50,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(159,176,198,.28); padding: clamp(22px, 3vw, 34px); }
+  .dn .eyebrow { color: #E0706F; }
+  .dn h2 { font-size: clamp(30px, 3.6vw, 42px); margin: 14px 0 12px; color: #fff; }
+  .dn-addr { color: #9FB0C6; font-size: 17px; margin: 0; }
+  .dn-addr b { color: #fff; font-weight: 600; }
+  .dn-pill { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; padding: 7px 14px 7px 12px; border-radius: 100px; border: 1px solid currentColor; font: 500 12px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: #7ED9A0; }
+  .dn-pill i { width: 8px; height: 8px; border-radius: 50%; background: #7ED9A0; animation: dnPing 2s infinite; }
+  .dn-pill.closed { color: #9FB0C6; } .dn-pill.closed i { background: #8A8A8A; animation: none; }
+  @keyframes dnPing { 0% { box-shadow: 0 0 0 0 rgba(126,217,160,.55); } 70% { box-shadow: 0 0 0 9px rgba(126,217,160,0); } 100% { box-shadow: 0 0 0 0 rgba(126,217,160,0); } }
+  .dn-hrs { margin-top: 20px; border-top: 1px solid rgba(159,176,198,.25); }
+  .dn-hrs .r { display: flex; justify-content: space-between; gap: 14px; padding: 11px 0; border-bottom: 1px solid rgba(159,176,198,.18); font-size: 15.5px; }
+  .dn-hrs .r span:last-child { font-family: var(--font-mono); font-size: 14px; text-align: right; }
+  .dn-hrs .r.today { color: #E0706F; font-weight: 600; }
+  .dn-hrs .r.off span:last-child { color: #9FB0C6; }
+  .dn-note { color: #9FB0C6; font-size: 14px; margin: 14px 0 0; }
+  .dn-acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .dn-btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 0 20px; border: 2px solid #E0706F; background: #E0706F; color: #1A0B0B; font: 600 15px var(--font-body); text-decoration: none; cursor: pointer; transition: transform .2s; }
+  .dn-btn:hover { transform: translateY(-2px); }
+  .dn-btn.ghost { background: transparent; color: #fff; border-color: rgba(159,176,198,.55); }
+  .dn-btn svg { width: 18px; height: 18px; flex: none; }
+  @media (max-width: 860px) {
+    .dn-stage { min-height: 0; display: flex; flex-direction: column; }
+    .dn-map { position: relative; inset: auto; height: 300px; background-position: 56% 54%; background-size: auto 220%; }
+    .dn-map::after { display: none; }
+    .dn-osm { top: 274px; bottom: auto; }
+    .dn-pin { left: 56%; top: 54%; }
+    .dn-card { position: relative; transform: none; left: auto; top: auto; width: 100%; border: 0; border-top: 1px solid rgba(159,176,198,.28); }
+  }
+  @media (max-width: 480px) { .dn-hrs .r span:first-child { white-space: nowrap; } .dn-hrs .r span:last-child { font-size: 12.5px; white-space: nowrap; } }
+  @media (prefers-reduced-motion: reduce) { .dn-pin::after, .dn-pill i { animation: none; } }
+</style>
